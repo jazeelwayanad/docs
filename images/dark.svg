@@ -1,0 +1,35 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1800 230">
+  
+  <defs>
+    <style>
+      .st0, .st1, .st2, .st3 {
+        isolation: isolate;
+      }
+
+      .st1 {
+        fill: #71717a;
+        font-family: Inter-Regular, Inter;
+        font-size: 130px;
+      }
+
+      .st2 {
+        fill: #004cf7;
+      }
+
+      .st2, .st3 {
+        font-family: Arial-Black, 'Arial Black';
+        font-size: 200px;
+        font-weight: 800;
+      }
+
+      .st3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <text class="st2" transform="translate(75.2 179.9)"><tspan x="0" y="0">Eu</tspan></text>
+  <text class="st3" transform="translate(353 179.9)"><tspan x="0" y="0">codes</tspan></text>
+  <g class="st0">
+    <text class="st1" transform="translate(1055.6357 179.9199)"><tspan x="0" y="0">Mahall App</tspan></text>
+  </g>
+</svg>

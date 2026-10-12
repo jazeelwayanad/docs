@@ -69,8 +69,8 @@
     ]
   },
   "logo": {
-    "light": "/images/EuCodes_Logo.png",
-    "dark": "/images/Black&greenLogo.png"
+    "light": "/images/light.svg",
+    "dark": "/images/dark.svg"
   },
   "navbar": {
     "primary": {
