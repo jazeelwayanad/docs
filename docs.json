@@ -7,7 +7,10 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/EuCodes_Logo.png",
+    "dark": "/images/EuCodes_Logo.png"
+  },
   "navigation": {
     "tabs": [
       {
@@ -66,8 +69,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/EuCodes_Logo.png",
+    "dark": "/images/Black&greenLogo.png"
   },
   "navbar": {
     "primary": {
