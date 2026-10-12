@@ -8,8 +8,8 @@
     "dark": "#15803D"
   },
   "favicon": {
-    "light": "/logo/g_light.svg",
-    "dark": "/images/EuCodes_Logo.png"
+    "light": "/favicon.svg",
+    "dark": "/favicon.svg"
   },
   "navigation": {
     "tabs": [
