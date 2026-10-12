@@ -40,6 +40,22 @@
                   "members",
                   "zones-divisions"
                 ]
+              },
+              {
+                "group": "Finance",
+                "pages": [
+                  "overview",
+                  "collection",
+                  "payments",
+                  "reports"
+                ]
+              },
+              {
+                "group": "Accountant",
+                "pages": [
+                  "charts-of-accounts",
+                  "reports-2"
+                ]
               }
             ]
           },
@@ -91,5 +107,8 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "interaction": {
+    "drilldown": false
   }
 }
