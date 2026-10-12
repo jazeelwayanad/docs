@@ -9,13 +9,59 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "tabs": [
       {
-        "group": "Getting Started",
+        "tab": "Overview",
         "pages": [
-          "index",
-          "quickstart"
+          "mahallu-app-overview"
         ]
+      },
+      {
+        "tab": "Mahallu Admin",
+        "pages": [
+          "getting-started",
+          "mahallu-setup",
+          {
+            "group": "Home",
+            "pages": [
+              "home"
+            ]
+          },
+          {
+            "group": "Mahall",
+            "pages": [
+              {
+                "group": "People",
+                "pages": [
+                  "family",
+                  "members",
+                  "zones-divisions"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Website",
+            "pages": []
+          },
+          {
+            "group": "Billing",
+            "pages": []
+          },
+          {
+            "group": "Settings",
+            "pages": []
+          }
+        ]
+      },
+      {
+        "tab": "Control Panel"
+      },
+      {
+        "tab": "Mahallu Member"
+      },
+      {
+        "tab": "Marketing"
       }
     ]
   },
@@ -33,13 +79,7 @@
   "contextual": {
     "options": [
       "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "view"
     ]
   },
   "footer": {
