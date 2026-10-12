@@ -61,15 +61,21 @@
           },
           {
             "group": "Website",
-            "pages": []
+            "pages": [
+              "general"
+            ]
           },
           {
             "group": "Billing",
-            "pages": []
+            "pages": [
+              "overview-2"
+            ]
           },
           {
             "group": "Settings",
-            "pages": []
+            "pages": [
+              "mahall-profile"
+            ]
           }
         ]
       },
@@ -109,6 +115,6 @@
     }
   },
   "interaction": {
-    "drilldown": false
+    "drilldown": true
   }
 }
