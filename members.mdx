@@ -16,7 +16,7 @@ Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/members`
 
 Maintain individual member records and their family, education, work, health, and residency information.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+You need an account session and membership in the selected Mahallu. The API independently checks the requested operation’s permissions and feature availability.
 
 ### Screen layout
 
@@ -110,50 +110,44 @@ The directory contains summary/filter pills, search, family and blood-group filt
 ### Actions
 
 
-| Control | Result | Component |
-| --- | --- | --- |
-| More | Toggles the `more menu` view. | `members-registry.tsx` |
-| Import CSV / Excel | Shows a notification; does not establish a saved change. | `members-registry.tsx` |
-| Bulk Photos | Shows a notification; does not establish a saved change. | `members-registry.tsx` |
-| ID Cards | Shows a notification; does not establish a saved change. | `members-registry.tsx` |
-| Export | Downloads the locally generated output. | `members-registry.tsx` |
-| Add Member | Opens a blank creation form. | `members-registry.tsx` |
-| Search Members | Opens the `search` view. | `members-registry.tsx` |
-| Advanced Filters | Toggles the `filter menu` view. | `members-registry.tsx` |
-| Reset | Changes the selected view, filter, or page in local state. | `members-registry.tsx` |
-| Sort Records | Toggles the `sort menu` view. | `members-registry.tsx` |
-| Actions | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `members-registry.tsx` |
-| View Profile | Opens the configured destination. | `members-registry.tsx` |
-| Edit Member | Opens the edit form populated from the selected record. | `members-registry.tsx` |
-| Delete Member | Selects the record for the removal confirmation dialog. | `members-registry.tsx` |
-| Assign to Family | Opens the `bulk family modal` view. | `members-registry.tsx` |
-| Export | Downloads the locally generated output. | `members-registry.tsx` |
-| Delete | Opens the `bulk delete modal` view. | `members-registry.tsx` |
-| Clear | Changes the selected view, filter, or page in local state. | `members-registry.tsx` |
-| Cancel | Closes or clears the `bulk family modal` view/selection. | `members-registry.tsx` |
-| Assigning... / Assign Family | Shows a notification; does not establish a saved change. | `members-registry.tsx` |
-| Deleting... | Submits the associated API change; follow the sequence and failure rules below. | `members-registry.tsx` |
-| Deleting... / Delete Member | Submits the associated API change; follow the sequence and failure rules below. | `members-registry.tsx` |
-| 1. Identity & Demographics | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| 2. Education & Work | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| 3. Health & Support | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| 4. Address & Registers | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| Student | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Worker / Adult | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
-| + | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
-| No Known Condition Healthy / No chronic illness | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Has Condition Chronic illness, disability, or care | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Not Disclosed Prefer not to disclose | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Delete | Opens the `delete confirm` view. | `member-form-dialog.tsx` |
-| Cancel | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
-| Back | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| Next | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
-| Save Changes / Add Member | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
-| Delete Member | Submits the associated API change; follow the sequence and failure rules below. | `member-form-dialog.tsx` |
+| Control | Result |
+| --- | --- |
+| More | Opens, closes, or selects the associated dialog/record. |
+| Import CSV / Excel | Shows a notification; does not establish a saved change. |
+| Bulk Photos | Shows a notification; does not establish a saved change. |
+| ID Cards | Shows a notification; does not establish a saved change. |
+| Export | Downloads the locally generated output. |
+| Add Member | Opens, closes, or selects the associated dialog/record. |
+| Search Members | Opens, closes, or selects the associated dialog/record. |
+| Advanced Filters | Opens, closes, or selects the associated dialog/record. |
+| Reset | Changes the selected view, filter, or page in local state. |
+| Sort Records | Opens, closes, or selects the associated dialog/record. |
+| Actions | No direct click handler; may be a menu trigger or linked control. See the sequence below. |
+| View Profile | Opens the configured destination. |
+| Edit Member | Opens, closes, or selects the associated dialog/record. |
+| Delete Member | Opens, closes, or selects the associated dialog/record. |
+| Assign to Family | Opens, closes, or selects the associated dialog/record. |
+| Delete | Opens, closes, or selects the associated dialog/record. |
+| Clear | Changes the selected view, filter, or page in local state. |
+| Cancel | Opens, closes, or selects the associated dialog/record. |
+| Assigning... / Assign Family | Shows a notification; does not establish a saved change. |
+| isBulkProcessing ? "Deleting..." : `Delete $&#123;selectedMemberIds.size&#125; Members` | Submits the associated API change; follow the sequence and failure rules below. |
+| isRemoving ? "Deleting..." : "Delete Member" | Submits the associated API change; follow the sequence and failure rules below. |
+| 1. Identity & Demographics | Changes the selected view, filter, or page in local state. |
+| 2. Education & Work | Changes the selected view, filter, or page in local state. |
+| 3. Health & Support | Changes the selected view, filter, or page in local state. |
+| 4. Address & Registers | Changes the selected view, filter, or page in local state. |
+| Student | Updates local UI state; persistence is described separately below. |
+| Worker / Adult | Updates local UI state; persistence is described separately below. |
+| Add | Invokes the associated handler; see the sequence below. |
+| × | Invokes the associated handler; see the sequence below. |
+| + | Updates local UI state; persistence is described separately below. |
+| No Known Condition Healthy / No chronic illness | Updates local UI state; persistence is described separately below. |
+| Has Condition Chronic illness, disability, or care | Updates local UI state; persistence is described separately below. |
+| Not Disclosed Prefer not to disclose | Updates local UI state; persistence is described separately below. |
+| Back | Changes the selected view, filter, or page in local state. |
+| Next | Changes the selected view, filter, or page in local state. |
+| Save Changes / Add Member | Updates local UI state; persistence is described separately below. |
 
 
 
@@ -165,13 +159,6 @@ Choose Add member → enter a full name in identity → complete education/work,
 
 Full name is required. The server page initially fetches at most 100 members; client filtering and pagination operate on the loaded list. Import Data, Bulk Photos, and ID Cards only show notifications. Bulk deletion suppresses individual failures and can overstate success.
 
-Explicit validation messages in the rendered forms:
-
-- Member full name is required.
-
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
 ### Implementation references
 
 Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
@@ -181,9 +168,6 @@ Paths below are relative to the application repository. This is source-reviewed 
 - `apps/web/src/features/tenants/member-form-dialog.tsx`
 
 Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `members.view`, `members.create`, `members.update`, `members.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
 
 ### API behavior references
 
@@ -203,7 +187,7 @@ Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/members`
 
 വ്യക്തിഗത അംഗരേഖകളും കുടുംബം, വിദ്യാഭ്യാസം, ജോലി, ആരോഗ്യം, താമസസ്ഥിതി എന്നിവയും പരിപാലിക്കുക.
 
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ membershipഉം വേണം. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
 
 ### സ്ക്രീൻ ക്രമം
 
@@ -297,50 +281,44 @@ Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ
 ### പ്രവർത്തനങ്ങൾ
 
 
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| More | `more menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `members-registry.tsx` |
-| Import CSV / Excel | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `members-registry.tsx` |
-| Bulk Photos | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `members-registry.tsx` |
-| ID Cards | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `members-registry.tsx` |
-| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `members-registry.tsx` |
-| Add Member | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `members-registry.tsx` |
-| Search Members | `search` കാഴ്ച തുറക്കും. | `members-registry.tsx` |
-| Advanced Filters | `filter menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `members-registry.tsx` |
-| Reset | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `members-registry.tsx` |
-| Sort Records | `sort menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `members-registry.tsx` |
-| Actions | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `members-registry.tsx` |
-| View Profile | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `members-registry.tsx` |
-| Edit Member | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `members-registry.tsx` |
-| Delete Member | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `members-registry.tsx` |
-| Assign to Family | `bulk family modal` കാഴ്ച തുറക്കും. | `members-registry.tsx` |
-| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `members-registry.tsx` |
-| Delete | `bulk delete modal` കാഴ്ച തുറക്കും. | `members-registry.tsx` |
-| Clear | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `members-registry.tsx` |
-| Cancel | `bulk family modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `members-registry.tsx` |
-| Assigning... / Assign Family | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `members-registry.tsx` |
-| Deleting... | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `members-registry.tsx` |
-| Deleting... / Delete Member | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `members-registry.tsx` |
-| 1. Identity & Demographics | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| 2. Education & Work | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| 3. Health & Support | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| 4. Address & Registers | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
-| + | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
-| No Known Condition Healthy / No chronic illness | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Has Condition Chronic illness, disability, or care | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Not Disclosed Prefer not to disclose | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Delete | `delete confirm` കാഴ്ച തുറക്കും. | `member-form-dialog.tsx` |
-| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
-| Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| Next | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
-| Save Changes / Add Member | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
-| Delete Member | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `member-form-dialog.tsx` |
+| നിയന്ത്രണം | ഫലം |
+| --- | --- |
+| More | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Import CSV / Excel | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
+| Bulk Photos | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
+| ID Cards | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
+| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. |
+| Add Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Search Members | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Advanced Filters | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Reset | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| Sort Records | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Actions | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. |
+| View Profile | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. |
+| Edit Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Delete Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Assign to Family | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Delete | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Clear | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| Cancel | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
+| Assigning... / Assign Family | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
+| isBulkProcessing ? "Deleting..." : `Delete $&#123;selectedMemberIds.size&#125; Members` | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. |
+| isRemoving ? "Deleting..." : "Delete Member" | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. |
+| 1. Identity & Demographics | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| 2. Education & Work | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| 3. Health & Support | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| 4. Address & Registers | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. |
+| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. |
+| + | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| No Known Condition Healthy / No chronic illness | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| Has Condition Chronic illness, disability, or care | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| Not Disclosed Prefer not to disclose | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| Next | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
+| Save Changes / Add Member | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
 
 
 
@@ -352,13 +330,6 @@ Add member തിരഞ്ഞെടുക്കുക → identityയിൽ മ�
 
 മുഴുവൻ പേര് നിർബന്ധമാണ്. ആദ്യം പരമാവധി 100 അംഗങ്ങളെയാണ് വായിക്കുന്നത്; ഫിൽട്ടറും പേജിംഗും ഈ ലിസ്റ്റിലാണ് പ്രവർത്തിക്കുന്നത്. Import Data, Bulk Photos, ID Cards അറിയിപ്പുകൾ മാത്രം കാണിക്കുന്നു. കൂട്ട നീക്കലിൽ ഓരോ പരാജയവും മറയ്ക്കുന്നതിനാൽ വിജയസംഖ്യ തെറ്റാകാം.
 
-Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
-
-- Member full name is required.
-
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
 ### Implementation റഫറൻസുകൾ
 
 താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
@@ -368,9 +339,6 @@ Rendered action controls pending state അനുസരിച്ച് loading in
 - `apps/web/src/features/tenants/member-form-dialog.tsx`
 
 Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `members.view`, `members.create`, `members.update`, `members.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
 
 ### API behavior റഫറൻസുകൾ
 
