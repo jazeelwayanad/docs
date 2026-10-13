@@ -1,0 +1,297 @@
+---
+title: "Route coverage and review notes"
+description: "Coverage of all 90 routes and explicitly identified unfinished behaviors."
+---
+
+<Tabs>
+<Tab title="English">
+
+## Coverage
+
+All 90 page routes are mapped below. Redirect entries have their own description within a related guide, rather than a duplicate implementation guide. Dynamic brackets describe route parameters. Hosts are templates, not deployment URLs.
+
+### Mahallu Admin (69)
+
+| Route | Specification |
+| --- | --- |
+| `/[tenant]` | [Home dashboard](/home) |
+| `/[tenant]/overview` | [Mahall dashboard](/admin/mahall-dashboard) |
+| `/[tenant]/members` | [Members directory](/members) |
+| `/[tenant]/members/[memberId]` | [Member profile](/admin/member-profile) |
+| `/[tenant]/families` | [Families registry](/family) |
+| `/[tenant]/families/[familyId]` | [Family profile](/admin/family-profile) |
+| `/[tenant]/houses` | [Houses directory](/admin/houses) |
+| `/[tenant]/houses/[houseId]` | [House profile](/admin/house-profile) |
+| `/[tenant]/divisions` | [Zones and divisions](/zones-divisions) |
+| `/[tenant]/divisions/[divisionId]` | [Division profile](/admin/division-profile) |
+| `/[tenant]/education-employment` | [Education and employment](/admin/education-employment) |
+| `/[tenant]/health-support` | [Health and support](/admin/health-support) |
+| `/[tenant]/finance` | [Finance overview](/overview) |
+| `/[tenant]/finance/collections` | [Collections](/collection) |
+| `/[tenant]/finance/collections/new` | [Record collection](/admin/record-collection) |
+| `/[tenant]/finance/payments` | [Payments](/payments) |
+| `/[tenant]/accountant` | [Accountant workspace](/admin/accountant-workspace) |
+| `/[tenant]/accountant/chart-of-accounts` | [Chart of accounts](/charts-of-accounts) |
+| `/[tenant]/accountant/manual-journals` | [Manual journals](/admin/manual-journals) |
+| `/[tenant]/accountant/bulk-update` | [Bulk update](/admin/bulk-update) |
+| `/[tenant]/accountant/financial-year` | [Financial years](/admin/financial-years) |
+| `/[tenant]/accountant/taxes-legal` | [Taxes and legal tracker](/admin/taxes-legal) |
+| `/[tenant]/accountant/balance-sheet` | [Balance sheet](/reports-2) |
+| `/[tenant]/accountant/income-expenditure` | [Profit and loss](/reports-2) |
+| `/[tenant]/accountant/receipt-payment` | [Receipt and payment](/reports-2) |
+| `/[tenant]/accountant/cash-book` | [Cash book](/reports-2) |
+| `/[tenant]/accountant/bank-book` | [Bank book](/reports-2) |
+| `/[tenant]/accountant/ledger` | [General ledger](/reports-2) |
+| `/[tenant]/accountant/trial-balance` | [Trial balance](/reports-2) |
+| `/[tenant]/finance/reports` | [Finance reports](/reports) |
+| `/[tenant]/accountant/reports` | [Accountant reports center](/reports-2) |
+| `/[tenant]/committee` | [Committee office bearers](/admin/committee) |
+| `/[tenant]/committee/meetings` | [Meetings and minutes](/admin/committee-meetings) |
+| `/[tenant]/events` | [Events](/admin/events) |
+| `/[tenant]/announcements` | [Announcements](/admin/announcements) |
+| `/[tenant]/programs` | [Programs](/admin/programs) |
+| `/[tenant]/events/[eventId]` | [Event detail](/admin/event-detail) |
+| `/[tenant]/services` | [Services and aid requests](/admin/services) |
+| `/[tenant]/registers/death` | [Death register](/admin/registers/death) |
+| `/[tenant]/registers/divorce` | [Divorce register](/admin/registers/divorce) |
+| `/[tenant]/registers/grave` | [Grave register](/admin/registers/grave) |
+| `/[tenant]/registers/madrassa` | [Madrassa and Dars register](/admin/registers/madrassa) |
+| `/[tenant]/registers/marriage` | [Marriage register](/admin/registers/marriage) |
+| `/[tenant]/registers/property` | [Waqf and property register](/admin/registers/property) |
+| `/[tenant]/registers/release` | [Mahallu release register](/admin/registers/release) |
+| `/[tenant]/reports` | [Community reports](/admin/community-reports) |
+| `/[tenant]/reports/blood-groups` | [Blood group report](/admin/community-reports) |
+| `/[tenant]/reports/expatriate` | [Expatriate register](/admin/community-reports) |
+| `/[tenant]/reports/yatheem` | [Yatheem register](/admin/community-reports) |
+| `/[tenant]/settings` | [General and Mahall profile](/mahall-profile) |
+| `/[tenant]/settings/structure` | [Structure settings](/admin/structure-settings) |
+| `/[tenant]/settings/finance` | [Finance settings](/admin/finance-settings) |
+| `/[tenant]/settings/notifications` | [Notification settings](/admin/notification-settings) |
+| `/[tenant]/settings/admins` | [Tenant users](/admin/users-roles) |
+| `/[tenant]/settings/admins/roles` | [Tenant roles](/admin/users-roles) |
+| `/[tenant]/settings/activity` | [Activity log](/admin/activity-log) |
+| `/[tenant]/website` | [Website overview](/general) |
+| `/[tenant]/website/pages` | [Website pages](/admin/website-pages) |
+| `/[tenant]/website/theme` | [Website theme](/admin/website-theme) |
+| `/[tenant]/website/visibility` | [Website visibility](/admin/website-visibility) |
+| `/[tenant]/website/domains` | [Website domains](/admin/website-domains) |
+| `/[tenant]/website/analytics` | [Website analytics](/admin/website-analytics) |
+| `/[tenant]/billing` | [Billing plan](/overview-2) |
+| `/[tenant]/billing/payments` | [Billing payment history](/admin/billing-payments) |
+| `/[tenant]/billing/usage` | [Billing usage](/admin/billing-usage) |
+| `/login` | [Admin login](/getting-started) |
+| `/register` | [Admin registration](/getting-started) |
+| `/` | [Admin entry routing](/getting-started) |
+| `/onboarding` | [Mahallu setup wizard](/mahallu-setup) |
+
+### Control Panel (15)
+
+| Route | Specification |
+| --- | --- |
+| `/login` | [Control-panel login](/control/login) |
+| `/` | [Control overview](/control/overview) |
+| `/tenants` | [Fleet and Mahalles](/control/tenants) |
+| `/tenants/[tenantId]` | [Tenant command center](/control/tenant-command-center) |
+| `/tenants/[tenantId]/billing` | [Tenant billing operations](/control/tenant-billing) |
+| `/tenants/[tenantId]/analytics` | [Tenant analytics](/control/tenant-analytics) |
+| `/users` | [User access and accounts](/control/users) |
+| `/users/[userId]/sessions` | [User sessions](/control/user-sessions) |
+| `/roles` | [Platform roles](/control/roles) |
+| `/plans` | [Plans and entitlements](/control/plans) |
+| `/analytics` | [Platform analytics](/control/analytics) |
+| `/settings` | [System settings](/control/settings) |
+| `/audit-logs` | [Audit stream](/control/audit-logs) |
+| `/forms` | [Form templates](/control/forms) |
+| `/forms/[templateId]` | [Form template detail](/control/forms) |
+
+### Mahallu Member (3)
+
+| Route | Specification |
+| --- | --- |
+| `/` | [Public Mahallu homepage](/member/public-home) |
+| `/login` | [Member OTP login](/member/login) |
+| `/dashboard` | [Member dashboard](/member/dashboard) |
+
+### Marketing (3)
+
+| Route | Specification |
+| --- | --- |
+| `/onboarding` | [Marketing onboarding redirect](/mahallu-setup) |
+| `/` | [Marketing homepage](/marketing/home) |
+| `/new-mahalle` | [Create Mahalle](/marketing/create-mahalle) |
+
+## Review notes
+
+- Family bulk house assignment and removal only show success; they make no persistence request. [Specification](/family).
+- Member bulk deletion suppresses per-record failures; reported success can exceed deleted records. [Specification](/members).
+- Family intake makes sequential requests; later errors can leave a house/family or some members saved. [Specification](/family).
+- Website branding, password, visibility, and domain changes are local state; analytics is an empty presentation. [Specification](/general).
+- Tenant billing plans, usage, and payment presentation use fixed/display data; control billing operations are API-backed. [Specification](/overview-2).
+- Dedicated report date/basis controls are not passed to their server data loaders; report-catalog entries include approximations/fixed rows. [Specification](/reports-2).
+- Member certificate/aid buttons submit no requests. Prayer times and some membership/health badges are fixed text. [Specification](/member/dashboard).
+- Website shortcuts and the dues notification point to routes absent from this inventory. [Specification](/reference/shared-navigation).
+- The setup entry reads a stored draft; the current wizard does not continuously persist its edits. [Specification](/mahallu-setup).
+
+## Additional source findings
+
+- OTP login uses a server-log development provider; there is no SMS gateway. [Member login](/member/login).
+- Member/public feeds call operator-JWT-protected endpoints and can appear empty for member-only or anonymous sessions. [Public home](/member/public-home).
+- Collection custom-field required markers are not all checked by the submit handler, and GENERAL/NO_TARGET targeting differs. [Record collection](/admin/record-collection).
+- Tenant guards currently elevate platform-membership accounts and bypass permissions for OWNER/ADMIN contexts. [Shared navigation](/reference/shared-navigation).
+
+- Account parent selection sends `parentId`, but DTOs require `parentAccountId`; strict validation rejects the request. [Chart of accounts](/charts-of-accounts).
+
+## Verification boundary
+
+Behavior was traced through route components, rendered dialogs, data helpers, API controllers/DTOs, and relevant guards/services. The route inventory stores source paths and hashes so future source changes can be detected. No authenticated app/browser journey, real SMS, payment, certificate, or destructive operation was executed. The documentation preview is a separate check from application behavior.
+
+Source commit: `0995e04fcebfe19561950bed799c0c70cf5595db`. Local application changes may exist; hashes capture the files actually reviewed.
+
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Coverage
+
+90 page routesഉം താഴെ ബന്ധിപ്പിച്ചിരിക്കുന്നു. Redirect പ്രവേശനങ്ങൾ ബന്ധപ്പെട്ട guideൽ വിവരിക്കുന്നു; duplicate implementation guide ഇല്ല. Brackets route parameters ആണ്. Hosts templates ആണ്; deployment URLs അല്ല.
+
+### Mahallu Admin (69)
+
+| Route | Specification |
+| --- | --- |
+| `/[tenant]` | [Home dashboard](/home) |
+| `/[tenant]/overview` | [Mahall dashboard](/admin/mahall-dashboard) |
+| `/[tenant]/members` | [Members directory](/members) |
+| `/[tenant]/members/[memberId]` | [Member profile](/admin/member-profile) |
+| `/[tenant]/families` | [Families registry](/family) |
+| `/[tenant]/families/[familyId]` | [Family profile](/admin/family-profile) |
+| `/[tenant]/houses` | [Houses directory](/admin/houses) |
+| `/[tenant]/houses/[houseId]` | [House profile](/admin/house-profile) |
+| `/[tenant]/divisions` | [Zones and divisions](/zones-divisions) |
+| `/[tenant]/divisions/[divisionId]` | [Division profile](/admin/division-profile) |
+| `/[tenant]/education-employment` | [Education and employment](/admin/education-employment) |
+| `/[tenant]/health-support` | [Health and support](/admin/health-support) |
+| `/[tenant]/finance` | [Finance overview](/overview) |
+| `/[tenant]/finance/collections` | [Collections](/collection) |
+| `/[tenant]/finance/collections/new` | [Record collection](/admin/record-collection) |
+| `/[tenant]/finance/payments` | [Payments](/payments) |
+| `/[tenant]/accountant` | [Accountant workspace](/admin/accountant-workspace) |
+| `/[tenant]/accountant/chart-of-accounts` | [Chart of accounts](/charts-of-accounts) |
+| `/[tenant]/accountant/manual-journals` | [Manual journals](/admin/manual-journals) |
+| `/[tenant]/accountant/bulk-update` | [Bulk update](/admin/bulk-update) |
+| `/[tenant]/accountant/financial-year` | [Financial years](/admin/financial-years) |
+| `/[tenant]/accountant/taxes-legal` | [Taxes and legal tracker](/admin/taxes-legal) |
+| `/[tenant]/accountant/balance-sheet` | [Balance sheet](/reports-2) |
+| `/[tenant]/accountant/income-expenditure` | [Profit and loss](/reports-2) |
+| `/[tenant]/accountant/receipt-payment` | [Receipt and payment](/reports-2) |
+| `/[tenant]/accountant/cash-book` | [Cash book](/reports-2) |
+| `/[tenant]/accountant/bank-book` | [Bank book](/reports-2) |
+| `/[tenant]/accountant/ledger` | [General ledger](/reports-2) |
+| `/[tenant]/accountant/trial-balance` | [Trial balance](/reports-2) |
+| `/[tenant]/finance/reports` | [Finance reports](/reports) |
+| `/[tenant]/accountant/reports` | [Accountant reports center](/reports-2) |
+| `/[tenant]/committee` | [Committee office bearers](/admin/committee) |
+| `/[tenant]/committee/meetings` | [Meetings and minutes](/admin/committee-meetings) |
+| `/[tenant]/events` | [Events](/admin/events) |
+| `/[tenant]/announcements` | [Announcements](/admin/announcements) |
+| `/[tenant]/programs` | [Programs](/admin/programs) |
+| `/[tenant]/events/[eventId]` | [Event detail](/admin/event-detail) |
+| `/[tenant]/services` | [Services and aid requests](/admin/services) |
+| `/[tenant]/registers/death` | [Death register](/admin/registers/death) |
+| `/[tenant]/registers/divorce` | [Divorce register](/admin/registers/divorce) |
+| `/[tenant]/registers/grave` | [Grave register](/admin/registers/grave) |
+| `/[tenant]/registers/madrassa` | [Madrassa and Dars register](/admin/registers/madrassa) |
+| `/[tenant]/registers/marriage` | [Marriage register](/admin/registers/marriage) |
+| `/[tenant]/registers/property` | [Waqf and property register](/admin/registers/property) |
+| `/[tenant]/registers/release` | [Mahallu release register](/admin/registers/release) |
+| `/[tenant]/reports` | [Community reports](/admin/community-reports) |
+| `/[tenant]/reports/blood-groups` | [Blood group report](/admin/community-reports) |
+| `/[tenant]/reports/expatriate` | [Expatriate register](/admin/community-reports) |
+| `/[tenant]/reports/yatheem` | [Yatheem register](/admin/community-reports) |
+| `/[tenant]/settings` | [General and Mahall profile](/mahall-profile) |
+| `/[tenant]/settings/structure` | [Structure settings](/admin/structure-settings) |
+| `/[tenant]/settings/finance` | [Finance settings](/admin/finance-settings) |
+| `/[tenant]/settings/notifications` | [Notification settings](/admin/notification-settings) |
+| `/[tenant]/settings/admins` | [Tenant users](/admin/users-roles) |
+| `/[tenant]/settings/admins/roles` | [Tenant roles](/admin/users-roles) |
+| `/[tenant]/settings/activity` | [Activity log](/admin/activity-log) |
+| `/[tenant]/website` | [Website overview](/general) |
+| `/[tenant]/website/pages` | [Website pages](/admin/website-pages) |
+| `/[tenant]/website/theme` | [Website theme](/admin/website-theme) |
+| `/[tenant]/website/visibility` | [Website visibility](/admin/website-visibility) |
+| `/[tenant]/website/domains` | [Website domains](/admin/website-domains) |
+| `/[tenant]/website/analytics` | [Website analytics](/admin/website-analytics) |
+| `/[tenant]/billing` | [Billing plan](/overview-2) |
+| `/[tenant]/billing/payments` | [Billing payment history](/admin/billing-payments) |
+| `/[tenant]/billing/usage` | [Billing usage](/admin/billing-usage) |
+| `/login` | [Admin login](/getting-started) |
+| `/register` | [Admin registration](/getting-started) |
+| `/` | [Admin entry routing](/getting-started) |
+| `/onboarding` | [Mahallu setup wizard](/mahallu-setup) |
+
+### Control Panel (15)
+
+| Route | Specification |
+| --- | --- |
+| `/login` | [Control-panel login](/control/login) |
+| `/` | [Control overview](/control/overview) |
+| `/tenants` | [Fleet and Mahalles](/control/tenants) |
+| `/tenants/[tenantId]` | [Tenant command center](/control/tenant-command-center) |
+| `/tenants/[tenantId]/billing` | [Tenant billing operations](/control/tenant-billing) |
+| `/tenants/[tenantId]/analytics` | [Tenant analytics](/control/tenant-analytics) |
+| `/users` | [User access and accounts](/control/users) |
+| `/users/[userId]/sessions` | [User sessions](/control/user-sessions) |
+| `/roles` | [Platform roles](/control/roles) |
+| `/plans` | [Plans and entitlements](/control/plans) |
+| `/analytics` | [Platform analytics](/control/analytics) |
+| `/settings` | [System settings](/control/settings) |
+| `/audit-logs` | [Audit stream](/control/audit-logs) |
+| `/forms` | [Form templates](/control/forms) |
+| `/forms/[templateId]` | [Form template detail](/control/forms) |
+
+### Mahallu Member (3)
+
+| Route | Specification |
+| --- | --- |
+| `/` | [Public Mahallu homepage](/member/public-home) |
+| `/login` | [Member OTP login](/member/login) |
+| `/dashboard` | [Member dashboard](/member/dashboard) |
+
+### Marketing (3)
+
+| Route | Specification |
+| --- | --- |
+| `/onboarding` | [Marketing onboarding redirect](/mahallu-setup) |
+| `/` | [Marketing homepage](/marketing/home) |
+| `/new-mahalle` | [Create Mahalle](/marketing/create-mahalle) |
+
+## പരിശോധന കുറിപ്പുകൾ
+
+- കുടുംബ കൂട്ട house assignment, removal എന്നിവ success മാത്രം കാണിക്കുന്നു; മാറ്റം സംരക്ഷിക്കുന്ന അഭ്യർത്ഥനയില്ല. [Specification](/family).
+- Member കൂട്ടനീക്കൽ ഓരോ പരാജയവും മറയ്ക്കുന്നു; റിപ്പോർട്ട് ചെയ്യുന്ന വിജയം നീക്കിയ രേഖകളെക്കാൾ കൂടുതലാകാം. [Specification](/members).
+- Family intake പല അഭ്യർത്ഥനകളിലാണ്; അവസാന പിശകിലും വീട്/കുടുംബം/ചില അംഗങ്ങൾ സംരക്ഷിച്ചിരിക്കാം. [Specification](/family).
+- Website branding/password/visibility/domain മാറ്റങ്ങൾ local state ആണ്; analytics ശൂന്യ presentation ആണ്. [Specification](/general).
+- Tenant billing plan/usage/payment presentation സ്ഥിര/display data ആണ്; control billing operations API ഉപയോഗിക്കുന്നു. [Specification](/overview-2).
+- Dedicated report date/basis data loaderലേക്ക് പോകുന്നില്ല; catalogൽ approximations/സ്ഥിരവരികളുണ്ട്. [Specification](/reports-2).
+- Member certificate/aid buttons അഭ്യർത്ഥന അയക്കുന്നില്ല. Prayer times, ചില membership/health badges സ്ഥിരവിവരങ്ങളാണ്. [Specification](/member/dashboard).
+- Website shortcuts, dues notification എന്നിവ inventoryയിൽ ഇല്ലാത്ത routeകളിലേക്ക് പോകുന്നു. [Specification](/reference/shared-navigation).
+- Setup entry stored draft വായിക്കുന്നു; നിലവിലെ wizard മാറ്റങ്ങൾ തുടർച്ചയായി സംരക്ഷിക്കുന്നില്ല. [Specification](/mahallu-setup).
+
+## കൂടുതൽ source findings
+
+- OTP login server-log development provider ഉപയോഗിക്കുന്നു; SMS gateway ഇല്ല. [Member login](/member/login).
+- Member/public feeds operator-JWT-protected endpoints വിളിക്കുന്നതിനാൽ member-only/anonymous sessionൽ ശൂന്യമാകാം. [Public home](/member/public-home).
+- എല്ലാ collection custom-field required ചിഹ്നങ്ങളും submit handler പരിശോധിക്കുന്നില്ല; GENERAL/NO_TARGET target വ്യത്യസ്തമാണ്. [Record collection](/admin/record-collection).
+- Tenant guards ഇപ്പോൾ platform-membership account elevate ചെയ്യുന്നു; OWNER/ADMIN contextsന് permission bypass ഉണ്ട്. [Shared navigation](/reference/shared-navigation).
+
+- Account parent selection `parentId` അയയ്ക്കുന്നു; DTOകൾ `parentAccountId` പ്രതീക്ഷിക്കുന്നതിനാൽ strict validation request നിരസിക്കും. [Chart of accounts](/charts-of-accounts).
+
+## പരിശോധനയുടെ പരിധി
+
+Route components, rendered dialogs, data helpers, API controllers/DTOs, ബന്ധപ്പെട്ട guards/services എന്നിവ പരിശോധിച്ചാണ് behavior രേഖപ്പെടുത്തിയത്. Inventory paths/hashes സംരക്ഷിക്കുന്നു; പിന്നീടുള്ള source മാറ്റങ്ങൾ കണ്ടെത്താം. Authenticate ചെയ്ത app/browser journey, real SMS, payment, certificate, destructive operation എന്നിവ നടത്തിയിട്ടില്ല. Documentation preview application behavior പരിശോധനയിൽ നിന്ന് വേറെയാണ്.
+
+Source commit: `0995e04fcebfe19561950bed799c0c70cf5595db`. Local changes ഉണ്ടായിരിക്കാം; പരിശോധിച്ച filesന്റെ hashes സംരക്ഷിക്കുന്നു.
+
+
+</Tab>
+</Tabs>

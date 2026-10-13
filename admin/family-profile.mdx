@@ -1,0 +1,427 @@
+---
+title: "Family profile"
+description: "Current screen specification: Family profile. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Family profile
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/families/[familyId]`
+
+### Purpose and access
+
+Inspect the household, its members, house links, and family-level welfare information.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The detail view shows household information and a member roster. It offers Add new member, Add existing member, Edit, and Certificate controls. Member ID values have reveal controls.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Members**, **House**, **Ward**, **Address**, **Contact**.
+
+#### Fields and filters: Family form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Edit ward select | `edit-ward-select` | select | Not marked | -- Choose  / Area -- |
+| Municipal House Number | `edit-municipal-house-number` | text | Not marked | e.g. 12/450-A |
+| Edit mahall house number | `edit-mahall-house-number` | text | Not marked | — |
+| House Name | `edit-house-name` | text | Yes | e.g. Baitul Noor, Al Baraka |
+| Head of Family (Applicant / Househead) | `family-head` | select | Not marked | Select head of family |
+| Edit family status | `edit-family-status` | select | Not marked | -- Select  -- |
+| Primary Contact Phone | `family-phone` | text | Not marked | e.g. +91 98765 43210 |
+| Registered Locality / Road | `family-address` | text | Not marked | Street / Place / Locality |
+| Administrative Notes | `family-notes` | textarea | Not marked | Internal administration annotations... |
+| Emergency Contact Person | `family-emer-name` | text | Not marked | Contact person name |
+| Emergency Phone | `family-emer-phone` | text | Not marked | e.g. +91 98765 43210 |
+| Requires community support | `requiresCommunitySupport` | checkbox | Not marked | — |
+| Welfare Category | `support-category` | select | Not marked | Select Category, Medical assistance, Regular medicine aid, Financial assistance, Home visit / Elderly care, Mobility assistance, Counselling / Guidance, Children education aid, Other welfare aid |
+| Support Status | `support-status` | select | Not marked | Active Support, Monitoring / Periodic, Resolved / Discontinued; Initial: ACTIVE |
+| Welfare Notes / Case Summary | `support-notes` | textarea | Not marked | Details regarding family situation, required aid, or monthly allocation... |
+
+
+#### Fields and filters: Member form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Full Legal Name | `member-name` | text | Yes | Enter full name |
+| Linked Family / Household | `member-family` | select | Not marked | No family assigned |
+| Relation to Head of Family | `member-relation` | select | Not marked | Select relation |
+| Date of Birth | `member-dob` | date | Not marked | — |
+| Gender | `member-gender` | select | Not marked | Select gender, Male, Female, Other |
+| Blood Group | `member-blood-group` | select | Not marked | Select blood group |
+| Marital Status | `member-marital-status` | select | Not marked | Select status, Single, Married, Widowed, Divorced |
+| Primary Phone Number | `member-phone` | text | Not marked | e.g. +91 98765 43210 |
+| Email Address | `member-email` | email | Not marked | e.g. name@example.com |
+| National ID / Aadhaar | `member-id-number` | text | Not marked | e.g. 12-digit Aadhaar number |
+| Current Course / Class / Standard | `member-student-course` | text | Not marked | e.g. Plus Two Science, Class 10, B.Tech CS |
+| Current Institution / School / College | `member-student-inst` | text | Not marked | e.g. Farook College, Govt HSS |
+| Employment Status | `member-emp-status` | select | Not marked | Select Employment Status |
+| Job Title / Designation | `member-job-title` | text | Not marked | e.g. Accountant, Electrician, Driver, Merchant |
+| Employer / Company / Business Name | `member-employer` | text | Not marked | e.g. Lulu Hypermarket, Self - Own Shop, Freelance |
+| Is job seeker | `isJobSeeker` | checkbox | Not marked | — |
+| Highest Education Level | `member-edu-level` | select | Not marked | Select Highest Education Level |
+| Primary Qualification / Major | `member-edu-details-primary` | text | Not marked | e.g. B.Com, Plus Two Science, Alimiyya |
+| Level | `new-edu-level` | select | Not marked | Initial: SECONDARY_SSLC |
+| Degree / Course | `new-edu-degree` | text | Not marked | e.g. SSLC, Plus Two, B.Com |
+| Institution / Board | `new-edu-inst` | text | Not marked | e.g. Govt HSS, Calicut Univ |
+| Year | `new-edu-year` | text | Not marked | e.g. 2021 |
+| New skill input | `newSkillInput` | text | Not marked | e.g. Electrician, Driving, Plumbing, Coding, Graphic Design, Tuition/Teaching, Accounting |
+| Has disability | `hasDisability` | checkbox | Not marked | — |
+| Disability Category | `disabilityType` | select | Not marked | Select Category |
+| Disability Percentage (%) | `disabilityPercentage` | number | Not marked | Percentage %; min 1; max 100 |
+| Disability certificate | `disabilityCertificate` | checkbox | Not marked | — |
+| Disability certificate no | `disabilityCertificateNo` | text | Not marked | Certificate / UDID Number |
+| Has chronic illness | `hasChronicIllness` | checkbox | Not marked | — |
+| Specific Diagnosis / Details | `chronicDetails` | text | Not marked | Condition notes or specific diagnosis |
+| Treatment required | `treatmentRequired` | checkbox | Not marked | — |
+| Regular medication required | `regularMedicationRequired` | checkbox | Not marked | — |
+| Requires assistance | `requiresAssistance` | checkbox | Not marked | — |
+| Primary Caregiver Name | `primaryCaregiverName` | text | Not marked | Name of person assisting |
+| Caregiver Relationship | `caregiverRelationship` | text | Not marked | e.g. Spouse, Son, Daughter, Caretaker |
+| Emergency Contact Person | `emergencyContactName` | text | Not marked | Emergency contact name |
+| Emergency Phone Number | `emergencyContactPhone` | text | Not marked | e.g. +91 98765 43210 |
+| Requires mental health support | `requiresMentalHealthSupport` | checkbox | Not marked | — |
+| Support Type Required | `mentalHealthSupportType` | select | Not marked | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
+| Support Category | `supportCategory` | select | Not marked | Select Welfare Category |
+| Support Status | `supportStatus` | select | Not marked | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; Initial: ACTIVE |
+| Welfare Committee Notes | `supportNotes` | textarea | Not marked | Confidential notes for the Mahallu welfare committee / relief desk... |
+| Use family address | `useFamilyAddress` | checkbox | Not marked | — |
+| House / Building Name | `m-house-name` | text | Not marked | House Name / Flat |
+| Place / Locality | `m-place` | text | Not marked | Place / Locality |
+| Post Office | `m-post` | text | Not marked | Post Office |
+| State | `m-state` | searchable select | Not marked | Select State; Initial: Kerala |
+| District | `m-district` | searchable select | Not marked | Select District |
+| PIN Code | `m-pin` | text | Not marked | 6-digit PIN |
+| Local Body Type | `m-local-body-type` | select | Not marked | Grama Panchayath, Municipality, Corporation; Initial: Grama Panchayath |
+| Local Body Name | `m-local-body-name` | text | Not marked | Name of Panchayath / Municipality |
+| Residency Status | `member-movement-status` | select | Not marked | — |
+| Status Effective Date | `member-movement-date` | date | Not marked | — |
+| Is expatriate | `isExpatriate` | checkbox | Not marked | — |
+| Expatriate country | `expatriateCountry` | text | Not marked | Country of residence (e.g. UAE, Saudi Arabia) |
+| Expatriate occupation | `expatriateOccupation` | text | Not marked | Occupation abroad |
+| Is yatheem | `isYatheem` | checkbox | Not marked | — |
+| Guardian name | `guardianName` | text | Not marked | Guardian Name |
+| Guardian phone | `guardianPhone` | text | Not marked | Guardian Phone |
+
+
+#### Fields and filters: Add existing member dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | Not marked | Search by name, phone, or member ID... |
+| Relation to Family Head | `relationToHead` | select | Yes | Initial: OTHER |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add new member | Opens the `add member` view. | `family-detail-view.tsx` |
+| Add existing member | Opens the `add existing` view. | `family-detail-view.tsx` |
+| h-3 w-3 | Updates local UI state; persistence is described separately below. | `family-detail-view.tsx` |
+| Edit / Add | Opens the `edit family` view. | `family-detail-view.tsx` |
+| WhatsApp | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `family-detail-view.tsx` |
+| Certificate | Shows a notification; does not establish a saved change. | `family-detail-view.tsx` |
+| Edit | Opens the `edit family` view. | `family-detail-view.tsx` |
+| Add member | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `family-detail-view.tsx` |
+| 1. House & Location | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
+| 2. Emergency & Welfare | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
+| Delete Family | Opens the `delete confirm` view. | `family-form-dialog.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `family-form-dialog.tsx` |
+| Emergency & Welfare → | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
+| Save Changes / Register | Submits the associated API change; follow the sequence and failure rules below. | `family-form-dialog.tsx` |
+| ← Back | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
+| Delete Family | Submits the associated API change; follow the sequence and failure rules below. | `family-form-dialog.tsx` |
+| 1. Identity & Demographics | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| 2. Education & Work | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| 3. Health & Support | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| 4. Address & Registers | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| Student | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Worker / Adult | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Add | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
+| × | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
+| Add | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
+| + | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| × | Invokes the associated handler; see the sequence below. | `member-form-dialog.tsx` |
+| No Known Condition Healthy / No chronic illness | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Has Condition Chronic illness, disability, or care | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Not Disclosed Prefer not to disclose | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Delete | Opens the `delete confirm` view. | `member-form-dialog.tsx` |
+| Back | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| Next | Changes the selected view, filter, or page in local state. | `member-form-dialog.tsx` |
+| Save Changes / Add Member | Updates local UI state; persistence is described separately below. | `member-form-dialog.tsx` |
+| Delete Member | Submits the associated API change; follow the sequence and failure rules below. | `member-form-dialog.tsx` |
+| h-3.5 w-3.5 | Submits the associated API change; follow the sequence and failure rules below. | `add-existing-member-dialog.tsx` |
+| Refresh contributions | Invokes the associated handler; see the sequence below. | `contribution-history.tsx` |
+| Try again | Invokes the associated handler; see the sequence below. | `contribution-history.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| WhatsApp | `whatsappHref(primaryPhone)` |
+
+
+
+### Interaction sequence
+
+Open a family → Add new member creates a member linked to the household; Add existing member opens an assignment dialog → choose an existing person → save and refresh. Edit opens details/welfare. Deleting through Edit returns to the families registry.
+
+### States and rules
+
+Certificate currently shows Coming soon and generates no household certificate. A household without members shows a dedicated empty message. House-update failures in family editing are treated as non-fatal, so the house and family can become inconsistent.
+
+Explicit validation messages in the rendered forms:
+
+- House Name / Family Name is required.
+- Member full name is required.
+- Please select a member to add to this family.
+
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx`
+- `apps/web/src/features/tenants/family-detail-view.tsx`
+- `apps/web/src/features/tenants/family-form-dialog.tsx`
+- `apps/web/src/features/tenants/member-form-dialog.tsx`
+- `apps/web/src/features/tenants/add-existing-member-dialog.tsx`
+- `apps/web/src/features/tenants/contribution-history.tsx`
+- `apps/web/src/features/tenants/record-layout.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `families.view`, `families.create`, `families.update`, `families.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/families/families.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Family profile
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/families/[familyId]`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+കുടുംബവിവരങ്ങൾ, അംഗങ്ങൾ, വീട്ടിലേക്കുള്ള ബന്ധം, കുടുംബതല ക്ഷേമവിവരങ്ങൾ എന്നിവ പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+കുടുംബ വിവരങ്ങളും അംഗപട്ടികയും കാണിക്കുന്നു. Add new member, Add existing member, Edit, Certificate നിയന്ത്രണങ്ങളുണ്ട്. അംഗങ്ങളുടെ ID കാണിക്കാൻ നിയന്ത്രണങ്ങളുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Members**, **House**, **Ward**, **Address**, **Contact**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Family form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Edit ward select | `edit-ward-select` | select | ചിഹ്നമില്ല | -- Choose  / Area -- |
+| Municipal House Number | `edit-municipal-house-number` | text | ചിഹ്നമില്ല | e.g. 12/450-A |
+| Edit mahall house number | `edit-mahall-house-number` | text | ചിഹ്നമില്ല | — |
+| House Name | `edit-house-name` | text | ഉണ്ട് | e.g. Baitul Noor, Al Baraka |
+| Head of Family (Applicant / Househead) | `family-head` | select | ചിഹ്നമില്ല | Select head of family |
+| Edit family status | `edit-family-status` | select | ചിഹ്നമില്ല | -- Select  -- |
+| Primary Contact Phone | `family-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
+| Registered Locality / Road | `family-address` | text | ചിഹ്നമില്ല | Street / Place / Locality |
+| Administrative Notes | `family-notes` | textarea | ചിഹ്നമില്ല | Internal administration annotations... |
+| Emergency Contact Person | `family-emer-name` | text | ചിഹ്നമില്ല | Contact person name |
+| Emergency Phone | `family-emer-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
+| Requires community support | `requiresCommunitySupport` | checkbox | ചിഹ്നമില്ല | — |
+| Welfare Category | `support-category` | select | ചിഹ്നമില്ല | Select Category, Medical assistance, Regular medicine aid, Financial assistance, Home visit / Elderly care, Mobility assistance, Counselling / Guidance, Children education aid, Other welfare aid |
+| Support Status | `support-status` | select | ചിഹ്നമില്ല | Active Support, Monitoring / Periodic, Resolved / Discontinued; ആരംഭം: ACTIVE |
+| Welfare Notes / Case Summary | `support-notes` | textarea | ചിഹ്നമില്ല | Details regarding family situation, required aid, or monthly allocation... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Full Legal Name | `member-name` | text | ഉണ്ട് | Enter full name |
+| Linked Family / Household | `member-family` | select | ചിഹ്നമില്ല | No family assigned |
+| Relation to Head of Family | `member-relation` | select | ചിഹ്നമില്ല | Select relation |
+| Date of Birth | `member-dob` | date | ചിഹ്നമില്ല | — |
+| Gender | `member-gender` | select | ചിഹ്നമില്ല | Select gender, Male, Female, Other |
+| Blood Group | `member-blood-group` | select | ചിഹ്നമില്ല | Select blood group |
+| Marital Status | `member-marital-status` | select | ചിഹ്നമില്ല | Select status, Single, Married, Widowed, Divorced |
+| Primary Phone Number | `member-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
+| Email Address | `member-email` | email | ചിഹ്നമില്ല | e.g. name@example.com |
+| National ID / Aadhaar | `member-id-number` | text | ചിഹ്നമില്ല | e.g. 12-digit Aadhaar number |
+| Current Course / Class / Standard | `member-student-course` | text | ചിഹ്നമില്ല | e.g. Plus Two Science, Class 10, B.Tech CS |
+| Current Institution / School / College | `member-student-inst` | text | ചിഹ്നമില്ല | e.g. Farook College, Govt HSS |
+| Employment Status | `member-emp-status` | select | ചിഹ്നമില്ല | Select Employment Status |
+| Job Title / Designation | `member-job-title` | text | ചിഹ്നമില്ല | e.g. Accountant, Electrician, Driver, Merchant |
+| Employer / Company / Business Name | `member-employer` | text | ചിഹ്നമില്ല | e.g. Lulu Hypermarket, Self - Own Shop, Freelance |
+| Is job seeker | `isJobSeeker` | checkbox | ചിഹ്നമില്ല | — |
+| Highest Education Level | `member-edu-level` | select | ചിഹ്നമില്ല | Select Highest Education Level |
+| Primary Qualification / Major | `member-edu-details-primary` | text | ചിഹ്നമില്ല | e.g. B.Com, Plus Two Science, Alimiyya |
+| Level | `new-edu-level` | select | ചിഹ്നമില്ല | ആരംഭം: SECONDARY_SSLC |
+| Degree / Course | `new-edu-degree` | text | ചിഹ്നമില്ല | e.g. SSLC, Plus Two, B.Com |
+| Institution / Board | `new-edu-inst` | text | ചിഹ്നമില്ല | e.g. Govt HSS, Calicut Univ |
+| Year | `new-edu-year` | text | ചിഹ്നമില്ല | e.g. 2021 |
+| New skill input | `newSkillInput` | text | ചിഹ്നമില്ല | e.g. Electrician, Driving, Plumbing, Coding, Graphic Design, Tuition/Teaching, Accounting |
+| Has disability | `hasDisability` | checkbox | ചിഹ്നമില്ല | — |
+| Disability Category | `disabilityType` | select | ചിഹ്നമില്ല | Select Category |
+| Disability Percentage (%) | `disabilityPercentage` | number | ചിഹ്നമില്ല | Percentage %; min 1; max 100 |
+| Disability certificate | `disabilityCertificate` | checkbox | ചിഹ്നമില്ല | — |
+| Disability certificate no | `disabilityCertificateNo` | text | ചിഹ്നമില്ല | Certificate / UDID Number |
+| Has chronic illness | `hasChronicIllness` | checkbox | ചിഹ്നമില്ല | — |
+| Specific Diagnosis / Details | `chronicDetails` | text | ചിഹ്നമില്ല | Condition notes or specific diagnosis |
+| Treatment required | `treatmentRequired` | checkbox | ചിഹ്നമില്ല | — |
+| Regular medication required | `regularMedicationRequired` | checkbox | ചിഹ്നമില്ല | — |
+| Requires assistance | `requiresAssistance` | checkbox | ചിഹ്നമില്ല | — |
+| Primary Caregiver Name | `primaryCaregiverName` | text | ചിഹ്നമില്ല | Name of person assisting |
+| Caregiver Relationship | `caregiverRelationship` | text | ചിഹ്നമില്ല | e.g. Spouse, Son, Daughter, Caretaker |
+| Emergency Contact Person | `emergencyContactName` | text | ചിഹ്നമില്ല | Emergency contact name |
+| Emergency Phone Number | `emergencyContactPhone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
+| Requires mental health support | `requiresMentalHealthSupport` | checkbox | ചിഹ്നമില്ല | — |
+| Support Type Required | `mentalHealthSupportType` | select | ചിഹ്നമില്ല | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
+| Support Category | `supportCategory` | select | ചിഹ്നമില്ല | Select Welfare Category |
+| Support Status | `supportStatus` | select | ചിഹ്നമില്ല | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; ആരംഭം: ACTIVE |
+| Welfare Committee Notes | `supportNotes` | textarea | ചിഹ്നമില്ല | Confidential notes for the Mahallu welfare committee / relief desk... |
+| Use family address | `useFamilyAddress` | checkbox | ചിഹ്നമില്ല | — |
+| House / Building Name | `m-house-name` | text | ചിഹ്നമില്ല | House Name / Flat |
+| Place / Locality | `m-place` | text | ചിഹ്നമില്ല | Place / Locality |
+| Post Office | `m-post` | text | ചിഹ്നമില്ല | Post Office |
+| State | `m-state` | searchable select | ചിഹ്നമില്ല | Select State; ആരംഭം: Kerala |
+| District | `m-district` | searchable select | ചിഹ്നമില്ല | Select District |
+| PIN Code | `m-pin` | text | ചിഹ്നമില്ല | 6-digit PIN |
+| Local Body Type | `m-local-body-type` | select | ചിഹ്നമില്ല | Grama Panchayath, Municipality, Corporation; ആരംഭം: Grama Panchayath |
+| Local Body Name | `m-local-body-name` | text | ചിഹ്നമില്ല | Name of Panchayath / Municipality |
+| Residency Status | `member-movement-status` | select | ചിഹ്നമില്ല | — |
+| Status Effective Date | `member-movement-date` | date | ചിഹ്നമില്ല | — |
+| Is expatriate | `isExpatriate` | checkbox | ചിഹ്നമില്ല | — |
+| Expatriate country | `expatriateCountry` | text | ചിഹ്നമില്ല | Country of residence (e.g. UAE, Saudi Arabia) |
+| Expatriate occupation | `expatriateOccupation` | text | ചിഹ്നമില്ല | Occupation abroad |
+| Is yatheem | `isYatheem` | checkbox | ചിഹ്നമില്ല | — |
+| Guardian name | `guardianName` | text | ചിഹ്നമില്ല | Guardian Name |
+| Guardian phone | `guardianPhone` | text | ചിഹ്നമില്ല | Guardian Phone |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Add existing member dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | ചിഹ്നമില്ല | Search by name, phone, or member ID... |
+| Relation to Family Head | `relationToHead` | select | ഉണ്ട് | ആരംഭം: OTHER |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add new member | `add member` കാഴ്ച തുറക്കും. | `family-detail-view.tsx` |
+| Add existing member | `add existing` കാഴ്ച തുറക്കും. | `family-detail-view.tsx` |
+| h-3 w-3 | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `family-detail-view.tsx` |
+| Edit / Add | `edit family` കാഴ്ച തുറക്കും. | `family-detail-view.tsx` |
+| WhatsApp | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `family-detail-view.tsx` |
+| Certificate | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `family-detail-view.tsx` |
+| Edit | `edit family` കാഴ്ച തുറക്കും. | `family-detail-view.tsx` |
+| Add member | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `family-detail-view.tsx` |
+| 1. House & Location | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
+| 2. Emergency & Welfare | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
+| Delete Family | `delete confirm` കാഴ്ച തുറക്കും. | `family-form-dialog.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `family-form-dialog.tsx` |
+| Emergency & Welfare → | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
+| Save Changes / Register | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `family-form-dialog.tsx` |
+| ← Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
+| Delete Family | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `family-form-dialog.tsx` |
+| 1. Identity & Demographics | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| 2. Education & Work | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| 3. Health & Support | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| 4. Address & Registers | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
+| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
+| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
+| + | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-form-dialog.tsx` |
+| No Known Condition Healthy / No chronic illness | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Has Condition Chronic illness, disability, or care | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Not Disclosed Prefer not to disclose | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Delete | `delete confirm` കാഴ്ച തുറക്കും. | `member-form-dialog.tsx` |
+| Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| Next | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `member-form-dialog.tsx` |
+| Save Changes / Add Member | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-form-dialog.tsx` |
+| Delete Member | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `member-form-dialog.tsx` |
+| h-3.5 w-3.5 | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `add-existing-member-dialog.tsx` |
+| Refresh contributions | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `contribution-history.tsx` |
+| Try again | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `contribution-history.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| WhatsApp | `whatsappHref(primaryPhone)` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+കുടുംബം തുറക്കുക → Add new member വഴി കുടുംബവുമായി ബന്ധിപ്പിച്ച അംഗം സൃഷ്ടിക്കാം. Add existing member വഴി നിലവിലുള്ള വ്യക്തിയെ തിരഞ്ഞെടുക്കുക → സംരക്ഷിച്ച് പുതുക്കുക. Edit details/welfare തുറക്കും. Edit വഴി കുടുംബം നീക്കിയാൽ കുടുംബ പട്ടികയിലേക്ക് മടങ്ങും.
+
+### നിലകളും നിയമങ്ങളും
+
+Certificate ഇപ്പോൾ Coming soon കാണിക്കുന്നു; സർട്ടിഫിക്കറ്റ് സൃഷ്ടിക്കുന്നില്ല. അംഗങ്ങളില്ലെങ്കിൽ പ്രത്യേക ശൂന്യ സന്ദേശമുണ്ട്. കുടുംബം തിരുത്തുമ്പോൾ വീട്ടിലെ മാറ്റം പരാജയപ്പെട്ടാലും തുടരുന്നതിനാൽ രണ്ടു രേഖകളും പൊരുത്തപ്പെടാതിരിക്കാം.
+
+Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
+
+- House Name / Family Name is required.
+- Member full name is required.
+- Please select a member to add to this family.
+
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx`
+- `apps/web/src/features/tenants/family-detail-view.tsx`
+- `apps/web/src/features/tenants/family-form-dialog.tsx`
+- `apps/web/src/features/tenants/member-form-dialog.tsx`
+- `apps/web/src/features/tenants/add-existing-member-dialog.tsx`
+- `apps/web/src/features/tenants/contribution-history.tsx`
+- `apps/web/src/features/tenants/record-layout.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `families.view`, `families.create`, `families.update`, `families.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/families/families.controller.ts`
+
+</Tab>
+</Tabs>

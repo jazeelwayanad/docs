@@ -1,0 +1,241 @@
+---
+title: "Record collection"
+description: "Current screen specification: Record collection. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Record collection
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/collections/new`
+
+### Purpose and access
+
+Record an inflow and generate its receipt using the selected collection category.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The form proceeds through Collection Category, Payer & Household Information, Collection & Payment Details, Additional Category Details, and Remarks & Notes. Category configuration determines family/member targeting and dynamic fields.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Record collection form
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Collection Head / Category | `categoryId` | searchable select | Yes | — |
+| Family | `familyId` | searchable select | Conditional | — |
+| Associated Family (Optional) | `familyId` | searchable select | Not marked | Select family if applicable (optional)... |
+| Family Member (Optional) | `memberId` | searchable select | Conditional | — |
+| Payer name | `payerName` | text | Conditional | — |
+| Payer Phone (Optional) | `payerPhone` | tel | Not marked | +91 9876543210 |
+| Amount (₹) | `amount` | number | Yes | 0.00 |
+| Payment Method | `paymentMethod` | searchable select | Yes | Select payment method...; Initial: Cash |
+| Receipt Date | `date` | date | Yes | — |
+| Billing Month / Period | `period` | text | Not marked | e.g. October 2026 |
+| Description / Remarks (Optional) | `description` | textarea | Not marked | Optional notes or references for this collection... |
+
+
+#### Fields and filters: Quick add account modal
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Account Name | `name` | text | Yes | — |
+| Account Type | `type` | select | Yes | Income (Inflows / Fund), Expense (Outflows), Asset (Cash / Bank / Property), Liability (Payable / Loan) |
+| Account Code (Optional) | `code` | text | Not marked | e.g. INC-001 |
+| Description (Optional) | `description` | textarea | Not marked | Brief purpose or scope of this account... |
+
+
+#### Fields and filters: Quick add category modal
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Parent Account / Fund | `accountId` | select | Yes | Select parent account... |
+| Category Name | `name` | text | Yes | — |
+| Target & Scope | `targetType` | select | Not marked | All Families, General Public / Donation, Category Based (A/B/C), Specific Divisions; Initial: ALL_FAMILIES |
+| Default Amount (₹) | `defaultAmount` | number | Not marked | e.g. 500; min 0 |
+
+
+
+
+Configured additional fields support `checkbox`, `radio`, `multiselect`, `select`, `member`, `family`, `description`, `date`, `number`, `amount`, and text fallback. Labels, options, defaults, order, and required markers come from the selected category. Disabled fields are excluded. A `file` type in the shared type definition has no dedicated upload branch in this renderer.
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Finance Settings | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
+| Print / Share Receipt | Opens the `show receipt modal` view. | `record-collection-form.tsx` |
+| Record Another | Updates local UI state; persistence is described separately below. | `record-collection-form.tsx` |
+| Cancel & Return | Opens the configured destination. | `record-collection-form.tsx` |
+| Recording... / Record Collection & Issue Receipt | Submits the associated API change; follow the sequence and failure rules below. | `record-collection-form.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `quick-add-account-modal.tsx` |
+| Creating... / Save Account | Submits the associated API change; follow the sequence and failure rules below. | `quick-add-account-modal.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `quick-add-category-modal.tsx` |
+| Creating... / Save Category | Submits the associated API change; follow the sequence and failure rules below. | `quick-add-category-modal.tsx` |
+| WhatsApp | Opens the configured destination. | `universal-receipt-modal.tsx` |
+| Print | Opens the browser print dialog; Save as PDF uses the browser destination. | `universal-receipt-modal.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Back to Collections | `/${slug}/finance/collections` |
+| Finance Settings | `/${slug}/settings/finance` |
+
+
+
+### Interaction sequence
+
+Select category → choose a household/member or enter the payer as appropriate → enter amount, payment method, date, and period → fill category-specific fields → submit. Success shows Collection Recorded & Receipt Generated; Print / Share Receipt opens the receipt modal and Record Another resets the form.
+
+### States and rules
+
+Amount and date are required controls; GENERAL categories mark payer name required. Enter moves focus to the next field except textareas and submit buttons. A selected family limits the member selector. Cancel & Return navigates back without submitting. The handler checks category, positive amount, and required family. It does not validate every configured required custom field; GENERAL and NO_TARGET are handled differently, which needs review.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx`
+- `apps/web/src/features/finance/record-collection-form.tsx`
+- `apps/web/src/features/finance/quick-add-account-modal.tsx`
+- `apps/web/src/features/finance/quick-add-category-modal.tsx`
+- `apps/web/src/features/finance/universal-receipt-modal.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Record collection
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/collections/new`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+തിരഞ്ഞെടുത്ത വരവ് വിഭാഗം ഉപയോഗിച്ച് പണം ലഭിച്ചതായി രേഖപ്പെടുത്തി രസീത് സൃഷ്ടിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Collection Category, Payer & Household Information, Collection & Payment Details, Additional Category Details, Remarks & Notes എന്ന ക്രമത്തിലാണ് form. കുടുംബം/അംഗം തിരഞ്ഞെടുക്കലും അധിക ഫീൽഡുകളും വിഭാഗ ക്രമീകരണത്തെ ആശ്രയിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Record collection form
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Collection Head / Category | `categoryId` | searchable select | ഉണ്ട് | — |
+| Family | `familyId` | searchable select | വ്യവസ്ഥാപിതം | — |
+| Associated Family (Optional) | `familyId` | searchable select | ചിഹ്നമില്ല | Select family if applicable (optional)... |
+| Family Member (Optional) | `memberId` | searchable select | വ്യവസ്ഥാപിതം | — |
+| Payer name | `payerName` | text | വ്യവസ്ഥാപിതം | — |
+| Payer Phone (Optional) | `payerPhone` | tel | ചിഹ്നമില്ല | +91 9876543210 |
+| Amount (₹) | `amount` | number | ഉണ്ട് | 0.00 |
+| Payment Method | `paymentMethod` | searchable select | ഉണ്ട് | Select payment method...; ആരംഭം: Cash |
+| Receipt Date | `date` | date | ഉണ്ട് | — |
+| Billing Month / Period | `period` | text | ചിഹ്നമില്ല | e.g. October 2026 |
+| Description / Remarks (Optional) | `description` | textarea | ചിഹ്നമില്ല | Optional notes or references for this collection... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Quick add account modal
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Account Name | `name` | text | ഉണ്ട് | — |
+| Account Type | `type` | select | ഉണ്ട് | Income (Inflows / Fund), Expense (Outflows), Asset (Cash / Bank / Property), Liability (Payable / Loan) |
+| Account Code (Optional) | `code` | text | ചിഹ്നമില്ല | e.g. INC-001 |
+| Description (Optional) | `description` | textarea | ചിഹ്നമില്ല | Brief purpose or scope of this account... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Quick add category modal
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Parent Account / Fund | `accountId` | select | ഉണ്ട് | Select parent account... |
+| Category Name | `name` | text | ഉണ്ട് | — |
+| Target & Scope | `targetType` | select | ചിഹ്നമില്ല | All Families, General Public / Donation, Category Based (A/B/C), Specific Divisions; ആരംഭം: ALL_FAMILIES |
+| Default Amount (₹) | `defaultAmount` | number | ചിഹ്നമില്ല | e.g. 500; min 0 |
+
+
+
+
+അധിക fieldsൽ `checkbox`, `radio`, `multiselect`, `select`, `member`, `family`, `description`, `date`, `number`, `amount`, text fallback ഉണ്ട്. Labels, options, defaults, order, required markers തിരഞ്ഞെടുത്ത categoryയിൽ നിന്നാണ്. Disabled fields ഒഴിവാക്കുന്നു. Shared type definitionലെ `file`ന് ഈ rendererൽ പ്രത്യേക upload branch ഇല്ല.
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Finance Settings | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
+| Print / Share Receipt | `show receipt modal` കാഴ്ച തുറക്കും. | `record-collection-form.tsx` |
+| Record Another | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `record-collection-form.tsx` |
+| Cancel & Return | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `record-collection-form.tsx` |
+| Recording... / Record Collection & Issue Receipt | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `record-collection-form.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `quick-add-account-modal.tsx` |
+| Creating... / Save Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `quick-add-account-modal.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `quick-add-category-modal.tsx` |
+| Creating... / Save Category | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `quick-add-category-modal.tsx` |
+| WhatsApp | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `universal-receipt-modal.tsx` |
+| Print | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `universal-receipt-modal.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Back to Collections | `/${slug}/finance/collections` |
+| Finance Settings | `/${slug}/settings/finance` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+വിഭാഗം തിരഞ്ഞെടുക്കുക → കുടുംബം/അംഗം തിരഞ്ഞെടുക്കുകയോ പണം നൽകുന്നയാളുടെ പേര് നൽകുകയോ ചെയ്യുക → തുക, രീതി, തീയതി, കാലയളവ് നൽകുക → വിഭാഗത്തിനുള്ള അധിക ഫീൽഡുകൾ പൂർത്തിയാക്കുക → സമർപ്പിക്കുക. വിജയിക്കുമ്പോൾ Collection Recorded & Receipt Generated കാണിക്കും. Print / Share Receipt രസീത് തുറക്കും; Record Another form reset ചെയ്യും.
+
+### നിലകളും നിയമങ്ങളും
+
+തുകയും തീയതിയും നിർബന്ധ നിയന്ത്രണങ്ങളാണ്; GENERAL വിഭാഗം payer name നിർബന്ധമായി അടയാളപ്പെടുത്തുന്നു. textareas, submit buttons ഒഴികെ Enter അടുത്ത ഫീൽഡിലേക്ക് നീങ്ങും. കുടുംബം തിരഞ്ഞെടുത്താൽ അംഗലിസ്റ്റ് ചുരുങ്ങും. Cancel & Return സമർപ്പിക്കാതെ മടങ്ങും. Category, positive amount, required family എന്നിവ handler പരിശോധിക്കുന്നു. എല്ലാ നിർബന്ധ custom fieldsഉം പരിശോധിക്കുന്നില്ല; GENERAL/NO_TARGET വ്യത്യസ്തമായി കൈകാര്യം ചെയ്യുന്നതിനാൽ review വേണം.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx`
+- `apps/web/src/features/finance/record-collection-form.tsx`
+- `apps/web/src/features/finance/quick-add-account-modal.tsx`
+- `apps/web/src/features/finance/quick-add-category-modal.tsx`
+- `apps/web/src/features/finance/universal-receipt-modal.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

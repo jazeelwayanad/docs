@@ -1,0 +1,237 @@
+---
+title: "Fleet and Mahalles"
+description: "Current screen specification: Fleet and Mahalles. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Fleet and Mahalles
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/tenants`
+
+### Purpose and access
+
+Provision and manage tenant records across the platform.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+Fleet & Mahalles includes search, status/district filters, sorting, selection, CSV export, and Provision New Mahalle. Provisioning captures name, slug, optional owner email, geography, Masjid, and contact details.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Mahalle &amp; Host**, **Location**, **Members / Families**, **Admins**, **Created**, **Status**, **Actions**.
+
+#### Fields and filters: Tenants table
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | Not marked | Search by name, slug, district, or place… |
+| Status filter | `statusFilter` | select | Not marked | All statuses, Active only, Suspended only; Initial: all |
+| District filter | `districtFilter` | select | Not marked | All districts; Initial: all |
+| Sort by | `sortBy` | select | Not marked | Newest first, Oldest first, Name (A-Z), Members (High-Low); Initial: newest |
+| All selected | `allSelected` | checkbox | Not marked | — |
+| Selected.has(tenant.id) | `selected.has(tenant.id)` | checkbox | Not marked | — |
+| Bulk delete confirm | `bulk-delete-confirm` | text | Not marked | — |
+
+
+#### Fields and filters: Provision tenant dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Mahalle Name | `name` | text | Yes | e.g. Al-Huda Juma Masjid |
+| Tenant Slug / Domain | `slug` | text | Yes | e.g. al-huda |
+| Description (Optional) | `description` | textarea | Not marked | Brief description of this Mahalle jurisdiction... |
+| Assigned Owner Email (Optional) | `ownerEmail` | email | Not marked | admin@example.com |
+| Central Masjid Name | `masjidName` | text | Not marked | e.g. Masjidul Huda |
+| State | `state` | searchable select | Not marked | Select State; Initial: Kerala |
+| District | `district` | searchable select | Not marked | Select District |
+| Place / Town | `place` | text | Not marked | e.g. Kalpetta |
+| Official Contact Phone | `contactPhone` | text | Not marked | +919876543210 |
+| Official Contact Email | `contactEmail` | email | Not marked | contact@alhuda.org |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Delete selected | Opens the `confirm` view. | `tenants-table.tsx` |
+| Export CSV | Downloads the locally generated output. | `tenants-table.tsx` |
+| Provision Mahalle | Opens the `provision` view. | `tenants-table.tsx` |
+| Inspect Mahalle | Opens the configured destination. | `tenants-table.tsx` |
+| Open Portal | Opens the configured destination. | `tenants-table.tsx` |
+| Suspend Mahalle / Reactivate Mahalle | Submits the associated API change; follow the sequence and failure rules below. | `tenants-table.tsx` |
+| Delete permanently | Submits the associated API change; follow the sequence and failure rules below. | `tenants-table.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `provision-tenant-dialog.tsx` |
+| Provision Mahalle | Submits the associated API change; follow the sequence and failure rules below. | `provision-tenant-dialog.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Inspect | `/tenants/${tenant.id}` |
+
+
+
+### Interaction sequence
+
+Provision → fill name/slug and optional metadata → save → inspect the new tenant. Select a row for its command center. Suspend/reactivate updates status; bulk delete requires confirmation and reports deleted/skipped results.
+
+### States and rules
+
+Provisioning does not use citizen member intake. Platform role requirements are enforced by the API. Filtering is client-side over loaded tenants; CSV exports the selected/current collection implemented by the handler.
+
+Explicit validation messages in the rendered forms:
+
+- Name and slug are required
+
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/tenants/page.tsx`
+- `apps/web/src/features/platform/tenants-table.tsx`
+- `apps/web/src/features/platform/provision-tenant-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Fleet and Mahalles
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/tenants`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Platform മുഴുവൻ tenant രേഖകൾ സൃഷ്ടിച്ച് പരിപാലിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Fleet & Mahallesൽ തിരച്ചിൽ, status/district filters, sorting, selection, CSV export, Provision New Mahalle എന്നിവയുണ്ട്. Name, slug, ഐച്ഛിക owner email, സ്ഥലം, Masjid, contact വിവരങ്ങൾ നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Mahalle &amp; Host**, **Location**, **Members / Families**, **Admins**, **Created**, **Status**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tenants table
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | ചിഹ്നമില്ല | Search by name, slug, district, or place… |
+| Status filter | `statusFilter` | select | ചിഹ്നമില്ല | All statuses, Active only, Suspended only; ആരംഭം: all |
+| District filter | `districtFilter` | select | ചിഹ്നമില്ല | All districts; ആരംഭം: all |
+| Sort by | `sortBy` | select | ചിഹ്നമില്ല | Newest first, Oldest first, Name (A-Z), Members (High-Low); ആരംഭം: newest |
+| All selected | `allSelected` | checkbox | ചിഹ്നമില്ല | — |
+| Selected.has(tenant.id) | `selected.has(tenant.id)` | checkbox | ചിഹ്നമില്ല | — |
+| Bulk delete confirm | `bulk-delete-confirm` | text | ചിഹ്നമില്ല | — |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Provision tenant dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Mahalle Name | `name` | text | ഉണ്ട് | e.g. Al-Huda Juma Masjid |
+| Tenant Slug / Domain | `slug` | text | ഉണ്ട് | e.g. al-huda |
+| Description (Optional) | `description` | textarea | ചിഹ്നമില്ല | Brief description of this Mahalle jurisdiction... |
+| Assigned Owner Email (Optional) | `ownerEmail` | email | ചിഹ്നമില്ല | admin@example.com |
+| Central Masjid Name | `masjidName` | text | ചിഹ്നമില്ല | e.g. Masjidul Huda |
+| State | `state` | searchable select | ചിഹ്നമില്ല | Select State; ആരംഭം: Kerala |
+| District | `district` | searchable select | ചിഹ്നമില്ല | Select District |
+| Place / Town | `place` | text | ചിഹ്നമില്ല | e.g. Kalpetta |
+| Official Contact Phone | `contactPhone` | text | ചിഹ്നമില്ല | +919876543210 |
+| Official Contact Email | `contactEmail` | email | ചിഹ്നമില്ല | contact@alhuda.org |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Delete selected | `confirm` കാഴ്ച തുറക്കും. | `tenants-table.tsx` |
+| Export CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tenants-table.tsx` |
+| Provision Mahalle | `provision` കാഴ്ച തുറക്കും. | `tenants-table.tsx` |
+| Inspect Mahalle | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenants-table.tsx` |
+| Open Portal | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenants-table.tsx` |
+| Suspend Mahalle / Reactivate Mahalle | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenants-table.tsx` |
+| Delete permanently | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenants-table.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `provision-tenant-dialog.tsx` |
+| Provision Mahalle | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `provision-tenant-dialog.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Inspect | `/tenants/${tenant.id}` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Provision → name/slug, അനുബന്ധ വിവരങ്ങൾ നൽകുക → സംരക്ഷിക്കുക → tenant പരിശോധിക്കുക. വരി command center തുറക്കും. Suspend/reactivate status മാറ്റും; bulk delete സ്ഥിരീകരണവും deleted/skipped ഫലവും നൽകും.
+
+### നിലകളും നിയമങ്ങളും
+
+Provisioning member intake ഉപയോഗിക്കുന്നില്ല. API platform role പരിശോധിക്കുന്നു. ലഭിച്ച tenantsലാണ് client filter; CSV handler നിർവചിച്ച selected/current വിവരങ്ങൾ export ചെയ്യും.
+
+Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
+
+- Name and slug are required
+
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/tenants/page.tsx`
+- `apps/web/src/features/platform/tenants-table.tsx`
+- `apps/web/src/features/platform/provision-tenant-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>

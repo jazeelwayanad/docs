@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mahall App",
+  "name": "Mahallu specifications",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -16,90 +16,171 @@
       {
         "tab": "Overview",
         "pages": [
-          "mahallu-app-overview"
+          "mahallu-app-overview",
+          "reference/shared-navigation",
+          "reference/coverage"
         ]
       },
       {
         "tab": "Mahallu Admin",
         "pages": [
-          "getting-started",
-          "mahallu-setup",
           {
-            "group": "Home",
+            "group": "Access and setup",
             "pages": [
-              "home"
+              "getting-started",
+              "mahallu-setup"
             ]
           },
           {
-            "group": "Mahall",
+            "group": "Dashboards",
             "pages": [
-              {
-                "group": "People",
-                "pages": [
-                  "family",
-                  "members",
-                  "zones-divisions"
-                ]
-              },
-              {
-                "group": "Finance",
-                "pages": [
-                  "overview",
-                  "collection",
-                  "payments",
-                  "reports"
-                ]
-              },
-              {
-                "group": "Accountant",
-                "pages": [
-                  "charts-of-accounts",
-                  "reports-2"
-                ]
-              }
+              "home",
+              "admin/mahall-dashboard"
+            ]
+          },
+          {
+            "group": "People",
+            "pages": [
+              "family",
+              "admin/family-profile",
+              "members",
+              "admin/member-profile",
+              "admin/houses",
+              "admin/house-profile",
+              "zones-divisions",
+              "admin/division-profile",
+              "admin/education-employment",
+              "admin/health-support"
+            ]
+          },
+          {
+            "group": "Finance",
+            "pages": [
+              "overview",
+              "collection",
+              "admin/record-collection",
+              "payments",
+              "reports"
+            ]
+          },
+          {
+            "group": "Accountant",
+            "pages": [
+              "admin/accountant-workspace",
+              "charts-of-accounts",
+              "admin/manual-journals",
+              "admin/bulk-update",
+              "reports-2",
+              "admin/financial-years",
+              "admin/taxes-legal"
+            ]
+          },
+          {
+            "group": "Registers",
+            "pages": [
+              "admin/registers/marriage",
+              "admin/registers/death",
+              "admin/registers/divorce",
+              "admin/registers/release",
+              "admin/registers/grave",
+              "admin/registers/madrassa",
+              "admin/registers/property"
+            ]
+          },
+          {
+            "group": "Community",
+            "pages": [
+              "admin/committee",
+              "admin/committee-meetings",
+              "admin/services",
+              "admin/events",
+              "admin/event-detail",
+              "admin/announcements",
+              "admin/programs",
+              "admin/community-reports"
             ]
           },
           {
             "group": "Website",
             "pages": [
-              "general"
+              "general",
+              "admin/website-pages",
+              "admin/website-theme",
+              "admin/website-visibility",
+              "admin/website-domains",
+              "admin/website-analytics"
             ]
           },
           {
             "group": "Billing",
             "pages": [
-              "overview-2"
+              "overview-2",
+              "admin/billing-payments",
+              "admin/billing-usage"
             ]
           },
           {
             "group": "Settings",
             "pages": [
-              "mahall-profile"
+              "mahall-profile",
+              "admin/structure-settings",
+              "admin/finance-settings",
+              "admin/notification-settings",
+              "admin/users-roles",
+              "admin/activity-log"
             ]
           }
         ]
       },
       {
-        "tab": "Control Panel"
+        "tab": "Control Panel",
+        "pages": [
+          {
+            "group": "Access and fleet",
+            "pages": [
+              "control/login",
+              "control/overview",
+              "control/tenants",
+              "control/tenant-command-center",
+              "control/tenant-analytics",
+              "control/tenant-billing"
+            ]
+          },
+          {
+            "group": "Platform management",
+            "pages": [
+              "control/users",
+              "control/user-sessions",
+              "control/roles",
+              "control/plans",
+              "control/analytics",
+              "control/settings",
+              "control/audit-logs",
+              "control/forms"
+            ]
+          }
+        ]
       },
       {
-        "tab": "Mahallu Member"
+        "tab": "Mahallu Member",
+        "pages": [
+          "member/public-home",
+          "member/login",
+          "member/dashboard"
+        ]
       },
       {
-        "tab": "Marketing"
+        "tab": "Marketing",
+        "pages": [
+          "marketing/home",
+          "marketing/create-mahalle"
+        ]
       }
     ]
   },
   "logo": {
     "light": "/images/light.svg",
     "dark": "/logo/g_dark.svg"
-  },
-  "navbar": {
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
   },
   "contextual": {
     "options": [

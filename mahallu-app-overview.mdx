@@ -1,3 +1,81 @@
 ---
-title: "Mahallu App Overview"
+title: "Mahallu screen specifications"
+description: "Page-by-page guide and current behavior specifications for the Mahallu development team."
 ---
+
+<Tabs>
+<Tab title="English">
+
+## What this documentation describes
+
+Use these specifications to understand what appears on each screen, what its controls do, and what developers need to preserve or complete. Each page combines a usage explanation with its current screen behavior. This is an internal product specification, based on source review on **13 October 2026**.
+
+The inventory accounts for **90 page routes** across four application surfaces. Documentation keeps five tabs so you can distinguish the overview from the four surfaces:
+
+| Tab | What it covers |
+| --- | --- |
+| Mahallu Admin | Accounts, onboarding, dashboards, people, finance, accounting, registers, community work, website, billing, and settings |
+| Control Panel | Fleet administration, accounts/access, plans, forms, analytics, settings, and audit |
+| Mahallu Member | Public Mahallu home, member OTP login, and member dashboard |
+| Marketing | Platform landing and tenant creation; onboarding forwards to the admin wizard |
+
+## How to read a specification
+
+Every screen uses seven sections: purpose/access, layout, fields/displayed information, actions, interaction sequence, states/rules, and implementation references. Related screens can share one documentation page, with a separate specification for each route.
+
+English and Malayalam tabs describe the same behavior. UI labels and identifiers retain their source spelling. Descriptive names identify controls without visible labels. **Required marker** describes the rendered field marker; it is not a promise that every form validates the same way. Tables include conditional fields and modal controls; not every field appears at once.
+
+## Terminology
+
+- **Mahallu** means the community workspace; source files may use Mahalle, Mahall, or tenant.
+- **Member** means a citizen/member record. **User/account** means an authenticated operator identity.
+- **Family** means a household unit. **House** means the dwelling linked to a household.
+- **Division** means the configured area/ward/zone; the displayed name can be customized.
+- **Platform role** controls cross-tenant operations. **Tenant role** controls a user’s access inside one Mahallu.
+- **Operational fund** and **ledger account** are distinct finance records.
+
+## Current behavior and gaps
+
+A button label does not prove the operation saves data. Specifications explicitly identify local-state controls, fixed display values, missing destinations, incomplete filtering, and partial multi-request workflows. They do not turn those gaps into intended product requirements.
+
+Start with [shared navigation](/reference/shared-navigation), consult [route coverage and review notes](/reference/coverage), or follow the role tabs. The application repository stays unchanged; publication and team access configuration are separate.
+
+</Tab>
+<Tab title="മലയാളം">
+
+## ഈ രേഖകളിൽ എന്തുണ്ട്
+
+ഓരോ സ്ക്രീനിലെയും ഉള്ളടക്കം, നിയന്ത്രണങ്ങളുടെ പ്രവർത്തനം, developer നിലനിർത്തേണ്ടതോ പൂർത്തിയാക്കേണ്ടതോ ആയ behavior എന്നിവ മനസ്സിലാക്കാൻ ഈ രേഖകൾ ഉപയോഗിക്കുക. ഓരോ പേജിലും ഉപയോഗ വിശദീകരണവും നിലവിലെ screen specificationഉം ഉണ്ട്. **2026 ഒക്ടോബർ 13**ന് source പരിശോധിച്ച internal product specification ആണ്.
+
+നാല് application ഭാഗങ്ങളിലെ **90 page routes** inventoryയിൽ ഉൾപ്പെടുന്നു. Overviewനും മറ്റു നാലു ഭാഗങ്ങൾക്കും അഞ്ച് documentation tabs നിലനിർത്തുന്നു:
+
+| Tab | ഉൾപ്പെടുന്ന കാര്യങ്ങൾ |
+| --- | --- |
+| Mahallu Admin | Accounts, onboarding, dashboards, people, finance, accounting, registers, community പ്രവർത്തനം, website, billing, settings |
+| Control Panel | Fleet administration, accounts/access, plans, forms, analytics, settings, audit |
+| Mahallu Member | Public Mahallu home, member OTP login, member dashboard |
+| Marketing | Platform landing, tenant creation; onboarding admin wizardലേക്ക് അയക്കും |
+
+## Specification വായിക്കുന്ന വിധം
+
+ഓരോ സ്ക്രീനിനും ഏഴ് വിഭാഗങ്ങളുണ്ട്: ഉദ്ദേശ്യം/പ്രവേശനം, layout, fields/displayed information, actions, interaction sequence, states/rules, implementation references. ബന്ധപ്പെട്ട സ്ക്രീനുകൾ ഒരേ documentation പേജിലാകാം; ഓരോ routeനും പ്രത്യേകം specification ഉണ്ടായിരിക്കും.
+
+English, Malayalam tabs ഒരേ behavior വിവരിക്കുന്നു. UI labels, identifiers എന്നിവ sourceലെ പേരിൽ നിലനിർത്തുന്നു. Visible label ഇല്ലാത്ത controlsന് വിവരണപേരുകൾ ഉപയോഗിക്കുന്നു. **Required marker** rendered field ചിഹ്നമാണ്; എല്ലാ formകളും ഒരേ രീതിയിൽ validate ചെയ്യുമെന്ന് ഉറപ്പല്ല. Conditional fields, modal controls എന്നിവയും പട്ടികകളിലുണ്ട്; എല്ലാം ഒരുമിച്ച് പ്രത്യക്ഷപ്പെടില്ല.
+
+## പദപ്രയോഗം
+
+- **Mahallu** സാമൂഹിക workspace ആണ്; sourceൽ Mahalle, Mahall, tenant എന്നീ പേരുകളും കാണാം.
+- **Member** പൗര അംഗരേഖയാണ്. **User/account** authenticate ചെയ്യുന്ന operator identity ആണ്.
+- **Family** കുടുംബയൂണിറ്റാണ്. **House** കുടുംബവുമായി ബന്ധിപ്പിക്കുന്ന വീടാണ്.
+- **Division** ക്രമീകരിച്ച area/ward/zone ആണ്; പ്രദർശനപേര് മാറ്റാം.
+- **Platform role** പല tenantsലുള്ള പ്രവർത്തനങ്ങൾ നിയന്ത്രിക്കുന്നു. **Tenant role** ഒരു മഹല്ലിലെ user access നിയന്ത്രിക്കുന്നു.
+- **Operational fund**, **ledger account** വ്യത്യസ്ത ധനകാര്യരേഖകളാണ്.
+
+## നിലവിലെ behaviorയും കുറവുകളും
+
+ബട്ടണിന്റെ പേര് മാത്രം സംരക്ഷിക്കൽ പ്രവർത്തിക്കുന്നു എന്ന് തെളിയിക്കുന്നില്ല. Local-state controls, സ്ഥിരവിലകൾ, destination ഇല്ലാത്തത്, പൂർത്തിയാകാത്ത filters, ഭാഗികമായി വിജയിക്കാവുന്ന പല അഭ്യർത്ഥനകൾ എന്നിവ വ്യക്തമാക്കുന്നു. ഇവയെ ഉദ്ദേശിച്ച product requirements ആയി മാറ്റുന്നില്ല.
+
+[പൊതുവായ നാവിഗേഷൻ](/reference/shared-navigation), [route coverage, review notes](/reference/coverage) എന്നിവയിൽ നിന്ന് തുടങ്ങാം; role tabs ഉപയോഗിക്കാം. Application repository മാറ്റിയിട്ടില്ല. Publishing, team access configuration വേറെയുള്ള ജോലികളാണ്.
+
+</Tab>
+</Tabs>

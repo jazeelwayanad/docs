@@ -1,0 +1,307 @@
+---
+title: "Tenant users and roles"
+description: "Current screen specification: Tenant users and roles. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Tenant users
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/admins`
+
+### Purpose and access
+
+Manage user accounts that have administrative membership in this Mahallu.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The page contains the administrator list, role selectors, removal controls, and an Add a user form asking for email and role.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Name**, **Email**, **Role**.
+
+#### Fields and filters: Admins table
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Admin.role.key | `admin.role.key` | select | Not marked | — |
+| Email | `add-admin-email` | email | Yes | person@example.com |
+| Role | `add-admin-role` | select | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Remove | Selects the record for the removal confirmation dialog. | `admins-table.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `admins-table.tsx` |
+| Add | Submits the associated API change; follow the sequence and failure rules below. | `admins-table.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Manage roles → | `/${slug}/settings/admins/roles` |
+
+
+
+### Interaction sequence
+
+Enter an existing account email and role → Add → refresh. Change a listed user’s role to update membership; Remove requires confirmation before removing access.
+
+### States and rules
+
+This manages tenant memberships, not citizen member records. Role-rank and permission checks are enforced by the API. A denied administrators view shows a permission panel.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx`
+- `apps/web/src/features/tenants/admins-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/admins.ts`, `apps/web/src/lib/roles.ts`, `apps/web/src/lib/api-client.ts`
+
+## Tenant roles
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/admins/roles`
+
+### Purpose and access
+
+Define tenant-specific roles and their permission sets.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The role table provides Create role, Edit, Duplicate, Deactivate, and Reactivate. The dialog exposes role identity and permission selection.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Role**, **Type**, **Permissions**, **Members**, **Status**, **Actions**.
+
+#### Fields and filters: Role form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Role name | `role-name` | text | Yes | — |
+| Description | `role-description` | textarea | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Create role | Invokes the associated handler; see the sequence below. | `roles-table.tsx` |
+| Duplicate | Submits the associated API change; follow the sequence and failure rules below. | `roles-table.tsx` |
+| Deactivate | Selects the record for `deactivate target`. | `roles-table.tsx` |
+| Reactivate | Submits the associated API change; follow the sequence and failure rules below. | `roles-table.tsx` |
+| Deactivate | Submits the associated API change; follow the sequence and failure rules below. | `roles-table.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `role-form-dialog.tsx` |
+| Save Changes / Create role | Submits the associated API change; follow the sequence and failure rules below. | `role-form-dialog.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| ← Users | `/${slug}/settings/admins` |
+
+
+
+### Interaction sequence
+
+Create or edit a role → choose its permissions → save and refresh. Duplicate creates another role; Deactivate/Reactivate changes availability through distinct API operations.
+
+### States and rules
+
+Built-in/system role restrictions and escalation checks belong to the backend. Deactivating a role is distinct from deleting a user or removing a member record.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx`
+- `apps/web/src/features/tenants/roles-table.tsx`
+- `apps/web/src/features/tenants/role-form-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/roles.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Tenant users
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/admins`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+ഈ മഹല്ലിൽ അഡ്മിനിസ്ട്രേറ്റീവ് അംഗത്വമുള്ള user accountകൾ പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+അഡ്മിനിസ്ട്രേറ്റർ പട്ടിക, role selectors, നീക്കൽ നിയന്ത്രണങ്ങൾ, email/role ഉള്ള Add a user form എന്നിവയുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Name**, **Email**, **Role**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Admins table
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Admin.role.key | `admin.role.key` | select | ചിഹ്നമില്ല | — |
+| Email | `add-admin-email` | email | ഉണ്ട് | person@example.com |
+| Role | `add-admin-role` | select | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Remove | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `admins-table.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `admins-table.tsx` |
+| Add | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `admins-table.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Manage roles → | `/${slug}/settings/admins/roles` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+നിലവിലുള്ള accountന്റെ email, role നൽകുക → Add → പുതുക്കും. പട്ടികയിലെ role മാറ്റിയാൽ membership പുതുക്കും; Remove സ്ഥിരീകരിച്ച ശേഷം പ്രവേശനം നീക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+ഇത് tenant memberships ആണ് പരിപാലിക്കുന്നത്; പൗര member രേഖകളല്ല. Role-rank, permission പരിശോധനകൾ APIയിൽ നടക്കുന്നു. പ്രവേശനമില്ലെങ്കിൽ പ്രത്യേക സന്ദേശമുണ്ട്.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx`
+- `apps/web/src/features/tenants/admins-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/admins.ts`, `apps/web/src/lib/roles.ts`, `apps/web/src/lib/api-client.ts`
+
+## Tenant roles
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/admins/roles`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+മഹല്ലിനുള്ള roleകളും അവയുടെ permission setകളും നിർവചിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Create role, Edit, Duplicate, Deactivate, Reactivate എന്നിവ പട്ടികയിലുണ്ട്. ഡയലോഗിൽ role വിവരങ്ങളും permission തിരഞ്ഞെടുപ്പും നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Role**, **Type**, **Permissions**, **Members**, **Status**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Role form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Role name | `role-name` | text | ഉണ്ട് | — |
+| Description | `role-description` | textarea | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Create role | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `roles-table.tsx` |
+| Duplicate | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `roles-table.tsx` |
+| Deactivate | `deactivate target`നായി രേഖ തിരഞ്ഞെടുക്കും. | `roles-table.tsx` |
+| Reactivate | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `roles-table.tsx` |
+| Deactivate | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `roles-table.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `role-form-dialog.tsx` |
+| Save Changes / Create role | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `role-form-dialog.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| ← Users | `/${slug}/settings/admins` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Role സൃഷ്ടിക്കുകയോ തിരുത്തുകയോ ചെയ്യുക → permissions തിരഞ്ഞെടുക്കുക → സംരക്ഷിച്ച് പുതുക്കുക. Duplicate മറ്റൊരു role സൃഷ്ടിക്കുന്നു; Deactivate/Reactivate പ്രത്യേകം API പ്രവർത്തനങ്ങളാണ്.
+
+### നിലകളും നിയമങ്ങളും
+
+System role നിയന്ത്രണങ്ങളും അധികാരം വർധിപ്പിക്കുന്നതിനുള്ള പരിശോധനയും backendലാണ്. Role deactivation user നീക്കലോ member രേഖ നീക്കലോ അല്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx`
+- `apps/web/src/features/tenants/roles-table.tsx`
+- `apps/web/src/features/tenants/role-form-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/roles.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

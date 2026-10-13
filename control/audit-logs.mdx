@@ -1,0 +1,155 @@
+---
+title: "Audit stream"
+description: "Current screen specification: Audit stream. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Audit stream
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/audit-logs`
+
+### Purpose and access
+
+Search and inspect platform audit records.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+Audit Logs & Compliance Stream contains search, action-category and tenant filters, a paginated table, JSON export, and an entry-inspection dialog.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Timestamp**, **Action**, **Actor**, **Mahalle Scope**, **IP Address**, **Payload**.
+
+#### Fields and filters: Audit logs explorer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | Not marked | Search by action, actor email, IP address… |
+| Action category | `actionCategory` | select | Not marked | — |
+| Selected tenant | `selectedTenant` | select | Not marked | All Mahalles |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Filter | Invokes the associated handler; see the sequence below. | `audit-logs-explorer.tsx` |
+| Export JSON | Downloads the locally generated output. | `audit-logs-explorer.tsx` |
+| Inspect | Updates local UI state; persistence is described separately below. | `audit-logs-explorer.tsx` |
+
+
+
+### Interaction sequence
+
+Submit search or change a filter → update URL parameters and reset page to 1 → load matching entries. Inspect a row for details. Export JSON downloads the currently loaded entries.
+
+### States and rules
+
+Export covers the current page, not necessarily the full filtered history. The screen has an empty-state message and does not edit, undo, or delete audit records.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/audit-logs/page.tsx`
+- `apps/web/src/features/platform/audit-logs-explorer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Audit stream
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/audit-logs`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Platform audit രേഖകൾ തിരഞ്ഞ് പരിശോധിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Audit Logs & Compliance Streamൽ തിരച്ചിൽ, action-category/tenant filters, paginated table, JSON export, entry-inspection dialog ഉണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Timestamp**, **Action**, **Actor**, **Mahalle Scope**, **IP Address**, **Payload**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Audit logs explorer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | ചിഹ്നമില്ല | Search by action, actor email, IP address… |
+| Action category | `actionCategory` | select | ചിഹ്നമില്ല | — |
+| Selected tenant | `selectedTenant` | select | ചിഹ്നമില്ല | All Mahalles |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Filter | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `audit-logs-explorer.tsx` |
+| Export JSON | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `audit-logs-explorer.tsx` |
+| Inspect | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `audit-logs-explorer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Search സമർപ്പിക്കുകയോ filter മാറ്റുകയോ ചെയ്യുക → URL parameters പുതുക്കി page 1 ആക്കും → matching രേഖകൾ വായിക്കും. വരി തുറന്ന് വിവരങ്ങൾ കാണാം. Export JSON ഇപ്പോൾ ലഭിച്ച രേഖകൾ download ചെയ്യും.
+
+### നിലകളും നിയമങ്ങളും
+
+Export നിലവിലെ പേജിനാണ്; മുഴുവൻ filtered history ആവണമെന്നില്ല. ശൂന്യനിലയുണ്ട്; audit തിരുത്തൽ, undo, delete എന്നിവ ഇല്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/audit-logs/page.tsx`
+- `apps/web/src/features/platform/audit-logs-explorer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>

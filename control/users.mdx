@@ -1,0 +1,257 @@
+---
+title: "User access and accounts"
+description: "Current screen specification: User access and accounts. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## User access and accounts
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/users`
+
+### Purpose and access
+
+Manage platform-wide account identities, platform roles, tenant memberships, passwords, status, and sessions.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+The screen has search, role/tenant/status filters, pagination, and selectable rows. Dialogs cover account creation, profile editing, platform role, Mahalle memberships, direct password reset, and single/bulk deletion.
+
+### Fields and displayed information
+
+
+Displayed table columns: **User**, **Contact**, **Platform Role**, **Mahalle Access & Roles**, **Active Sessions**, **Status**, **Actions**.
+
+#### Fields and filters: Users management view
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | Not marked | Search by name, email or phone number... |
+| Selected role filter | `selectedRoleFilter` | select | Not marked | All Roles, Superadmins, Platform Staff, Mahall Owners, Mahall Admins, Regular Members; Initial: all |
+| Selected tenant filter | `selectedTenantFilter` | select | Not marked | All Mahalles; Initial: all |
+| Selected status filter | `selectedStatusFilter` | select | Not marked | All Status, Active Only, Suspended; Initial: all |
+| Is all current page selected | `isAllCurrentPageSelected` | checkbox | Not marked | — |
+| Is selected | `isSelected` | checkbox | Not marked | — |
+| Page size | `pageSize` | select | Not marked | 10, 25, 50, 100; Initial: 10 |
+| Full Name | `create-fullName` | text | Yes | e.g. Muhammed Ali |
+| Email Address | `create-email` | email | Yes | user@example.com |
+| Initial Password | `create-password` | password | Yes | •••••••• |
+| Phone Number | `create-phone` | text | Not marked | +91 9876543210 |
+| Platform Superadmin / Staff Role | `create-platformRole` | select | Not marked | None (Standard User), SUPER_ADMIN (Full Platform Control), PLATFORM_STAFF, PLATFORM_SUPPORT |
+| Assign Initial Mahalle | `create-tenantId` | select | Not marked | None |
+| Mahalle Role | `create-tenantRoleKey` | select | Yes | Owner, Admin, Staff, Member |
+| Full Name | `edit-fullName` | text | Yes | — |
+| Email Address | `edit-email` | email | Yes | — |
+| Phone Number | `edit-phone` | text | Not marked | — |
+| System Platform Role | `platform-role-select` | select | Not marked | None (Regular user / Tenant admin only), SUPER_ADMIN (Full Root Access), PLATFORM_STAFF (Operator Access), PLATFORM_SUPPORT (Support Mode Only) |
+| Mahalle | `assign-tenantId` | select | Not marked | Select Mahalle... |
+| Role Assignment | `assign-roleKey` | select | Not marked | Owner, Admin, Staff, Member; Initial: ADMIN |
+| New Password | `reset-newPassword` | password | Yes | •••••••• |
+| Confirm New Password | `reset-confirmPassword` | password | Yes | •••••••• |
+| Terminate sessions check | `terminate-sessions-check` | checkbox | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Create User | Opens the `is create` view. | `users-management-view.tsx` |
+| Reset | Changes the selected view, filter, or page in local state. | `users-management-view.tsx` |
+| Delete Selected | Opens the `is bulk delete` view. | `users-management-view.tsx` |
+| Clear | Changes the selected view, filter, or page in local state. | `users-management-view.tsx` |
+| User actions | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `users-management-view.tsx` |
+| Edit Profile | Opens the edit form populated from the selected record. | `users-management-view.tsx` |
+| Platform Role | Invokes the associated handler; see the sequence below. | `users-management-view.tsx` |
+| Mahalle Access | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Reset Password | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Revoke All Sessions | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Suspend Account / Activate Account | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Delete User | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Cancel | Closes or clears the `is create` view/selection. | `users-management-view.tsx` |
+| Create Account | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Update Role | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Assign Mahalle | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Done | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Reset Password | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `users-management-view.tsx` |
+| Delete User | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+| Cancel | Closes or clears the `is bulk delete` view/selection. | `users-management-view.tsx` |
+| Delete Users | Submits the associated API change; follow the sequence and failure rules below. | `users-management-view.tsx` |
+
+
+
+### Interaction sequence
+
+Create User → enter identity/password and optional initial access → save. Row actions edit identity, assign/revoke platform access, add/remove tenant membership, reset password with optional session termination, suspend/reactivate, terminate sessions, or delete after confirmation.
+
+### States and rules
+
+Accounts are distinct from tenant citizen members. Destructive and access-changing operations are backend-gated. Reset Password can terminate sessions; profile editing alone does not change credentials.
+
+Explicit validation messages in the rendered forms:
+
+- Password must be at least 8 characters long
+- Passwords do not match
+
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/users/page.tsx`
+- `apps/web/src/features/platform/users-management-view.tsx`
+
+Data and access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## User access and accounts
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/users`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Platform account identity, platform role, tenant memberships, password, status, session എന്നിവ പരിപാലിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+തിരച്ചിൽ, role/tenant/status filters, pagination, selectable rows ഉണ്ട്. Account സൃഷ്ടിക്കൽ, profile edit, platform role, Mahalle memberships, password reset, single/bulk delete ഡയലോഗുകളുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **User**, **Contact**, **Platform Role**, **Mahalle Access & Roles**, **Active Sessions**, **Status**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Users management view
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | ചിഹ്നമില്ല | Search by name, email or phone number... |
+| Selected role filter | `selectedRoleFilter` | select | ചിഹ്നമില്ല | All Roles, Superadmins, Platform Staff, Mahall Owners, Mahall Admins, Regular Members; ആരംഭം: all |
+| Selected tenant filter | `selectedTenantFilter` | select | ചിഹ്നമില്ല | All Mahalles; ആരംഭം: all |
+| Selected status filter | `selectedStatusFilter` | select | ചിഹ്നമില്ല | All Status, Active Only, Suspended; ആരംഭം: all |
+| Is all current page selected | `isAllCurrentPageSelected` | checkbox | ചിഹ്നമില്ല | — |
+| Is selected | `isSelected` | checkbox | ചിഹ്നമില്ല | — |
+| Page size | `pageSize` | select | ചിഹ്നമില്ല | 10, 25, 50, 100; ആരംഭം: 10 |
+| Full Name | `create-fullName` | text | ഉണ്ട് | e.g. Muhammed Ali |
+| Email Address | `create-email` | email | ഉണ്ട് | user@example.com |
+| Initial Password | `create-password` | password | ഉണ്ട് | •••••••• |
+| Phone Number | `create-phone` | text | ചിഹ്നമില്ല | +91 9876543210 |
+| Platform Superadmin / Staff Role | `create-platformRole` | select | ചിഹ്നമില്ല | None (Standard User), SUPER_ADMIN (Full Platform Control), PLATFORM_STAFF, PLATFORM_SUPPORT |
+| Assign Initial Mahalle | `create-tenantId` | select | ചിഹ്നമില്ല | None |
+| Mahalle Role | `create-tenantRoleKey` | select | ഉണ്ട് | Owner, Admin, Staff, Member |
+| Full Name | `edit-fullName` | text | ഉണ്ട് | — |
+| Email Address | `edit-email` | email | ഉണ്ട് | — |
+| Phone Number | `edit-phone` | text | ചിഹ്നമില്ല | — |
+| System Platform Role | `platform-role-select` | select | ചിഹ്നമില്ല | None (Regular user / Tenant admin only), SUPER_ADMIN (Full Root Access), PLATFORM_STAFF (Operator Access), PLATFORM_SUPPORT (Support Mode Only) |
+| Mahalle | `assign-tenantId` | select | ചിഹ്നമില്ല | Select Mahalle... |
+| Role Assignment | `assign-roleKey` | select | ചിഹ്നമില്ല | Owner, Admin, Staff, Member; ആരംഭം: ADMIN |
+| New Password | `reset-newPassword` | password | ഉണ്ട് | •••••••• |
+| Confirm New Password | `reset-confirmPassword` | password | ഉണ്ട് | •••••••• |
+| Terminate sessions check | `terminate-sessions-check` | checkbox | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Create User | `is create` കാഴ്ച തുറക്കും. | `users-management-view.tsx` |
+| Reset | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `users-management-view.tsx` |
+| Delete Selected | `is bulk delete` കാഴ്ച തുറക്കും. | `users-management-view.tsx` |
+| Clear | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `users-management-view.tsx` |
+| User actions | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `users-management-view.tsx` |
+| Edit Profile | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `users-management-view.tsx` |
+| Platform Role | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `users-management-view.tsx` |
+| Mahalle Access | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Reset Password | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Revoke All Sessions | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Suspend Account / Activate Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Delete User | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Cancel | `is create` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `users-management-view.tsx` |
+| Create Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Update Role | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Assign Mahalle | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Done | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Reset Password | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `users-management-view.tsx` |
+| Delete User | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+| Cancel | `is bulk delete` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `users-management-view.tsx` |
+| Delete Users | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `users-management-view.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Create User → identity/password, ഐച്ഛിക access നൽകുക → സംരക്ഷിക്കുക. Row actions വഴി identity തിരുത്തൽ, platform access, tenant membership, session termination സഹിതം password reset, suspend/reactivate, session termination, സ്ഥിരീകരിച്ച delete എന്നിവ നടത്താം.
+
+### നിലകളും നിയമങ്ങളും
+
+Accountsഉം citizen membersഉം വേറെയാണ്. Destructive/access-changing പ്രവർത്തനങ്ങൾക്ക് backend അനുമതി വേണം. Reset Password sessions അവസാനിപ്പിക്കാം; profile editing credentials മാറ്റുന്നില്ല.
+
+Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
+
+- Password must be at least 8 characters long
+- Passwords do not match
+
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/users/page.tsx`
+- `apps/web/src/features/platform/users-management-view.tsx`
+
+Data/access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>

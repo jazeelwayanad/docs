@@ -1,3 +1,273 @@
 ---
-title: "Dashboard"
+title: "Home dashboard"
+description: "Current screen specification: Home dashboard. English and Malayalam guidance for the development team."
 ---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Home dashboard
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]`
+
+### Purpose and access
+
+Use this landing screen to review your Mahallu and open its main work areas.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The screen composes DashboardHero, DashboardMetrics, DashboardModules, DashboardChart, and DashboardMilestones, followed by the website card. It displays tenant identity, aggregate measures, module shortcuts, charts, and setup milestones.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Dashboard modules
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | Not marked | Search operations... |
+
+
+#### Fields and filters: Dashboard chart
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Timeframe | `timeframe` | select | Not marked | Weekly, Monthly, Yearly; Initial: weekly |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Open Mahall Hub | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Open Mahall Hub | `/${slug}/overview` |
+| Check Calendar | `/${slug}/events` |
+| Manage Treasury | `/${slug}/finance/dues` |
+| Census Members | `/${slug}/members` |
+| Issue Certificate | `/${slug}/registers/marriage` |
+| See all | `/${slug}/overview` |
+| Mahall Public Website Portal online & accessible to residents | `publicUrl` |
+| Treasury Closing Cash Net balance: | `/${slug}/finance/cash-book` |
+| Monthly Dues & Income Varisa, donations & fees collected | `/${slug}/finance/collections` |
+| Enrolled Family Units Avg members per household | `/${slug}/families` |
+| Total Mahall Residents Across active divisions / wards | `/${slug}/members` |
+| % | `task.href` |
+| All | `/${slug}/members` |
+| ✓ | `/${slug}/members` |
+
+
+
+### Interaction sequence
+
+Open your Mahallu from the admin entry point → review the headline measures → choose a module shortcut → continue in that module. The website card links to the public site and website management.
+
+### States and rules
+
+The page catches failures in several supporting reads and falls back to null data or empty lists. Treat unavailable dashboard measures as missing data rather than verified zero activity.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/page.tsx`
+- `apps/web/src/features/dashboard/dashboard-hero.tsx`
+- `apps/web/src/features/dashboard/dashboard-metrics.tsx`
+- `apps/web/src/features/dashboard/dashboard-modules.tsx`
+- `apps/web/src/features/dashboard/dashboard-chart.tsx`
+- `apps/web/src/features/dashboard/dashboard-milestones.tsx`
+- `apps/web/src/features/dashboard/dashboard-recent-members.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/structure.ts`
+
+
+Relevant controller permission keys: `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `education.view`, `registers.death.view`, `registers.death.create`, `registers.death.update`, `registers.death.delete`, `announcements.view`, `announcements.create`, `announcements.update`, `announcements.delete`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `settings.view`, `settings.update`, `registers.madrassa.view`, `registers.madrassa.create`, `registers.madrassa.update`, `registers.madrassa.delete`, `services.view`, `services.create`, `services.update`, `services.delete`, `houses.view`, `houses.create`, `houses.update`, `houses.delete`, `families.view`, `families.create`, `families.update`, `families.delete`, `events.view`, `events.create`, `events.update`, `events.delete`, `health.view`, `health.manage`, `members.view`, `members.create`, `members.update`, `members.delete`, `registers.marriage.view`, `registers.marriage.create`, `registers.marriage.update`, `registers.marriage.delete`, `registers.divorce.view`, `registers.divorce.create`, `registers.divorce.update`, `registers.divorce.delete`, `registers.property.view`, `registers.property.create`, `registers.property.update`, `registers.property.delete`, `committee.view`, `committee.create`, `committee.update`, `committee.delete`, `registers.release.view`, `registers.release.create`, `registers.release.update`, `registers.release.delete`, `audit.view`, `registers.grave.view`, `registers.grave.create`, `registers.grave.update`, `registers.grave.delete`, `programs.view`, `programs.create`, `programs.update`, `programs.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/activity/activity.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+- `apps/api/src/announcements/announcements.controller.ts`
+- `apps/api/src/auth/auth.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/committee/committee.controller.ts`
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+- `apps/api/src/families/families.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/health/health.controller.ts`
+- `apps/api/src/houses/houses.controller.ts`
+- `apps/api/src/member-auth/member-auth.controller.ts`
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/onboarding/onboarding.controller.ts`
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/programs/programs.controller.ts`
+- `apps/api/src/registers/death/death.controller.ts`
+- `apps/api/src/registers/divorce/divorce.controller.ts`
+- `apps/api/src/registers/grave/grave.controller.ts`
+- `apps/api/src/registers/madrassa/madrassa.controller.ts`
+- `apps/api/src/registers/marriage/marriage.controller.ts`
+- `apps/api/src/registers/property/property.controller.ts`
+- `apps/api/src/registers/release/release.controller.ts`
+- `apps/api/src/search/search.controller.ts`
+- `apps/api/src/services/services.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Home dashboard
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+നിങ്ങളുടെ മഹല്ലിന്റെ സ്ഥിതി പരിശോധിക്കാനും പ്രധാന പ്രവർത്തന വിഭാഗങ്ങൾ തുറക്കാനും ഈ ഹോം സ്ക്രീൻ ഉപയോഗിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+DashboardHero, DashboardMetrics, DashboardModules, DashboardChart, DashboardMilestones എന്നിവയ്ക്കു ശേഷം വെബ്സൈറ്റ് കാർഡ് വരുന്നു. മഹല്ലിന്റെ പേര്, സംഗ്രഹ കണക്കുകൾ, വിഭാഗങ്ങളിലേക്കുള്ള ലിങ്കുകൾ, ചാർട്ടുകൾ, സജ്ജീകരണ പുരോഗതി എന്നിവ കാണിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Dashboard modules
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | ചിഹ്നമില്ല | Search operations... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Dashboard chart
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Timeframe | `timeframe` | select | ചിഹ്നമില്ല | Weekly, Monthly, Yearly; ആരംഭം: weekly |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Open Mahall Hub | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Open Mahall Hub | `/${slug}/overview` |
+| Check Calendar | `/${slug}/events` |
+| Manage Treasury | `/${slug}/finance/dues` |
+| Census Members | `/${slug}/members` |
+| Issue Certificate | `/${slug}/registers/marriage` |
+| See all | `/${slug}/overview` |
+| Mahall Public Website Portal online & accessible to residents | `publicUrl` |
+| Treasury Closing Cash Net balance: | `/${slug}/finance/cash-book` |
+| Monthly Dues & Income Varisa, donations & fees collected | `/${slug}/finance/collections` |
+| Enrolled Family Units Avg members per household | `/${slug}/families` |
+| Total Mahall Residents Across active divisions / wards | `/${slug}/members` |
+| % | `task.href` |
+| All | `/${slug}/members` |
+| ✓ | `/${slug}/members` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+അഡ്മിൻ പ്രവേശനത്തിൽ നിന്ന് മഹല്ല് തുറക്കുക → പ്രധാന കണക്കുകൾ പരിശോധിക്കുക → ആവശ്യമായ വിഭാഗം തിരഞ്ഞെടുക്കുക → അവിടെ പ്രവർത്തനം തുടരുക. വെബ്സൈറ്റ് കാർഡിലൂടെ പൊതു സൈറ്റും വെബ്സൈറ്റ് മാനേജ്മെന്റും തുറക്കാം.
+
+### നിലകളും നിയമങ്ങളും
+
+ചില അനുബന്ധ വിവരങ്ങൾ ലഭിക്കാത്തപ്പോൾ null അല്ലെങ്കിൽ ശൂന്യ ലിസ്റ്റ് ഉപയോഗിക്കുന്നു. ലഭ്യമല്ലാത്ത കണക്കുകളെ പ്രവർത്തനം ഇല്ലെന്ന സ്ഥിരീകരണമായി കാണരുത്.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/page.tsx`
+- `apps/web/src/features/dashboard/dashboard-hero.tsx`
+- `apps/web/src/features/dashboard/dashboard-metrics.tsx`
+- `apps/web/src/features/dashboard/dashboard-modules.tsx`
+- `apps/web/src/features/dashboard/dashboard-chart.tsx`
+- `apps/web/src/features/dashboard/dashboard-milestones.tsx`
+- `apps/web/src/features/dashboard/dashboard-recent-members.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/structure.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `education.view`, `registers.death.view`, `registers.death.create`, `registers.death.update`, `registers.death.delete`, `announcements.view`, `announcements.create`, `announcements.update`, `announcements.delete`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `settings.view`, `settings.update`, `registers.madrassa.view`, `registers.madrassa.create`, `registers.madrassa.update`, `registers.madrassa.delete`, `services.view`, `services.create`, `services.update`, `services.delete`, `houses.view`, `houses.create`, `houses.update`, `houses.delete`, `families.view`, `families.create`, `families.update`, `families.delete`, `events.view`, `events.create`, `events.update`, `events.delete`, `health.view`, `health.manage`, `members.view`, `members.create`, `members.update`, `members.delete`, `registers.marriage.view`, `registers.marriage.create`, `registers.marriage.update`, `registers.marriage.delete`, `registers.divorce.view`, `registers.divorce.create`, `registers.divorce.update`, `registers.divorce.delete`, `registers.property.view`, `registers.property.create`, `registers.property.update`, `registers.property.delete`, `committee.view`, `committee.create`, `committee.update`, `committee.delete`, `registers.release.view`, `registers.release.create`, `registers.release.update`, `registers.release.delete`, `audit.view`, `registers.grave.view`, `registers.grave.create`, `registers.grave.update`, `registers.grave.delete`, `programs.view`, `programs.create`, `programs.update`, `programs.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/activity/activity.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+- `apps/api/src/announcements/announcements.controller.ts`
+- `apps/api/src/auth/auth.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/committee/committee.controller.ts`
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+- `apps/api/src/families/families.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/health/health.controller.ts`
+- `apps/api/src/houses/houses.controller.ts`
+- `apps/api/src/member-auth/member-auth.controller.ts`
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/onboarding/onboarding.controller.ts`
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/programs/programs.controller.ts`
+- `apps/api/src/registers/death/death.controller.ts`
+- `apps/api/src/registers/divorce/divorce.controller.ts`
+- `apps/api/src/registers/grave/grave.controller.ts`
+- `apps/api/src/registers/madrassa/madrassa.controller.ts`
+- `apps/api/src/registers/marriage/marriage.controller.ts`
+- `apps/api/src/registers/property/property.controller.ts`
+- `apps/api/src/registers/release/release.controller.ts`
+- `apps/api/src/search/search.controller.ts`
+- `apps/api/src/services/services.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+
+</Tab>
+</Tabs>

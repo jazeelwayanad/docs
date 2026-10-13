@@ -1,0 +1,451 @@
+---
+title: "Community reports"
+description: "Current screen specification: Community reports. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Community reports
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports`
+
+### Purpose and access
+
+Choose demographic and community reports from the report hub.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The page displays report links/cards rather than a record-entry form. It links to blood-group, expatriate, and Yatheem reports.
+
+### Fields and displayed information
+
+
+This screen has no editable fields or filters in its rendered components.
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Choose a report → inspect its counts and table → filter the loaded records → return to the report hub to choose another view.
+
+### States and rules
+
+This hub is separate from Finance Reports and Accountant Reports. The destination routes perform their own member-access checks.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/page.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/reports-summary.ts`
+
+## Blood group report
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/blood-groups`
+
+### Purpose and access
+
+Inspect the blood group report using member data already recorded in the directory.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The view combines summary counts, relevant grouping controls, and a member table. Name/phone search narrows the loaded list; columns differ by report.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Blood group**, **Phone**.
+
+#### Fields and filters: Blood group report
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Group filter | `groupFilter` | select | Not marked | All blood groups |
+
+
+Displayed table columns: **Member**.
+
+#### Fields and filters: Member report table
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | Not marked | Search name or phone… |
+
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Open the report → select available group filters → search a name or phone → inspect family/contact and report-specific values. Update source information through Members rather than entering records here.
+
+### States and rules
+
+Denied members.view produces a permission panel. No records and No matches are separate states. These views operate on the route’s loaded subset; the UI does not provide a new record-creation workflow.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx`
+- `apps/web/src/features/tenants/blood-group-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+## Expatriate register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/expatriate`
+
+### Purpose and access
+
+Inspect the expatriate register using member data already recorded in the directory.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The view combines summary counts, relevant grouping controls, and a member table. Name/phone search narrows the loaded list; columns differ by report.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Country**, **Occupation abroad**, **Contact abroad**.
+
+Displayed table columns: **Member**.
+
+#### Fields and filters: Member report table
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | Not marked | Search name or phone… |
+
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Open the report → select available group filters → search a name or phone → inspect family/contact and report-specific values. Update source information through Members rather than entering records here.
+
+### States and rules
+
+Denied members.view produces a permission panel. No records and No matches are separate states. These views operate on the route’s loaded subset; the UI does not provide a new record-creation workflow.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx`
+- `apps/web/src/features/tenants/expatriate-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+## Yatheem register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/yatheem`
+
+### Purpose and access
+
+Inspect the yatheem register using member data already recorded in the directory.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The view combines summary counts, relevant grouping controls, and a member table. Name/phone search narrows the loaded list; columns differ by report.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Guardian**, **Guardian phone**, **Date of birth**.
+
+Displayed table columns: **Member**.
+
+#### Fields and filters: Member report table
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | Not marked | Search name or phone… |
+
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Open the report → select available group filters → search a name or phone → inspect family/contact and report-specific values. Update source information through Members rather than entering records here.
+
+### States and rules
+
+Denied members.view produces a permission panel. No records and No matches are separate states. These views operate on the route’s loaded subset; the UI does not provide a new record-creation workflow.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx`
+- `apps/web/src/features/tenants/yatheem-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+
+Relevant controller permission keys: `education.view`, `members.view`, `members.create`, `members.update`, `members.delete`, `health.view`, `health.manage`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Community reports
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+റിപ്പോർട്ട് ഹബിൽ നിന്ന് ജനസംഖ്യ/സാമൂഹിക റിപ്പോർട്ടുകൾ തിരഞ്ഞെടുക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+രേഖ ചേർക്കാനുള്ള formന് പകരം റിപ്പോർട്ട് ലിങ്കുകൾ/കാർഡുകളാണ്. രക്തഗ്രൂപ്പ്, പ്രവാസി, Yatheem റിപ്പോർട്ടുകളിലേക്ക് ലിങ്കുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തിരഞ്ഞെടുക്കുക → കണക്കുകളും പട്ടികയും പരിശോധിക്കുക → ലഭിച്ച രേഖകളിൽ filter ചെയ്യുക → മറ്റൊരു കാഴ്ചയ്ക്കായി ഹബിലേക്ക് മടങ്ങുക.
+
+### നിലകളും നിയമങ്ങളും
+
+ഇത് Finance Reports, Accountant Reports എന്നിവയിൽ നിന്ന് വേറെയാണ്. ലക്ഷ്യ routeകൾ member പ്രവേശനം പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/page.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/reports-summary.ts`
+
+## Blood group report
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/blood-groups`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+അംഗ ഡയറക്ടറിയിലുള്ള വിവരങ്ങളിൽ നിന്ന് രക്തഗ്രൂപ്പ് റിപ്പോർട്ട് പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+സംഗ്രഹ കണക്കുകൾ, ബന്ധപ്പെട്ട grouping നിയന്ത്രണങ്ങൾ, അംഗപട്ടിക എന്നിവയുണ്ട്. പേര്/ഫോൺ തിരച്ചിൽ ലഭിച്ച പട്ടിക ചുരുക്കും; ഓരോ റിപ്പോർട്ടിലും കോളങ്ങൾ വ്യത്യസ്തമാണ്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Blood group**, **Phone**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Blood group report
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Group filter | `groupFilter` | select | ചിഹ്നമില്ല | All blood groups |
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Member**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member report table
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | ചിഹ്നമില്ല | Search name or phone… |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → ലഭ്യമായ group filter തിരഞ്ഞെടുക്കുക → പേര്/ഫോൺ തിരയുക → കുടുംബം/ബന്ധപ്പെടൽ/റിപ്പോർട്ട് വിവരങ്ങൾ പരിശോധിക്കുക. വിവരങ്ങൾ പുതുക്കാൻ Members ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+'members.view' ഇല്ലെങ്കിൽ അനുമതി സന്ദേശമുണ്ട്. രേഖകളില്ലാത്തതും No matchesഉം വേറെയാണ്. Route വായിച്ച ഉപസമുച്ചയത്തിലാണ് പ്രവർത്തനം; പുതിയ രേഖ ചേർക്കാനുള്ള workflow ഇല്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx`
+- `apps/web/src/features/tenants/blood-group-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+## Expatriate register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/expatriate`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+അംഗ ഡയറക്ടറിയിലുള്ള വിവരങ്ങളിൽ നിന്ന് പ്രവാസി രജിസ്റ്റർ പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+സംഗ്രഹ കണക്കുകൾ, ബന്ധപ്പെട്ട grouping നിയന്ത്രണങ്ങൾ, അംഗപട്ടിക എന്നിവയുണ്ട്. പേര്/ഫോൺ തിരച്ചിൽ ലഭിച്ച പട്ടിക ചുരുക്കും; ഓരോ റിപ്പോർട്ടിലും കോളങ്ങൾ വ്യത്യസ്തമാണ്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Country**, **Occupation abroad**, **Contact abroad**.
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Member**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member report table
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | ചിഹ്നമില്ല | Search name or phone… |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → ലഭ്യമായ group filter തിരഞ്ഞെടുക്കുക → പേര്/ഫോൺ തിരയുക → കുടുംബം/ബന്ധപ്പെടൽ/റിപ്പോർട്ട് വിവരങ്ങൾ പരിശോധിക്കുക. വിവരങ്ങൾ പുതുക്കാൻ Members ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+'members.view' ഇല്ലെങ്കിൽ അനുമതി സന്ദേശമുണ്ട്. രേഖകളില്ലാത്തതും No matchesഉം വേറെയാണ്. Route വായിച്ച ഉപസമുച്ചയത്തിലാണ് പ്രവർത്തനം; പുതിയ രേഖ ചേർക്കാനുള്ള workflow ഇല്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx`
+- `apps/web/src/features/tenants/expatriate-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+## Yatheem register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/reports/yatheem`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+അംഗ ഡയറക്ടറിയിലുള്ള വിവരങ്ങളിൽ നിന്ന് യതീം രജിസ്റ്റർ പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+സംഗ്രഹ കണക്കുകൾ, ബന്ധപ്പെട്ട grouping നിയന്ത്രണങ്ങൾ, അംഗപട്ടിക എന്നിവയുണ്ട്. പേര്/ഫോൺ തിരച്ചിൽ ലഭിച്ച പട്ടിക ചുരുക്കും; ഓരോ റിപ്പോർട്ടിലും കോളങ്ങൾ വ്യത്യസ്തമാണ്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Guardian**, **Guardian phone**, **Date of birth**.
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Member**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member report table
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | ചിഹ്നമില്ല | Search name or phone… |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → ലഭ്യമായ group filter തിരഞ്ഞെടുക്കുക → പേര്/ഫോൺ തിരയുക → കുടുംബം/ബന്ധപ്പെടൽ/റിപ്പോർട്ട് വിവരങ്ങൾ പരിശോധിക്കുക. വിവരങ്ങൾ പുതുക്കാൻ Members ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+'members.view' ഇല്ലെങ്കിൽ അനുമതി സന്ദേശമുണ്ട്. രേഖകളില്ലാത്തതും No matchesഉം വേറെയാണ്. Route വായിച്ച ഉപസമുച്ചയത്തിലാണ് പ്രവർത്തനം; പുതിയ രേഖ ചേർക്കാനുള്ള workflow ഇല്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx`
+- `apps/web/src/features/tenants/yatheem-report.tsx`
+- `apps/web/src/features/tenants/member-report-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `education.view`, `members.view`, `members.create`, `members.update`, `members.delete`, `health.view`, `health.manage`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+
+</Tab>
+</Tabs>

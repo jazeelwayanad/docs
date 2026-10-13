@@ -1,0 +1,217 @@
+---
+title: "Structure settings"
+description: "Current screen specification: Structure settings. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Structure settings
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/structure`
+
+### Purpose and access
+
+Configure subdivisions, house numbering, and family categories.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Organization contains a divisions toggle, preferred division term, numbering method, and prefix. Division rows have order/edit/activation controls. Family categories have their own toggle, term, list, and save controls.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Structure settings
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Has divisions | `hasDivisions` | switch | Not marked | — |
+| Settings division term | `settings-division-term` | text | Not marked | e.g. Ward |
+| House number prefix | `house-number-prefix` | text | Not marked | e.g. MH |
+| Has family statuses | `hasFamilyStatuses` | switch | Not marked | — |
+| Status term | `status-term` | text | Not marked | e.g. Category |
+
+
+#### Fields and filters: Division form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Name | `division-name` | text | Yes | — |
+| Division code | `division-code` | text | Not marked | e.g. KBD |
+| Description | `division-description` | textarea | Not marked | — |
+
+
+#### Fields and filters: Family status form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Status Name | `status-name` | text | Yes | e.g. Category A, Welfare Eligible, Zakat |
+| Code / Short Key | `status-code` | text | Not marked | e.g. CAT_A |
+| Badge Color | `status-color` | select | Not marked | — |
+| Description | `status-description` | textarea | Not marked | Optional criteria or notes for this status tier |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Save | Submits the associated API change; follow the sequence and failure rules below. | `structure-settings.tsx` |
+| Add | Opens the `form` view. | `structure-settings.tsx` |
+| Save | Submits the associated API change; follow the sequence and failure rules below. | `structure-settings.tsx` |
+| Add | Opens the `status form` view. | `structure-settings.tsx` |
+| `Move $&#123;label&#125; up` | Invokes the associated handler; see the sequence below. | `structure-settings.tsx` |
+| `Move $&#123;label&#125; down` | Invokes the associated handler; see the sequence below. | `structure-settings.tsx` |
+| `Edit $&#123;label&#125;` | Invokes the associated handler; see the sequence below. | `structure-settings.tsx` |
+| Deactivate / Reactivate | Invokes the associated handler; see the sequence below. | `structure-settings.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `division-form-dialog.tsx` |
+| Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `division-form-dialog.tsx` |
+| Saving... / Update Status / Save Status | Submits the associated API change; follow the sequence and failure rules below. | `family-status-form-dialog.tsx` |
+
+
+
+### Interaction sequence
+
+Enable divisions → choose terminology and numbering → Save. Add/edit subdivision definitions separately; move rows to save their order. Enable family categories → set their term → Save → maintain category definitions.
+
+### States and rules
+
+Settings and list records save through separate API requests. With divisions disabled numbering is GLOBAL. Prefixes are normalized to uppercase. Permission-denied and no-definition states are explicit.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx`
+- `apps/web/src/features/tenants/structure-settings.tsx`
+- `apps/web/src/features/tenants/division-form-dialog.tsx`
+- `apps/web/src/features/tenants/family-status-form-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `settings.view`, `settings.update`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Structure settings
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/structure`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+പ്രദേശങ്ങൾ, വീട്ടുനമ്പറിംഗ്, കുടുംബവിഭാഗങ്ങൾ എന്നിവ ക്രമീകരിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Organizationൽ divisions toggle, പ്രദേശപേര്, നമ്പറിംഗ് രീതി, prefix ഉണ്ട്. പ്രദേശവരികളിൽ ക്രമം/തിരുത്തൽ/സജീവമാക്കൽ നിയന്ത്രണങ്ങളുണ്ട്. Family categoriesന് പ്രത്യേകം toggle, പേര്, പട്ടിക, save ഉണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Structure settings
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Has divisions | `hasDivisions` | switch | ചിഹ്നമില്ല | — |
+| Settings division term | `settings-division-term` | text | ചിഹ്നമില്ല | e.g. Ward |
+| House number prefix | `house-number-prefix` | text | ചിഹ്നമില്ല | e.g. MH |
+| Has family statuses | `hasFamilyStatuses` | switch | ചിഹ്നമില്ല | — |
+| Status term | `status-term` | text | ചിഹ്നമില്ല | e.g. Category |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Division form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Name | `division-name` | text | ഉണ്ട് | — |
+| Division code | `division-code` | text | ചിഹ്നമില്ല | e.g. KBD |
+| Description | `division-description` | textarea | ചിഹ്നമില്ല | — |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Family status form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Status Name | `status-name` | text | ഉണ്ട് | e.g. Category A, Welfare Eligible, Zakat |
+| Code / Short Key | `status-code` | text | ചിഹ്നമില്ല | e.g. CAT_A |
+| Badge Color | `status-color` | select | ചിഹ്നമില്ല | — |
+| Description | `status-description` | textarea | ചിഹ്നമില്ല | Optional criteria or notes for this status tier |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Save | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `structure-settings.tsx` |
+| Add | `form` കാഴ്ച തുറക്കും. | `structure-settings.tsx` |
+| Save | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `structure-settings.tsx` |
+| Add | `status form` കാഴ്ച തുറക്കും. | `structure-settings.tsx` |
+| `Move $&#123;label&#125; up` | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `structure-settings.tsx` |
+| `Move $&#123;label&#125; down` | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `structure-settings.tsx` |
+| `Edit $&#123;label&#125;` | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `structure-settings.tsx` |
+| Deactivate / Reactivate | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `structure-settings.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `division-form-dialog.tsx` |
+| Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `division-form-dialog.tsx` |
+| Saving... / Update Status / Save Status | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `family-status-form-dialog.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+പ്രദേശങ്ങൾ സജീവമാക്കുക → പേരും നമ്പറിംഗും തിരഞ്ഞെടുക്കുക → Save. പ്രദേശനിർവചനങ്ങൾ പ്രത്യേകം ചേർക്കുക/തിരുത്തുക; വരികളുടെ ക്രമം മാറ്റാം. കുടുംബവിഭാഗങ്ങൾ സജീവമാക്കുക → പേര് നൽകുക → Save → നിർവചനങ്ങൾ പരിപാലിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+Settingsഉം പട്ടിക രേഖകളും വ്യത്യസ്ത അഭ്യർത്ഥനകളിൽ സംരക്ഷിക്കുന്നു. പ്രദേശങ്ങൾ ഇല്ലെങ്കിൽ numbering GLOBAL ആണ്. Prefix വലിയ അക്ഷരങ്ങളാക്കുന്നു. അനുമതിയില്ലാത്തതും നിർവചനങ്ങളില്ലാത്തതും പ്രത്യേക നിലകളാണ്.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx`
+- `apps/web/src/features/tenants/structure-settings.tsx`
+- `apps/web/src/features/tenants/division-form-dialog.tsx`
+- `apps/web/src/features/tenants/family-status-form-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `settings.view`, `settings.update`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

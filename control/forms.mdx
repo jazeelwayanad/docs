@@ -1,0 +1,355 @@
+---
+title: "Form templates and versions"
+description: "Current screen specification: Form templates and versions. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Form templates
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/forms`
+
+### Purpose and access
+
+Create platform-managed form templates.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+Form Templates lists forms and New form. Creation asks name, key, category, and whether the form is platform-wide.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Name**, **Key**, **Category**, **Version**, **Assignment**.
+
+#### Fields and filters: Create form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Name | `form-name` | text | Yes | Marriage NOC Request |
+| Key | `form-key` | text | Yes | marriage-noc |
+| Category (optional) | `form-category` | text | Not marked | Certificates |
+| Is platform wide | `isPlatformWide` | checkbox | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| New form | Opens the `create` view. | `forms-table.tsx` |
+| Create form | Submits the associated API change; follow the sequence and failure rules below. | `create-form-dialog.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Open | `/forms/${form.id}` |
+
+
+
+### Interaction sequence
+
+New form → enter identity/category and assignment scope → Create form → navigate to /forms/{templateId} to define version fields.
+
+### States and rules
+
+The forms route exists but is absent from the current control sidebar; document it as a direct route. Creating a template does not publish its fields or complete member self-service integration.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/forms/page.tsx`
+- `apps/web/src/features/platform/forms-table.tsx`
+- `apps/web/src/features/platform/create-form-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/forms.ts`, `apps/web/src/lib/api-client.ts`
+
+## Form template detail
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/forms/[templateId]`
+
+### Purpose and access
+
+Maintain form versions, fields, publication, and tenant assignment.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+The detail view has version history, draft-field editing, Publish/Open new draft version controls, Assignment, and Delete form. Fields specify identity, type, options, required status, description, and order.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Order**, **Label**, **Key**, **Type**, **Required**.
+
+#### Fields and filters: Form field dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Label | `field-label` | text | Yes | Full name |
+| Key | `field-key` | text | Yes | full_name |
+| Type | `field-type` | select | Not marked | — |
+| Options | `field-options` | textarea | Not marked | "Option A\nOption B" |
+| Description (optional) | `field-description` | text | Not marked | — |
+| Order | `field-order` | number | Not marked | min 0 |
+| Required | `required` | checkbox | Not marked | — |
+
+
+#### Fields and filters: Form assignment editor
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Platform wide | `platformWide` | checkbox | Not marked | — |
+| Selected.has(tenant.id) | `selected.has(tenant.id)` | checkbox | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Remove | Opens the `open` view. | `form-fields-list.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `form-fields-list.tsx` |
+| Add field | Invokes the associated handler; see the sequence below. | `form-fields-list.tsx` |
+| Edit | Opens the edit form populated from the selected record. | `form-fields-list.tsx` |
+| Save changes / Add field | Submits the associated API change; follow the sequence and failure rules below. | `form-field-dialog.tsx` |
+| Publish | Opens the `open` view. | `form-version-actions.tsx` |
+| Publish | Submits the associated API change; follow the sequence and failure rules below. | `form-version-actions.tsx` |
+| Open new draft version | Submits the associated API change; follow the sequence and failure rules below. | `form-version-actions.tsx` |
+| Save assignment | Submits the associated API change; follow the sequence and failure rules below. | `form-assignment-editor.tsx` |
+| Delete form | Opens the `open` view. | `delete-form-button.tsx` |
+| Delete | Submits the associated API change; follow the sequence and failure rules below. | `delete-form-button.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| &larr; All forms | `/forms` |
+
+
+
+### Interaction sequence
+
+Open a draft → add/edit fields → Publish with confirmation → create a new draft for subsequent changes. Choose platform-wide or selected tenants → Save assignment. Delete form returns to /forms.
+
+### States and rules
+
+Published and draft versions are distinct. Template editing and tenant assignment save independently; published forms are not automatically wired to the placeholder request buttons in the member dashboard.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx`
+- `apps/web/src/features/platform/form-fields-list.tsx`
+- `apps/web/src/features/platform/form-field-dialog.tsx`
+- `apps/web/src/features/platform/form-version-actions.tsx`
+- `apps/web/src/features/platform/form-assignment-editor.tsx`
+- `apps/web/src/features/platform/delete-form-button.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/forms.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Form templates
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/forms`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Platform പരിപാലിക്കുന്ന form templates സൃഷ്ടിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Form Templatesൽ form പട്ടികയും New formഉം ഉണ്ട്. Name, key, category, platform-wide സ്ഥിതി നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Name**, **Key**, **Category**, **Version**, **Assignment**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Create form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Name | `form-name` | text | ഉണ്ട് | Marriage NOC Request |
+| Key | `form-key` | text | ഉണ്ട് | marriage-noc |
+| Category (optional) | `form-category` | text | ചിഹ്നമില്ല | Certificates |
+| Is platform wide | `isPlatformWide` | checkbox | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| New form | `create` കാഴ്ച തുറക്കും. | `forms-table.tsx` |
+| Create form | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `create-form-dialog.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Open | `/forms/${form.id}` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+New form → വിവരങ്ങളും assignment scopeഉം → Create form → /forms/{templateId} തുറന്ന് version fields നിർവചിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+Forms route നിലവിലെ control sidebarൽ ഇല്ല; നേരിട്ടുള്ള route ആയി രേഖപ്പെടുത്തുക. Template സൃഷ്ടിക്കൽ fields publish ചെയ്യുകയോ member self-service integration പൂർത്തിയാക്കുകയോ ചെയ്യുന്നില്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/forms/page.tsx`
+- `apps/web/src/features/platform/forms-table.tsx`
+- `apps/web/src/features/platform/create-form-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/forms.ts`, `apps/web/src/lib/api-client.ts`
+
+## Form template detail
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/forms/[templateId]`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Form versions, fields, publication, tenant assignment എന്നിവ പരിപാലിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Version history, draft-field edit, Publish/Open new draft version, Assignment, Delete form എന്നിവയുണ്ട്. Fieldsൽ identity, type, options, required, description, order നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Order**, **Label**, **Key**, **Type**, **Required**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Form field dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Label | `field-label` | text | ഉണ്ട് | Full name |
+| Key | `field-key` | text | ഉണ്ട് | full_name |
+| Type | `field-type` | select | ചിഹ്നമില്ല | — |
+| Options | `field-options` | textarea | ചിഹ്നമില്ല | "Option A\nOption B" |
+| Description (optional) | `field-description` | text | ചിഹ്നമില്ല | — |
+| Order | `field-order` | number | ചിഹ്നമില്ല | min 0 |
+| Required | `required` | checkbox | ചിഹ്നമില്ല | — |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Form assignment editor
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Platform wide | `platformWide` | checkbox | ചിഹ്നമില്ല | — |
+| Selected.has(tenant.id) | `selected.has(tenant.id)` | checkbox | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Remove | `open` കാഴ്ച തുറക്കും. | `form-fields-list.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `form-fields-list.tsx` |
+| Add field | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `form-fields-list.tsx` |
+| Edit | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `form-fields-list.tsx` |
+| Save changes / Add field | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `form-field-dialog.tsx` |
+| Publish | `open` കാഴ്ച തുറക്കും. | `form-version-actions.tsx` |
+| Publish | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `form-version-actions.tsx` |
+| Open new draft version | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `form-version-actions.tsx` |
+| Save assignment | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `form-assignment-editor.tsx` |
+| Delete form | `open` കാഴ്ച തുറക്കും. | `delete-form-button.tsx` |
+| Delete | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `delete-form-button.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| &larr; All forms | `/forms` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Draft തുറക്കുക → fields ചേർക്കുക/തിരുത്തുക → സ്ഥിരീകരിച്ച് Publish → പിന്നീടുള്ള മാറ്റങ്ങൾക്ക് പുതിയ draft സൃഷ്ടിക്കുക. Platform-wide അല്ലെങ്കിൽ tenants തിരഞ്ഞെടുക്കുക → Save assignment. Delete form /formsലേക്ക് മടങ്ങും.
+
+### നിലകളും നിയമങ്ങളും
+
+Published/draft versions വേറെയാണ്. Template editingഉം assignmentഉം പ്രത്യേകം സംരക്ഷിക്കുന്നു; member dashboardലെ placeholder buttonsലേക്ക് published form സ്വയം ബന്ധിപ്പിക്കുന്നില്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx`
+- `apps/web/src/features/platform/form-fields-list.tsx`
+- `apps/web/src/features/platform/form-field-dialog.tsx`
+- `apps/web/src/features/platform/form-version-actions.tsx`
+- `apps/web/src/features/platform/form-assignment-editor.tsx`
+- `apps/web/src/features/platform/delete-form-button.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/forms.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>

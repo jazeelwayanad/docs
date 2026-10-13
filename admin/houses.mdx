@@ -1,0 +1,175 @@
+---
+title: "Houses directory"
+description: "Current screen specification: Houses directory. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Houses directory
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/houses`
+
+### Purpose and access
+
+Maintain physical dwellings separately from the families and members linked to them.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The directory has Add house, search by number/name/address, division and active-status filters, and house rows with edit and activation actions. The dialog contains display number, name, division, address, and notes.
+
+### Fields and displayed information
+
+
+Displayed table columns: **House**, **Division**, **Address**, **Status**, **Actions**.
+
+#### Fields and filters: Houses registry
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | Not marked | Search house number, name, address… |
+| Division filter | `divisionFilter` | select | Not marked | All divisions |
+| Status filter | `statusFilter` | select | Not marked | Active, Inactive, All; Initial: active |
+
+
+#### Fields and filters: House form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| House number | `house-number` | text | Yes | e.g. 14/A |
+| House name | `house-name` | text | Not marked | — |
+| Division | `house-division` | select | Not marked | No division |
+| Address | `house-address` | text | Not marked | — |
+| Notes | `house-notes` | textarea | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add house | Opens a blank creation form. | `houses-registry.tsx` |
+| Deactivate / Reactivate | Submits the associated API change; follow the sequence and failure rules below. | `houses-registry.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `house-form-dialog.tsx` |
+| Save Changes / Add House | Submits the associated API change; follow the sequence and failure rules below. | `house-form-dialog.tsx` |
+
+
+
+### Interaction sequence
+
+Add house → enter the required display number → choose a division if applicable → save → the dialog closes and the list refreshes. Open a house for its household information. Row edit updates the record; activation toggles its active status.
+
+### States and rules
+
+The page handles denied houses.view with a permission message. Empty search results are distinct from an empty directory. Add/edit sends API requests and leaves an inline error visible if the request fails.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/houses/page.tsx`
+- `apps/web/src/features/tenants/houses-registry.tsx`
+- `apps/web/src/features/tenants/house-form-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `houses.view`, `houses.create`, `houses.update`, `houses.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/houses/houses.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Houses directory
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/houses`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+കുടുംബങ്ങളോടും അംഗങ്ങളോടും ബന്ധിപ്പിക്കുന്ന ഭൗതിക വീടുകൾ പ്രത്യേകം പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Add house, നമ്പർ/പേര്/വിലാസം തിരച്ചിൽ, പ്രദേശം/സജീവസ്ഥിതി ഫിൽട്ടറുകൾ, തിരുത്തൽ/സജീവമാക്കൽ നിയന്ത്രണങ്ങൾ എന്നിവയുണ്ട്. ഡയലോഗിൽ display number, പേര്, പ്രദേശം, വിലാസം, കുറിപ്പുകൾ എന്നിവ നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **House**, **Division**, **Address**, **Status**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Houses registry
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Query | `query` | text | ചിഹ്നമില്ല | Search house number, name, address… |
+| Division filter | `divisionFilter` | select | ചിഹ്നമില്ല | All divisions |
+| Status filter | `statusFilter` | select | ചിഹ്നമില്ല | Active, Inactive, All; ആരംഭം: active |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: House form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| House number | `house-number` | text | ഉണ്ട് | e.g. 14/A |
+| House name | `house-name` | text | ചിഹ്നമില്ല | — |
+| Division | `house-division` | select | ചിഹ്നമില്ല | No division |
+| Address | `house-address` | text | ചിഹ്നമില്ല | — |
+| Notes | `house-notes` | textarea | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add house | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `houses-registry.tsx` |
+| Deactivate / Reactivate | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `houses-registry.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `house-form-dialog.tsx` |
+| Save Changes / Add House | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `house-form-dialog.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Add house → നിർബന്ധമായ display number നൽകുക → ആവശ്യമെങ്കിൽ പ്രദേശം തിരഞ്ഞെടുക്കുക → സംരക്ഷിക്കുക → ഡയലോഗ് അടഞ്ഞ് പട്ടിക പുതുക്കും. വീടിന്റെ വിശദാംശങ്ങൾ തുറക്കാം. വരിയിലെ തിരുത്തലും സജീവസ്ഥിതി മാറ്റവും രേഖ പുതുക്കുന്നു.
+
+### നിലകളും നിയമങ്ങളും
+
+houses.view ഇല്ലെങ്കിൽ അനുമതി സന്ദേശം കാണിക്കും. തിരച്ചിലിൽ ഫലമില്ലാത്തതും വീടുകളില്ലാത്തതും വേർതിരിക്കുന്നു. ചേർക്കൽ/തിരുത്തൽ API അഭ്യർത്ഥനകളാണ്; പരാജയപ്പെട്ടാൽ ഡയലോഗിൽ പിശക് കാണിക്കും.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/houses/page.tsx`
+- `apps/web/src/features/tenants/houses-registry.tsx`
+- `apps/web/src/features/tenants/house-form-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `houses.view`, `houses.create`, `houses.update`, `houses.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/houses/houses.controller.ts`
+
+</Tab>
+</Tabs>

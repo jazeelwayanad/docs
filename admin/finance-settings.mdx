@@ -1,0 +1,409 @@
+---
+title: "Finance settings"
+description: "Current screen specification: Finance settings. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Finance settings
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/finance`
+
+### Purpose and access
+
+Configure the operational funds, ledger mappings, numbering, bank accounts, categories, dynamic collection fields, and payment methods used by finance screens.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The screen provides operational funds and COA ledgers, general currency/receipt/voucher settings, bank accounts, collection/expense categories, and payment methods. Category dialogs expose target scope, economic category, amounts, recurrence, and custom fields where applicable.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Fund Name**, **Code**, **Description**, **Linked Categories**, **Default / Status**, **Actions**, **Ledger Account Name**, **Account Type**, **Mapped Categories**, **Balance**, **Bank Name**, **Account Name**, **Account Number**, **IFSC Code**, **Branch**, **Status**.
+
+#### Fields and filters: Finance settings client
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Enabled | `enabled` | checkbox | Not marked | — |
+| Required | `required` | checkbox | Not marked | — |
+| Finance currency | `finance-currency` | text | Yes | — |
+| Finance receipt prefix | `finance-receipt-prefix` | text | Yes | — |
+| Finance voucher prefix | `finance-voucher-prefix` | text | Yes | — |
+| Category fund filter | `categoryFundFilter` | select | Not marked | All Operational Funds (  ); Initial: ALL |
+| Bank Name | `bankName` | text | Yes | e.g. State Bank of India |
+| Account Title | `accountName` | text | Yes | e.g. Mahallu Jama-ath General Fund |
+| Account Number | `accountNumber` | text | Yes | Account number |
+| IFSC Code | `ifscCode` | text | Not marked | e.g. SBIN0001234 |
+| Branch | `branch` | text | Not marked | e.g. Wayanad Main |
+| Bank Name | `editBankName` | text | Yes | — |
+| Account Title | `editAccountName` | text | Yes | — |
+| Account Number (Leave blank to keep current) | `editAccountNumber` | text | Not marked | — |
+| IFSC Code | `editIfscCode` | text | Not marked | — |
+| Branch | `editBranch` | text | Not marked | — |
+| Fund Name | `opFundName` | text | Yes | e.g. Masjid Fund, Madrasa Fund, Building Fund |
+| Fund Code (Short prefix) | `opFundCode` | text | Not marked | e.g. MSJ, MDR, BLD |
+| Description | `opFundDescription` | text | Not marked | e.g. Primary fund for daily operations and utilities |
+| Op fund color | `opFundColor` | color | Not marked | Initial: #059669 |
+| Op fund is default | `opFundIsDefault` | checkbox | Not marked | — |
+| Fund Name | `editOpFundName` | text | Yes | — |
+| Fund Code | `editOpFundCode` | text | Not marked | — |
+| Description | `editOpFundDescription` | text | Not marked | — |
+| Edit op fund color | `editOpFundColor` | color | Not marked | Initial: #059669 |
+| Edit op fund is default | `editOpFundIsDefault` | checkbox | Not marked | — |
+| Operational Fund / Account | `catFundId` | select | Yes | Select Operational Fund... |
+| Cat account id | `catAccountId` | select | Not marked | Select COA Account (Required for Posting)... |
+| Category Name | `catName` | text | Yes | — |
+| Category Code (Optional) | `catCode` | text | Not marked | e.g. VARISA, JUMA, BLDG |
+| Target Scope | `catTargetType` | select | Not marked | No Target / Open (General Public, Hundi, Juma), Family-based (All Mahall Families), Division-based (Select Specific Wards), Member-based (Individual Members), Custom Target (Economic Category: BPL / APL); Initial: FAMILY_BASED |
+| Checked | `checked` | checkbox | Not marked | — |
+| Eligible Economic Category | `catEconomicCategory` | select | Not marked | BPL (Below Poverty Line) Only, APL (Above Poverty Line) Only, All Categories; Initial: ALL |
+| Default Amount (₹) | `catDefaultAmount` | number | Not marked | e.g. 200; min 0 |
+| Collection Target (₹) | `catTargetAmount` | number | Not marked | e.g. 50000; min 0 |
+| Cat is recurring | `catIsRecurring` | checkbox | Not marked | — |
+| Recurrence Frequency | `catRecurrenceFrequency` | select | Not marked | Daily, Weekly, Monthly, Quarterly, Yearly, Custom; Initial: MONTHLY |
+| Cat auto generate | `catAutoGenerate` | checkbox | Not marked | — |
+| Operational Fund / Account | `editCatFundId` | select | Yes | Select Operational Fund... |
+| Edit cat account id | `editCatAccountId` | select | Not marked | Select COA Account (Required for Posting)... |
+| Category Name | `editCatName` | text | Yes | — |
+| Category Code (Optional) | `editCatCode` | text | Not marked | — |
+| Target Scope | `editCatTargetType` | select | Not marked | No Target / Open (General Public, Hundi, Juma), Family-based (All Mahall Families), Division-based (Select Specific Wards), Member-based (Individual Members), Custom Target (Economic Category: BPL / APL); Initial: FAMILY_BASED |
+| Eligible Economic Category | `editCatEconomicCategory` | select | Not marked | BPL (Below Poverty Line) Only, APL (Above Poverty Line) Only, All Categories; Initial: ALL |
+| Default Amount (₹) | `editCatDefaultAmount` | number | Not marked | e.g. 200; min 0 |
+| Collection Target (₹) | `editCatTargetAmount` | number | Not marked | e.g. 50000; min 0 |
+| Edit cat is recurring | `editCatIsRecurring` | checkbox | Not marked | — |
+| Recurrence Frequency | `editCatRecurrenceFrequency` | select | Not marked | Daily, Weekly, Monthly, Quarterly, Yearly, Custom; Initial: MONTHLY |
+| Edit cat auto generate | `editCatAutoGenerate` | checkbox | Not marked | — |
+| Method Name | `methodName` | text | Yes | e.g. Google Pay / UPI |
+| Code | `methodCode` | text | Yes | e.g. UPI |
+| Type | `methodType` | select | Yes | Cash, Bank Transfer, UPI, Cheque, Online Gateway, Other; Initial: BANK_TRANSFER |
+| Method requires ref | `methodRequiresRef` | checkbox | Not marked | — |
+| Method requires cheque | `methodRequiresCheque` | checkbox | Not marked | — |
+| Method requires bank | `methodRequiresBank` | checkbox | Not marked | — |
+| Method Name | `editMethodName` | text | Yes | — |
+| Code | `editMethodCode` | text | Yes | — |
+| Type | `editMethodType` | select | Yes | Cash, Bank Transfer, UPI, Cheque, Online Gateway, Other; Initial: BANK_TRANSFER |
+| Edit method is active | `editMethodIsActive` | checkbox | Not marked | — |
+| Edit method requires ref | `editMethodRequiresRef` | checkbox | Not marked | — |
+| Edit method requires cheque | `editMethodRequiresCheque` | checkbox | Not marked | — |
+| Edit method requires bank | `editMethodRequiresBank` | checkbox | Not marked | — |
+| Fund / Account Name | `fundName` | text | Yes | e.g. Building / Construction Fund, Zakat Fund, General Fund |
+| Fund Code / Abbreviation | `fundCode` | text | Not marked | e.g. FUND-BLD |
+| Type | `fundType` | select | Yes | Income / Fund (Collections), Expense / Disbursement Account, Asset (Cash / Bank), Liability / Dues; Initial: INCOME |
+| Opening Balance (₹) | `fundOpeningBalance` | number | Not marked | 0.00 |
+| Description / Purpose (Optional) | `fundDescription` | text | Not marked | Brief purpose of this fund or account |
+| Fund / Account Name | `editFundName` | text | Yes | e.g. Building / Construction Fund |
+| Fund Code | `editFundCode` | text | Not marked | e.g. FUND-BLD |
+| Type | `editFundType` | select | Yes | Income / Fund (Collections), Expense / Disbursement Account, Asset (Cash / Bank), Liability / Dues; Initial: INCOME |
+| Opening Balance (₹) | `editFundOpeningBalance` | number | Not marked | 0.00 |
+| Description / Purpose (Optional) | `editFundDescription` | text | Not marked | Brief purpose of this fund or account |
+
+
+#### Fields and filters: Dynamic form builder
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Field.enabled | `field.enabled` | checkbox | Not marked | — |
+| Field.label | `field.label` | text | Not marked | Field label |
+| Field.required | `field.required` | checkbox | Not marked | — |
+| (field.options | `(field.options` | text | Not marked | Option 1, Option 2, Option 3 |
+| New field type | `newFieldType` | select | Not marked | Initial: text |
+| New field label | `newFieldLabel` | text | Not marked | Custom field label (e.g. Occasion, Receipt #) |
+| New date().to isostring().split("t")[0] | `new Date().toISOString().split("T")[0]` | date | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add Operational Fund | Opens the `op fund modal` view. | `finance-settings-client.tsx` |
+| Edit fund | Selects the record for `edit op fund target`. | `finance-settings-client.tsx` |
+| Delete fund | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Add Ledger Account | Opens the `fund modal` view. | `finance-settings-client.tsx` |
+| Edit ledger account | Opens the edit form populated from the selected record. | `finance-settings-client.tsx` |
+| Delete ledger account | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Save changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Add Bank Account | Opens the `bank modal` view. | `finance-settings-client.tsx` |
+| Edit bank account | Opens the edit form populated from the selected record. | `finance-settings-client.tsx` |
+| Delete bank account | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Add Collection Category | Opens the `cat modal` view. | `finance-settings-client.tsx` |
+| Add Expense Category | Opens the `cat modal` view. | `finance-settings-client.tsx` |
+| Edit category | Opens the edit form populated from the selected record. | `finance-settings-client.tsx` |
+| Delete category | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Edit category | Opens the edit form populated from the selected record. | `finance-settings-client.tsx` |
+| Delete category | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Add Payment Method | Opens the `method modal` view. | `finance-settings-client.tsx` |
+| Edit payment method | Opens the edit form populated from the selected record. | `finance-settings-client.tsx` |
+| Deactivate payment method | Selects the record for the removal confirmation dialog. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `bank modal` view/selection. | `finance-settings-client.tsx` |
+| Adding... / Add Bank Account | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `edit bank target` view/selection. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Delete | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `op fund modal` view/selection. | `finance-settings-client.tsx` |
+| Saving... / Create Fund | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `edit op fund target` view/selection. | `finance-settings-client.tsx` |
+| Saving... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Delete Fund | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `cat modal` view/selection. | `finance-settings-client.tsx` |
+| Saving... / Save Category | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `edit cat target` view/selection. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Delete | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `method modal` view/selection. | `finance-settings-client.tsx` |
+| Adding... / Add Method | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `edit method target` view/selection. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Deactivate | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `fund modal` view/selection. | `finance-settings-client.tsx` |
+| Creating... / Create Fund | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Cancel | Closes or clears the `edit fund target` view/selection. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Delete Fund | Submits the associated API change; follow the sequence and failure rules below. | `finance-settings-client.tsx` |
+| Fields ( / ) | Changes the selected view, filter, or page in local state. | `dynamic-form-builder.tsx` |
+| Live Preview | Changes the selected view, filter, or page in local state. | `dynamic-form-builder.tsx` |
+| Remove custom field | Invokes the associated handler; see the sequence below. | `dynamic-form-builder.tsx` |
+| Add Field | Invokes the associated handler; see the sequence below. | `dynamic-form-builder.tsx` |
+
+
+
+### Interaction sequence
+
+Create operational funds and ledger accounts → create a category and map its fund/COA account → configure targets and dynamic fields → save. Set bank accounts and payment methods → save numbering/currency settings → use Collections or Payments with these definitions.
+
+### States and rules
+
+Operational funds and ledger accounts are distinct records. Category COA mapping determines posting; do not treat a saved collection as automatically posted. Each dialog saves independently. Bank editing can keep the existing number when left blank.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/settings/finance/finance-settings-client.tsx`
+- `apps/web/src/features/finance/dynamic-form-builder.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Finance settings
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/finance`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+ധനകാര്യ സ്ക്രീനുകളുടെ ഫണ്ടുകൾ, ledger mapping, നമ്പറിംഗ്, ബാങ്കുകൾ, വിഭാഗങ്ങൾ, അധിക collection fields, payment methods എന്നിവ ക്രമീകരിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Operational funds, COA ledgers, currency/receipt/voucher settings, ബാങ്കുകൾ, വരവ്/ചെലവ് വിഭാഗങ്ങൾ, payment methods എന്നിവയുണ്ട്. വിഭാഗ ഡയലോഗുകളിൽ target scope, economic category, തുക, recurrence, ബാധകമായ custom fields കാണിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Fund Name**, **Code**, **Description**, **Linked Categories**, **Default / Status**, **Actions**, **Ledger Account Name**, **Account Type**, **Mapped Categories**, **Balance**, **Bank Name**, **Account Name**, **Account Number**, **IFSC Code**, **Branch**, **Status**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Finance settings client
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Enabled | `enabled` | checkbox | ചിഹ്നമില്ല | — |
+| Required | `required` | checkbox | ചിഹ്നമില്ല | — |
+| Finance currency | `finance-currency` | text | ഉണ്ട് | — |
+| Finance receipt prefix | `finance-receipt-prefix` | text | ഉണ്ട് | — |
+| Finance voucher prefix | `finance-voucher-prefix` | text | ഉണ്ട് | — |
+| Category fund filter | `categoryFundFilter` | select | ചിഹ്നമില്ല | All Operational Funds (  ); ആരംഭം: ALL |
+| Bank Name | `bankName` | text | ഉണ്ട് | e.g. State Bank of India |
+| Account Title | `accountName` | text | ഉണ്ട് | e.g. Mahallu Jama-ath General Fund |
+| Account Number | `accountNumber` | text | ഉണ്ട് | Account number |
+| IFSC Code | `ifscCode` | text | ചിഹ്നമില്ല | e.g. SBIN0001234 |
+| Branch | `branch` | text | ചിഹ്നമില്ല | e.g. Wayanad Main |
+| Bank Name | `editBankName` | text | ഉണ്ട് | — |
+| Account Title | `editAccountName` | text | ഉണ്ട് | — |
+| Account Number (Leave blank to keep current) | `editAccountNumber` | text | ചിഹ്നമില്ല | — |
+| IFSC Code | `editIfscCode` | text | ചിഹ്നമില്ല | — |
+| Branch | `editBranch` | text | ചിഹ്നമില്ല | — |
+| Fund Name | `opFundName` | text | ഉണ്ട് | e.g. Masjid Fund, Madrasa Fund, Building Fund |
+| Fund Code (Short prefix) | `opFundCode` | text | ചിഹ്നമില്ല | e.g. MSJ, MDR, BLD |
+| Description | `opFundDescription` | text | ചിഹ്നമില്ല | e.g. Primary fund for daily operations and utilities |
+| Op fund color | `opFundColor` | color | ചിഹ്നമില്ല | ആരംഭം: #059669 |
+| Op fund is default | `opFundIsDefault` | checkbox | ചിഹ്നമില്ല | — |
+| Fund Name | `editOpFundName` | text | ഉണ്ട് | — |
+| Fund Code | `editOpFundCode` | text | ചിഹ്നമില്ല | — |
+| Description | `editOpFundDescription` | text | ചിഹ്നമില്ല | — |
+| Edit op fund color | `editOpFundColor` | color | ചിഹ്നമില്ല | ആരംഭം: #059669 |
+| Edit op fund is default | `editOpFundIsDefault` | checkbox | ചിഹ്നമില്ല | — |
+| Operational Fund / Account | `catFundId` | select | ഉണ്ട് | Select Operational Fund... |
+| Cat account id | `catAccountId` | select | ചിഹ്നമില്ല | Select COA Account (Required for Posting)... |
+| Category Name | `catName` | text | ഉണ്ട് | — |
+| Category Code (Optional) | `catCode` | text | ചിഹ്നമില്ല | e.g. VARISA, JUMA, BLDG |
+| Target Scope | `catTargetType` | select | ചിഹ്നമില്ല | No Target / Open (General Public, Hundi, Juma), Family-based (All Mahall Families), Division-based (Select Specific Wards), Member-based (Individual Members), Custom Target (Economic Category: BPL / APL); ആരംഭം: FAMILY_BASED |
+| Checked | `checked` | checkbox | ചിഹ്നമില്ല | — |
+| Eligible Economic Category | `catEconomicCategory` | select | ചിഹ്നമില്ല | BPL (Below Poverty Line) Only, APL (Above Poverty Line) Only, All Categories; ആരംഭം: ALL |
+| Default Amount (₹) | `catDefaultAmount` | number | ചിഹ്നമില്ല | e.g. 200; min 0 |
+| Collection Target (₹) | `catTargetAmount` | number | ചിഹ്നമില്ല | e.g. 50000; min 0 |
+| Cat is recurring | `catIsRecurring` | checkbox | ചിഹ്നമില്ല | — |
+| Recurrence Frequency | `catRecurrenceFrequency` | select | ചിഹ്നമില്ല | Daily, Weekly, Monthly, Quarterly, Yearly, Custom; ആരംഭം: MONTHLY |
+| Cat auto generate | `catAutoGenerate` | checkbox | ചിഹ്നമില്ല | — |
+| Operational Fund / Account | `editCatFundId` | select | ഉണ്ട് | Select Operational Fund... |
+| Edit cat account id | `editCatAccountId` | select | ചിഹ്നമില്ല | Select COA Account (Required for Posting)... |
+| Category Name | `editCatName` | text | ഉണ്ട് | — |
+| Category Code (Optional) | `editCatCode` | text | ചിഹ്നമില്ല | — |
+| Target Scope | `editCatTargetType` | select | ചിഹ്നമില്ല | No Target / Open (General Public, Hundi, Juma), Family-based (All Mahall Families), Division-based (Select Specific Wards), Member-based (Individual Members), Custom Target (Economic Category: BPL / APL); ആരംഭം: FAMILY_BASED |
+| Eligible Economic Category | `editCatEconomicCategory` | select | ചിഹ്നമില്ല | BPL (Below Poverty Line) Only, APL (Above Poverty Line) Only, All Categories; ആരംഭം: ALL |
+| Default Amount (₹) | `editCatDefaultAmount` | number | ചിഹ്നമില്ല | e.g. 200; min 0 |
+| Collection Target (₹) | `editCatTargetAmount` | number | ചിഹ്നമില്ല | e.g. 50000; min 0 |
+| Edit cat is recurring | `editCatIsRecurring` | checkbox | ചിഹ്നമില്ല | — |
+| Recurrence Frequency | `editCatRecurrenceFrequency` | select | ചിഹ്നമില്ല | Daily, Weekly, Monthly, Quarterly, Yearly, Custom; ആരംഭം: MONTHLY |
+| Edit cat auto generate | `editCatAutoGenerate` | checkbox | ചിഹ്നമില്ല | — |
+| Method Name | `methodName` | text | ഉണ്ട് | e.g. Google Pay / UPI |
+| Code | `methodCode` | text | ഉണ്ട് | e.g. UPI |
+| Type | `methodType` | select | ഉണ്ട് | Cash, Bank Transfer, UPI, Cheque, Online Gateway, Other; ആരംഭം: BANK_TRANSFER |
+| Method requires ref | `methodRequiresRef` | checkbox | ചിഹ്നമില്ല | — |
+| Method requires cheque | `methodRequiresCheque` | checkbox | ചിഹ്നമില്ല | — |
+| Method requires bank | `methodRequiresBank` | checkbox | ചിഹ്നമില്ല | — |
+| Method Name | `editMethodName` | text | ഉണ്ട് | — |
+| Code | `editMethodCode` | text | ഉണ്ട് | — |
+| Type | `editMethodType` | select | ഉണ്ട് | Cash, Bank Transfer, UPI, Cheque, Online Gateway, Other; ആരംഭം: BANK_TRANSFER |
+| Edit method is active | `editMethodIsActive` | checkbox | ചിഹ്നമില്ല | — |
+| Edit method requires ref | `editMethodRequiresRef` | checkbox | ചിഹ്നമില്ല | — |
+| Edit method requires cheque | `editMethodRequiresCheque` | checkbox | ചിഹ്നമില്ല | — |
+| Edit method requires bank | `editMethodRequiresBank` | checkbox | ചിഹ്നമില്ല | — |
+| Fund / Account Name | `fundName` | text | ഉണ്ട് | e.g. Building / Construction Fund, Zakat Fund, General Fund |
+| Fund Code / Abbreviation | `fundCode` | text | ചിഹ്നമില്ല | e.g. FUND-BLD |
+| Type | `fundType` | select | ഉണ്ട് | Income / Fund (Collections), Expense / Disbursement Account, Asset (Cash / Bank), Liability / Dues; ആരംഭം: INCOME |
+| Opening Balance (₹) | `fundOpeningBalance` | number | ചിഹ്നമില്ല | 0.00 |
+| Description / Purpose (Optional) | `fundDescription` | text | ചിഹ്നമില്ല | Brief purpose of this fund or account |
+| Fund / Account Name | `editFundName` | text | ഉണ്ട് | e.g. Building / Construction Fund |
+| Fund Code | `editFundCode` | text | ചിഹ്നമില്ല | e.g. FUND-BLD |
+| Type | `editFundType` | select | ഉണ്ട് | Income / Fund (Collections), Expense / Disbursement Account, Asset (Cash / Bank), Liability / Dues; ആരംഭം: INCOME |
+| Opening Balance (₹) | `editFundOpeningBalance` | number | ചിഹ്നമില്ല | 0.00 |
+| Description / Purpose (Optional) | `editFundDescription` | text | ചിഹ്നമില്ല | Brief purpose of this fund or account |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Dynamic form builder
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Field.enabled | `field.enabled` | checkbox | ചിഹ്നമില്ല | — |
+| Field.label | `field.label` | text | ചിഹ്നമില്ല | Field label |
+| Field.required | `field.required` | checkbox | ചിഹ്നമില്ല | — |
+| (field.options | `(field.options` | text | ചിഹ്നമില്ല | Option 1, Option 2, Option 3 |
+| New field type | `newFieldType` | select | ചിഹ്നമില്ല | ആരംഭം: text |
+| New field label | `newFieldLabel` | text | ചിഹ്നമില്ല | Custom field label (e.g. Occasion, Receipt #) |
+| New date().to isostring().split("t")[0] | `new Date().toISOString().split("T")[0]` | date | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add Operational Fund | `op fund modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Edit fund | `edit op fund target`നായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Delete fund | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Add Ledger Account | `fund modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Edit ledger account | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `finance-settings-client.tsx` |
+| Delete ledger account | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Save changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Add Bank Account | `bank modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Edit bank account | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `finance-settings-client.tsx` |
+| Delete bank account | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Add Collection Category | `cat modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Add Expense Category | `cat modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Edit category | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `finance-settings-client.tsx` |
+| Delete category | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Edit category | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `finance-settings-client.tsx` |
+| Delete category | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Add Payment Method | `method modal` കാഴ്ച തുറക്കും. | `finance-settings-client.tsx` |
+| Edit payment method | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `finance-settings-client.tsx` |
+| Deactivate payment method | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `finance-settings-client.tsx` |
+| Cancel | `bank modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Adding... / Add Bank Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `edit bank target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Delete | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `op fund modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Saving... / Create Fund | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `edit op fund target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Saving... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Delete Fund | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `cat modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Saving... / Save Category | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `edit cat target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Delete | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `method modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Adding... / Add Method | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `edit method target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Deactivate | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `fund modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Creating... / Create Fund | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Cancel | `edit fund target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `finance-settings-client.tsx` |
+| Updating... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Delete Fund | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `finance-settings-client.tsx` |
+| Fields ( / ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `dynamic-form-builder.tsx` |
+| Live Preview | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `dynamic-form-builder.tsx` |
+| Remove custom field | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `dynamic-form-builder.tsx` |
+| Add Field | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `dynamic-form-builder.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Operational funds, ledger accounts സൃഷ്ടിക്കുക → വിഭാഗം സൃഷ്ടിച്ച് fund/COA ബന്ധിപ്പിക്കുക → targets, dynamic fields ക്രമീകരിക്കുക → സംരക്ഷിക്കുക. ബാങ്കുകളും payment methodsഉം നൽകുക → numbering/currency സംരക്ഷിക്കുക → Collections/Paymentsൽ ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+Operational fundഉം ledger accountഉം വ്യത്യസ്ത രേഖകളാണ്. COA mapping posting നിർണ്ണയിക്കുന്നു; സംരക്ഷിച്ച എല്ലാ വരവും posted ആണെന്ന് കരുതരുത്. ഓരോ ഡയലോഗും പ്രത്യേകം സംരക്ഷിക്കുന്നു. ബാങ്ക് തിരുത്തലിൽ നമ്പർ ശൂന്യമാക്കിയാൽ നിലവിലെത് നിലനിർത്താം.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/settings/finance/finance-settings-client.tsx`
+- `apps/web/src/features/finance/dynamic-form-builder.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/structure/structure.controller.ts`
+- `apps/api/src/notifications/notifications.controller.ts`
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

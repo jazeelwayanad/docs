@@ -1,0 +1,129 @@
+---
+title: "Platform analytics"
+description: "Current screen specification: Platform analytics. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Platform analytics
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/analytics`
+
+### Purpose and access
+
+Review platform-wide growth, subscriptions, and module adoption.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+The screen shows analytics summaries, Mahalle growth, Subscriptions, and Module adoption panels.
+
+### Fields and displayed information
+
+
+This screen has no editable fields or filters in its rendered components.
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Open Platform Analytics → inspect the charts and distributions → follow platform navigation to investigate tenants or plans.
+
+### States and rules
+
+This screen is read-only. Analytics requests use platform authorization; a chart does not grant access to a tenant’s private operational records.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/analytics/page.tsx`
+- `apps/web/src/features/platform/growth-chart.tsx`
+- `apps/web/src/features/platform/module-adoption-list.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Platform analytics
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/analytics`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Platform മുഴുവൻ growth, subscriptions, module adoption പരിശോധിക്കുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Analytics summaries, Mahalle growth, Subscriptions, Module adoption വിഭാഗങ്ങളുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+Platform Analytics തുറക്കുക → ചാർട്ടുകളും വിതരണവും പരിശോധിക്കുക → കൂടുതൽ പരിശോധിക്കാൻ tenants/plans നാവിഗേഷൻ ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+ഇത് വായിക്കാൻ മാത്രം. Analyticsന് platform authorization വേണം; chart കാണുന്നത് tenantന്റെ രഹസ്യ പ്രവർത്തനരേഖകളിലേക്കുള്ള അധികാരം നൽകുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/analytics/page.tsx`
+- `apps/web/src/features/platform/growth-chart.tsx`
+- `apps/web/src/features/platform/module-adoption-list.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>

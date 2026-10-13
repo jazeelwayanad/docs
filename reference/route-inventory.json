@@ -1,0 +1,2957 @@
+{
+  "sourceRoot": "/Volumes/New Volume/mahall-app",
+  "sourceCommit": "0995e04fcebfe19561950bed799c0c70cf5595db",
+  "reviewedOn": "2026-10-13",
+  "routes": [
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]",
+      "document": "home",
+      "screen": "Home dashboard",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/lib/services.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/dashboard/dashboard-hero.tsx",
+        "apps/web/src/features/dashboard/dashboard-metrics.tsx",
+        "apps/web/src/features/dashboard/dashboard-modules.tsx",
+        "apps/web/src/features/dashboard/dashboard-chart.tsx",
+        "apps/web/src/features/dashboard/dashboard-milestones.tsx",
+        "apps/web/src/features/dashboard/dashboard-recent-members.tsx",
+        "apps/web/src/features/navigation/home-website-card.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/page.tsx",
+        "apps/web/src/features/dashboard/dashboard-hero.tsx",
+        "apps/web/src/features/dashboard/dashboard-metrics.tsx",
+        "apps/web/src/features/dashboard/dashboard-modules.tsx",
+        "apps/web/src/features/dashboard/dashboard-chart.tsx",
+        "apps/web/src/features/dashboard/dashboard-milestones.tsx",
+        "apps/web/src/features/dashboard/dashboard-recent-members.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/activity/activity.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts",
+        "apps/api/src/announcements/announcements.controller.ts",
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/committee/committee.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts",
+        "apps/api/src/families/families.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/finance/finance.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/health/health.controller.ts",
+        "apps/api/src/houses/houses.controller.ts",
+        "apps/api/src/member-auth/member-auth.controller.ts",
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts",
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/programs/programs.controller.ts",
+        "apps/api/src/registers/death/death.controller.ts",
+        "apps/api/src/registers/divorce/divorce.controller.ts",
+        "apps/api/src/registers/grave/grave.controller.ts",
+        "apps/api/src/registers/madrassa/madrassa.controller.ts",
+        "apps/api/src/registers/marriage/marriage.controller.ts",
+        "apps/api/src/registers/property/property.controller.ts",
+        "apps/api/src/registers/release/release.controller.ts",
+        "apps/api/src/search/search.controller.ts",
+        "apps/api/src/services/services.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/overview/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/overview",
+      "document": "admin/mahall-dashboard",
+      "screen": "Mahall dashboard",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/overview/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/lib/services.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/onboarding/setup-checklist.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/overview/page.tsx",
+        "apps/web/src/features/onboarding/setup-checklist.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts",
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts",
+        "apps/api/src/finance/finance.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/members/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/members",
+      "document": "members",
+      "screen": "Members directory",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/members/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/tenants/members-registry.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/lib/location-data.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/members/page.tsx",
+        "apps/web/src/features/tenants/members-registry.tsx",
+        "apps/web/src/features/tenants/member-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/members/[memberId]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/members/[memberId]",
+      "document": "admin/member-profile",
+      "screen": "Member profile",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/members/[memberId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/tenants/member-detail-view.tsx",
+        "apps/web/src/features/navigation/admin-shell.tsx",
+        "apps/web/src/features/auth/logout-button.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/search/command-palette.tsx",
+        "apps/web/src/features/navigation/topbar-quick-actions.tsx",
+        "apps/web/src/features/navigation/hijri-date-badge.tsx",
+        "apps/web/src/features/tenants/notification-bell.tsx",
+        "apps/web/src/features/auth/idle-timeout-provider.tsx",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/features/tenants/contribution-history.tsx",
+        "apps/web/src/features/tenants/record-utils.ts",
+        "apps/web/src/features/tenants/record-layout.tsx",
+        "apps/web/src/features/tenants/use-record-tab.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/members/[memberId]/page.tsx",
+        "apps/web/src/features/tenants/member-detail-view.tsx",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/features/tenants/contribution-history.tsx",
+        "apps/web/src/features/tenants/record-layout.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/families/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/families",
+      "document": "family",
+      "screen": "Families registry",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/families/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/tenants/families-registry.tsx",
+        "apps/web/src/features/tenants/family-form-dialog.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/add-family-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/features/tenants/member-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/families/page.tsx",
+        "apps/web/src/features/tenants/families-registry.tsx",
+        "apps/web/src/features/tenants/family-form-dialog.tsx",
+        "apps/web/src/features/tenants/add-family-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/families/families.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/families/[familyId]",
+      "document": "admin/family-profile",
+      "screen": "Family profile",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/family-detail-view.tsx",
+        "apps/web/src/features/navigation/admin-shell.tsx",
+        "apps/web/src/features/auth/logout-button.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/search/command-palette.tsx",
+        "apps/web/src/features/navigation/topbar-quick-actions.tsx",
+        "apps/web/src/features/navigation/hijri-date-badge.tsx",
+        "apps/web/src/features/tenants/notification-bell.tsx",
+        "apps/web/src/features/auth/idle-timeout-provider.tsx",
+        "apps/web/src/features/tenants/family-form-dialog.tsx",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/features/tenants/add-existing-member-dialog.tsx",
+        "apps/web/src/features/tenants/contribution-history.tsx",
+        "apps/web/src/features/tenants/record-utils.ts",
+        "apps/web/src/features/tenants/record-layout.tsx",
+        "apps/web/src/features/tenants/use-record-tab.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx",
+        "apps/web/src/features/tenants/family-detail-view.tsx",
+        "apps/web/src/features/tenants/family-form-dialog.tsx",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/features/tenants/add-existing-member-dialog.tsx",
+        "apps/web/src/features/tenants/contribution-history.tsx",
+        "apps/web/src/features/tenants/record-layout.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/families/families.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/houses/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/houses",
+      "document": "admin/houses",
+      "screen": "Houses directory",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/houses/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/tenants/houses-registry.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/house-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/houses/page.tsx",
+        "apps/web/src/features/tenants/houses-registry.tsx",
+        "apps/web/src/features/tenants/house-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/houses/houses.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/houses/[houseId]",
+      "document": "admin/house-profile",
+      "screen": "House profile",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/edit-house-button.tsx",
+        "apps/web/src/features/tenants/house-form-dialog.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx",
+        "apps/web/src/features/tenants/edit-house-button.tsx",
+        "apps/web/src/features/tenants/house-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/houses/houses.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/divisions/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/divisions",
+      "document": "zones-divisions",
+      "screen": "Zones and divisions",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/divisions/page.tsx",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/features/tenants/divisions-registry.tsx",
+        "apps/web/src/features/tenants/add-family-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/member-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/divisions/page.tsx",
+        "apps/web/src/features/tenants/divisions-registry.tsx",
+        "apps/web/src/features/tenants/add-family-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/families/families.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/divisions/[divisionId]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/divisions/[divisionId]",
+      "document": "admin/division-profile",
+      "screen": "Division profile",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/divisions/[divisionId]/page.tsx",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/houses.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/division-detail-view.tsx",
+        "apps/web/src/features/tenants/add-family-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/member-form-dialog.tsx",
+        "apps/web/src/features/tenants/assign-family-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/divisions/[divisionId]/page.tsx",
+        "apps/web/src/features/tenants/division-detail-view.tsx",
+        "apps/web/src/features/tenants/add-family-dialog.tsx",
+        "apps/web/src/features/tenants/assign-family-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/families/families.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/education-employment",
+      "document": "admin/education-employment",
+      "screen": "Education and employment",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/education-employment.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/app/sites/admin/[tenant]/education-employment/education-employment-client.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/education-employment/education-employment-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/health-support",
+      "document": "admin/health-support",
+      "screen": "Health and support",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/health-support.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/app/sites/admin/[tenant]/health-support/health-support-client.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/health-support/health-support-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts",
+        "apps/api/src/families/families.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/finance/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/finance",
+      "document": "overview",
+      "screen": "Finance overview",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/finance/collections",
+      "document": "collection",
+      "screen": "Collections",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/collections-client.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/finance/edit-collection-modal.tsx",
+        "apps/web/src/features/finance/universal-receipt-modal.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/collections-client.tsx",
+        "apps/web/src/features/finance/edit-collection-modal.tsx",
+        "apps/web/src/features/finance/universal-receipt-modal.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/finance/collections/new",
+      "document": "admin/record-collection",
+      "screen": "Record collection",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/finance/record-collection-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/finance/quick-add-account-modal.tsx",
+        "apps/web/src/features/finance/quick-add-category-modal.tsx",
+        "apps/web/src/features/finance/universal-receipt-modal.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx",
+        "apps/web/src/features/finance/record-collection-form.tsx",
+        "apps/web/src/features/finance/quick-add-account-modal.tsx",
+        "apps/web/src/features/finance/quick-add-category-modal.tsx",
+        "apps/web/src/features/finance/universal-receipt-modal.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/finance/payments",
+      "document": "payments",
+      "screen": "Payments",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/finance/payments/vouchers-client.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/finance/quick-add-account-modal.tsx",
+        "apps/web/src/features/finance/quick-add-category-modal.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/finance/payments/vouchers-client.tsx",
+        "apps/web/src/features/finance/quick-add-account-modal.tsx",
+        "apps/web/src/features/finance/quick-add-category-modal.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant",
+      "document": "admin/accountant-workspace",
+      "screen": "Accountant workspace",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/chart-of-accounts",
+      "document": "charts-of-accounts",
+      "screen": "Chart of accounts",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/accounts-client.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/accounts-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/manual-journals",
+      "document": "admin/manual-journals",
+      "screen": "Manual journals",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/journal-client.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/journal-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/bulk-update",
+      "document": "admin/bulk-update",
+      "screen": "Bulk update",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/bulk-update-client.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/bulk-update-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/financial-year",
+      "document": "admin/financial-years",
+      "screen": "Financial years",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/financial-year-client.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/financial-year-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/taxes-legal",
+      "document": "admin/taxes-legal",
+      "screen": "Taxes and legal tracker",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/taxes-legal-client.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/taxes-legal-client.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/balance-sheet",
+      "document": "reports-2",
+      "screen": "Balance sheet",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/income-expenditure",
+      "document": "reports-2",
+      "screen": "Profit and loss",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/receipt-payment",
+      "document": "reports-2",
+      "screen": "Receipt and payment",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/cash-book",
+      "document": "reports-2",
+      "screen": "Cash book",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/bank-book",
+      "document": "reports-2",
+      "screen": "Bank book",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/ledger",
+      "document": "reports-2",
+      "screen": "General ledger",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/trial-balance",
+      "document": "reports-2",
+      "screen": "Trial balance",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/finance/reports/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/finance/reports",
+      "document": "reports",
+      "screen": "Finance reports",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/reports/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/reports-center-client.tsx",
+        "apps/web/src/features/reports/reports-data.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/finance/reports/page.tsx",
+        "apps/web/src/features/reports/reports-center-client.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/accountant/reports",
+      "document": "reports-2",
+      "screen": "Accountant reports center",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/features/reports/reports-center-client.tsx",
+        "apps/web/src/features/reports/reports-data.ts",
+        "apps/web/src/features/reports/financial-report-viewer.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx",
+        "apps/web/src/features/reports/reports-center-client.tsx",
+        "apps/web/src/features/reports/financial-report-viewer.tsx",
+        "apps/web/src/features/reports/tabular-report-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/committee/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/committee",
+      "document": "admin/committee",
+      "screen": "Committee office bearers",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/committee/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/committee.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/committee-roster.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/committee-post-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/committee/page.tsx",
+        "apps/web/src/features/tenants/committee-roster.tsx",
+        "apps/web/src/features/tenants/committee-post-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/committee/committee.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/committee/meetings",
+      "document": "admin/committee-meetings",
+      "screen": "Meetings and minutes",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/committee.ts",
+        "apps/web/src/features/tenants/committee-meetings.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/committee-meeting-form-dialog.tsx",
+        "apps/web/src/features/tenants/committee-decision-form.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx",
+        "apps/web/src/features/tenants/committee-meetings.tsx",
+        "apps/web/src/features/tenants/committee-meeting-form-dialog.tsx",
+        "apps/web/src/features/tenants/committee-decision-form.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/committee/committee.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/events/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/events",
+      "document": "admin/events",
+      "screen": "Events",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/events/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/events/page.tsx",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/announcements/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/announcements",
+      "document": "admin/announcements",
+      "screen": "Announcements",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/announcements/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/announcements/page.tsx",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/announcements/announcements.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/programs/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/programs",
+      "document": "admin/programs",
+      "screen": "Programs",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/programs/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/programs/page.tsx",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/features/tenants/simple-resource-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/programs/programs.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/events/[eventId]",
+      "document": "admin/event-detail",
+      "screen": "Event detail",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/event-detail.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/tenants/event-registrations-table.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx",
+        "apps/web/src/features/tenants/event-registrations-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/services/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/services",
+      "document": "admin/services",
+      "screen": "Services and aid requests",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/services/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/services.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/service-requests-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/services/page.tsx",
+        "apps/web/src/features/tenants/simple-create-form.tsx",
+        "apps/web/src/features/tenants/service-requests-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/services/services.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/death/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/death",
+      "document": "admin/registers/death",
+      "screen": "Death register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/death/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/death/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/death/death.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/divorce/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/divorce",
+      "document": "admin/registers/divorce",
+      "screen": "Divorce register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/divorce/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/divorce/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/divorce/divorce.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/grave",
+      "document": "admin/registers/grave",
+      "screen": "Grave register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/grave/grave.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/madrassa/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/madrassa",
+      "document": "admin/registers/madrassa",
+      "screen": "Madrassa and Dars register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/madrassa/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/madrassa/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/madrassa/madrassa.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/marriage/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/marriage",
+      "document": "admin/registers/marriage",
+      "screen": "Marriage register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/marriage/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/marriage/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/marriage/marriage.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/property/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/property",
+      "document": "admin/registers/property",
+      "screen": "Waqf and property register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/property/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/property/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/property/property.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/registers/release/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/registers/release",
+      "document": "admin/registers/release",
+      "screen": "Mahallu release register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/release/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/registers.ts",
+        "apps/web/src/features/tenants/register-types.ts",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/registers/release/page.tsx",
+        "apps/web/src/features/tenants/register-table.tsx",
+        "apps/web/src/features/tenants/register-form-dialog.tsx",
+        "apps/web/src/features/registers/printable-certificate.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/registers/release/release.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/reports/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/reports",
+      "document": "admin/community-reports",
+      "screen": "Community reports",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/reports-summary.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/reports/blood-groups",
+      "document": "admin/community-reports",
+      "screen": "Blood group report",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/blood-group-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx",
+        "apps/web/src/features/tenants/blood-group-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/reports/expatriate",
+      "document": "admin/community-reports",
+      "screen": "Expatriate register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/expatriate-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx",
+        "apps/web/src/features/tenants/expatriate-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/reports/yatheem",
+      "document": "admin/community-reports",
+      "screen": "Yatheem register",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/members.ts",
+        "apps/web/src/lib/member-constants.ts",
+        "apps/web/src/features/tenants/yatheem-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx",
+        "apps/web/src/features/tenants/yatheem-report.tsx",
+        "apps/web/src/features/tenants/member-report-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings",
+      "document": "mahall-profile",
+      "screen": "General and Mahall profile",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/lib/features.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/structure",
+      "document": "admin/structure-settings",
+      "screen": "Structure settings",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/features/tenants/structure-settings.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/division-form-dialog.tsx",
+        "apps/web/src/features/tenants/family-status-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx",
+        "apps/web/src/features/tenants/structure-settings.tsx",
+        "apps/web/src/features/tenants/division-form-dialog.tsx",
+        "apps/web/src/features/tenants/family-status-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/finance",
+      "document": "admin/finance-settings",
+      "screen": "Finance settings",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/finance.ts",
+        "apps/web/src/lib/structure.ts",
+        "apps/web/src/app/sites/admin/[tenant]/settings/finance/finance-settings-client.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/finance/dynamic-form-builder.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx",
+        "apps/web/src/app/sites/admin/[tenant]/settings/finance/finance-settings-client.tsx",
+        "apps/web/src/features/finance/dynamic-form-builder.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/notifications",
+      "document": "admin/notification-settings",
+      "screen": "Notification settings",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/notifications.ts",
+        "apps/web/src/features/tenants/notification-settings-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/settings/unsaved-changes-bar.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx",
+        "apps/web/src/features/tenants/notification-settings-form.tsx",
+        "apps/web/src/features/settings/unsaved-changes-bar.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/admins",
+      "document": "admin/users-roles",
+      "screen": "Tenant users",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/admins.ts",
+        "apps/web/src/lib/roles.ts",
+        "apps/web/src/features/tenants/admins-table.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx",
+        "apps/web/src/features/tenants/admins-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/admins/roles",
+      "document": "admin/users-roles",
+      "screen": "Tenant roles",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/roles.ts",
+        "apps/web/src/features/tenants/roles-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/role-form-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx",
+        "apps/web/src/features/tenants/roles-table.tsx",
+        "apps/web/src/features/tenants/role-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/settings/activity",
+      "document": "admin/activity-log",
+      "screen": "Activity log",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/activity.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/finance/finance.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website",
+      "document": "general",
+      "screen": "Website overview",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-overview.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/page.tsx",
+        "apps/web/src/features/website/website-overview.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website/pages",
+      "document": "admin/website-pages",
+      "screen": "Website pages",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-pages.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx",
+        "apps/web/src/features/website/website-pages.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website/theme",
+      "document": "admin/website-theme",
+      "screen": "Website theme",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-theme.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx",
+        "apps/web/src/features/website/website-theme.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website/visibility",
+      "document": "admin/website-visibility",
+      "screen": "Website visibility",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-visibility.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx",
+        "apps/web/src/features/website/website-visibility.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website/domains",
+      "document": "admin/website-domains",
+      "screen": "Website domains",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-domains.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx",
+        "apps/web/src/features/website/website-domains.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/website/analytics",
+      "document": "admin/website-analytics",
+      "screen": "Website analytics",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/website/website-analytics.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx",
+        "apps/web/src/features/website/website-analytics.tsx"
+      ],
+      "apiControllers": []
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/billing/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/billing",
+      "document": "overview-2",
+      "screen": "Billing plan",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/billing/billing-plan-details.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/page.tsx",
+        "apps/web/src/features/billing/billing-plan-details.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/billing/payments",
+      "document": "admin/billing-payments",
+      "screen": "Billing payment history",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/billing/billing-payments.tsx",
+        "apps/web/src/features/billing/invoice-download-modal.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx",
+        "apps/web/src/features/billing/billing-payments.tsx",
+        "apps/web/src/features/billing/invoice-download-modal.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/[tenant]/billing/usage",
+      "document": "admin/billing-usage",
+      "screen": "Billing usage",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/billing/billing-usage.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx",
+        "apps/web/src/features/billing/billing-usage.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/login/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/login",
+      "document": "getting-started",
+      "screen": "Admin login",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/login/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/auth/login-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/components/auth-shell.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/login/page.tsx",
+        "apps/web/src/features/auth/login-form.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/register/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/register",
+      "document": "getting-started",
+      "screen": "Admin registration",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/register/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/auth/register-form.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/register/page.tsx",
+        "apps/web/src/features/auth/register-form.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/",
+      "document": "getting-started",
+      "screen": "Admin entry routing",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/activity/activity.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts",
+        "apps/api/src/announcements/announcements.controller.ts",
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/committee/committee.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts",
+        "apps/api/src/families/families.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/finance/finance.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/health/health.controller.ts",
+        "apps/api/src/houses/houses.controller.ts",
+        "apps/api/src/member-auth/member-auth.controller.ts",
+        "apps/api/src/members/education-employment.controller.ts",
+        "apps/api/src/members/health-support.controller.ts",
+        "apps/api/src/members/members.controller.ts",
+        "apps/api/src/notifications/notifications.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts",
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/programs/programs.controller.ts",
+        "apps/api/src/registers/death/death.controller.ts",
+        "apps/api/src/registers/divorce/divorce.controller.ts",
+        "apps/api/src/registers/grave/grave.controller.ts",
+        "apps/api/src/registers/madrassa/madrassa.controller.ts",
+        "apps/api/src/registers/marriage/marriage.controller.ts",
+        "apps/api/src/registers/property/property.controller.ts",
+        "apps/api/src/registers/release/release.controller.ts",
+        "apps/api/src/search/search.controller.ts",
+        "apps/api/src/services/services.controller.ts",
+        "apps/api/src/structure/structure.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/admin/onboarding/page.tsx",
+      "host": "admin.<ROOT_DOMAIN>",
+      "route": "/onboarding",
+      "document": "mahallu-setup",
+      "screen": "Mahallu setup wizard",
+      "sourceFiles": [
+        "apps/web/src/app/sites/admin/onboarding/page.tsx",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/onboarding.ts",
+        "apps/web/src/features/onboarding/types.ts",
+        "apps/web/src/features/onboarding/onboarding-wizard.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/slug-field.tsx",
+        "apps/web/src/features/onboarding/onboarding-steps.tsx",
+        "apps/web/src/features/onboarding/steps/mahallu-details-step.tsx",
+        "apps/web/src/features/onboarding/components/location-picker.tsx",
+        "apps/web/src/features/onboarding/services/map-service.ts",
+        "apps/web/src/features/onboarding/steps/admin-account-step.tsx",
+        "apps/web/src/features/onboarding/steps/complete-step.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/admin/onboarding/page.tsx",
+        "apps/web/src/features/onboarding/onboarding-wizard.tsx",
+        "apps/web/src/features/onboarding/onboarding-steps.tsx",
+        "apps/web/src/features/onboarding/steps/mahallu-details-step.tsx",
+        "apps/web/src/features/onboarding/components/location-picker.tsx",
+        "apps/web/src/features/onboarding/steps/admin-account-step.tsx",
+        "apps/web/src/features/onboarding/steps/complete-step.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/marketing/onboarding/page.tsx",
+      "host": "<ROOT_DOMAIN>",
+      "route": "/onboarding",
+      "document": "mahallu-setup",
+      "screen": "Marketing onboarding redirect",
+      "sourceFiles": [
+        "apps/web/src/app/sites/marketing/onboarding/page.tsx",
+        "apps/web/src/lib/env.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/marketing/onboarding/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/login/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/login",
+      "document": "control/login",
+      "screen": "Control-panel login",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/login/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/auth/login-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/components/auth-shell.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/login/page.tsx",
+        "apps/web/src/features/auth/login-form.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/",
+      "document": "control/overview",
+      "screen": "Control overview",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/analytics.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/tenants/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/tenants",
+      "document": "control/tenants",
+      "screen": "Fleet and Mahalles",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/tenants/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/features/platform/tenants-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/platform/provision-tenant-dialog.tsx",
+        "apps/web/src/lib/location-data.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/tenants/page.tsx",
+        "apps/web/src/features/platform/tenants-table.tsx",
+        "apps/web/src/features/platform/provision-tenant-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/tenants/[tenantId]",
+      "document": "control/tenant-command-center",
+      "screen": "Tenant command center",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/features.ts",
+        "apps/web/src/lib/billing.ts",
+        "apps/web/src/features/platform/tenant-name-context.tsx",
+        "apps/web/src/features/platform/tenant-command-center.tsx",
+        "apps/web/src/features/platform/tenant-status-actions.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/platform/edit-tenant-dialog.tsx",
+        "apps/web/src/lib/location-data.ts",
+        "apps/web/src/features/platform/tenant-features-editor.tsx",
+        "apps/web/src/features/platform/tenant-subscription-editor.tsx",
+        "apps/web/src/features/platform/invoices-panel.tsx",
+        "apps/web/src/features/platform/create-invoice-dialog.tsx",
+        "apps/web/src/features/platform/payments-panel.tsx",
+        "apps/web/src/features/platform/record-payment-dialog.tsx",
+        "apps/web/src/features/platform/tenant-operations-viewer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx",
+        "apps/web/src/features/platform/tenant-command-center.tsx",
+        "apps/web/src/features/platform/tenant-status-actions.tsx",
+        "apps/web/src/features/platform/edit-tenant-dialog.tsx",
+        "apps/web/src/features/platform/tenant-features-editor.tsx",
+        "apps/web/src/features/platform/tenant-subscription-editor.tsx",
+        "apps/web/src/features/platform/invoices-panel.tsx",
+        "apps/web/src/features/platform/create-invoice-dialog.tsx",
+        "apps/web/src/features/platform/payments-panel.tsx",
+        "apps/web/src/features/platform/record-payment-dialog.tsx",
+        "apps/web/src/features/platform/tenant-operations-viewer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/tenants/[tenantId]/billing",
+      "document": "control/tenant-billing",
+      "screen": "Tenant billing operations",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/billing.ts",
+        "apps/web/src/features/platform/tenant-name-context.tsx",
+        "apps/web/src/features/platform/tenant-subscription-editor.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/platform/invoices-panel.tsx",
+        "apps/web/src/features/platform/create-invoice-dialog.tsx",
+        "apps/web/src/features/platform/payments-panel.tsx",
+        "apps/web/src/features/platform/record-payment-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx",
+        "apps/web/src/features/platform/tenant-subscription-editor.tsx",
+        "apps/web/src/features/platform/invoices-panel.tsx",
+        "apps/web/src/features/platform/create-invoice-dialog.tsx",
+        "apps/web/src/features/platform/payments-panel.tsx",
+        "apps/web/src/features/platform/record-payment-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/tenants/[tenantId]/analytics",
+      "document": "control/tenant-analytics",
+      "screen": "Tenant analytics",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/analytics.ts",
+        "apps/web/src/features/platform/tenant-name-context.tsx",
+        "apps/web/src/features/platform/growth-chart.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx",
+        "apps/web/src/features/platform/growth-chart.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/users/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/users",
+      "document": "control/users",
+      "screen": "User access and accounts",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/users/page.tsx",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/platform/users-management-view.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/users/page.tsx",
+        "apps/web/src/features/platform/users-management-view.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/users/[userId]/sessions",
+      "document": "control/user-sessions",
+      "screen": "User sessions",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/features/platform/user-sessions-table.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx",
+        "apps/web/src/features/platform/user-sessions-table.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/roles/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/roles",
+      "document": "control/roles",
+      "screen": "Platform roles",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/roles/page.tsx",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/platform/roles-permissions-view.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/roles/page.tsx",
+        "apps/web/src/features/platform/roles-permissions-view.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/plans/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/plans",
+      "document": "control/plans",
+      "screen": "Plans and entitlements",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/plans/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/billing.ts",
+        "apps/web/src/lib/features.ts",
+        "apps/web/src/features/platform/plans-table.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/platform/create-plan-dialog.tsx",
+        "apps/web/src/features/platform/plan-features-dialog.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/plans/page.tsx",
+        "apps/web/src/features/platform/plans-table.tsx",
+        "apps/web/src/features/platform/create-plan-dialog.tsx",
+        "apps/web/src/features/platform/plan-features-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/analytics/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/analytics",
+      "document": "control/analytics",
+      "screen": "Platform analytics",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/analytics/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/analytics.ts",
+        "apps/web/src/features/platform/growth-chart.tsx",
+        "apps/web/src/features/platform/module-adoption-list.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/analytics/page.tsx",
+        "apps/web/src/features/platform/growth-chart.tsx",
+        "apps/web/src/features/platform/module-adoption-list.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/settings/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/settings",
+      "document": "control/settings",
+      "screen": "System settings",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/settings/page.tsx",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/features/platform/platform-settings-view.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/settings/page.tsx",
+        "apps/web/src/features/platform/platform-settings-view.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/audit-logs/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/audit-logs",
+      "document": "control/audit-logs",
+      "screen": "Audit stream",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/audit-logs/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/features/platform/audit-logs-explorer.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/audit-logs/page.tsx",
+        "apps/web/src/features/platform/audit-logs-explorer.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/forms/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/forms",
+      "document": "control/forms",
+      "screen": "Form templates",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/forms/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/forms.ts",
+        "apps/web/src/features/platform/forms-table.tsx",
+        "apps/web/src/features/platform/create-form-dialog.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/forms/page.tsx",
+        "apps/web/src/features/platform/forms-table.tsx",
+        "apps/web/src/features/platform/create-form-dialog.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx",
+      "host": "control.<ROOT_DOMAIN>",
+      "route": "/forms/[templateId]",
+      "document": "control/forms",
+      "screen": "Form template detail",
+      "sourceFiles": [
+        "apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/platform.ts",
+        "apps/web/src/lib/forms.ts",
+        "apps/web/src/features/platform/form-fields-list.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/platform/form-field-dialog.tsx",
+        "apps/web/src/features/platform/form-version-actions.tsx",
+        "apps/web/src/features/platform/form-assignment-editor.tsx",
+        "apps/web/src/features/platform/delete-form-button.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx",
+        "apps/web/src/features/platform/form-fields-list.tsx",
+        "apps/web/src/features/platform/form-field-dialog.tsx",
+        "apps/web/src/features/platform/form-version-actions.tsx",
+        "apps/web/src/features/platform/form-assignment-editor.tsx",
+        "apps/web/src/features/platform/delete-form-button.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/platform/platform-tenant-access.controller.ts",
+        "apps/api/src/platform/platform.controller.ts",
+        "apps/api/src/billing/plans.controller.ts",
+        "apps/api/src/billing/tenant-billing.controller.ts",
+        "apps/api/src/features/features.controller.ts",
+        "apps/api/src/features/tenant-features.controller.ts",
+        "apps/api/src/forms/forms.controller.ts",
+        "apps/api/src/analytics/analytics.controller.ts",
+        "apps/api/src/analytics/tenant-analytics.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/marketing/page.tsx",
+      "host": "<ROOT_DOMAIN>",
+      "route": "/",
+      "document": "marketing/home",
+      "screen": "Marketing homepage",
+      "sourceFiles": [
+        "apps/web/src/app/sites/marketing/page.tsx",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/auth/logout-button.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/marketing/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/marketing/new-mahalle/page.tsx",
+      "host": "<ROOT_DOMAIN>",
+      "route": "/new-mahalle",
+      "document": "marketing/create-mahalle",
+      "screen": "Create Mahalle",
+      "sourceFiles": [
+        "apps/web/src/app/sites/marketing/new-mahalle/page.tsx",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/features/tenants/create-tenant-form.tsx",
+        "apps/web/src/lib/api-client.ts",
+        "apps/web/src/features/tenants/slug-field.tsx",
+        "apps/web/src/components/auth-shell.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/marketing/new-mahalle/page.tsx",
+        "apps/web/src/features/tenants/create-tenant-form.tsx",
+        "apps/web/src/features/tenants/slug-field.tsx",
+        "apps/web/src/components/auth-shell.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/auth/auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/onboarding/onboarding.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/tenant/[tenant]/page.tsx",
+      "host": "[tenant].<ROOT_DOMAIN>",
+      "route": "/",
+      "document": "member/public-home",
+      "screen": "Public Mahallu homepage",
+      "sourceFiles": [
+        "apps/web/src/app/sites/tenant/[tenant]/page.tsx",
+        "apps/web/src/lib/member-session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts",
+        "apps/web/src/features/navigation/hijri-date-badge.tsx"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/tenant/[tenant]/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/member-auth/member-auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/announcements/announcements.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/tenant/[tenant]/login/page.tsx",
+      "host": "[tenant].<ROOT_DOMAIN>",
+      "route": "/login",
+      "document": "member/login",
+      "screen": "Member OTP login",
+      "sourceFiles": [
+        "apps/web/src/app/sites/tenant/[tenant]/login/page.tsx",
+        "apps/web/src/lib/member-session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/features/auth/member-otp-login-form.tsx",
+        "apps/web/src/lib/api-client.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/tenant/[tenant]/login/page.tsx",
+        "apps/web/src/features/auth/member-otp-login-form.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/member-auth/member-auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/announcements/announcements.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    },
+    {
+      "source": "apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx",
+      "host": "[tenant].<ROOT_DOMAIN>",
+      "route": "/dashboard",
+      "document": "member/dashboard",
+      "screen": "Member dashboard",
+      "sourceFiles": [
+        "apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx",
+        "apps/web/src/lib/member-session.ts",
+        "apps/web/src/lib/server-api.ts",
+        "apps/web/src/lib/env.ts",
+        "apps/web/src/lib/tenants.ts",
+        "apps/web/src/lib/business-resources.ts"
+      ],
+      "renderedComponents": [
+        "apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx"
+      ],
+      "apiControllers": [
+        "apps/api/src/member-auth/member-auth.controller.ts",
+        "apps/api/src/tenants/admins.controller.ts",
+        "apps/api/src/tenants/roles.controller.ts",
+        "apps/api/src/tenants/tenants.controller.ts",
+        "apps/api/src/announcements/announcements.controller.ts",
+        "apps/api/src/events/event-registrations.controller.ts",
+        "apps/api/src/events/events.controller.ts"
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx": "90710ef091e80a135351001d4f2b6a55dd4f2fe6cb41106bec2754978c7a955c",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx": "fb046e4cb034db685d071bf93551643304838f542015f9393b54aa56559be6f0",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/bulk-update-client.tsx": "f84703ac625b21e7cc03aca22ca20beba81f7658c2b7469e20c69f5554dfb343",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx": "d317cfbbee2e810102c68e5a6112714dbc466a9bd316a8e3ceb1f39adf03da45",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx": "54cdfb1f6e8f4f62554b8016fb5a914889e248e872f7db039d22b2083d337977",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/accounts-client.tsx": "840279d2b8e18712a69aa47a2f187625847b30b63a14749c036ae250a957db98",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx": "efa8bfc604c37e1c3add1f33115d024e6609b3bc0c1958d0f2a788da506ec717",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/financial-year-client.tsx": "042ff06e6a474cb7861abe44f05beaed4b2ab1351d240c2d136738acc8b50c05",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx": "ae0bac583330b55a2d630d41931a5cc029b6774278bf8dc804b8cc7f2ca65c08",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx": "d19e550cef2d08ba5b663bfaac66e6c4736364353e6d8997d7617abb62ed1e7c",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx": "b1b854d2745c792cd838c48e93407355a802463c8a02696222e88b928436cbb3",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/journal-client.tsx": "f50923fcaa2fb9a97b7c099e7bde4d9d63f13b7341156a342eba0e94c29098af",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx": "5682308b2894320c1c76c03f09e8db01b0e837062095a8607461cca71aa057e2",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx": "c7285c509ca3168e49e662734dd9040fbbee4ab88e9e29183c2c64993ee45df0",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx": "9e46d17c13686da85eac8eb7eb4b94ac7fad367d0f630855e83525a766252b2a",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx": "64e8a8f5722b195954659877d77735fbd469c1e58a8aef948f8b65ade0d9ee1d",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx": "00b4d40a2fab77f938ab084b8b840acb795a4ee0278070385815a3035eda129c",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/taxes-legal-client.tsx": "0f6bb53df02c24434e8b24420d64827384e083e63bcf6e4bdd878e201b1bdbf8",
+    "apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx": "67af3e5379c17b0bad563b3a069969023c316733347f95f1625f90737efab4c4",
+    "apps/web/src/app/sites/admin/[tenant]/announcements/page.tsx": "f503034f0e4a4860e9b71084969e066bdf80290bb10ff62a4ea4b411da2d6d61",
+    "apps/web/src/app/sites/admin/[tenant]/billing/page.tsx": "1a44ebecad73265f5e6bccf8def9a0cbb80b9689c1e3bda78dca9c7b41090e1b",
+    "apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx": "15f19a9611a47865b2a09506f1e160ab7874f5851117ee925fe43e17c427a49b",
+    "apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx": "fff17e1bcf96eaa0486e2bb3ad017dc681e70bb6d22152958df7a6574aa19786",
+    "apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx": "237bfb07dd6a1d7511bb09f6132e30796d50cb86e9d3b264f9af5f154b16c4ab",
+    "apps/web/src/app/sites/admin/[tenant]/committee/page.tsx": "648ceec0e5a31a9372aec8f31340f8b0986b19608563e49ccf23e535eb2a9718",
+    "apps/web/src/app/sites/admin/[tenant]/divisions/[divisionId]/page.tsx": "dc95a2b0d494b4e29aed2f22a7d01c451650ca07200f4091489732aed37b598e",
+    "apps/web/src/app/sites/admin/[tenant]/divisions/page.tsx": "582a6799f4d97f538188db74c8ab723b97e8f82e950a278e5299295dc8d692af",
+    "apps/web/src/app/sites/admin/[tenant]/education-employment/education-employment-client.tsx": "9a7795cea37529520c7d33660b4be2905f8764b11b00fca748bb083549a97f3f",
+    "apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx": "cad11a2d29a97e2607734fd6781fcf37579fc44e15b6e22cd233ea3bf31b15ba",
+    "apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx": "aa0804d48ddfa784dc5269cbd82b68a536e27c133c8f33f78ee85364b2f1f3ee",
+    "apps/web/src/app/sites/admin/[tenant]/events/page.tsx": "3142f6ce9d5d6d6c8c0b5ee1c4f46555f2bcd6f216aa4127294b991159a1999b",
+    "apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx": "3565e3c6985038bb7d0ddaa9147ab373bdd47c0d72d43ed2115029d3eca71f93",
+    "apps/web/src/app/sites/admin/[tenant]/families/page.tsx": "f7dd217e84020a46b625d89e8921bff561454d4647613adbaec23362c66d4414",
+    "apps/web/src/app/sites/admin/[tenant]/finance/collections/collections-client.tsx": "741dea5eae7ee1cf723dde34b8a645c676b9e497c599f691432982251ce94f0f",
+    "apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx": "112b3fd0609916f364dcd8345990ced6fa506be9c63c4a26a920a9dd8d0aec37",
+    "apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx": "0f9b49ec3ab7fca13ebb0ad08788eb76826205e1266c97be4f55e10ec15cc71c",
+    "apps/web/src/app/sites/admin/[tenant]/finance/page.tsx": "274ea0fc81778254bdd75fbab9c451c88d474191963d4feb6b1fd99370b0d607",
+    "apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx": "1d8fe5849cb1ba05b410c3fac6629c4669a2b1024fce3aef46cad046ed4ece13",
+    "apps/web/src/app/sites/admin/[tenant]/finance/payments/vouchers-client.tsx": "93878f0c802f8e1de3dc001766e3129cbcf454e4f7564c4d5ea0aa8c77b310e0",
+    "apps/web/src/app/sites/admin/[tenant]/finance/reports/page.tsx": "864548c15adf2e0c5a421f13137d2ac85a82c47f4af0aca400920438bb6c09ad",
+    "apps/web/src/app/sites/admin/[tenant]/health-support/health-support-client.tsx": "f7407798b83e331e8b29bdb74a5134eeed851322fbcac2eedf06164401a95631",
+    "apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx": "94b2d324a25a231874b6d65d93bd45d3c5824eafed33d95142c465d55ffa9e34",
+    "apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx": "db29a21ebb3369ca1c18d0159031209eb86b2e3fbdcf34cd1c65998c89711067",
+    "apps/web/src/app/sites/admin/[tenant]/houses/page.tsx": "94b6d2103b08d7dc947260bed4f58c64e0b28804b01d393bb40c8f3bd1932c37",
+    "apps/web/src/app/sites/admin/[tenant]/members/[memberId]/page.tsx": "3b5a60517e9bde9e2bb438ff05f6b32b1d98182c460cc7e0a7b2ae366a15a066",
+    "apps/web/src/app/sites/admin/[tenant]/members/page.tsx": "04a51521b8e720e23d8c375e68adddbee1625c4ee8b17bca226d13de2f0d7d67",
+    "apps/web/src/app/sites/admin/[tenant]/overview/page.tsx": "5efad47c7c319896c90463539ce521cda82ae099de1e64831981da80024e1ae7",
+    "apps/web/src/app/sites/admin/[tenant]/page.tsx": "a841b5b571afdbefc637d2ec2feea8502769ddeddd5811772d417f7b6f5f0e18",
+    "apps/web/src/app/sites/admin/[tenant]/programs/page.tsx": "0a0bc4f548ef07dc056c9d6748b67723c4532fa7a8c2dec8aa65b08c980f5053",
+    "apps/web/src/app/sites/admin/[tenant]/registers/death/page.tsx": "6a17752816b54fd392d04c9baf955c6f6688a29e3b5e06ce8c5037909794a684",
+    "apps/web/src/app/sites/admin/[tenant]/registers/divorce/page.tsx": "20a512fb21e7c26ad6ada321c1a117f7daf5a4a322cdf11aefe3d2c172170ff2",
+    "apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx": "d4bcfdb6590724878a93375d24a324df8ba1cf7f3db3d71ee4a68baffb1aeaf9",
+    "apps/web/src/app/sites/admin/[tenant]/registers/madrassa/page.tsx": "bc95cd128f5ef077679906792b29815cfd7a09ae0c8417119ea22fc4525ea989",
+    "apps/web/src/app/sites/admin/[tenant]/registers/marriage/page.tsx": "3cd764eb77c4f57969e588054eae8eaf665c398762aae11833256ba838b71c43",
+    "apps/web/src/app/sites/admin/[tenant]/registers/property/page.tsx": "648dbfeee748e1d82f6b9ddb4fc2cccd7e574b288a428c4ef983837483d5baf9",
+    "apps/web/src/app/sites/admin/[tenant]/registers/release/page.tsx": "83c9b1570507866d77f6bd6bc28c03c9d9cb93c7ed124d0d8caf9189ebbb426d",
+    "apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx": "81a8d1eb1507dd1fbfec8bba8863127df5eb5ce3796ac6df195699c2530faa64",
+    "apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx": "d765d39a42ba445813c2f8ab6578f391bce81af1448c467b02da4771840bc72e",
+    "apps/web/src/app/sites/admin/[tenant]/reports/page.tsx": "bd2b9507cd2c2d764659b225ce5a27b0ec95e635755cbf427f48423f987b707e",
+    "apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx": "1c20cfaede472003860e7be0c8844eb79f75f8d7d9a21df84cfe39ecf39bccbe",
+    "apps/web/src/app/sites/admin/[tenant]/services/page.tsx": "7cafc5d225e27d1736368092ea82b2266c424af58378666388bc2a1b3b369c78",
+    "apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx": "8bd6e5b755c984a8f581ffae678b007d53c6695379ad2fb02da1648de93b2d5b",
+    "apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx": "7ed37b65f9cceae104445c68119c8b9c17b7d72d6c2ae31dc7e5cc68154d75ce",
+    "apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx": "c58f91d3a0f0ca66763f91491bbf6d563a87c29e99ebcc4324dbef14056c909f",
+    "apps/web/src/app/sites/admin/[tenant]/settings/finance/finance-settings-client.tsx": "17b0e9b97707442b3356f2410d88c1586544bb1dcdffc67140e658dec68aaf3c",
+    "apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx": "bb90def019d1a3c8b2cbc5fbfdbb8f0607e255397496cfd41541698714a611fb",
+    "apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx": "4749b66d293bcb99f21e8bf827d3a851b96d93e7aa507aed3f8b0dfe1f46ad95",
+    "apps/web/src/app/sites/admin/[tenant]/settings/page.tsx": "9d26d15af46fd74876e9a379ee4b00275f72acea86e63ebe687e1a156c15a155",
+    "apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx": "eea93f9f442a712e77005ae181224e6975aea53f9b19acd2626613c67c955e70",
+    "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx": "ab942c9adf8d3dd37f9809fac7362dbb942688b3705a891511852b35a68a43fd",
+    "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx": "e0e650bc86bc7386182459671ce20557014b6c3bf8e19413972f7d47ded4b283",
+    "apps/web/src/app/sites/admin/[tenant]/website/page.tsx": "204aa6b9a03586f1f6ee2823664bc9610dac33e75088be9b5ffc6e1f9c7986b5",
+    "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx": "2a78813be4cf8320272f2094a3c25ff2c9663447694cff4939a4f21f2318a469",
+    "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx": "09824d9eaef04bb5c0218f66dffff8892fcc05e66c85498acd4338dd4112b68b",
+    "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx": "3969a6ff1ce4b7c9fc2fa294d558643141670b14043442f10bbbb0e45deaa62b",
+    "apps/web/src/app/sites/admin/login/page.tsx": "3e1b25500d224f67a0227fd90beb43423d87c1183236e815abbf5b3c2d8f221f",
+    "apps/web/src/app/sites/admin/onboarding/page.tsx": "b81a1c6cfcab1ac73cda19a4de6ea691eee72ceeafa51d1f2e9855e8aa315ada",
+    "apps/web/src/app/sites/admin/page.tsx": "66490eb774a67c3426deee26c3d1b6bc5e81a1d41f503f7d954a87317f2d3084",
+    "apps/web/src/app/sites/admin/register/page.tsx": "a30295f1f8560995a5323496bf43967077174f99d33eb2befb361da196f88ffb",
+    "apps/web/src/app/sites/control/(app)/analytics/page.tsx": "88cddb8b395d854104e7e372dd957ba56848b5d3fa7c7fc00c5959431a16d26e",
+    "apps/web/src/app/sites/control/(app)/audit-logs/page.tsx": "0485d43c49cf9cb3f143db7ac96e34466b3058cbc018c7b85151ad096249221e",
+    "apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx": "8872de40ec43ec81289de3ce104d406b861c8551da1acaa7dec2c0f5b47421cc",
+    "apps/web/src/app/sites/control/(app)/forms/page.tsx": "66d1c9a745af8f3c39ca200de6528d0ccf8bad06778eb7012def42abe8fb1024",
+    "apps/web/src/app/sites/control/(app)/page.tsx": "64bf2e4a234d78fa047ac3ebec57d1f6eeaf732de9fabf7f8279dfe0c58ded8a",
+    "apps/web/src/app/sites/control/(app)/plans/page.tsx": "15b7f6b91b4c5fd54ba1434829aeca1f330d1a329e99d369eb3f39f2387a9074",
+    "apps/web/src/app/sites/control/(app)/roles/page.tsx": "2236e6252f54ef7f9c42fbc22f8cf8b2813a831f58139301e2ebb01865b1d600",
+    "apps/web/src/app/sites/control/(app)/settings/page.tsx": "4d265899d88a31d504889ccebe965fb341da6a49d643f01ea2e561920836b907",
+    "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx": "ddf98f8840aa6c378c3f49fbad181d00f4f669fe98cf9da2ab9a1370e5e47de4",
+    "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx": "7f904a6095706ed1f2576cebb1f04882cd7fd10316587d5c35e0ca52171d7318",
+    "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx": "5931b0c34717f5705782974c90bbc6233a4b2e259d29ddfdcf9feccf18fcf553",
+    "apps/web/src/app/sites/control/(app)/tenants/page.tsx": "12076650939a9219527a0d118f9e3bfb27c0fe9d5121d8b3e60a54179aa325ba",
+    "apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx": "872b1443e3b211833d307dab988b8ea84043971adb24a0a346795126e7a2651f",
+    "apps/web/src/app/sites/control/(app)/users/page.tsx": "55e967243d3a8609f7fcb9fc1b5af69faf2bc36356cf0658c23fc45538e6091d",
+    "apps/web/src/app/sites/control/login/page.tsx": "354c2cc8b96cfa6ee198e67b7b1472699d5e8d634a5af891da255e58a31c16b2",
+    "apps/web/src/app/sites/marketing/new-mahalle/page.tsx": "9ba3e921f3db179aa96e8046b692ca6c1a5df0a46484e8a0faea4873d1a120aa",
+    "apps/web/src/app/sites/marketing/onboarding/page.tsx": "d71d0632eb8c15613257730adf4b06e8562411093c5ddaf3d585cb47bd91c2f4",
+    "apps/web/src/app/sites/marketing/page.tsx": "41300c3681b819f822f55483771d75b020f8ee4755c389bd5d5568b2ed3939d9",
+    "apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx": "9f5f3c79710c399a04ded331d21516ded8d58dea6493130f748815454a84547b",
+    "apps/web/src/app/sites/tenant/[tenant]/login/page.tsx": "11586830c71bd3ae4cc9cc22e6a16acde5a7935c5590ae83f03131d9d58fa4d2",
+    "apps/web/src/app/sites/tenant/[tenant]/page.tsx": "54180192b308b8a1b8f98d0ac862de51c0137fad83bbdf94e558dc6406447984",
+    "apps/web/src/components/auth-shell.tsx": "c48d70ee1a79a4a9dd0c7b3149fa2fe08d0909215b707b0c9b4c8c0ae87f8896",
+    "apps/web/src/features/auth/idle-timeout-provider.tsx": "8a558c4758a648cbe7af2d8fb839804830b89d0adbbdca00a21a898ff5b90405",
+    "apps/web/src/features/auth/login-form.tsx": "3cbd0500079916b5622aaff1cebb845edb6cbe91300d0f05f3cd4eca67567c37",
+    "apps/web/src/features/auth/logout-button.tsx": "7d0032cc37d22e49aeafcfb4c5d13949f955ffa2a57d90a5e8f9efc87f733095",
+    "apps/web/src/features/auth/member-otp-login-form.tsx": "2cdbb7f0b6eda34e14bc17b2bea516e546e360b84947a0dc84b9e8bcab92dab4",
+    "apps/web/src/features/auth/register-form.tsx": "67ed6efa2719d4ced0d1363d3f4bb381b57441ff1baf2a506ebcafd02fdc50e0",
+    "apps/web/src/features/billing/billing-payments.tsx": "0d873682fe7724b9c347d435812a9d948370229adac08fa69a44160303b0fb05",
+    "apps/web/src/features/billing/billing-plan-details.tsx": "525ee1e1b9af695d1ac3e52bfd339387ad9ec7e4bb6dba428950062f8447ebb2",
+    "apps/web/src/features/billing/billing-usage.tsx": "14db79253072fc85fbe190c2170fbec39ebf161b49e0e3bf8881ab4b7876d45e",
+    "apps/web/src/features/billing/invoice-download-modal.tsx": "8157bf78e3418df58944aa7da6d38b8ab947cbf4bfba25d12f57ce09fb02ba27",
+    "apps/web/src/features/dashboard/dashboard-chart.tsx": "6bfe2c341546a4ee2b3a33e65e3a11a88034f69ac3a4fe02ad679227c3cdf10d",
+    "apps/web/src/features/dashboard/dashboard-hero.tsx": "7259d7dc2dff07cd25a3bbe8b5909df3a9a0e13f3f89b77cc2dc40e862088881",
+    "apps/web/src/features/dashboard/dashboard-metrics.tsx": "5a61b88f23e6287141b18399ce44c75fdcd67038fbc17f9a164b68d408ad6f5b",
+    "apps/web/src/features/dashboard/dashboard-milestones.tsx": "e286eccd644c28d03912a14f3a70b1163ce88f45aabcdece30f19b167cfec51b",
+    "apps/web/src/features/dashboard/dashboard-modules.tsx": "79eb37ab0b137af22db01e23c28eec47b3f12e4a4cfb0bca40797a7100a09be4",
+    "apps/web/src/features/dashboard/dashboard-recent-members.tsx": "3dcebbfdea5d545a96fd6e8f6586f991b86e1cd99b52aaafe45c15f335eea205",
+    "apps/web/src/features/finance/dynamic-form-builder.tsx": "e1fc4d814e5b48df6014344759258f706d47522699206ab77563c23b90cd31fa",
+    "apps/web/src/features/finance/edit-collection-modal.tsx": "96bf4574b93f653f0f6c2b469d7dcc61b861b67532bdfb008877c9f8a7290b57",
+    "apps/web/src/features/finance/quick-add-account-modal.tsx": "f0b77a80bf4e93901df45280505ee7705a0c4b8b8beb11d23c9c44936b7db13d",
+    "apps/web/src/features/finance/quick-add-category-modal.tsx": "38264e8ab0f8f63dfd6efa45b7435c78c36099e0d21fffb8b79a2c3565187f22",
+    "apps/web/src/features/finance/record-collection-form.tsx": "0e8f7982bd7b2f3cee57d84f247e4f0d45b9a835525bb1d5a9b0b70e09b52282",
+    "apps/web/src/features/finance/universal-receipt-modal.tsx": "2920d4b6579352c8f8dea0f5ea2f5af7207ec1dbad7e14da07c16c5d24500b53",
+    "apps/web/src/features/navigation/admin-shell.tsx": "e8aa20d4a0f16cb76ce25222b7f13b5eca43c4a852852a9b33aab8306bc10de7",
+    "apps/web/src/features/navigation/hijri-date-badge.tsx": "5dbbb6bab8ceba3668245815522212574929ec09ce423f73b38f7fdec8a81e3e",
+    "apps/web/src/features/navigation/home-website-card.tsx": "46a53940456e003a9e95d7ec1c0d752a5bc6aa5d33e761cb358b6c289a8463e1",
+    "apps/web/src/features/navigation/topbar-quick-actions.tsx": "aec694c7411e49e4697959670f1928529c056a65f9faec9ace1e833427286c01",
+    "apps/web/src/features/onboarding/components/location-picker.tsx": "6c06056f63d3d9cce06e86ab052a9246eb97eab003d6a0e2f4bbb8ee3957ff19",
+    "apps/web/src/features/onboarding/onboarding-steps.tsx": "cbea25544e05eada819119656c0c86ddbd968b73089cb64b5d8103391e22bdbd",
+    "apps/web/src/features/onboarding/onboarding-wizard.tsx": "e6db79eff449c9577578c468dd753da344b188b7cb5d3ca15501e237ae603d6b",
+    "apps/web/src/features/onboarding/services/map-service.ts": "50851a193e61ef6e9866afeb019da37db69fb69af857ac194147f135ee51c6a9",
+    "apps/web/src/features/onboarding/setup-checklist.tsx": "5cb1e538cea0c2bee9302e88624e880e5641ee08e3d16348e6c45719feafddb2",
+    "apps/web/src/features/onboarding/steps/admin-account-step.tsx": "6fd07bc6b94a14f67870aa1783ff83d278f114df28b5e8158cd6e8158f9a0e52",
+    "apps/web/src/features/onboarding/steps/complete-step.tsx": "eb17001bf2da9f9acae8498fe3b09c8626eae56ab59f6cb73c9b45a1983632a4",
+    "apps/web/src/features/onboarding/steps/mahallu-details-step.tsx": "dbdb6a27069275bc0b5d4311725c7cae0306288f2f8038210cdc5b0419be9e7a",
+    "apps/web/src/features/onboarding/types.ts": "bb27dd0b54f31c308212bb7c74cdf440160eccf7885c567b5c5fb2c9ca7cfc37",
+    "apps/web/src/features/platform/audit-logs-explorer.tsx": "9642ac74cee054b0b6d077ddfce1a03ec05f0aac6a523c67050831b6918f665f",
+    "apps/web/src/features/platform/create-form-dialog.tsx": "885e37fa1280e106c625c170d873d6f20167a00f77bea15fcb558579d981b73d",
+    "apps/web/src/features/platform/create-invoice-dialog.tsx": "669c44dcbbd70afbb5e4eccd2afeb76ddf938e50fe8a5667824d14288998ac6c",
+    "apps/web/src/features/platform/create-plan-dialog.tsx": "b743f401fb62123c83a71e6794aff8b73e60f97b6c0000c1664b861f366c3b02",
+    "apps/web/src/features/platform/delete-form-button.tsx": "9bd4babd44d91db316cd013273f655d68c8d29b7b5bafa188ec736427e566ab8",
+    "apps/web/src/features/platform/edit-tenant-dialog.tsx": "a10a32992c28bf934d1d9d564020d304e4052f158b3245efb8d8b8163e83a00e",
+    "apps/web/src/features/platform/form-assignment-editor.tsx": "e8a5d40cdf082120d188bbc6472102b8811d21a42db43b594b57368a535da749",
+    "apps/web/src/features/platform/form-field-dialog.tsx": "44a81f7391af180c79e4197d874c215f1991eea23cccb8c68c04f2e83be4df8d",
+    "apps/web/src/features/platform/form-fields-list.tsx": "97680afa7b3336147ac0b7ad4ccf2829cf2a98868e48253482dafb8dfb2d6d65",
+    "apps/web/src/features/platform/form-version-actions.tsx": "5658acc1dec712b8c27e8f6beb3f8f393e30908b1725bb937d995b465984cedd",
+    "apps/web/src/features/platform/forms-table.tsx": "43e210c7aa450d10067413f25f17a9d4b20a79953edd02b2203425e441ea599f",
+    "apps/web/src/features/platform/growth-chart.tsx": "a10ea0862bf717b88cee226502d707aa84a43c063ed4ac02dc4c1d9c1bc4e96b",
+    "apps/web/src/features/platform/invoices-panel.tsx": "7f248370a5d81553d6ffdbe533bbdead4116d0a8caf2ca94f8f78b14acb773c9",
+    "apps/web/src/features/platform/module-adoption-list.tsx": "f3396836ef2c71bfc7d5e32f796f40ddd348f2c13b852a118c4b2b5d2be5525b",
+    "apps/web/src/features/platform/payments-panel.tsx": "56dd525dc8f60798411f6f7975b4f12f7de7efdc84e3b8d5f66c39c471af1ebc",
+    "apps/web/src/features/platform/plan-features-dialog.tsx": "3e97fa2ab94ccaeabd4b6f5995e82772c8b37906246585b7ea4b726138bfc18e",
+    "apps/web/src/features/platform/plans-table.tsx": "5c96889e7dc5693a03d59ad44e68f21edddab26c86141926602a44cd136213ea",
+    "apps/web/src/features/platform/platform-settings-view.tsx": "67005f8b9cc17fea69b45a76a2e86e8e3bec256dd5167e0017b9c48edd5c7aa9",
+    "apps/web/src/features/platform/provision-tenant-dialog.tsx": "0d6423240b8d17024c767f1a714cf42a5e30ce4ba3a60bb9e9954a49cbe951c1",
+    "apps/web/src/features/platform/record-payment-dialog.tsx": "f848522e6559559db56dee9130de9098b437c11ef90cd9ce182511d62147cab8",
+    "apps/web/src/features/platform/roles-permissions-view.tsx": "f58b117c43e5d65ead08d63f64f624c4979309811ea7505c69658d2488e04d26",
+    "apps/web/src/features/platform/tenant-command-center.tsx": "eaacd0c62ebc940999f6ebd2b84a81537f0a6e7c9268538bacca3133fbda5b2e",
+    "apps/web/src/features/platform/tenant-features-editor.tsx": "32f6f5f65e2d049fd364be0db16b8c2b7147d26ccbe77d530a471ab13c155b92",
+    "apps/web/src/features/platform/tenant-name-context.tsx": "5021cef8a1a419ce837437df2c15f7404c516e0014b33ef1840c3be0814506d6",
+    "apps/web/src/features/platform/tenant-operations-viewer.tsx": "5b2226a49c194559465f12e252e6f93c0e565cabe41114dfc197e204c4210f0a",
+    "apps/web/src/features/platform/tenant-status-actions.tsx": "070f84c89d5338ea92cefdd22ccf1a200ed55300605e1886c1d1b295b471a060",
+    "apps/web/src/features/platform/tenant-subscription-editor.tsx": "ef08fd89730411444c9c3f3d229ed508ffefa7a885eb88676864bfbab2985073",
+    "apps/web/src/features/platform/tenants-table.tsx": "27ffcff8bbd76df717a8a2aee86a5df8ab0aed0945e87d093cf8305f19615d8b",
+    "apps/web/src/features/platform/user-sessions-table.tsx": "2393d69a15955db3bb2a6d7dc4dd2cd50bd48abb956d959b4f5ce0f70d19f1e4",
+    "apps/web/src/features/platform/users-management-view.tsx": "9f5e750d538ae480bffed35e1abfee0c2e9fd50cd5673918093c4a3c57dc5b19",
+    "apps/web/src/features/registers/printable-certificate.tsx": "a2aef41146a836a90d48b72fe7157985aa70a57426c4824c3bb37bceaf401814",
+    "apps/web/src/features/reports/financial-report-viewer.tsx": "0af389d8a9055401ff44d2efc4613542c510b07ee115ed12273b218b8412f344",
+    "apps/web/src/features/reports/reports-center-client.tsx": "5846057f5ec4f64cf1be3cd613da76bec338a3f4bdc00e0b8025e18cca61d85b",
+    "apps/web/src/features/reports/reports-data.ts": "d2b0d0fe36f8fa095fcb15f2f60b9a0b5acc191fe53a126ec1400ff0d979325d",
+    "apps/web/src/features/reports/tabular-report-viewer.tsx": "ffa0f04dff68e05cdf60d7e97633587075ebe9db9124e25ad0c5f6211a0b79d1",
+    "apps/web/src/features/search/command-palette.tsx": "5e00d99042224a43ae9e5b1d92bd85cbf3a3b02f2773c4975a2e705b928655b5",
+    "apps/web/src/features/settings/unsaved-changes-bar.tsx": "c0c5e84d2f7cbba82444b1ac9977f86115340f041984117d2244564b966b78c0",
+    "apps/web/src/features/tenants/add-existing-member-dialog.tsx": "dc1450415ce8ccac6da40e85fd53f25b242ac88376563ac44affce09fab3f707",
+    "apps/web/src/features/tenants/add-family-dialog.tsx": "457ab905a15625c74cab8be935c5ce974f572a71bd59f1cf35fb831e6629e26c",
+    "apps/web/src/features/tenants/admins-table.tsx": "68352be46d98e5354830cafdc475779490ac517646e9d3e543c251ad44f591c3",
+    "apps/web/src/features/tenants/assign-family-dialog.tsx": "cdfdbb3474f4005506be426b8302bd8390b66a995039179b9d8ee8b6325d82d5",
+    "apps/web/src/features/tenants/blood-group-report.tsx": "937aba877d5590850646737b93aee382bfbef3a9140182e8e55f5dd60d904457",
+    "apps/web/src/features/tenants/committee-decision-form.tsx": "19e49e5bf55ce396aa8b7c7aec1f835ce93741b9995e989b9e9f246e0c015c5c",
+    "apps/web/src/features/tenants/committee-meeting-form-dialog.tsx": "c3cb7afde61d0043da311af5e103968bcdd9ad339c30aafead441f8624611c9f",
+    "apps/web/src/features/tenants/committee-meetings.tsx": "8b1bf2d2c7139a8759435ebb507905b462f62620f6794d6256673765784cb85a",
+    "apps/web/src/features/tenants/committee-post-form-dialog.tsx": "a7c0e8684348c18fcfcb97d82bd48fe36b9b06916e6292d94d201f23a9b4454c",
+    "apps/web/src/features/tenants/committee-roster.tsx": "d2454a98db5606ff1429d8a40062ab1179676b3a551284f0b6876b8f36de577b",
+    "apps/web/src/features/tenants/contribution-history.tsx": "464400230f4bcbb5a72bc23d27d580caeabadab66d81a7bdeadfe7a5237c5c35",
+    "apps/web/src/features/tenants/create-tenant-form.tsx": "d0abd671bea77dbb4b03a0030d0e9f8a890b699972f23336f6dda8947018d1ff",
+    "apps/web/src/features/tenants/division-detail-view.tsx": "6955abcd892902c7fae364879b15acf5c4ffa8fe8d9edb33c56142ab6388558f",
+    "apps/web/src/features/tenants/division-form-dialog.tsx": "11e28c2a2b8556f1072b70c0d2f78472c20aa5b227fcc420e3900f1d71e972a4",
+    "apps/web/src/features/tenants/divisions-registry.tsx": "d06b375536fea095c97f65a5c38b99ae49328e1463b1e58bb776fc6cb4c886fb",
+    "apps/web/src/features/tenants/edit-house-button.tsx": "5f09387069d9161c4991ef528ff05fbf5727a1699b5dd08e6c1cbba4cab436ee",
+    "apps/web/src/features/tenants/event-registrations-table.tsx": "22c9da0c69f7ce7ebfe2d9e25a5e429741ada2177dbfc77e1323800a13b885fd",
+    "apps/web/src/features/tenants/expatriate-report.tsx": "ac5d124afd79a68725cdd3a42e6e0b9365e5d21e0040ed6424f10ada0dbd082c",
+    "apps/web/src/features/tenants/families-registry.tsx": "1edd4d4370272e884f0ea7c7939860da289a0aee93fd5cb04ea88ef71dec45d6",
+    "apps/web/src/features/tenants/family-detail-view.tsx": "76cff5eee57b38104aff6de67756973e4cbc27a1cbdb9959d0f38ceef43a298f",
+    "apps/web/src/features/tenants/family-form-dialog.tsx": "445af42a9b8ffb9e450b8fdd27d4def58dcdf837f6c62f4ba3f65df6b3988bef",
+    "apps/web/src/features/tenants/family-status-form-dialog.tsx": "c2782e0c9fc10727b7045a9ac8ae1533c5aaabfbd2c931a85ad54f96c4ab2a07",
+    "apps/web/src/features/tenants/house-form-dialog.tsx": "190bdffa357ef7f8c4112bdeed0ac02f8907de14f21582a5b57f62ff80e440b0",
+    "apps/web/src/features/tenants/houses-registry.tsx": "96d74494a6fff424a2987059761aa71fd8dbf5be084be1d72a74aef5091ba669",
+    "apps/web/src/features/tenants/member-detail-view.tsx": "f9ce555646e334d89bfb0892051d19e30c7d900e78d44b7bf0b7147eecc19e88",
+    "apps/web/src/features/tenants/member-form-dialog.tsx": "2bc1a0ad629d3d08cb32d6b7bf258e09c6ec1346af1b8ebed84b7cf205ff441b",
+    "apps/web/src/features/tenants/member-report-table.tsx": "f583ace503f4bc701756314c86c446030a37016cd8495d0b454f767fa3f36d10",
+    "apps/web/src/features/tenants/members-registry.tsx": "b08d4b08c62388c63d17af356fa2d70d88bbf9865975aa1911d647ee57ac4aae",
+    "apps/web/src/features/tenants/notification-bell.tsx": "ef7105cdea30a1426a54466d3277a05eadfb5ce7fbc8e151520ca8368c6beca5",
+    "apps/web/src/features/tenants/notification-settings-form.tsx": "1d14ce09c0f4d85035d7215ad103801b653c9d5dd12cc40230585627906d4cf6",
+    "apps/web/src/features/tenants/record-layout.tsx": "36ded0f798ae06ab0a6601e4e6af1b9dc23e036d107a23601ccb01ba7989aa60",
+    "apps/web/src/features/tenants/record-utils.ts": "72b93c92ad0cf090e536b065584d60745e6a65e29beeb907134492fcfdf8f2c8",
+    "apps/web/src/features/tenants/register-form-dialog.tsx": "918f4df6f1b8988226c38857b0f011af92dc5922d2abda5f6eb9c1272f974ffd",
+    "apps/web/src/features/tenants/register-table.tsx": "c8069e09666af229ecd1683ffa7f23856d023574aefc2a290552e7779b4f29fe",
+    "apps/web/src/features/tenants/register-types.ts": "0be305c8bbff4c5c367060ff6478036f84c5d35368af60098e2d097cf2f1ff8a",
+    "apps/web/src/features/tenants/role-form-dialog.tsx": "bfd9eb7fe1f00c3bc20e7c406827c547c79b06cb8356d55fc32199430f24b0ff",
+    "apps/web/src/features/tenants/roles-table.tsx": "40508f0f73a5cdaf721ce260e564bee52a142abca696b0d2cc5a1d3fd16a6dd6",
+    "apps/web/src/features/tenants/service-requests-table.tsx": "2d6151136cb6eda8ff4358ad17670e63083f93ad94e77a3037e2ea913704bdc4",
+    "apps/web/src/features/tenants/simple-create-form.tsx": "d84f893aa7e91e7a181405298cb6464718ac386c60ab36b5c19dec1727127bb6",
+    "apps/web/src/features/tenants/simple-resource-table.tsx": "e3d197a16aaa6457a9ab4e39aca37cda628e5c0806f6b36341e3136a499ab5c7",
+    "apps/web/src/features/tenants/slug-field.tsx": "4c2806670826414c04f3bb90fd15771fb0af96e55162e0de33e1bb5da1e7eb3e",
+    "apps/web/src/features/tenants/structure-settings.tsx": "e32f1c34055ff44c0f5b4ef2fbbc912f0868f9f9efe536cae95169a6897fe050",
+    "apps/web/src/features/tenants/use-record-tab.ts": "97ef1790a4640a8aae84af532561e0d5d8387fbb8a6365067a168839f3a90e27",
+    "apps/web/src/features/tenants/yatheem-report.tsx": "4950644938f867494bc3b41bcbcb9a13968a2a4e157c8f832fafd70229e63d10",
+    "apps/web/src/features/website/website-analytics.tsx": "7b8890b7ad010db31040099e9668b2e4a7808f7b1c701eefc51ea424072ff4b4",
+    "apps/web/src/features/website/website-domains.tsx": "d1c64108a77bf409d7af84d06bdfa1b9cc976428181d2b955b50a395f0686860",
+    "apps/web/src/features/website/website-overview.tsx": "78a03a3e0089a7de591b1858dfab417d8b2196f0072a9cb7aee7d6dfbe5fc408",
+    "apps/web/src/features/website/website-pages.tsx": "9db0e53c8ff061adb31bb871c027a958e5074e0f0d7e0552458f459884b50001",
+    "apps/web/src/features/website/website-theme.tsx": "022d79208a35d179abc784f2cde880e09b8bf0c02d14fe553ed12c063d52b3b3",
+    "apps/web/src/features/website/website-visibility.tsx": "c2e5571d38be671e847c0c6645638f2bb5368b70a1b5543997aa80f7da6488b7",
+    "apps/web/src/lib/activity.ts": "6fc0e6f5c9045a2636738dc32088d760c155626aa3e7698670d3daa531b8b2dc",
+    "apps/web/src/lib/admins.ts": "67d0556c09759f799661b649b6c1bb7d9525114687325eb3c5aa21d24b3f7a3f",
+    "apps/web/src/lib/analytics.ts": "7261d45f0debe44dac1d27de438852d7d6ddc637361d0d42413d3288d0db0443",
+    "apps/web/src/lib/api-client.ts": "47bab2be6b45924d3abcef2e993c5e2ed170778341ea63399e7422b53ca80324",
+    "apps/web/src/lib/billing.ts": "44212cb79a1071e6d9535b645876fadfe7c00d495a95a63f94bc8ec8cf1bd20b",
+    "apps/web/src/lib/business-resources.ts": "6789d1f1bcf7ab975ea00576c7e0a4686353d09b6664f7c20d7592842c1b3643",
+    "apps/web/src/lib/committee.ts": "ed3cb2537fd3fb5a0e64a0fff0615586f82a43d32b9e747277704cafb0b88aa7",
+    "apps/web/src/lib/education-employment.ts": "ed69782a56665380ba4b4659ebbda7f2b9b8daa78a2c0242cc1e250cdc39d7dc",
+    "apps/web/src/lib/env.ts": "748e7537b8c6f74841abfa427614e738f365cede65769fe6801b5cb7bddeb8b0",
+    "apps/web/src/lib/event-detail.ts": "8904899ae93ed0fa606492d586c737cc3b8a70e3c3a7e8b06cd6ac8ca1075782",
+    "apps/web/src/lib/features.ts": "2ef906edc16a666c44e623c496ff3ca8650ae6bf5d76ed62738118d1a4d00806",
+    "apps/web/src/lib/finance.ts": "07f08e0a24df047e38e0cceb75d4285e2932bb4387d5ca35f431a394102cf468",
+    "apps/web/src/lib/forms.ts": "022401b55f2637d08481b1490ff12c8c20bbb0497fbd24d7f5ac9c5f61acd026",
+    "apps/web/src/lib/health-support.ts": "8831f2ac521ff943e1166d6356167d2a2606bbe88cc26c850585029c8ad9154a",
+    "apps/web/src/lib/houses.ts": "5015f676d6aa6880618367bd876c25b2012877138eb68091b73cade8e2d7839c",
+    "apps/web/src/lib/location-data.ts": "b79ea335ddd23e17ee0715377d13e500028a8f84925a3c82d463bb18eb6ec2ce",
+    "apps/web/src/lib/member-constants.ts": "1bb07288e055133168eaf3beed061b30a7a98443cb991edb6b19bb1e321fc8f0",
+    "apps/web/src/lib/member-session.ts": "122fa149ec13e5da0431137f749fe447a13d07341bf73b107b23ca6f35150a56",
+    "apps/web/src/lib/members.ts": "f5823b419302b120501351616e007bdd1bf59348d4d884ad626c2ff0a74c71fe",
+    "apps/web/src/lib/notifications.ts": "595b52a93d82404d88ad65759390b59c71c51339a54373a71a6774c758aa79ec",
+    "apps/web/src/lib/onboarding.ts": "e7b20a759c316139d058c90d493be9748753a1032d7251f9cd928272cd47bbb8",
+    "apps/web/src/lib/platform.ts": "cde701f2241af80f3854e8603e8742e18e893355d18e2df5e324acb398d2ef5b",
+    "apps/web/src/lib/registers.ts": "cacb066f5b561513962c546eb5694d2ee888a4a33c92309671255c59e621a09f",
+    "apps/web/src/lib/reports-summary.ts": "729de094b122bd5e86ca505cf91ca8ce462b07570bf2fff1eb333058706ebdf2",
+    "apps/web/src/lib/roles.ts": "ea07684cf76046dbbdc6a5a365e5f76043ab2dad936165da078fe2f363055e92",
+    "apps/web/src/lib/server-api.ts": "c066a87111bbe759883ec6c129f07e0bb83904aca6e0c20974606d2b619ee7bb",
+    "apps/web/src/lib/services.ts": "95dd5858e150eaba40553af0b5ee02e1d4262069783ceea3c138e3effef1c8cc",
+    "apps/web/src/lib/session.ts": "77a2eb5ee4ab90068b77103d359485e431d98a5ec93d14111d8af319a4b17b69",
+    "apps/web/src/lib/structure.ts": "abde60578a227a6136d1e729ac9637528ede7d95a60f6993d449578090828679",
+    "apps/web/src/lib/tenants.ts": "558b2e250c2dc0eb7e0ef165921fa68dc6501f2471e49c41339d4c514f455004",
+    "apps/api/src/activity/activity.controller.ts": "a4a3309fd377bfae3cbba7e96aea191c3748165faff5d9747b7fe50b13874438",
+    "apps/api/src/analytics/analytics.controller.ts": "5a917a4ed57764ba114245ad16fc6a91598afc6c1673e85257b3df124250842f",
+    "apps/api/src/analytics/tenant-analytics.controller.ts": "2c220a1fd530e828f13b8d0ed1b899269611fe491d9c876ff8078c85db01ceb0",
+    "apps/api/src/announcements/announcements.controller.ts": "7badd8ae586732692d3317403b3fe10fd3b8dafdd24c60b0c43536bbc658132a",
+    "apps/api/src/auth/auth.controller.ts": "d8f9e5cf3e3db7134f5b18fb35072d4cb1ad7bf9ab0b1873c78833a1857ce3a9",
+    "apps/api/src/billing/plans.controller.ts": "243fb01d4d7715898667ee2f017c0c6205b9c977955c0e144c93a324538a8d21",
+    "apps/api/src/billing/tenant-billing.controller.ts": "e60cd08626954ffdc4e07331acb9eefbcc23eaa77e4a4466761f4e1912bd8229",
+    "apps/api/src/committee/committee.controller.ts": "4d912e1e751f7edd6b9da037304532c8dbfb125257435846863d89a35a9e3132",
+    "apps/api/src/events/event-registrations.controller.ts": "f3475a715a597130b03136225eb871c1785739d489b27df8f1e42f9d8733af48",
+    "apps/api/src/events/events.controller.ts": "967a74898ac427e4be2d4a0e9d5de165f6858f0980dbcd86c188c514f16911cb",
+    "apps/api/src/families/families.controller.ts": "7cc4f25d9b598be87562af420fb8c6d8e81636c7e2790f154dee9b67d349f7c1",
+    "apps/api/src/features/features.controller.ts": "9f2090af996781065fdbd88903fbedada59bcf6d2abd7c27ec4f9a928925ff53",
+    "apps/api/src/features/tenant-features.controller.ts": "2b3290446118f0121c05a1b7d6e14cbb5a5d5f78c3187d997532eba636c92727",
+    "apps/api/src/finance/finance.controller.ts": "b065ac36609a79af2e925074ba3b3b3a60c3aa37aeac5f2e75d340e12c24fff3",
+    "apps/api/src/forms/forms.controller.ts": "92b2b454f7e7d7ffd036d2ea6a30f5029db36347efdefd72dfb72dcd106c0bcb",
+    "apps/api/src/health/health.controller.ts": "e10c3beb6a73f25091d5c15ed2396319a9ff376824b2b6ba3792634d47308353",
+    "apps/api/src/houses/houses.controller.ts": "55fd99882b8427ce11e8aaf16f3713dba7fcc6b63063a7096a1db0ea2a2a56c5",
+    "apps/api/src/member-auth/member-auth.controller.ts": "2a2965f315eb5a29c88bdb61b1e70c46fc03ddc4d8da9e034f19018801e835c3",
+    "apps/api/src/members/education-employment.controller.ts": "38ca8eaf7f26aaf027cbb89f88e32afacfc7156b090581720a0b75f69f1622e4",
+    "apps/api/src/members/health-support.controller.ts": "3bb45932871ebc526a3574d8bacf0ae5b60cc9fdc1b7b4db2924a088253e3b9b",
+    "apps/api/src/members/members.controller.ts": "e1424dafce10502da0d2cab679cb9e3646d1f8d02a05bee85cd06c38d5a14647",
+    "apps/api/src/notifications/notifications.controller.ts": "c0f30dd6ce8843dc6229fb92d6489b592facfb9c24f5dfebdf5f710da1af5985",
+    "apps/api/src/onboarding/onboarding.controller.ts": "d5f8529728904e17c88ec09ceb83073a22e690eef9c0257fda8bb8fa418d838b",
+    "apps/api/src/platform/platform-tenant-access.controller.ts": "a988b44b7775e9219e91d5ec46c94ebadd1f68e299cda878f308d86b3339e7b0",
+    "apps/api/src/platform/platform.controller.ts": "59c29776c3cc00a613016896f1ba05d0ec755a83f45a41d7d3f4c418fdcc4fda",
+    "apps/api/src/programs/programs.controller.ts": "2358666ab14e80f11690b83c98b3eaeb6f95bcf8774f5d33ad8674e728225fa1",
+    "apps/api/src/registers/death/death.controller.ts": "9ec2ad22206cad02dce01a95c4d5f6722555b38d8f6e3b27d42b55a6cf964a02",
+    "apps/api/src/registers/divorce/divorce.controller.ts": "d320d21ec55bafc29f888242750340ec0fe951515fa29b53b8ec85e862a4d515",
+    "apps/api/src/registers/grave/grave.controller.ts": "ae868f899bbf89100d8faff0d9ef665aef7fa10bb28613e476bf139813c6d632",
+    "apps/api/src/registers/madrassa/madrassa.controller.ts": "afd6c5ee36c818074b559648c5bafd6a63877aafea9b47dd7b529273e208b7e9",
+    "apps/api/src/registers/marriage/marriage.controller.ts": "dbb52c62a39eaa618316761c36044c0f9e7857dbf04f0b0eb4726af679d226ce",
+    "apps/api/src/registers/property/property.controller.ts": "ef0dfb635c080c321538a0027c9d36fc7c72010a38d585e10e2cbfa1563f8988",
+    "apps/api/src/registers/release/release.controller.ts": "98a071c49845fea0c1a1a2ed8ebfddecce3a8f07fcbd7763ef34e7d70734c215",
+    "apps/api/src/search/search.controller.ts": "8266ea28c2efaf7e44057355f843ad0dd8ffcca3ce0622f0f168006a406fd617",
+    "apps/api/src/services/services.controller.ts": "7fe2f3e9bf20c4109487b0000c43232b323d2bdc863fb095438557d2964b8c1a",
+    "apps/api/src/structure/structure.controller.ts": "af2c4a3c285a70d37977dde6f8ef786d87478226b9a55de0b60411eb4f010b47",
+    "apps/api/src/tenants/admins.controller.ts": "5eed1ca49e8ab57c6b971c82ebbeb53d7cf284e2612b8107d338bb7ad7e4751e",
+    "apps/api/src/tenants/roles.controller.ts": "31d337e739db8866878273000f3860d4243d54e566cd5c95730b83e7eecddf89",
+    "apps/api/src/tenants/tenants.controller.ts": "9aff64199f0306ac5292aa22ea862146f1ea6f9c59e62216d636c892a6c5461f",
+    "apps/web/src/proxy.ts": "ecb238706fa290d76a15f6264b38ece02984ef2b3f59d1d98d4796f2b4e99103",
+    "apps/api/src/tenants/guards/permission.guard.ts": "3f12503656934f67da2eccc104c6128e80fcdf1a065b9adac8b591fa87424fcc",
+    "apps/api/src/tenants/guards/tenant-context.guard.ts": "6f795a13a915c857e8191f4bbbc0343b18274baca3c83613b0fabad1a3fa3955",
+    "apps/api/src/platform/guards/platform-context.guard.ts": "1b8e476a81519db48578d086d5f8e8df615dfd040950d83c9cafbe683a7ae959",
+    "apps/api/src/member-auth/otp.service.ts": "4cef85ad5c66c4e290ee4182089878bba0a0041033a75a24f97fc18fadc9ad88",
+    "apps/api/src/member-auth/member-auth.constants.ts": "859d5a01b378ebc0be59b41af1784538d1c173473a8d92f60ee0bd5036218b22",
+    "apps/api/src/finance/accounting.service.ts": "8251eba317f9b53387801636755eebce42b8cb264d572d01d17dc25c6f7a9e3a",
+    "apps/api/src/finance/dto/create-collection.dto.ts": "25978d9b6eb2ce94c6ab9c3c09f4903b98537867eeb698fbabdf66361464291f",
+    "apps/api/src/finance/dto/create-account.dto.ts": "285c28f8cffb3f3d2fc7b3bde797939ce00805bd11be3bee3671e85141754be9",
+    "apps/api/src/finance/dto/update-account.dto.ts": "4a4a1166378d49906974c74ec4706977b49189fa23f1a0da65dd6fb2feae6100",
+    "apps/api/src/main.ts": "53566469d91f9bbee003b97f5748c4d517f20645c40a6fe74c637c0a60bd1e55"
+  }
+}

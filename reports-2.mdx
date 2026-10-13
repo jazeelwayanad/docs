@@ -1,3 +1,1115 @@
 ---
-title: "Reports"
+title: "Accountant reports"
+description: "Current screen specification: Accountant reports. English and Malayalam guidance for the development team."
 ---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Balance sheet
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/balance-sheet`
+
+### Purpose and access
+
+Inspect the balance sheet as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Assets, liabilities, and equity sections with totals.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Financial report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | Not marked | — |
+| Compare with | `compareWith` | select | Not marked | None, Previous Period, Previous Year; Initial: None |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Profit and loss
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/income-expenditure`
+
+### Purpose and access
+
+Inspect the profit and loss as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Operating income and expense, gross/operating/net totals; several non-operating and cost-of-goods rows are fixed at zero.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Financial report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | Not marked | — |
+| Compare with | `compareWith` | select | Not marked | None, Previous Period, Previous Year; Initial: None |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Receipt and payment
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/receipt-payment`
+
+### Purpose and access
+
+Inspect the receipt and payment as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Receipts/payments grouped into report rows and summary totals.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Financial report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | Not marked | — |
+| Compare with | `compareWith` | select | Not marked | None, Previous Period, Previous Year; Initial: None |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Cash book
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/cash-book`
+
+### Purpose and access
+
+Inspect the cash book as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Date, Voucher / Ref, Particulars, Receipts (Dr), Payments (Cr), Running Balance; opening, movement, and closing summaries.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Date**, **Voucher / Ref**, **Particulars**, **Receipts (Dr)**, **Payments (Cr)**, **Running Balance**.
+
+#### Fields and filters: Tabular report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Bank book
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/bank-book`
+
+### Purpose and access
+
+Inspect the bank book as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Date, Entry / Cheque #, Particulars, Deposits (Dr), Withdrawals (Cr), Running Balance. bankAccountId selects the account; otherwise the first loaded bank account is used.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Date**, **Entry / Cheque #**, **Particulars**, **Deposits (Dr)**, **Withdrawals (Cr)**, **Running Balance**.
+
+#### Fields and filters: Tabular report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## General ledger
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/ledger`
+
+### Purpose and access
+
+Inspect the general ledger as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Date, Entry #, Particulars, Debit (Dr), Credit (Cr), Running Balance. accountId selects the account; otherwise the first loaded account is used.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Date**, **Entry #**, **Particulars**, **Debit (Dr)**, **Credit (Cr)**, **Running Balance**.
+
+#### Fields and filters: Tabular report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `tabular-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `tabular-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `tabular-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `tabular-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `tabular-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Trial balance
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/trial-balance`
+
+### Purpose and access
+
+Inspect the trial balance as a dedicated accounting report.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Account balance rows and report totals rendered through FinancialReportViewer.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Financial report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | Not marked | — |
+| Compare with | `compareWith` | select | Not marked | None, Previous Period, Previous Year; Initial: None |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Open the report → review the heading, period, and rows → change displayed date/basis controls → Run Report refreshes the route unless a custom refresh handler exists.
+
+### States and rules
+
+The shared viewer keeps date/basis controls in client state. These dedicated routes do not pass those choices back to their data loaders; changing a displayed filter does not guarantee filtered data. Export/print/share-style toolbar buttons without handlers are unfinished.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Accountant reports center
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/reports`
+
+### Purpose and access
+
+Browse the shared reports catalog and open a financial or tabular viewer.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The center contains category navigation, search, Quick Favorites, a report table, and an inline selected report. It receives accounts, collections, vouchers, categories, bank accounts, and overview data.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Report Name & Details**, **Category**, **Engine**, **Action**.
+
+#### Fields and filters: Reports center client
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | Not marked | Search reports by name or description... |
+
+
+#### Fields and filters: Financial report viewer
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | Not marked | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | Not marked | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | Not marked | — |
+| Compare with | `compareWith` | select | Not marked | None, Previous Period, Previous Year; Initial: None |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Open → | Changes the selected view, filter, or page in local state. | `reports-center-client.tsx` |
+| Remove from favorites / Add to favorites | Updates local UI state; persistence is described separately below. | `reports-center-client.tsx` |
+| View | Changes the selected view, filter, or page in local state. | `reports-center-client.tsx` |
+| Back to Reports Center | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Back to Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Report Options | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Schedule Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Export as PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Export as CSV | Downloads the locally generated output. | `financial-report-viewer.tsx` |
+| Print Report | Opens the browser print dialog; Save as PDF uses the browser destination. | `financial-report-viewer.tsx` |
+| Refresh Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+| Close Report | Closes the form/dialog without submitting it. | `financial-report-viewer.tsx` |
+| Close Report | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `financial-report-viewer.tsx` |
+| Run Report | Refreshes the current route. | `financial-report-viewer.tsx` |
+
+
+
+### Interaction sequence
+
+Search or choose a category → View/Open a report → review its generated rows → close to return. Star controls save favorites in browser localStorage for this tenant.
+
+### States and rules
+
+Catalog entries exceed the implemented backend reports. Some generated rows use approximations or fixed values. Favorites are browser-local; toolbar export/share and displayed date/basis controls must not be described as working backend filtering.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx`
+- `apps/web/src/features/reports/reports-center-client.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+
+Relevant controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Balance sheet
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/balance-sheet`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Balance sheet പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+ആസ്തി, ബാധ്യത, equity വിഭാഗങ്ങളും ആകെ കണക്കുകളും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | ചിഹ്നമില്ല | — |
+| Compare with | `compareWith` | select | ചിഹ്നമില്ല | None, Previous Period, Previous Year; ആരംഭം: None |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Profit and loss
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/income-expenditure`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Profit and loss പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Operating income/expense, gross/operating/net കണക്കുകൾ; ചില non-operating, cost-of-goods വരികൾ സ്ഥിരമായി പൂജ്യമാണ്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | ചിഹ്നമില്ല | — |
+| Compare with | `compareWith` | select | ചിഹ്നമില്ല | None, Previous Period, Previous Year; ആരംഭം: None |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Receipt and payment
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/receipt-payment`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Receipt and payment പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+വരവ്/ചെലവ് വിഭാഗങ്ങളായുള്ള വരികളും സംഗ്രഹ കണക്കുകളും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | ചിഹ്നമില്ല | — |
+| Compare with | `compareWith` | select | ചിഹ്നമില്ല | None, Previous Period, Previous Year; ആരംഭം: None |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Cash book
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/cash-book`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Cash book പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Date, Voucher / Ref, Particulars, Receipts (Dr), Payments (Cr), Running Balance; ആരംഭ/മാറ്റ/അവസാന സംഗ്രഹങ്ങൾ.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Voucher / Ref**, **Particulars**, **Receipts (Dr)**, **Payments (Cr)**, **Running Balance**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tabular report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Bank book
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/bank-book`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Bank book പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Date, Entry / Cheque #, Particulars, Deposits (Dr), Withdrawals (Cr), Running Balance. bankAccountId ഉപയോഗിച്ച് അക്കൗണ്ട് തിരഞ്ഞെടുക്കുന്നു; ഇല്ലെങ്കിൽ ആദ്യ ബാങ്ക് അക്കൗണ്ട് ഉപയോഗിക്കും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Entry / Cheque #**, **Particulars**, **Deposits (Dr)**, **Withdrawals (Cr)**, **Running Balance**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tabular report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## General ledger
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/ledger`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+General ledger പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Date, Entry #, Particulars, Debit (Dr), Credit (Cr), Running Balance. accountId ഉപയോഗിച്ച് അക്കൗണ്ട് തിരഞ്ഞെടുക്കുന്നു; ഇല്ലെങ്കിൽ ആദ്യ അക്കൗണ്ട് ഉപയോഗിക്കും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Entry #**, **Particulars**, **Debit (Dr)**, **Credit (Cr)**, **Running Balance**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tabular report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `tabular-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `tabular-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `tabular-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `tabular-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `tabular-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Trial balance
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/trial-balance`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Trial balance പ്രത്യേക അക്കൗണ്ടിംഗ് റിപ്പോർട്ടായി പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+അക്കൗണ്ട് ബാലൻസ് വരികളും ആകെ കണക്കുകളും FinancialReportViewer കാണിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | ചിഹ്നമില്ല | — |
+| Compare with | `compareWith` | select | ചിഹ്നമില്ല | None, Previous Period, Previous Year; ആരംഭം: None |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+റിപ്പോർട്ട് തുറക്കുക → തലക്കെട്ട്, കാലയളവ്, വരികൾ പരിശോധിക്കുക → date/basis നിയന്ത്രണങ്ങൾ മാറ്റുക → പ്രത്യേക handler ഇല്ലെങ്കിൽ Run Report route പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Date/basis നിയന്ത്രണങ്ങൾ client stateലാണ്. ഈ routeകൾ തിരഞ്ഞെടുപ്പുകൾ data loaderലേക്ക് അയക്കുന്നില്ല; പ്രദർശിപ്പിച്ച filter മാറിയതുകൊണ്ട് ഡാറ്റ filter ആയെന്ന് ഉറപ്പില്ല. Handler ഇല്ലാത്ത Export/print/share toolbar നിയന്ത്രണങ്ങൾ പൂർത്തിയായിട്ടില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+## Accountant reports center
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/reports`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+പൊതുവായ റിപ്പോർട്ട് പട്ടികയിൽ നിന്ന് financial/tabular viewer തുറക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+വിഭാഗ നാവിഗേഷൻ, തിരച്ചിൽ, Quick Favorites, റിപ്പോർട്ട് പട്ടിക, തിരഞ്ഞെടുത്ത റിപ്പോർട്ടിന്റെ കാഴ്ച എന്നിവയുണ്ട്. അക്കൗണ്ടുകൾ, വരവുകൾ, വൗച്ചറുകൾ, വിഭാഗങ്ങൾ, ബാങ്കുകൾ, overview വിവരങ്ങൾ സ്വീകരിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Report Name & Details**, **Category**, **Engine**, **Action**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Reports center client
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search query | `searchQuery` | text | ചിഹ്നമില്ല | Search reports by name or description... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial report viewer
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Date filter | `dateFilter` | select | ചിഹ്നമില്ല | Today, This Week, This Month, This Quarter, This Fiscal Year, Previous Fiscal Year |
+| Report basis | `reportBasis` | select | ചിഹ്നമില്ല | Accrual, Cash Basis |
+| Collapse sub accounts | `collapseSubAccounts` | checkbox | ചിഹ്നമില്ല | — |
+| Compare with | `compareWith` | select | ചിഹ്നമില്ല | None, Previous Period, Previous Year; ആരംഭം: None |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Open → | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `reports-center-client.tsx` |
+| Remove from favorites / Add to favorites | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `reports-center-client.tsx` |
+| View | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `reports-center-client.tsx` |
+| Back to Reports Center | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Back to Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Report Options | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Schedule Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Export as PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Export as XLSX (Excel) | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Export as CSV | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `financial-report-viewer.tsx` |
+| Print Report | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `financial-report-viewer.tsx` |
+| Refresh Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+| Close Report | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `financial-report-viewer.tsx` |
+| Close Report | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `financial-report-viewer.tsx` |
+| Run Report | നിലവിലെ route പുതുക്കും. | `financial-report-viewer.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+തിരയുകയോ വിഭാഗം തിരഞ്ഞെടുക്കുകയോ ചെയ്യുക → View/Open വഴി റിപ്പോർട്ട് തുറക്കുക → വരികൾ പരിശോധിക്കുക → അടച്ച് മടങ്ങുക. Star ഉപയോഗിച്ച favorites ഈ മഹല്ലിന്റെ browser localStorageൽ സംരക്ഷിക്കുന്നു.
+
+### നിലകളും നിയമങ്ങളും
+
+പട്ടികയിലെ എല്ലാ റിപ്പോർട്ടുകൾക്കും പൂർണ്ണ backend implementation ഇല്ല. ചില വരികളിൽ അനുമാനമോ സ്ഥിരവിലയോ ഉപയോഗിക്കുന്നു. Favorites browserൽ മാത്രമാണ്; export/share അല്ലെങ്കിൽ date/basis നിയന്ത്രണങ്ങളെ പ്രവർത്തിക്കുന്ന backend filter ആയി വിവരിക്കരുത്.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx`
+- `apps/web/src/features/reports/reports-center-client.tsx`
+- `apps/web/src/features/reports/financial-report-viewer.tsx`
+- `apps/web/src/features/reports/tabular-report-viewer.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

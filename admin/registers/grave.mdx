@@ -1,0 +1,169 @@
+---
+title: "Grave register"
+description: "Current screen specification: Grave register. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Grave register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/registers/grave`
+
+### Purpose and access
+
+Maintain the grave register for this tenant using its own record fields.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The page presents a heading, record count, Add record, and a configured table. Add/edit opens a scrollable two-column dialog; long remarks span the width. This page does not enable certificate controls.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Deceased**, **Plot**, **Section**, **Burial date**.
+
+#### Fields and filters: Page
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Deceased name | `deceasedName` | text | Yes | — |
+| Plot number | `plotNumber` | text | Yes | — |
+| Section/block | `section` | text | Not marked | — |
+| Burial date | `burialDate` | date | Yes | — |
+| Remarks | `remarks` | textarea | Not marked | — |
+
+
+Displayed table columns: **Actions**.
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add record | Opens a blank creation form. | `register-table.tsx` |
+| Print / Save Certificate | Updates local UI state; persistence is described separately below. | `register-table.tsx` |
+| Issue | Submits the associated API change; follow the sequence and failure rules below. | `register-table.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `register-table.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `register-form-dialog.tsx` |
+| Save Changes / Add Record | Submits the associated API change; follow the sequence and failure rules below. | `register-form-dialog.tsx` |
+| Print / Save PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `printable-certificate.tsx` |
+
+
+
+### Interaction sequence
+
+Add record → fill the fields below → submit → close and refresh. Edit pre-fills stored values. Remove opens a confirmation and deletes the selected record. No certificate issuance journey is exposed on this page.
+
+### States and rules
+
+The route initially loads 100 records without list pagination controls. Empty and permission-denied states are explicit. Required flags are displayed, but the form uses noValidate and leaves final validation to the API; do not promise native browser validation.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx`
+- `apps/web/src/features/tenants/register-table.tsx`
+- `apps/web/src/features/tenants/register-form-dialog.tsx`
+- `apps/web/src/features/registers/printable-certificate.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/registers.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `registers.grave.view`, `registers.grave.create`, `registers.grave.update`, `registers.grave.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/registers/grave/grave.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Grave register
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/registers/grave`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+ഈ മഹല്ലിന്റെ കബർ രജിസ്റ്റർ അതിനുള്ള ഫീൽഡുകൾ ഉപയോഗിച്ച് പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+തലക്കെട്ട്, രേഖകളുടെ എണ്ണം, Add record, നിർവചിച്ച പട്ടിക എന്നിവയുണ്ട്. ചേർക്കൽ/തിരുത്തലിൽ സ്ക്രോൾ ചെയ്യാവുന്ന രണ്ടു കോളം ഡയലോഗ് തുറക്കും; നീണ്ട കുറിപ്പുകൾ മുഴുവൻ വീതിയിലാകും. ഈ പേജിൽ certificate നിയന്ത്രണങ്ങൾ സജീവമല്ല.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Deceased**, **Plot**, **Section**, **Burial date**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Page
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Deceased name | `deceasedName` | text | ഉണ്ട് | — |
+| Plot number | `plotNumber` | text | ഉണ്ട് | — |
+| Section/block | `section` | text | ചിഹ്നമില്ല | — |
+| Burial date | `burialDate` | date | ഉണ്ട് | — |
+| Remarks | `remarks` | textarea | ചിഹ്നമില്ല | — |
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Actions**.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add record | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `register-table.tsx` |
+| Print / Save Certificate | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `register-table.tsx` |
+| Issue | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `register-table.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `register-table.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `register-form-dialog.tsx` |
+| Save Changes / Add Record | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `register-form-dialog.tsx` |
+| Print / Save PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `printable-certificate.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Add record → താഴെയുള്ള ഫീൽഡുകൾ നൽകുക → സമർപ്പിക്കുക → അടച്ച് പുതുക്കും. Edit നിലവിലെ മൂല്യങ്ങൾ നൽകും. Remove സ്ഥിരീകരിച്ച ശേഷം രേഖ നീക്കും. Certificate നൽകാനുള്ള workflow ഈ പേജിലില്ല.
+
+### നിലകളും നിയമങ്ങളും
+
+ആദ്യം 100 രേഖകൾ വായിക്കുന്നു; പട്ടികയ്ക്ക് പേജ് നിയന്ത്രണങ്ങളില്ല. ശൂന്യ/അനുമതിയില്ലാത്ത നിലകൾ വ്യക്തമാണ്. നിർബന്ധ ചിഹ്നങ്ങളുണ്ടെങ്കിലും form noValidate ഉപയോഗിക്കുന്നു; അവസാന പരിശോധന APIയിലാണ്, browser validation ഉറപ്പാക്കരുത്.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx`
+- `apps/web/src/features/tenants/register-table.tsx`
+- `apps/web/src/features/tenants/register-form-dialog.tsx`
+- `apps/web/src/features/registers/printable-certificate.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/registers.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `registers.grave.view`, `registers.grave.create`, `registers.grave.update`, `registers.grave.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/registers/grave/grave.controller.ts`
+
+</Tab>
+</Tabs>

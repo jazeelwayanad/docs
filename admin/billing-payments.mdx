@@ -1,0 +1,127 @@
+---
+title: "Billing payment history"
+description: "Current screen specification: Billing payment history. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Billing payment history
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing/payments`
+
+### Purpose and access
+
+Inspect tenant subscription payment history and its invoice-download presentation.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Payment histories shows invoice rows and Download controls connected to InvoiceDownloadModal.
+
+### Fields and displayed information
+
+
+This screen has no editable fields or filters in its rendered components.
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Refresh | Updates local UI state; persistence is described separately below. | `billing-payments.tsx` |
+| Download | Changes the selected view, filter, or page in local state. | `billing-payments.tsx` |
+| Close | Closes the form/dialog without submitting it. | `invoice-download-modal.tsx` |
+| Print or Save PDF | Opens the browser print dialog; Save as PDF uses the browser destination. | `invoice-download-modal.tsx` |
+
+
+
+### Interaction sequence
+
+Download → open the selected invoice preview → use the modal’s available output controls.
+
+### States and rules
+
+The tenant component uses display data rather than loading the tenant’s persisted billing history. Do not equate this presentation with the functional control-panel invoice/payment tools.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx`
+- `apps/web/src/features/billing/billing-payments.tsx`
+- `apps/web/src/features/billing/invoice-download-modal.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+### API behavior references
+
+
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Billing payment history
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing/payments`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Tenant subscription payment historyയും invoice-download കാഴ്ചയും പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Payment historiesൽ invoice വരികളും InvoiceDownloadModal തുറക്കുന്ന Download നിയന്ത്രണങ്ങളും ഉണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Refresh | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `billing-payments.tsx` |
+| Download | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `billing-payments.tsx` |
+| Close | Form/dialog സമർപ്പിക്കാതെ അടയ്ക്കും. | `invoice-download-modal.tsx` |
+| Print or Save PDF | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `invoice-download-modal.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Download → തിരഞ്ഞെടുത്ത invoice preview തുറക്കുക → modalയിലെ ലഭ്യമായ output നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കുക.
+
+### നിലകളും നിയമങ്ങളും
+
+Tenant component സംരക്ഷിച്ച billing history വായിക്കുന്നതിന് പകരം display data ഉപയോഗിക്കുന്നു. പ്രവർത്തിക്കുന്ന control-panel invoice/payment tools ആയി ഇതിനെ കാണരുത്.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx`
+- `apps/web/src/features/billing/billing-payments.tsx`
+- `apps/web/src/features/billing/invoice-download-modal.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+
+</Tab>
+</Tabs>

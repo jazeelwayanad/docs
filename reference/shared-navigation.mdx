@@ -1,0 +1,91 @@
+---
+title: "Shared navigation and sessions"
+description: "Shared shells, routing, search, notifications, record views, and session interactions."
+---
+
+<Tabs>
+<Tab title="English">
+
+## Purpose and access
+
+The shared shells give each application surface its navigation and session controls. Routing selects a surface; the API independently authorizes operations. Browser hosts use `ROOT_DOMAIN` from application configuration.
+
+## Screen layout
+
+| Surface | Shared layout |
+| --- | --- |
+| Admin | Home/Mahall/Website/Billing/Settings rail; nested sidebar; breadcrumbs; search/quick actions; notification bell; identity/logout |
+| Control | Platform sidebar, breadcrumbs, account actions, root-access banner, and logout |
+| Tenant public/member | Tenant branding, public/member navigation, and member session controls |
+| Onboarding/auth | Authentication or wizard shell rather than the tenant admin rail |
+
+The admin Mahall sidebar groups People, Finance, Accountant, Registers, Committee, Services, Events, Announcements, Programs, and Reports. Disabled features hide related items. Division labels come from structure configuration. Control includes fleet/users/roles/analytics/plans/settings/audit; Forms is a direct route without a sidebar item.
+
+## Fields and displayed information
+
+Search accepts text; the command palette groups matching results and links. Breadcrumb detail titles are supplied by record screens. Notification items display counts/links and the bell loads its own notification data. Record views reuse a shared tab layout.
+
+## Actions
+
+Expand/collapse sidebar groups, collapse the desktop sidebar, open mobile navigation, choose a quick action, search/open a result, inspect notifications, or open the account menu and log out. Active navigation follows the current path; record tabs change the visible record section.
+
+## Interaction sequence
+
+Choose a primary area → expand its group → select a screen → inspect its breadcrumb → open a related record. Logging out posts to the configured logout endpoint and returns to login. The idle warning offers **Stay Logged In** and **Log out now**; the timeout redirects with `reason=inactivity` and preserves a non-login return path.
+
+## States and rules
+
+- An account without a resolved tenant membership context returns to the admin root; an account without platform membership cannot gain platform privileges through navigation.
+- Legacy `accounting`, `accountant/accounts`, `accountant/journal`, `finance/vouchers`, `admins`, and `activity` paths redirect with HTTP 308 to their canonical admin paths.
+- Unknown hosts fall back to marketing. The proxy does not resolve custom-domain ownership.
+- The admin layout’s dues notification points at `/{tenant}/finance/dues`, which has no page route in this snapshot. Treat it as a broken destination to review.
+- Sidebar hiding is presentation behavior, not API authorization. The current TenantContextGuard synthesizes an admin membership context for an account with a platform membership when no tenant membership exists; PermissionGuard bypasses operational permission checks for OWNER/ADMIN and the synthesized context. This differs from older architecture prose, so preserve it as current behavior rather than intended policy.
+
+## Implementation references
+
+Application-relative paths: `apps/web/src/proxy.ts`, `apps/web/src/features/navigation/admin-shell.tsx`, `apps/web/src/features/search/command-palette.tsx`, `apps/web/src/features/navigation/topbar-quick-actions.tsx`, `apps/web/src/features/navigation/notification-bell.tsx`, `apps/web/src/features/tenants/notification-bell.tsx`, `apps/web/src/features/tenants/record-layout.tsx`, `apps/web/src/features/tenants/use-record-tab.ts`, `apps/web/src/features/auth/idle-timeout-provider.tsx`, `apps/web/src/features/auth/logout-button.tsx`, and the surface `layout.tsx` files.
+
+</Tab>
+<Tab title="മലയാളം">
+
+## ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Shared shells ഓരോ application ഭാഗത്തിന്റെയും navigation/session controls നൽകുന്നു. Routing ഭാഗം തിരഞ്ഞെടുക്കുന്നു; API പ്രവർത്തനങ്ങൾ പ്രത്യേകം authorize ചെയ്യുന്നു. Browser hosts configurationലെ `ROOT_DOMAIN` ഉപയോഗിക്കുന്നു.
+
+## സ്ക്രീൻ ക്രമം
+
+| ഭാഗം | Shared layout |
+| --- | --- |
+| Admin | Home/Mahall/Website/Billing/Settings rail; nested sidebar; breadcrumbs; search/quick actions; notification bell; identity/logout |
+| Control | Platform sidebar, breadcrumbs, account actions, root-access banner, logout |
+| Tenant public/member | Tenant branding, public/member navigation, member session controls |
+| Onboarding/auth | Tenant admin railന് പകരം authentication/wizard shell |
+
+Admin Mahall sidebarൽ People, Finance, Accountant, Registers, Committee, Services, Events, Announcements, Programs, Reports ഉണ്ട്. Disabled features ബന്ധപ്പെട്ട items മറയ്ക്കും. Division പേരുകൾ structure configurationൽ നിന്നാണ്. Controlൽ fleet/users/roles/analytics/plans/settings/audit ഉണ്ട്; Forms sidebarൽ ഇല്ലാത്ത direct route ആണ്.
+
+## ഫീൽഡുകളും വിവരങ്ങളും
+
+Search text സ്വീകരിക്കുന്നു; command palette matching results വിഭാഗങ്ങളാക്കി ലിങ്കുകൾ നൽകുന്നു. Record സ്ക്രീനുകൾ breadcrumb detail title നൽകുന്നു. Notification items count/link കാണിക്കുന്നു; bell സ്വന്തം notification data വായിക്കുന്നു. Record views പൊതുവായ tab layout ഉപയോഗിക്കുന്നു.
+
+## പ്രവർത്തനങ്ങൾ
+
+Sidebar groups തുറക്കുക/അടയ്ക്കുക, desktop sidebar ചുരുക്കുക, mobile navigation തുറക്കുക, quick action തിരഞ്ഞെടുക്കുക, result തിരഞ്ഞ് തുറക്കുക, അറിയിപ്പ് പരിശോധിക്കുക, account menu തുറന്ന് logout ചെയ്യുക. Current path അനുസരിച്ച് active navigation മാറും; record tabs കാണിക്കുന്ന വിഭാഗം മാറ്റും.
+
+## പ്രവർത്തനക്രമം
+
+Primary area തിരഞ്ഞെടുക്കുക → group തുറക്കുക → screen തിരഞ്ഞെടുക്കുക → breadcrumb പരിശോധിക്കുക → ബന്ധപ്പെട്ട record തുറക്കുക. Logout configured endpointൽ post ചെയ്ത് loginലേക്ക് മടങ്ങും. Idle warningൽ **Stay Logged In**, **Log out now** ഉണ്ട്. Timeout `reason=inactivity` ഉപയോഗിച്ച് redirect ചെയ്ത് login അല്ലാത്ത return path നിലനിർത്തും.
+
+## നിലകളും നിയമങ്ങളും
+
+- Resolved tenant membership context ഇല്ലാത്ത account admin rootലേക്ക് മടങ്ങും; navigation വഴി platform അധികാരം നേടാനാവില്ല.
+- പഴയ `accounting`, `accountant/accounts`, `accountant/journal`, `finance/vouchers`, `admins`, `activity` paths HTTP 308 ഉപയോഗിച്ച് canonical admin pathsലേക്ക് redirect ചെയ്യും.
+- Unknown host marketingലേക്ക് പോകും. Proxy custom-domain ownership resolve ചെയ്യുന്നില്ല.
+- Admin layoutലെ dues notification `/{tenant}/finance/dues`ലേക്ക് പോകുന്നു; ഈ snapshotൽ page route ഇല്ല. Broken destination ആയി review ചെയ്യണം.
+- Sidebar item മറയ്ക്കുന്നത് presentation ആണ്; API authorization അല്ല. നിലവിലെ TenantContextGuardൽ tenant membership ഇല്ലാത്ത platform membership accountന് admin context സൃഷ്ടിക്കുന്നു. PermissionGuard OWNER/ADMINനും ഈ contextനും operational permission bypass നൽകുന്നു. പഴയ architecture വിവരണത്തിൽ നിന്ന് ഇത് വ്യത്യസ്തമാണ്; intended policy ആയി കാണാതെ നിലവിലെ behavior ആയി രേഖപ്പെടുത്തുക.
+
+## Implementation റഫറൻസുകൾ
+
+Application-relative paths: `apps/web/src/proxy.ts`, `apps/web/src/features/navigation/admin-shell.tsx`, `apps/web/src/features/search/command-palette.tsx`, `apps/web/src/features/navigation/topbar-quick-actions.tsx`, `apps/web/src/features/navigation/notification-bell.tsx`, `apps/web/src/features/tenants/notification-bell.tsx`, `apps/web/src/features/tenants/record-layout.tsx`, `apps/web/src/features/tenants/use-record-tab.ts`, `apps/web/src/features/auth/idle-timeout-provider.tsx`, `apps/web/src/features/auth/logout-button.tsx`, surface `layout.tsx` files.
+
+</Tab>
+</Tabs>

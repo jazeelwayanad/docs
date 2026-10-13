@@ -1,0 +1,101 @@
+---
+title: "Website visibility"
+description: "Current screen specification: Website visibility. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Website visibility
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/visibility`
+
+### Purpose and access
+
+Inspect and toggle the proposed visibility of website sections.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Page Visibility, Navbar Visibility, and Footer Visibility lists contain individual visibility switches.
+
+### Fields and displayed information
+
+
+This screen has no editable fields or filters in its rendered components.
+
+
+### Actions
+
+
+Navigation and row interactions are described in the sequence below.
+
+
+### Interaction sequence
+
+Toggle an item → its local visible/hidden state changes in that list.
+
+### States and rules
+
+Visibility changes are local state only. There is no API save or public-site enforcement; reloading resets the component’s configured defaults.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx`
+- `apps/web/src/features/website/website-visibility.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Website visibility
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/visibility`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+വെബ്സൈറ്റ് വിഭാഗങ്ങളുടെ നിർദ്ദേശിച്ച visibility പരിശോധിച്ച് മാറ്റുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Page Visibility, Navbar Visibility, Footer Visibility പട്ടികകളിൽ ഓരോ visibility switch ഉണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
+
+
+### പ്രവർത്തനക്രമം
+
+ഒരു item മാറ്റുക → ആ ലിസ്റ്റിലെ local visible/hidden സ്ഥിതി മാറും.
+
+### നിലകളും നിയമങ്ങളും
+
+മാറ്റം local state മാത്രമാണ്. API save അല്ലെങ്കിൽ പൊതു സൈറ്റ് enforcement ഇല്ല; reload ചെയ്താൽ component defaults മടങ്ങും.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx`
+- `apps/web/src/features/website/website-visibility.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+</Tab>
+</Tabs>

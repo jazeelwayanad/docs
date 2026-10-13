@@ -1,3 +1,267 @@
 ---
 title: "Payments"
+description: "Current screen specification: Payments. English and Malayalam guidance for the development team."
 ---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Payments
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/payments`
+
+### Purpose and access
+
+Record and manage paid expense vouchers, including category, fund, ledger, and bank allocation.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The page has payee/voucher/description search, fund, posting-status, expense-account, and category filters. The table offers edit and delete. Record Expense opens category, payee, amount, method, optional bank account, date, and description fields.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Date**, **Voucher #**, **Payee / Party**, **Expense Head / Fund**, **Status**, **Payment Mode**, **Amount**, **Actions**.
+
+#### Fields and filters: Vouchers client
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search term | `searchTerm` | text | Not marked | Search payee, voucher #, description... |
+| Fund filter | `fundFilter` | select | Not marked | All Operational Funds; Initial: ALL |
+| Posting status filter | `postingStatusFilter` | select | Not marked | All Statuses, Posted (COA), Unposted (Pending); Initial: ALL |
+| Account filter | `accountFilter` | select | Not marked | All Expense Accounts; Initial: ALL |
+| Category filter | `categoryFilter` | select | Not marked | All Categories; Initial: ALL |
+| All selected | `allSelected` | checkbox | Not marked | — |
+| Is checked | `isChecked` | checkbox | Not marked | — |
+| Expense category id | `expenseCategoryId` | searchable select | Not marked | Select an expense category |
+| Payee / Vendor / Recipient Name | `payeeName` | text | Yes | e.g. KSEB, Hardware Store, Staff Name, Contractor |
+| Amount (₹) | `amount` | number | Yes | 0.00 |
+| Payment Method | `paymentMethod` | searchable select | Yes | Select payment method...; Initial: Cash |
+| Disbursed From Bank Account | `bankAccountId` | searchable select | Yes | Select Bank Account... |
+| Payment Date | `date` | date | Yes | — |
+| Notes / Description (Optional) | `description` | textarea | Not marked | Details of the bill, invoice or payment remarks... |
+| Edit expense category id | `editExpenseCategoryId` | searchable select | Not marked | Select expense category... |
+| Payee / Vendor / Recipient Name | `editPayeeName` | text | Yes | e.g. KSEB, Hardware Store, Staff Name |
+| Amount (₹) | `editAmount` | number | Yes | 0.00 |
+| Payment Method | `editPaymentMethod` | searchable select | Yes | Select payment method...; Initial: Cash |
+| Disbursed From Bank Account | `editBankAccountId` | searchable select | Yes | Select Bank Account... |
+| Date | `editDate` | date | Yes | — |
+| Notes / Description | `editDescription` | textarea | Not marked | Details of the bill, invoice or payment remarks... |
+
+
+#### Fields and filters: Quick add account modal
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Account Name | `name` | text | Yes | — |
+| Account Type | `type` | select | Yes | Income (Inflows / Fund), Expense (Outflows), Asset (Cash / Bank / Property), Liability (Payable / Loan) |
+| Account Code (Optional) | `code` | text | Not marked | e.g. INC-001 |
+| Description (Optional) | `description` | textarea | Not marked | Brief purpose or scope of this account... |
+
+
+#### Fields and filters: Quick add category modal
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Parent Account / Fund | `accountId` | select | Yes | Select parent account... |
+| Category Name | `name` | text | Yes | — |
+| Target & Scope | `targetType` | select | Not marked | All Families, General Public / Donation, Category Based (A/B/C), Specific Divisions; Initial: ALL_FAMILIES |
+| Default Amount (₹) | `defaultAmount` | number | Not marked | e.g. 500; min 0 |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Delete Selected ( ) | Opens the `bulk delete` view. | `vouchers-client.tsx` |
+| Settings | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `vouchers-client.tsx` |
+| Record Expense | Opens the `modal` view. | `vouchers-client.tsx` |
+| Edit Expense | Opens the edit form populated from the selected record. | `vouchers-client.tsx` |
+| Delete Expense | Selects the record for the removal confirmation dialog. | `vouchers-client.tsx` |
+| Cancel | Closes or clears the `modal` view/selection. | `vouchers-client.tsx` |
+| Saving... / Record & Disburse Expense | Submits the associated API change; follow the sequence and failure rules below. | `vouchers-client.tsx` |
+| Cancel | Closes or clears the `edit modal` view/selection. | `vouchers-client.tsx` |
+| Saving... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `vouchers-client.tsx` |
+| Cancel | Closes or clears the `delete target` view/selection. | `vouchers-client.tsx` |
+| Deleting... / Delete Permanently | Submits the associated API change; follow the sequence and failure rules below. | `vouchers-client.tsx` |
+| Cancel | Closes or clears the `bulk delete` view/selection. | `vouchers-client.tsx` |
+| Deleting... | Submits the associated API change; follow the sequence and failure rules below. | `vouchers-client.tsx` |
+| Cancel | Updates local UI state; persistence is described separately below. | `quick-add-account-modal.tsx` |
+| Creating... / Save Account | Submits the associated API change; follow the sequence and failure rules below. | `quick-add-account-modal.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `quick-add-category-modal.tsx` |
+| Creating... / Save Category | Submits the associated API change; follow the sequence and failure rules below. | `quick-add-category-modal.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| Settings | `/${slug}/settings/finance` |
+
+
+
+### Interaction sequence
+
+Record Expense → choose expense category → enter payee, amount, payment method, and date → select bank account where applicable → submit. The request creates a PAYMENT/EXPENSE voucher marked PAID. Edit updates the voucher; deletion uses individual or bulk confirmation.
+
+### States and rules
+
+Required controls include payee, amount, and date. The selected category supplies fund/account mapping. API errors show destructive notifications. These records represent paid expenses; the UI does not run a separate approval journey before this creation request.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/finance/payments/vouchers-client.tsx`
+- `apps/web/src/features/finance/quick-add-account-modal.tsx`
+- `apps/web/src/features/finance/quick-add-category-modal.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Payments
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/payments`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+വിഭാഗം, ഫണ്ട്, ledger, ബാങ്ക് വിന്യാസം ഉൾപ്പെടുന്ന ചെലവ് വൗച്ചറുകൾ രേഖപ്പെടുത്തി പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+payee/voucher/description തിരച്ചിൽ, ഫണ്ട്, posting-status, expense-account, വിഭാഗം ഫിൽട്ടറുകളുണ്ട്. പട്ടികയിൽ തിരുത്തലും നീക്കലുമുണ്ട്. Record Expense വിഭാഗം, payee, തുക, രീതി, ഐച്ഛിക ബാങ്ക് അക്കൗണ്ട്, തീയതി, വിവരണം എന്നിവ തുറക്കും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Voucher #**, **Payee / Party**, **Expense Head / Fund**, **Status**, **Payment Mode**, **Amount**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Vouchers client
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search term | `searchTerm` | text | ചിഹ്നമില്ല | Search payee, voucher #, description... |
+| Fund filter | `fundFilter` | select | ചിഹ്നമില്ല | All Operational Funds; ആരംഭം: ALL |
+| Posting status filter | `postingStatusFilter` | select | ചിഹ്നമില്ല | All Statuses, Posted (COA), Unposted (Pending); ആരംഭം: ALL |
+| Account filter | `accountFilter` | select | ചിഹ്നമില്ല | All Expense Accounts; ആരംഭം: ALL |
+| Category filter | `categoryFilter` | select | ചിഹ്നമില്ല | All Categories; ആരംഭം: ALL |
+| All selected | `allSelected` | checkbox | ചിഹ്നമില്ല | — |
+| Is checked | `isChecked` | checkbox | ചിഹ്നമില്ല | — |
+| Expense category id | `expenseCategoryId` | searchable select | ചിഹ്നമില്ല | Select an expense category |
+| Payee / Vendor / Recipient Name | `payeeName` | text | ഉണ്ട് | e.g. KSEB, Hardware Store, Staff Name, Contractor |
+| Amount (₹) | `amount` | number | ഉണ്ട് | 0.00 |
+| Payment Method | `paymentMethod` | searchable select | ഉണ്ട് | Select payment method...; ആരംഭം: Cash |
+| Disbursed From Bank Account | `bankAccountId` | searchable select | ഉണ്ട് | Select Bank Account... |
+| Payment Date | `date` | date | ഉണ്ട് | — |
+| Notes / Description (Optional) | `description` | textarea | ചിഹ്നമില്ല | Details of the bill, invoice or payment remarks... |
+| Edit expense category id | `editExpenseCategoryId` | searchable select | ചിഹ്നമില്ല | Select expense category... |
+| Payee / Vendor / Recipient Name | `editPayeeName` | text | ഉണ്ട് | e.g. KSEB, Hardware Store, Staff Name |
+| Amount (₹) | `editAmount` | number | ഉണ്ട് | 0.00 |
+| Payment Method | `editPaymentMethod` | searchable select | ഉണ്ട് | Select payment method...; ആരംഭം: Cash |
+| Disbursed From Bank Account | `editBankAccountId` | searchable select | ഉണ്ട് | Select Bank Account... |
+| Date | `editDate` | date | ഉണ്ട് | — |
+| Notes / Description | `editDescription` | textarea | ചിഹ്നമില്ല | Details of the bill, invoice or payment remarks... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Quick add account modal
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Account Name | `name` | text | ഉണ്ട് | — |
+| Account Type | `type` | select | ഉണ്ട് | Income (Inflows / Fund), Expense (Outflows), Asset (Cash / Bank / Property), Liability (Payable / Loan) |
+| Account Code (Optional) | `code` | text | ചിഹ്നമില്ല | e.g. INC-001 |
+| Description (Optional) | `description` | textarea | ചിഹ്നമില്ല | Brief purpose or scope of this account... |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Quick add category modal
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Parent Account / Fund | `accountId` | select | ഉണ്ട് | Select parent account... |
+| Category Name | `name` | text | ഉണ്ട് | — |
+| Target & Scope | `targetType` | select | ചിഹ്നമില്ല | All Families, General Public / Donation, Category Based (A/B/C), Specific Divisions; ആരംഭം: ALL_FAMILIES |
+| Default Amount (₹) | `defaultAmount` | number | ചിഹ്നമില്ല | e.g. 500; min 0 |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Delete Selected ( ) | `bulk delete` കാഴ്ച തുറക്കും. | `vouchers-client.tsx` |
+| Settings | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `vouchers-client.tsx` |
+| Record Expense | `modal` കാഴ്ച തുറക്കും. | `vouchers-client.tsx` |
+| Edit Expense | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `vouchers-client.tsx` |
+| Delete Expense | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `vouchers-client.tsx` |
+| Cancel | `modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `vouchers-client.tsx` |
+| Saving... / Record & Disburse Expense | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `vouchers-client.tsx` |
+| Cancel | `edit modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `vouchers-client.tsx` |
+| Saving... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `vouchers-client.tsx` |
+| Cancel | `delete target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `vouchers-client.tsx` |
+| Deleting... / Delete Permanently | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `vouchers-client.tsx` |
+| Cancel | `bulk delete` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `vouchers-client.tsx` |
+| Deleting... | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `vouchers-client.tsx` |
+| Cancel | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `quick-add-account-modal.tsx` |
+| Creating... / Save Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `quick-add-account-modal.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `quick-add-category-modal.tsx` |
+| Creating... / Save Category | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `quick-add-category-modal.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| Settings | `/${slug}/settings/finance` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Record Expense → ചെലവ് വിഭാഗം തിരഞ്ഞെടുക്കുക → payee, തുക, രീതി, തീയതി നൽകുക → ആവശ്യമെങ്കിൽ ബാങ്ക് തിരഞ്ഞെടുക്കുക → സമർപ്പിക്കുക. PAYMENT/EXPENSE വൗച്ചർ PAID ആയി സൃഷ്ടിക്കുന്നു. Edit പുതുക്കും; വ്യക്തിഗത/കൂട്ട നീക്കലിന് സ്ഥിരീകരണം ഉണ്ട്.
+
+### നിലകളും നിയമങ്ങളും
+
+payee, തുക, തീയതി നിർബന്ധ നിയന്ത്രണങ്ങളാണ്. തിരഞ്ഞെടുത്ത വിഭാഗത്തിൽ നിന്ന് ഫണ്ട്/അക്കൗണ്ട് ലഭിക്കുന്നു. API പിശകുകൾ അറിയിപ്പായി കാണിക്കും. ഇവ നൽകിയ ചെലവുകളാണ്; സൃഷ്ടിക്കലിന് മുമ്പുള്ള പ്രത്യേകം approval journey ഈ UI നടത്തുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/finance/payments/vouchers-client.tsx`
+- `apps/web/src/features/finance/quick-add-account-modal.tsx`
+- `apps/web/src/features/finance/quick-add-category-modal.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

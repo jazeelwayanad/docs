@@ -1,0 +1,171 @@
+---
+title: "Committee office bearers"
+description: "Current screen specification: Committee office bearers. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Committee office bearers
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/committee`
+
+### Purpose and access
+
+Maintain committee posts and the member assigned to each office.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The roster lists posts and offers Add post, Edit, and Remove. The post dialog captures member, designation, display order, and term start/end dates.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Designation**, **Member**, **Term**, **Actions**.
+
+#### Fields and filters: Committee post form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Member | `post-member` | select | Yes | Select a member |
+| Designation | `post-designation` | text | Yes | — |
+| Display order | `post-order` | number | Not marked | min 0 |
+| Term start | `post-term-start` | date | Not marked | — |
+| Term end | `post-term-end` | date | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add post | Opens a blank creation form. | `committee-roster.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `committee-roster.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `committee-post-form-dialog.tsx` |
+| Save / Add | Submits the associated API change; follow the sequence and failure rules below. | `committee-post-form-dialog.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| View meetings → | `/${slug}/committee/meetings` |
+
+
+
+### Interaction sequence
+
+Add post → complete the post details → save → refresh. Edit opens the saved post; Remove opens a confirmation before the delete request.
+
+### States and rules
+
+Committee access is permission-gated. An empty roster has its own message. Office-bearer records are distinct from platform roles and tenant administrator permissions.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/committee/page.tsx`
+- `apps/web/src/features/tenants/committee-roster.tsx`
+- `apps/web/src/features/tenants/committee-post-form-dialog.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/committee.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `committee.view`, `committee.create`, `committee.update`, `committee.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/committee/committee.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Committee office bearers
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/committee`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+കമ്മിറ്റി സ്ഥാനങ്ങളും ഓരോ സ്ഥാനത്തുമുള്ള അംഗവും പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+സ്ഥാനപട്ടികയിൽ Add post, Edit, Remove ഉണ്ട്. ഡയലോഗിൽ member, designation, display order, term start/end തീയതികൾ നൽകാം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Designation**, **Member**, **Term**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Committee post form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Member | `post-member` | select | ഉണ്ട് | Select a member |
+| Designation | `post-designation` | text | ഉണ്ട് | — |
+| Display order | `post-order` | number | ചിഹ്നമില്ല | min 0 |
+| Term start | `post-term-start` | date | ചിഹ്നമില്ല | — |
+| Term end | `post-term-end` | date | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add post | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `committee-roster.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `committee-roster.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `committee-post-form-dialog.tsx` |
+| Save / Add | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `committee-post-form-dialog.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| View meetings → | `/${slug}/committee/meetings` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Add post → വിവരങ്ങൾ നൽകുക → സംരക്ഷിക്കുക → പുതുക്കും. Edit നിലവിലെ സ്ഥാനം തുറക്കും; Remove delete അഭ്യർത്ഥനയ്ക്കു മുമ്പ് സ്ഥിരീകരണം ചോദിക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+കമ്മിറ്റി പ്രവേശനം അനുമതിയെ ആശ്രയിക്കുന്നു. സ്ഥാനങ്ങളില്ലെങ്കിൽ പ്രത്യേക സന്ദേശമുണ്ട്. സ്ഥാനരേഖകൾ platform role അല്ലെങ്കിൽ tenant administrator അനുമതികളിൽ നിന്ന് വ്യത്യസ്തമാണ്.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/committee/page.tsx`
+- `apps/web/src/features/tenants/committee-roster.tsx`
+- `apps/web/src/features/tenants/committee-post-form-dialog.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/committee.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `committee.view`, `committee.create`, `committee.update`, `committee.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/committee/committee.controller.ts`
+
+</Tab>
+</Tabs>

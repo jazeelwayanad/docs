@@ -1,0 +1,151 @@
+---
+title: "Financial years"
+description: "Current screen specification: Financial years. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Financial years
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/financial-year`
+
+### Purpose and access
+
+Manage accounting periods and their current/open/closed status.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The table provides Add Financial Year, Set Current, Close FY, and Reopen. The creation dialog asks for name, start date, and end date.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Year Title**, **Start Date**, **End Date**, **Status**, **Active**, **Actions**.
+
+#### Fields and filters: Financial year client
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Financial Year Name | `name` | text | Yes | e.g. FY 2027-28 |
+| Start Date | `startDate` | date | Yes | — |
+| End Date | `endDate` | date | Yes | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add Financial Year | Opens the `modal` view. | `financial-year-client.tsx` |
+| Set Current | Submits the associated API change; follow the sequence and failure rules below. | `financial-year-client.tsx` |
+| Close FY | Submits the associated API change; follow the sequence and failure rules below. | `financial-year-client.tsx` |
+| Reopen | Submits the associated API change; follow the sequence and failure rules below. | `financial-year-client.tsx` |
+| Cancel | Closes or clears the `modal` view/selection. | `financial-year-client.tsx` |
+| Creating... / Create Financial Year | Submits the associated API change; follow the sequence and failure rules below. | `financial-year-client.tsx` |
+
+
+
+### Interaction sequence
+
+Add Financial Year → fill all three fields → submit → refresh. Use Set Current, Close FY, or Reopen on a saved year to call the corresponding backend action.
+
+### States and rules
+
+The client checks that required values exist and sends dates as ISO values. Backend validation governs invalid or overlapping periods; the UI does not establish that every close action succeeds.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/financial-year-client.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Financial years
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/financial-year`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+അക്കൗണ്ടിംഗ് കാലയളവുകളും current/open/closed നിലയും പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Add Financial Year, Set Current, Close FY, Reopen എന്നിവ പട്ടികയിലുണ്ട്. സൃഷ്ടിക്കൽ ഡയലോഗിൽ പേര്, ആരംഭതീയതി, അവസാനതീയതി നൽകണം.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Year Title**, **Start Date**, **End Date**, **Status**, **Active**, **Actions**.
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Financial year client
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Financial Year Name | `name` | text | ഉണ്ട് | e.g. FY 2027-28 |
+| Start Date | `startDate` | date | ഉണ്ട് | — |
+| End Date | `endDate` | date | ഉണ്ട് | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add Financial Year | `modal` കാഴ്ച തുറക്കും. | `financial-year-client.tsx` |
+| Set Current | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `financial-year-client.tsx` |
+| Close FY | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `financial-year-client.tsx` |
+| Reopen | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `financial-year-client.tsx` |
+| Cancel | `modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `financial-year-client.tsx` |
+| Creating... / Create Financial Year | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `financial-year-client.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Add Financial Year → മൂന്നു ഫീൽഡുകളും നൽകുക → സമർപ്പിക്കുക → പുതുക്കും. സംരക്ഷിച്ച വർഷത്തിൽ Set Current, Close FY, Reopen ഉപയോഗിച്ചാൽ ബന്ധപ്പെട്ട backend പ്രവർത്തനം നടക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+നിർബന്ധ വിവരങ്ങൾ ഉണ്ടോ എന്ന് client പരിശോധിച്ച് ISO തീയതികൾ അയക്കുന്നു. തെറ്റായതോ തമ്മിൽ മുട്ടുന്നതോ ആയ കാലയളവുകൾ backend പരിശോധിക്കും; എല്ലാ close പ്രവർത്തനവും വിജയിക്കുമെന്ന് UI ഉറപ്പാക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/financial-year-client.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/finance/finance.controller.ts`
+
+</Tab>
+</Tabs>

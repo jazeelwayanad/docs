@@ -1,0 +1,165 @@
+---
+title: "Member OTP login"
+description: "Current screen specification: Member OTP login. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Member OTP login
+
+Host: `[tenant].<ROOT_DOMAIN>` · Route: `/login`
+
+### Purpose and access
+
+Authenticate a citizen member using the mobile number registered with this Mahallu.
+
+Entry, public access, and redirect rules are described for this screen below.
+
+### Screen layout
+
+Sign In via Phone & OTP shows the phone-entry step, then a six-digit-code step with Verify and log in, resend cooldown, and Use a different number. A link returns to the public homepage.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Member otp login form
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Phone number | `member-phone` | tel | Yes | +91 98765 43210 |
+| 6-digit code | `member-code` | text | Yes | 000000 |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Send code | Invokes the associated handler; see the sequence below. | `member-otp-login-form.tsx` |
+| Verify and log in | Submits the associated API change; follow the sequence and failure rules below. | `member-otp-login-form.tsx` |
+| Use a different number | Updates local UI state; persistence is described separately below. | `member-otp-login-form.tsx` |
+| Resend code | Invokes the associated handler; see the sequence below. | `member-otp-login-form.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| ← Return to public homepage | `/` |
+
+
+
+### Interaction sequence
+
+Enter phone → Send code → request tenant-scoped OTP → enter code → Verify and log in → verify OTP and navigate to the safe destination. Use a different number resets the code step; resend follows its cooldown.
+
+### States and rules
+
+The page recognizes inactivity/expired notices and sanitizes returnTo/redirect. An existing member session redirects to dashboard by default. No SMS provider is wired up: OTP codes are logged server-side for development. Codes expire after five minutes, allow five failed attempts, and are consumed once. The request response does not reveal whether the number is registered.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/tenant/[tenant]/login/page.tsx`
+- `apps/web/src/features/auth/member-otp-login-form.tsx`
+
+Data and access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/member-auth/member-auth.controller.ts`
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/announcements/announcements.controller.ts`
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Member OTP login
+
+Host: `[tenant].<ROOT_DOMAIN>` · Route: `/login`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+ഈ മഹല്ലിൽ രജിസ്റ്റർ ചെയ്ത മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് പൗര അംഗമായി പ്രവേശിക്കുക.
+
+ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Sign In via Phone & OTP ആദ്യം phone stepയും തുടർന്ന് ആറക്ക code stepയും കാണിക്കും. Verify and log in, resend cooldown, Use a different number, public homepage ലിങ്ക് എന്നിവയുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member otp login form
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Phone number | `member-phone` | tel | ഉണ്ട് | +91 98765 43210 |
+| 6-digit code | `member-code` | text | ഉണ്ട് | 000000 |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Send code | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-otp-login-form.tsx` |
+| Verify and log in | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `member-otp-login-form.tsx` |
+| Use a different number | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `member-otp-login-form.tsx` |
+| Resend code | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `member-otp-login-form.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| ← Return to public homepage | `/` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Phone → Send code → tenant-scoped OTP ആവശ്യപ്പെടും → code നൽകുക → Verify and log in → OTP പരിശോധിച്ച് സുരക്ഷിത ലക്ഷ്യസ്ഥാനത്തേക്ക് പോകും. Use a different number code step reset ചെയ്യും; resend cooldown അനുസരിച്ചാണ്.
+
+### നിലകളും നിയമങ്ങളും
+
+Inactivity/expired അറിയിപ്പുകളും returnTo/redirect പരിശോധനയും ഉണ്ട്. Member session ഉള്ളവർ default ആയി dashboardലേക്ക് പോകും. SMS provider ബന്ധിപ്പിച്ചിട്ടില്ല: developmentനായി OTP server logൽ എഴുതുന്നു. അഞ്ചു മിനിറ്റിനു ശേഷം expire ചെയ്യും; അഞ്ച് തെറ്റായ ശ്രമങ്ങൾ അനുവദിക്കും; ഒരു തവണ മാത്രം ഉപയോഗിക്കാം. നമ്പർ രജിസ്റ്റർ ചെയ്തിട്ടുണ്ടോ എന്ന് request response വെളിപ്പെടുത്തുന്നില്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/tenant/[tenant]/login/page.tsx`
+- `apps/web/src/features/auth/member-otp-login-form.tsx`
+
+Data/access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/member-auth/member-auth.controller.ts`
+- `apps/api/src/tenants/admins.controller.ts`
+- `apps/api/src/tenants/roles.controller.ts`
+- `apps/api/src/tenants/tenants.controller.ts`
+- `apps/api/src/announcements/announcements.controller.ts`
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+
+</Tab>
+</Tabs>

@@ -1,3 +1,125 @@
 ---
-title: "Overview"
+title: "Billing plan"
+description: "Current screen specification: Billing plan. English and Malayalam guidance for the development team."
 ---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Billing plan
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing`
+
+### Purpose and access
+
+Inspect the tenant billing-plan presentation.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Billing shows a fixed Community Basic/ACTIVE plan, renewal text, Plan Limits, and an Upgrade Subscription Plan modal with Growth Mahall and Juma Enterprise options.
+
+### Fields and displayed information
+
+
+This screen has no editable fields or filters in its rendered components.
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Refresh | Updates local UI state; persistence is described separately below. | `billing-plan-details.tsx` |
+| Upgrade | Opens the `upgrade modal` view. | `billing-plan-details.tsx` |
+| Cancel | Closes or clears the `upgrade modal` view/selection. | `billing-plan-details.tsx` |
+| Confirm Upgrade | Updates local UI state; persistence is described separately below. | `billing-plan-details.tsx` |
+
+
+
+### Interaction sequence
+
+Upgrade → select a tier → Confirm Upgrade → a local success state appears and the modal closes after a timer.
+
+### States and rules
+
+Plan labels, limits, prices, and renewal date are fixed display values. Upgrade/Refresh make no billing API calls; this does not change the persisted subscription.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/billing/page.tsx`
+- `apps/web/src/features/billing/billing-plan-details.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+### API behavior references
+
+
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Billing plan
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+Tenant billing plan കാഴ്ച പരിശോധിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Billingൽ സ്ഥിരമായ Community Basic/ACTIVE plan, renewal വിവരം, Plan Limits, Growth Mahall/Juma Enterprise ഉള്ള Upgrade Subscription Plan modal എന്നിവ കാണിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Refresh | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `billing-plan-details.tsx` |
+| Upgrade | `upgrade modal` കാഴ്ച തുറക്കും. | `billing-plan-details.tsx` |
+| Cancel | `upgrade modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `billing-plan-details.tsx` |
+| Confirm Upgrade | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `billing-plan-details.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Upgrade → tier തിരഞ്ഞെടുക്കുക → Confirm Upgrade → local success കാണിച്ച് timerനു ശേഷം modal അടയും.
+
+### നിലകളും നിയമങ്ങളും
+
+Plan പേര്, പരിധി, വില, renewal date എന്നിവ സ്ഥിരവിലകളാണ്. Upgrade/Refresh billing API വിളിക്കുന്നില്ല; subscription മാറ്റുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/billing/page.tsx`
+- `apps/web/src/features/billing/billing-plan-details.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+
+</Tab>
+</Tabs>

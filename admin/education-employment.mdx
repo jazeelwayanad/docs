@@ -1,0 +1,163 @@
+---
+title: "Education and employment"
+description: "Current screen specification: Education and employment. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Education and employment
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/education-employment`
+
+### Purpose and access
+
+Find education, employment, job-seeker, expatriate, and skill profiles recorded on members.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The screen has summary statistics, search, skill filters, and All Profiles, Job Seekers Desk, Higher Ed & Students, Expatriates / NRIs, and Skills Bank views.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Education employment client
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | Not marked | Search member, skill, job... |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| All Skills ( ) | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| ( ) | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| All Profiles ( ) | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| Job Seekers Desk | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| Higher Ed & Students | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| Expatriates / NRIs | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+| Skills Bank | Changes the selected view, filter, or page in local state. | `education-employment-client.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| View Profile | `/${slug}/members/${m.id}` |
+
+
+
+### Interaction sequence
+
+Choose a profile view → search a member, skill, or job → select a skill to narrow Skills Bank → open the linked member profile to edit its underlying information.
+
+### States and rules
+
+The page shows a denied-access panel when the education/employment read is unavailable. Filtering changes the loaded list only. Profile editing belongs to the member dialog; this screen has no separate save form.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/education-employment/education-employment-client.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/education-employment.ts`, `apps/web/src/lib/members.ts`
+
+
+Relevant controller permission keys: `education.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Education and employment
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/education-employment`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+അംഗങ്ങളിൽ രേഖപ്പെടുത്തിയ വിദ്യാഭ്യാസം, തൊഴിൽ, ജോലി അന്വേഷിക്കൽ, പ്രവാസം, കഴിവുകൾ എന്നിവ കണ്ടെത്തുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+സംഗ്രഹ കണക്കുകൾ, തിരച്ചിൽ, കഴിവ് ഫിൽട്ടറുകൾ, All Profiles, Job Seekers Desk, Higher Ed & Students, Expatriates / NRIs, Skills Bank കാഴ്ചകൾ എന്നിവയുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Education employment client
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Search | `search` | text | ചിഹ്നമില്ല | Search member, skill, job... |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| All Skills ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| All Profiles ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| Job Seekers Desk | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| Higher Ed & Students | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| Expatriates / NRIs | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+| Skills Bank | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `education-employment-client.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| View Profile | `/${slug}/members/${m.id}` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+പ്രൊഫൈൽ കാഴ്ച തിരഞ്ഞെടുക്കുക → അംഗം/കഴിവ്/ജോലി തിരയുക → Skills Bank ചുരുക്കാൻ കഴിവ് തിരഞ്ഞെടുക്കുക → ബന്ധപ്പെട്ട അംഗ പ്രൊഫൈൽ തുറന്ന് വിവരങ്ങൾ തിരുത്തുക.
+
+### നിലകളും നിയമങ്ങളും
+
+വിവരങ്ങൾ വായിക്കാൻ അനുമതിയില്ലെങ്കിൽ പ്രത്യേക സന്ദേശം കാണിക്കും. ഫിൽട്ടർ ലഭിച്ച ലിസ്റ്റിനെ മാത്രമാണ് മാറ്റുന്നത്. തിരുത്തൽ member dialogലാണ്; ഈ സ്ക്രീനിൽ പ്രത്യേക save form ഇല്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx`
+- `apps/web/src/app/sites/admin/[tenant]/education-employment/education-employment-client.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/education-employment.ts`, `apps/web/src/lib/members.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `education.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/members/education-employment.controller.ts`
+- `apps/api/src/members/health-support.controller.ts`
+- `apps/api/src/members/members.controller.ts`
+
+</Tab>
+</Tabs>

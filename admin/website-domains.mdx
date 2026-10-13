@@ -1,0 +1,133 @@
+---
+title: "Website domains"
+description: "Current screen specification: Website domains. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Website domains
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/domains`
+
+### Purpose and access
+
+Inspect the displayed subdomain and locally add a custom-domain entry.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Domains includes a subdomain row, edit modal, and Connect Custom Domain modal with a domain field and CNAME copy instruction.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Website domains
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Subdomain input | `subdomainInput` | text | Not marked | subdomain |
+| Custom domain input | `customDomainInput` | text | Not marked | e.g. www.kambalakkadmosque.com |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Refresh | Updates local UI state; persistence is described separately below. | `website-domains.tsx` |
+| Add Domain | Opens the `add custom modal` view. | `website-domains.tsx` |
+| Edit | Opens the `add custom modal` view. | `website-domains.tsx` |
+| Cancel | Closes or clears the `edit subdomain modal` view/selection. | `website-domains.tsx` |
+| Save | Updates local UI state; persistence is described separately below. | `website-domains.tsx` |
+| cname / h-3.5 w-3.5 text-emerald-600 / h-3.5 w-3.5 | Invokes the associated handler; see the sequence below. | `website-domains.tsx` |
+| Cancel | Closes or clears the `add custom modal` view/selection. | `website-domains.tsx` |
+| Save Domain | Updates local UI state; persistence is described separately below. | `website-domains.tsx` |
+
+
+
+### Interaction sequence
+
+Edit subdomain → enter a value → Save updates local rows. Connect Custom Domain → enter domain → optionally copy the displayed CNAME → Save Domain adds a local entry.
+
+### States and rules
+
+These handlers make no backend/DNS requests. Subdomain input is lowercased and stripped to letters, digits, and hyphens. The UI does not provision DNS, validate ownership, or activate a custom domain.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx`
+- `apps/web/src/features/website/website-domains.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Website domains
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/domains`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+കാണിച്ച subdomain പരിശോധിച്ച് custom-domain entry പ്രാദേശികമായി ചേർക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+Domainsൽ subdomain വരി, edit modal, domain field/CNAME copy നിർദ്ദേശമുള്ള Connect Custom Domain modal ഉണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Website domains
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Subdomain input | `subdomainInput` | text | ചിഹ്നമില്ല | subdomain |
+| Custom domain input | `customDomainInput` | text | ചിഹ്നമില്ല | e.g. www.kambalakkadmosque.com |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Refresh | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `website-domains.tsx` |
+| Add Domain | `add custom modal` കാഴ്ച തുറക്കും. | `website-domains.tsx` |
+| Edit | `add custom modal` കാഴ്ച തുറക്കും. | `website-domains.tsx` |
+| Cancel | `edit subdomain modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `website-domains.tsx` |
+| Save | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `website-domains.tsx` |
+| cname / h-3.5 w-3.5 text-emerald-600 / h-3.5 w-3.5 | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `website-domains.tsx` |
+| Cancel | `add custom modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `website-domains.tsx` |
+| Save Domain | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `website-domains.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Subdomain തിരുത്തുക → മൂല്യം നൽകുക → Save local വരി മാറ്റും. Connect Custom Domain → domain നൽകുക → ആവശ്യമായാൽ CNAME copy ചെയ്യുക → Save Domain local entry ചേർക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+Backend/DNS അഭ്യർത്ഥനകളില്ല. Subdomain lowercase ആക്കി അക്ഷരം, സംഖ്യ, hyphen മാത്രം നിലനിർത്തുന്നു. DNS സൃഷ്ടിക്കലോ ഉടമസ്ഥത പരിശോധിക്കലോ custom domain സജീവമാക്കലോ UI ചെയ്യുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx`
+- `apps/web/src/features/website/website-domains.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
+
+</Tab>
+</Tabs>

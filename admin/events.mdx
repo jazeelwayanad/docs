@@ -1,0 +1,151 @@
+---
+title: "Events"
+description: "Current screen specification: Events. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Events
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/events`
+
+### Purpose and access
+
+Maintain events for this Mahallu.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+Add an event form with title, start date-time, description, and location; then Title/Starts/Location table and pagination.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Page
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Title | `title` | text | Yes | — |
+| Starts at | `startsAt` | datetime-local | Yes | — |
+| Location | `location` | text | Not marked | — |
+| Description | `description` | textarea | Not marked | — |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Add Record | Submits the associated API change; follow the sequence and failure rules below. | `simple-create-form.tsx` |
+| Remove | Selects the record for the removal confirmation dialog. | `simple-resource-table.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `simple-resource-table.tsx` |
+
+
+
+### Interaction sequence
+
+Fill the creation form → submit → refresh the list. Use the row removal control and confirm before deletion. Navigate pages through the page query parameter; events link to their detail screen.
+
+### States and rules
+
+The route loads 20 records per page and provides permission and empty states. Title and Starts at are required. A saved event links to its registrations and finance summary.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/events/page.tsx`
+- `apps/web/src/features/tenants/simple-create-form.tsx`
+- `apps/web/src/features/tenants/simple-resource-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `events.view`, `events.create`, `events.update`, `events.delete`, `finance.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Events
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/events`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+ഈ മഹല്ലിലെ പരിപാടികൾ പരിപാലിക്കുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+title, start date-time, description, location ഉള്ള Add an event form; തുടർന്ന് Title/Starts/Location പട്ടികയും പേജിംഗും.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Page
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Title | `title` | text | ഉണ്ട് | — |
+| Starts at | `startsAt` | datetime-local | ഉണ്ട് | — |
+| Location | `location` | text | ചിഹ്നമില്ല | — |
+| Description | `description` | textarea | ചിഹ്നമില്ല | — |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Add Record | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `simple-create-form.tsx` |
+| Remove | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `simple-resource-table.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `simple-resource-table.tsx` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+സൃഷ്ടിക്കൽ form പൂർത്തിയാക്കുക → സമർപ്പിക്കുക → പട്ടിക പുതുക്കും. വരിയിലെ നീക്കൽ നിയന്ത്രണം ഉപയോഗിച്ച് സ്ഥിരീകരിക്കുക. page query parameter വഴി പേജുകൾ മാറ്റാം; events വിശദാംശത്തിലേക്ക് ലിങ്കുണ്ട്.
+
+### നിലകളും നിയമങ്ങളും
+
+ഓരോ പേജിലും 20 രേഖകൾ വായിക്കുന്നു; അനുമതി/ശൂന്യ സന്ദേശങ്ങളുണ്ട്. Title, Starts at നിർബന്ധമാണ്. സംരക്ഷിച്ച eventന്റെ registrations, finance summary തുറക്കാം.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/events/page.tsx`
+- `apps/web/src/features/tenants/simple-create-form.tsx`
+- `apps/web/src/features/tenants/simple-resource-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `events.view`, `events.create`, `events.update`, `events.delete`, `finance.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/events/event-registrations.controller.ts`
+- `apps/api/src/events/events.controller.ts`
+
+</Tab>
+</Tabs>

@@ -1,55 +1,45 @@
-# Mintlify Starter Kit
+# Mahallu screen specifications
 
-Use the starter kit to get your docs deployed and ready to customize.
+Internal page-by-page documentation for the Mahallu development team. The site combines user explanations with current screen behavior in English and Malayalam.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+Start at `mahallu-app-overview.mdx`. The five navigation tabs cover the overview, Mahallu Admin, Control Panel, Mahallu Member, and Marketing. `reference/coverage.mdx` maps all 90 application page routes and lists observed implementation gaps.
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## Source review
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+The application source is `/Volumes/New Volume/mahall-app`. The initial review uses the working tree on 13 October 2026. Source paths, route-to-document mappings, and hashes are stored in `reference/route-inventory.json`.
 
-## AI-assisted writing
+These specifications describe current behavior, including controls that do not persist data. They are not evidence of successful authenticated application journeys. Read `AGENTS.md` before editing.
 
-Set up your AI coding tool to work with Mintlify:
+## Check and preview
+
+Use Node.js to run the dependency-free content checks:
 
 ```bash
-npx skills add https://mintlify.com/docs
+node scripts/check-docs.mjs
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+To compare route coverage and source hashes against an application checkout:
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
+```bash
+node scripts/check-docs.mjs --source '/Volumes/New Volume/mahall-app'
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+With the Mintlify CLI available:
 
+```bash
+mint validate --telemetry=false
+mint broken-links
+mint dev --port 3005
 ```
-mint dev
-```
 
-View your local preview at `http://localhost:3000`.
+The preview opens at `http://localhost:3005`. Check long tables on desktop/mobile and switch both language tabs. The CLI can also be invoked through `npx mint` without a global installation.
 
-## Publishing changes
+## Maintaining a specification
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+1. Read the route, rendered components, forms/dialogs, data calls, and applicable API behavior.
+2. Update the seven screen sections in both languages. Keep exact UI labels and identifiers.
+3. Map added routes and documentation pages in the inventory and `docs.json`.
+4. Update source hashes only after reviewing the changed behavior.
+5. Run checks and preview the changed pages.
 
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+The site is prepared locally. Production publishing and restricting access to the development team are separate hosting tasks.

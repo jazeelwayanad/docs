@@ -1,0 +1,193 @@
+---
+title: "Meetings and minutes"
+description: "Current screen specification: Meetings and minutes. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## Meetings and minutes
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/committee/meetings`
+
+### Purpose and access
+
+Schedule committee meetings and record decisions within a selected meeting.
+
+You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+
+### Screen layout
+
+The page shows a meeting list and selected-meeting details, with Schedule meeting, Edit, Remove, and the decision form.
+
+### Fields and displayed information
+
+
+#### Fields and filters: Committee meeting form dialog
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Title | `meeting-title` | text | Yes | — |
+| Date | `meeting-date` | date | Yes | — |
+| Status | `meeting-status` | select | Not marked | Scheduled, Completed, Cancelled |
+| Location | `meeting-location` | text | Not marked | — |
+| Agenda | `meeting-agenda` | textarea | Not marked | — |
+| Minutes | `meeting-minutes` | textarea | Not marked | — |
+| Attendee ids.includes(post.id) | `attendeeIds.includes(post.id)` | checkbox | Not marked | — |
+
+
+#### Fields and filters: Committee decision form
+
+| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
+| --- | --- | --- | --- | --- |
+| Description | `description` | text | Not marked | Record a decision… |
+
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Schedule meeting | Opens a blank creation form. | `committee-meetings.tsx` |
+| Remove | Submits the associated API change; follow the sequence and failure rules below. | `committee-meetings.tsx` |
+| Remove | Selects the record for the removal confirmation dialog. | `committee-meetings.tsx` |
+| Edit | Opens the edit form populated from the selected record. | `committee-meetings.tsx` |
+| Cancel | Invokes the associated handler; see the sequence below. | `committee-meeting-form-dialog.tsx` |
+| Save Changes / Schedule Meeting | Submits the associated API change; follow the sequence and failure rules below. | `committee-meeting-form-dialog.tsx` |
+| Add | Submits the associated API change; follow the sequence and failure rules below. | `committee-decision-form.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| ← Roster | `/${slug}/committee` |
+
+
+
+### Interaction sequence
+
+Schedule meeting → enter its details → save → select the meeting → add a decision or minute → save → refresh. Editing and deletion apply to the selected meeting.
+
+### States and rules
+
+Empty meetings have a dedicated state. Meeting and decision saves are separate requests; adding a meeting does not automatically create its decisions.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx`
+- `apps/web/src/features/tenants/committee-meetings.tsx`
+- `apps/web/src/features/tenants/committee-meeting-form-dialog.tsx`
+- `apps/web/src/features/tenants/committee-decision-form.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/committee.ts`, `apps/web/src/lib/api-client.ts`
+
+
+Relevant controller permission keys: `committee.view`, `committee.create`, `committee.update`, `committee.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
+
+### API behavior references
+
+
+- `apps/api/src/committee/committee.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## Meetings and minutes
+
+Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/committee/meetings`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+കമ്മിറ്റി യോഗങ്ങൾ നിശ്ചയിച്ച് തിരഞ്ഞെടുത്ത യോഗത്തിൽ തീരുമാനങ്ങൾ രേഖപ്പെടുത്തുക.
+
+Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+
+### സ്ക്രീൻ ക്രമം
+
+യോഗപട്ടികയും തിരഞ്ഞെടുത്ത യോഗത്തിന്റെ വിശദാംശങ്ങളും കാണിക്കുന്നു. Schedule meeting, Edit, Remove, തീരുമാനം നൽകാനുള്ള form എന്നിവയുണ്ട്.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Committee meeting form dialog
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Title | `meeting-title` | text | ഉണ്ട് | — |
+| Date | `meeting-date` | date | ഉണ്ട് | — |
+| Status | `meeting-status` | select | ചിഹ്നമില്ല | Scheduled, Completed, Cancelled |
+| Location | `meeting-location` | text | ചിഹ്നമില്ല | — |
+| Agenda | `meeting-agenda` | textarea | ചിഹ്നമില്ല | — |
+| Minutes | `meeting-minutes` | textarea | ചിഹ്നമില്ല | — |
+| Attendee ids.includes(post.id) | `attendeeIds.includes(post.id)` | checkbox | ചിഹ്നമില്ല | — |
+
+
+#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Committee decision form
+
+| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
+| --- | --- | --- | --- | --- |
+| Description | `description` | text | ചിഹ്നമില്ല | Record a decision… |
+
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Schedule meeting | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `committee-meetings.tsx` |
+| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `committee-meetings.tsx` |
+| Remove | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `committee-meetings.tsx` |
+| Edit | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `committee-meetings.tsx` |
+| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `committee-meeting-form-dialog.tsx` |
+| Save Changes / Schedule Meeting | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `committee-meeting-form-dialog.tsx` |
+| Add | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `committee-decision-form.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| ← Roster | `/${slug}/committee` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+Schedule meeting → വിവരങ്ങൾ നൽകുക → സംരക്ഷിക്കുക → യോഗം തിരഞ്ഞെടുക്കുക → തീരുമാനം/minute ചേർക്കുക → സംരക്ഷിക്കുക → പുതുക്കും. തിരുത്തലും നീക്കലും തിരഞ്ഞെടുത്ത യോഗത്തിനാണ്.
+
+### നിലകളും നിയമങ്ങളും
+
+യോഗങ്ങളില്ലെങ്കിൽ പ്രത്യേക സന്ദേശമുണ്ട്. യോഗവും തീരുമാനവും വ്യത്യസ്ത അഭ്യർത്ഥനകളിൽ സംരക്ഷിക്കുന്നു; യോഗം ചേർത്താൽ തീരുമാനങ്ങൾ സ്വയം സൃഷ്ടിക്കില്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx`
+- `apps/web/src/features/tenants/committee-meetings.tsx`
+- `apps/web/src/features/tenants/committee-meeting-form-dialog.tsx`
+- `apps/web/src/features/tenants/committee-decision-form.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/committee.ts`, `apps/web/src/lib/api-client.ts`
+
+
+ബന്ധപ്പെട്ട controller permission keys: `committee.view`, `committee.create`, `committee.update`, `committee.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/committee/committee.controller.ts`
+
+</Tab>
+</Tabs>

@@ -1,0 +1,151 @@
+---
+title: "User sessions"
+description: "Current screen specification: User sessions. English and Malayalam guidance for the development team."
+---
+
+<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+
+<Tabs>
+<Tab title="English">
+
+## User sessions
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/users/[userId]/sessions`
+
+### Purpose and access
+
+Inspect and revoke sessions belonging to a selected account.
+
+You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+
+### Screen layout
+
+The screen identifies the target user and shows session records with their available metadata and Revoke actions.
+
+### Fields and displayed information
+
+
+Displayed table columns: **Started**, **IP address**, **Device**, **Expires**, **Status**.
+
+
+### Actions
+
+
+| Control | Result | Component |
+| --- | --- | --- |
+| Revoke | Submits the associated API change; follow the sequence and failure rules below. | `user-sessions-table.tsx` |
+
+
+#### Linked navigation
+
+| Link | Target in source |
+| --- | --- |
+| &larr; All platform users | `/users` |
+
+
+
+### Interaction sequence
+
+Open the user’s sessions → inspect a record → Revoke → call the session-revocation endpoint → refresh.
+
+### States and rules
+
+No sessions on record is an explicit empty state. Revoking a session is distinct from deleting the account or removing tenant membership.
+
+The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
+
+### Implementation references
+
+Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
+
+- `apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx`
+- `apps/web/src/features/platform/user-sessions-table.tsx`
+
+Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior references
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+<Tab title="മലയാളം">
+
+## User sessions
+
+Host: `control.<ROOT_DOMAIN>` · Route: `/users/[userId]/sessions`
+
+### ഉദ്ദേശ്യവും പ്രവേശനവും
+
+തിരഞ്ഞെടുത്ത accountന്റെ sessions പരിശോധിച്ച് revoke ചെയ്യുക.
+
+Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
+
+### സ്ക്രീൻ ക്രമം
+
+Target user വിവരങ്ങളും session metadataയും Revoke നിയന്ത്രണങ്ങളും കാണിക്കുന്നു.
+
+### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
+
+
+പ്രദർശിപ്പിക്കുന്ന table columns: **Started**, **IP address**, **Device**, **Expires**, **Status**.
+
+
+### പ്രവർത്തനങ്ങൾ
+
+
+| നിയന്ത്രണം | ഫലം | Component |
+| --- | --- | --- |
+| Revoke | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `user-sessions-table.tsx` |
+
+
+#### ലിങ്ക് നാവിഗേഷൻ
+
+| ലിങ്ക് | Source ലക്ഷ്യം |
+| --- | --- |
+| &larr; All platform users | `/users` |
+
+
+
+### പ്രവർത്തനക്രമം
+
+User sessions തുറക്കുക → രേഖ പരിശോധിക്കുക → Revoke → session-revocation endpoint വിളിക്കും → പുതുക്കും.
+
+### നിലകളും നിയമങ്ങളും
+
+No sessions on record പ്രത്യേക ശൂന്യനിലയാണ്. Session revoke account delete അല്ലെങ്കിൽ tenant membership നീക്കൽ അല്ല.
+
+Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+
+### Implementation റഫറൻസുകൾ
+
+താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
+
+- `apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx`
+- `apps/web/src/features/platform/user-sessions-table.tsx`
+
+Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/api-client.ts`
+
+### API behavior റഫറൻസുകൾ
+
+
+- `apps/api/src/platform/platform-tenant-access.controller.ts`
+- `apps/api/src/platform/platform.controller.ts`
+- `apps/api/src/billing/plans.controller.ts`
+- `apps/api/src/billing/tenant-billing.controller.ts`
+- `apps/api/src/features/features.controller.ts`
+- `apps/api/src/features/tenant-features.controller.ts`
+- `apps/api/src/forms/forms.controller.ts`
+- `apps/api/src/analytics/analytics.controller.ts`
+- `apps/api/src/analytics/tenant-analytics.controller.ts`
+
+</Tab>
+</Tabs>
