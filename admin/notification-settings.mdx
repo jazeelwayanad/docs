@@ -1,155 +1,36 @@
 ---
 title: "Notification settings"
-description: "Current screen specification: Notification settings. English and Malayalam guidance for the development team."
+description: "Choose notification preferences and review messaging settings."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Notification settings
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/notifications`
+Choose notification preferences and review messaging settings.
 
-### Purpose and access
+### Steps
 
-Configure service/dues alerts, event reminders, and SMS-provider metadata.
+1. Open **Settings** → **Notifications**.
+2. Set the new-service-request and new-dues switches.
+3. Enter event-reminder days and the available SMS provider and sender settings.
+4. Review the unsaved-changes bar, then save. Use reset to discard unsaved edits.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The form has new-service-request and new-dues switches, event reminder days, SMS enablement, provider, and sender ID. Unsaved changes expose a save/reset bar.
+#### Notification settings form
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Notify on new service request** | Enter notify on new service request. |
+| **Notify on new due** | Enter notify on new due. |
+| **Reminder days** | Minimum 0; Maximum 30 |
+| **Enable SMS** | Enter enable sms. |
+| **SMS provider** | e.g. MSG91 |
+| **SMS sender ID** | e.g. MAHALL |
 
+### Things to know
 
-#### Fields and filters: Notification settings form
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Notify on new service request | `notifyOnNewServiceRequest` | switch | Not marked | — |
-| Notify on new due | `notifyOnNewDue` | switch | Not marked | — |
-| Reminder days | `reminder-days` | number | Not marked | min 0; max 30 |
-| Sms enabled | `smsEnabled` | switch | Not marked | — |
-| Sms provider | `sms-provider` | text | Not marked | e.g. MSG91 |
-| Sms sender | `sms-sender` | text | Not marked | e.g. MAHALL |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Discard | Invokes the associated handler; see the sequence below. | `unsaved-changes-bar.tsx` |
-| Save changes | Invokes the associated handler; see the sequence below. | `unsaved-changes-bar.tsx` |
-
-
-
-### Interaction sequence
-
-Change settings → review the unsaved-changes bar → save → patch notification settings and refresh; reset discards local edits.
-
-### States and rules
-
-Saving provider metadata is not proof of SMS delivery integration. The route has a denied settings.view state. Numeric reminder values are checked by the form before submission.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx`
-- `apps/web/src/features/tenants/notification-settings-form.tsx`
-- `apps/web/src/features/settings/unsaved-changes-bar.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/notifications.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Notification settings
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/notifications`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-സേവന/കുടിശ്ശിക അറിയിപ്പുകൾ, പരിപാടി ഓർമ്മപ്പെടുത്തൽ, SMS-provider വിവരങ്ങൾ ക്രമീകരിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-പുതിയ സേവന/കുടിശ്ശിക switches, reminder days, SMS enablement, provider, sender ID എന്നിവയുണ്ട്. സംരക്ഷിക്കാത്ത മാറ്റങ്ങൾക്ക് save/reset bar കാണിക്കും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Notification settings form
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Notify on new service request | `notifyOnNewServiceRequest` | switch | ചിഹ്നമില്ല | — |
-| Notify on new due | `notifyOnNewDue` | switch | ചിഹ്നമില്ല | — |
-| Reminder days | `reminder-days` | number | ചിഹ്നമില്ല | min 0; max 30 |
-| Sms enabled | `smsEnabled` | switch | ചിഹ്നമില്ല | — |
-| Sms provider | `sms-provider` | text | ചിഹ്നമില്ല | e.g. MSG91 |
-| Sms sender | `sms-sender` | text | ചിഹ്നമില്ല | e.g. MAHALL |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Discard | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `unsaved-changes-bar.tsx` |
-| Save changes | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `unsaved-changes-bar.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-ക്രമീകരണം മാറ്റുക → unsaved-changes bar പരിശോധിക്കുക → സംരക്ഷിക്കുക → notification settings പുതുക്കും; reset പ്രാദേശിക മാറ്റങ്ങൾ ഉപേക്ഷിക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-Provider വിവരങ്ങൾ സംരക്ഷിക്കുന്നത് SMS അയക്കൽ integration ഉണ്ടെന്ന തെളിവല്ല. settings.view ഇല്ലെങ്കിൽ പ്രത്യേക നിലയുണ്ട്. Reminder സംഖ്യ form സമർപ്പിക്കുന്നതിന് മുമ്പ് പരിശോധിക്കുന്നു.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx`
-- `apps/web/src/features/tenants/notification-settings-form.tsx`
-- `apps/web/src/features/settings/unsaved-changes-bar.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/notifications.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Review any numeric-value errors before saving. Saving an SMS provider name and sender ID does not activate SMS delivery. Member OTP messages are not currently delivered by SMS.

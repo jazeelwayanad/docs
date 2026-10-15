@@ -1,153 +1,18 @@
 ---
-title: "Public Mahallu homepage"
-description: "Current screen specification: Public Mahallu homepage. English and Malayalam guidance for the development team."
+title: "Your Mahallu website"
+description: "Visit your Mahallu\u2019s public page and find the member sign-in link."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+## Your Mahallu website
 
-<Tabs>
-<Tab title="English">
+Visit your Mahallu’s public page and find the member sign-in link.
 
-## Public Mahallu homepage
+### Steps
 
-Host: `[tenant].<ROOT_DOMAIN>` · Route: `/`
+1. Open the public website address supplied by your Mahallu.
+2. Review the Mahallu and Masjid identity, community information, notices, and upcoming events.
+3. Choose **Member Login (Phone + OTP)** to sign in. If already signed in, choose **Go to Member Dashboard**.
 
-### Purpose and access
+### Things to know
 
-Introduce a Mahallu publicly and provide member login/dashboard access.
-
-Entry, public access, and redirect rules are described for this screen below.
-
-### Screen layout
-
-The page presents Mahallu/Masjid identity, daily prayer cards, Citizen Member Services, announcements, upcoming events, and a member-login call to action. The main link changes when a member session exists.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Go to Member Dashboard | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Member Login (Phone + OTP) | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Open My Dashboard | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Citizen OTP Login | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Go to Member Dashboard | `/dashboard` |
-| Member Login (Phone + OTP) | `/login` |
-| Open My Dashboard | `/dashboard` |
-| Citizen OTP Login | `/login` |
-
-
-
-### Interaction sequence
-
-Visitors choose Member Login (Phone + OTP) → authenticate → open dashboard. Already signed-in members choose Go to Member Dashboard. Announcements and events are displayed from the route’s requests.
-
-### States and rules
-
-Prayer times are fixed page values, not a configured live schedule. Service cards describe offerings without request-submission controls. Failed announcement/event reads fall back to empty lists. Announcement/event reads use operator-JWT-protected endpoints, so anonymous/member-only sessions can receive empty feeds. A public/member feed integration is unfinished.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/tenant/[tenant]/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`
-
-### API behavior references
-
-
-- `apps/api/src/member-auth/member-auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/announcements/announcements.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Public Mahallu homepage
-
-Host: `[tenant].<ROOT_DOMAIN>` · Route: `/`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-മഹല്ലിനെ പൊതുവായി പരിചയപ്പെടുത്തി member login/dashboard പ്രവേശനം നൽകുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-മഹല്ല്/Masjid identity, ദിവസേന prayer cards, Citizen Member Services, അറിയിപ്പുകൾ, വരാനിരിക്കുന്ന events, member-login ലിങ്ക് എന്നിവയുണ്ട്. Member session ഉണ്ടെങ്കിൽ പ്രധാന ലിങ്ക് മാറും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Go to Member Dashboard | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Member Login (Phone + OTP) | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Open My Dashboard | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Citizen OTP Login | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Go to Member Dashboard | `/dashboard` |
-| Member Login (Phone + OTP) | `/login` |
-| Open My Dashboard | `/dashboard` |
-| Citizen OTP Login | `/login` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-സന്ദർശകർ Member Login (Phone + OTP) → authenticate → dashboard. നേരത്തെ പ്രവേശിച്ചവർ Go to Member Dashboard തിരഞ്ഞെടുക്കാം. അറിയിപ്പുകളും eventsഉം route അഭ്യർത്ഥനകളിൽ നിന്ന് കാണിക്കുന്നു.
-
-### നിലകളും നിയമങ്ങളും
-
-Prayer times സ്ഥിരവിലകളാണ്; ക്രമീകരിച്ച live schedule അല്ല. Service cards സമർപ്പിക്കൽ നിയന്ത്രണങ്ങളില്ലാതെ സേവനങ്ങൾ വിവരിക്കുന്നു. അറിയിപ്പ്/event വായന പരാജയപ്പെട്ടാൽ ശൂന്യ ലിസ്റ്റാകും. അറിയിപ്പ്/event വായന operator-JWT-protected endpoints ഉപയോഗിക്കുന്നു; anonymous/member-only sessionൽ ശൂന്യ feed വരാം. Public/member feed integration പൂർത്തിയായിട്ടില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/tenant/[tenant]/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/member-auth/member-auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/announcements/announcements.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-</Tabs>
+Displayed prayer times are fixed examples, not a verified live schedule. Confirm prayer times with your Masjid. Service cards do not submit requests. Announcement and event feeds are not fully connected for public and member access, so empty panels do not confirm there are no notices or events.

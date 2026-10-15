@@ -1,227 +1,53 @@
 ---
 title: "Collections"
-description: "Current screen specification: Collections. English and Malayalam guidance for the development team."
+description: "Find collections, review receipts, and maintain recorded incoming payments."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Collections
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/collections`
+Find collections, review receipts, and maintain recorded incoming payments.
 
-### Purpose and access
+### Steps
 
-Review incoming collections, receipts, category/fund allocation, and accounting posting status.
+1. Open **Collections**. Search and filter by operational fund, posting status, category, or collection type.
+2. Choose **Record Collection** to open [Record a collection](/admin/record-collection).
+3. Open a saved receipt to review it. Use **Print** for printing or saving as PDF, or **WhatsApp** for the available sharing link.
+4. Choose **Edit** to update a collection and save the populated form.
+5. To remove a collection, confirm its deletion. For several records, select their rows and confirm bulk deletion.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The page has search, operational-fund, posting-status, category, and collection-type filters. A selectable table provides receipt viewing, edit, individual delete, and bulk delete; the record link opens a separate entry screen.
+#### Collections
 
-### Fields and displayed information
-
-
-Displayed table columns: **Date**, **Receipt #**, **Payer / Member**, **Category / Fund**, **Status**, **Method**, **Amount**, **Actions**.
-
-#### Fields and filters: Collections client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Search term | `searchTerm` | text | Not marked | Search payer, receipt #... |
-| Fund filter | `fundFilter` | select | Not marked | All Operational Funds; Initial: ALL |
-| Posting status filter | `postingStatusFilter` | select | Not marked | All Statuses, Posted (COA), Unposted (Pending); Initial: ALL |
-| Category filter | `categoryFilter` | select | Not marked | All Categories; Initial: ALL |
-| Type filter | `typeFilter` | select | Not marked | All Types, Family, Friday, Donation, Hundi Box, Other; Initial: ALL |
-| All selected | `allSelected` | checkbox | Not marked | — |
-| Is checked | `isChecked` | checkbox | Not marked | — |
-
-
-#### Fields and filters: Edit collection modal
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Fund / Income Account | `accountId` | searchable select | Not marked | — |
-| Collection Head / Category | `categoryId` | searchable select | Yes | Select category... |
-| Family (Optional) | `familyId` | searchable select | Not marked | Select family... |
-| Family Member (Optional) | `memberId` | searchable select | Not marked | Select member... |
-| Payer / Donor Name | `donorName` | text | Not marked | Full Name / Donor |
-| Donor Phone (Optional) | `donorPhone` | text | Not marked | +91 9876543210 |
-| Amount (₹) | `amount` | number | Yes | — |
-| Payment Method | `paymentMethod` | searchable select | Yes | Select payment method...; Initial: Cash |
-| Receipt Date | `date` | date | Yes | — |
-| Description / Remarks | `description` | textarea | Not marked | Description... |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Delete Selected ( ) | Opens the `bulk delete` view. | `collections-client.tsx` |
-| Settings | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `collections-client.tsx` |
-| Record Collection | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `collections-client.tsx` |
-| View / Print Receipt | Changes the selected view, filter, or page in local state. | `collections-client.tsx` |
-| Edit Collection | Opens the `edit modal` view. | `collections-client.tsx` |
-| Delete Collection | Selects the record for the removal confirmation dialog. | `collections-client.tsx` |
-| Cancel | Closes or clears the `delete target` view/selection. | `collections-client.tsx` |
-| Deleting... / Delete Permanently | Submits the associated API change; follow the sequence and failure rules below. | `collections-client.tsx` |
-| Cancel | Closes or clears the `bulk delete` view/selection. | `collections-client.tsx` |
-| Deleting... | Submits the associated API change; follow the sequence and failure rules below. | `collections-client.tsx` |
-| Cancel | Invokes the associated handler; see the sequence below. | `edit-collection-modal.tsx` |
-| Saving... / Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `edit-collection-modal.tsx` |
-| WhatsApp | Opens the configured destination. | `universal-receipt-modal.tsx` |
-| Print | Opens the browser print dialog; Save as PDF uses the browser destination. | `universal-receipt-modal.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| Settings | `/${slug}/settings/finance` |
-| Record Collection | `/${slug}/finance/collections/new` |
+| **Search** | Search payer, receipt #... |
+| **Fund filter** | All Operational Funds; Default: All |
+| **Posting status filter** | All Statuses, Posted (COA), Unposted (Pending); Default: All |
+| **Category filter** | All Categories; Default: All |
+| **Type filter** | All Types, Family, Friday, Donation, Hundi Box, Other; Default: All |
+| **Select all rows** | Select or clear this option. |
+| **Select row** | Select or clear this option. |
 
+#### Edit collection
 
-
-### Interaction sequence
-
-Choose Record Collection to open the entry screen → save the collection → return to the list. Open a receipt to print/share; Edit pre-fills its modal. Confirm individual deletion or select rows and confirm bulk deletion → refresh the table.
-
-### States and rules
-
-Posting status falls back to the presence of a journal entry when absent. Filters operate on the loaded records. Deletion is wired to backend operations; keep this distinct from the unfinished family bulk-removal action.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/finance/collections/collections-client.tsx`
-- `apps/web/src/features/finance/edit-collection-modal.tsx`
-- `apps/web/src/features/finance/universal-receipt-modal.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Collections
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance/collections`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-വരവുകൾ, രസീതുകൾ, വിഭാഗം/ഫണ്ട് വിന്യാസം, അക്കൗണ്ടിംഗ് posting സ്ഥിതി എന്നിവ പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-തിരച്ചിൽ, operational-fund, posting-status, വിഭാഗം, collection-type ഫിൽട്ടറുകളുണ്ട്. തിരഞ്ഞെടുക്കാവുന്ന പട്ടികയിൽ രസീത്, തിരുത്തൽ, വ്യക്തിഗത/കൂട്ട നീക്കൽ എന്നിവയുണ്ട്. രേഖപ്പെടുത്തൽ ലിങ്ക് പ്രത്യേക സ്ക്രീൻ തുറക്കും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Receipt #**, **Payer / Member**, **Category / Fund**, **Status**, **Method**, **Amount**, **Actions**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Collections client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Search term | `searchTerm` | text | ചിഹ്നമില്ല | Search payer, receipt #... |
-| Fund filter | `fundFilter` | select | ചിഹ്നമില്ല | All Operational Funds; ആരംഭം: ALL |
-| Posting status filter | `postingStatusFilter` | select | ചിഹ്നമില്ല | All Statuses, Posted (COA), Unposted (Pending); ആരംഭം: ALL |
-| Category filter | `categoryFilter` | select | ചിഹ്നമില്ല | All Categories; ആരംഭം: ALL |
-| Type filter | `typeFilter` | select | ചിഹ്നമില്ല | All Types, Family, Friday, Donation, Hundi Box, Other; ആരംഭം: ALL |
-| All selected | `allSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Is checked | `isChecked` | checkbox | ചിഹ്നമില്ല | — |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Edit collection modal
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Fund / Income Account | `accountId` | searchable select | ചിഹ്നമില്ല | — |
-| Collection Head / Category | `categoryId` | searchable select | ഉണ്ട് | Select category... |
-| Family (Optional) | `familyId` | searchable select | ചിഹ്നമില്ല | Select family... |
-| Family Member (Optional) | `memberId` | searchable select | ചിഹ്നമില്ല | Select member... |
-| Payer / Donor Name | `donorName` | text | ചിഹ്നമില്ല | Full Name / Donor |
-| Donor Phone (Optional) | `donorPhone` | text | ചിഹ്നമില്ല | +91 9876543210 |
-| Amount (₹) | `amount` | number | ഉണ്ട് | — |
-| Payment Method | `paymentMethod` | searchable select | ഉണ്ട് | Select payment method...; ആരംഭം: Cash |
-| Receipt Date | `date` | date | ഉണ്ട് | — |
-| Description / Remarks | `description` | textarea | ചിഹ്നമില്ല | Description... |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Delete Selected ( ) | `bulk delete` കാഴ്ച തുറക്കും. | `collections-client.tsx` |
-| Settings | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `collections-client.tsx` |
-| Record Collection | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `collections-client.tsx` |
-| View / Print Receipt | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `collections-client.tsx` |
-| Edit Collection | `edit modal` കാഴ്ച തുറക്കും. | `collections-client.tsx` |
-| Delete Collection | നീക്കൽ സ്ഥിരീകരണ dialogനായി രേഖ തിരഞ്ഞെടുക്കും. | `collections-client.tsx` |
-| Cancel | `delete target` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `collections-client.tsx` |
-| Deleting... / Delete Permanently | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `collections-client.tsx` |
-| Cancel | `bulk delete` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `collections-client.tsx` |
-| Deleting... | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `collections-client.tsx` |
-| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `edit-collection-modal.tsx` |
-| Saving... / Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `edit-collection-modal.tsx` |
-| WhatsApp | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `universal-receipt-modal.tsx` |
-| Print | Browser print dialog തുറക്കും; Save as PDF browser destination ഉപയോഗിക്കുന്നു. | `universal-receipt-modal.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
+| Field or control | Guidance |
 | --- | --- |
-| Settings | `/${slug}/settings/finance` |
-| Record Collection | `/${slug}/finance/collections/new` |
+| **Fund / Income Account** | Search and choose an available option. |
+| **Collection Head / Category** | Required. Select category... |
+| **Family (Optional)** | Select family... |
+| **Family Member (Optional)** | Select member... |
+| **Payer / Donor Name** | Full Name / Donor |
+| **Donor Phone (Optional)** | +91 9876543210 |
+| **Amount (₹)** | Required. Enter a number. |
+| **Payment Method** | Required. Select payment method...; Default: Cash |
+| **Receipt Date** | Required. Choose a date. |
+| **Description / Remarks** | Description... |
 
+### Things to know
 
-
-### പ്രവർത്തനക്രമം
-
-Record Collection വഴി entry സ്ക്രീൻ തുറക്കുക → വരവ് സംരക്ഷിക്കുക → പട്ടികയിലേക്ക് മടങ്ങുക. രസീത് തുറന്ന് print/share ചെയ്യാം; Edit നിലവിലെ വിവരങ്ങൾ നിറയ്ക്കും. വ്യക്തിഗതമായോ കൂട്ടമായോ നീക്കൽ സ്ഥിരീകരിക്കുക → പട്ടിക പുതുക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-Posting status ഇല്ലെങ്കിൽ journal entry ഉണ്ടോ എന്നതിനെ ആശ്രയിക്കുന്നു. ഫിൽട്ടറുകൾ ലഭിച്ച രേഖകളിലാണ് പ്രവർത്തിക്കുന്നത്. നീക്കൽ backendലേക്ക് അയക്കുന്നു; പൂർത്തിയാകാത്ത കുടുംബ കൂട്ടനീക്കലുമായി ഇത് കലർത്തരുത്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/finance/collections/collections-client.tsx`
-- `apps/web/src/features/finance/edit-collection-modal.tsx`
-- `apps/web/src/features/finance/universal-receipt-modal.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Filters apply to the loaded records. Check posting status separately from the receipt: recording a collection does not always mean it has been posted to the ledger.

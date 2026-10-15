@@ -1,183 +1,52 @@
 ---
 title: "Bulk update"
-description: "Current screen specification: Bulk update. English and Malayalam guidance for the development team."
+description: "Apply shared changes to selected finance categories, ledger accounts, or transactions."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Bulk update
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/bulk-update`
-
-### Purpose and access
-
-Apply shared changes to selected categories, ledger accounts, or transactions.
-
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-Public Categories, Chart of Accounts, and Transactions tabs each provide search, filters, selection, and target controls. Category changes can alter funds, scope/type, COA mappings, and status; account changes can alter type/parent/fund/status; transactions can move fund/category.
-
-### Fields and displayed information
-
-
-Displayed table columns: **Public Category Name**, **Inflow / Outflow**, **Assigned Fund**, **Public Scope / Type**, **Chart of Accounts Mapping**, **Status**, **Account Name & Code**, **Account Type**, **Parent Account**, **Document / Ref**, **Party / Member**, **Category**, **Date**, **Amount**.
-
-#### Fields and filters: Bulk update client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Search term | `searchTerm` | text | Not marked | Search category name... |
-| Category kind | `categoryKind` | select | Not marked | All Categories, Collections (Inflow), Expenses (Outflow); Initial: ALL |
-| Filter fund | `filterFund` | select | Not marked | All Funds; Initial: ALL |
-| Target category fund | `targetCategoryFund` | select | Not marked | Move to Fund... |
-| Target category type | `targetCategoryType` | select | Not marked | Set Scope / Type..., All Families, Specific Divisions, Category Based, General Public, Monthly Subscription, Recurring Period, One-time Collection |
-| Target chart account | `targetChartAccount` | select | Not marked | Map Chart of Accounts... |
-| Target status | `targetStatus` | select | Not marked | Set Status..., Active, Inactive |
-| Post pending transactions | `postPendingTransactions` | checkbox | Not marked | — |
-| All selected | `allSelected` | checkbox | Not marked | — |
-| Is selected | `isSelected` | checkbox | Not marked | — |
-| Account type filter | `accountTypeFilter` | select | Not marked | All Account Types, Asset, Liability, Equity, Income, Expense; Initial: ALL |
-| Target account fund | `targetAccountFund` | select | Not marked | Move to Fund... |
-| Target account type | `targetAccountType` | select | Not marked | Set Type..., Asset, Liability, Equity, Income, Expense |
-| Target parent account | `targetParentAccount` | select | Not marked | Set Parent Account..., No Parent (Top Level) |
-| Target account status | `targetAccountStatus` | select | Not marked | Set Status..., Active, Inactive |
-| Tx module type | `txModuleType` | select | Not marked | Collections Recorded, Expenses / Vouchers; Initial: COLLECTIONS |
-| Tx filter category | `txFilterCategory` | select | Not marked | All Categories; Initial: ALL |
-| Tx target fund | `txTargetFund` | select | Not marked | Move to Fund... |
-| Tx target category | `txTargetCategory` | select | Not marked | Change Category... |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Public Categories ( ) | Changes the selected view, filter, or page in local state. | `bulk-update-client.tsx` |
-| Chart of Accounts ( ) | Changes the selected view, filter, or page in local state. | `bulk-update-client.tsx` |
-| Transactions | Changes the selected view, filter, or page in local state. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | Submits the associated API change; follow the sequence and failure rules below. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | Submits the associated API change; follow the sequence and failure rules below. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | Submits the associated API change; follow the sequence and failure rules below. | `bulk-update-client.tsx` |
-
-
-
-### Interaction sequence
-
-Select a tab → filter the records → select rows → choose target changes → execute the bulk update → inspect the result and refreshed data. COA mapping can also request posting pending transactions.
-
-### States and rules
-
-Category/account/transaction paths are separate operations. Several updates run record by record, so partial progress is possible. The route loads up to 1000 collections/vouchers; the UI is not a full-dataset guarantee.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/bulk-update-client.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Bulk update
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/bulk-update`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-തിരഞ്ഞെടുത്ത വിഭാഗങ്ങൾ, ledger അക്കൗണ്ടുകൾ, ഇടപാടുകൾ എന്നിവയിൽ പൊതുവായ മാറ്റങ്ങൾ നടത്തുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Public Categories, Chart of Accounts, Transactions ടാബുകളിൽ തിരച്ചിൽ, ഫിൽട്ടർ, തിരഞ്ഞെടുക്കൽ, മാറ്റാനുള്ള നിയന്ത്രണങ്ങൾ ഉണ്ട്. വിഭാഗങ്ങളിൽ ഫണ്ട്, scope/type, COA mapping, സ്ഥിതി; അക്കൗണ്ടുകളിൽ type/parent/fund/status; ഇടപാടുകളിൽ fund/category എന്നിവ മാറ്റാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Public Category Name**, **Inflow / Outflow**, **Assigned Fund**, **Public Scope / Type**, **Chart of Accounts Mapping**, **Status**, **Account Name & Code**, **Account Type**, **Parent Account**, **Document / Ref**, **Party / Member**, **Category**, **Date**, **Amount**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Bulk update client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Search term | `searchTerm` | text | ചിഹ്നമില്ല | Search category name... |
-| Category kind | `categoryKind` | select | ചിഹ്നമില്ല | All Categories, Collections (Inflow), Expenses (Outflow); ആരംഭം: ALL |
-| Filter fund | `filterFund` | select | ചിഹ്നമില്ല | All Funds; ആരംഭം: ALL |
-| Target category fund | `targetCategoryFund` | select | ചിഹ്നമില്ല | Move to Fund... |
-| Target category type | `targetCategoryType` | select | ചിഹ്നമില്ല | Set Scope / Type..., All Families, Specific Divisions, Category Based, General Public, Monthly Subscription, Recurring Period, One-time Collection |
-| Target chart account | `targetChartAccount` | select | ചിഹ്നമില്ല | Map Chart of Accounts... |
-| Target status | `targetStatus` | select | ചിഹ്നമില്ല | Set Status..., Active, Inactive |
-| Post pending transactions | `postPendingTransactions` | checkbox | ചിഹ്നമില്ല | — |
-| All selected | `allSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Is selected | `isSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Account type filter | `accountTypeFilter` | select | ചിഹ്നമില്ല | All Account Types, Asset, Liability, Equity, Income, Expense; ആരംഭം: ALL |
-| Target account fund | `targetAccountFund` | select | ചിഹ്നമില്ല | Move to Fund... |
-| Target account type | `targetAccountType` | select | ചിഹ്നമില്ല | Set Type..., Asset, Liability, Equity, Income, Expense |
-| Target parent account | `targetParentAccount` | select | ചിഹ്നമില്ല | Set Parent Account..., No Parent (Top Level) |
-| Target account status | `targetAccountStatus` | select | ചിഹ്നമില്ല | Set Status..., Active, Inactive |
-| Tx module type | `txModuleType` | select | ചിഹ്നമില്ല | Collections Recorded, Expenses / Vouchers; ആരംഭം: COLLECTIONS |
-| Tx filter category | `txFilterCategory` | select | ചിഹ്നമില്ല | All Categories; ആരംഭം: ALL |
-| Tx target fund | `txTargetFund` | select | ചിഹ്നമില്ല | Move to Fund... |
-| Tx target category | `txTargetCategory` | select | ചിഹ്നമില്ല | Change Category... |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Public Categories ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `bulk-update-client.tsx` |
-| Chart of Accounts ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `bulk-update-client.tsx` |
-| Transactions | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `bulk-update-client.tsx` |
-| h-3.5 w-3.5 animate-spin / h-3.5 w-3.5 | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `bulk-update-client.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-ടാബ് തിരഞ്ഞെടുക്കുക → ഫിൽട്ടർ ചെയ്യുക → വരികൾ തിരഞ്ഞെടുക്കുക → മാറ്റങ്ങൾ നൽകുക → കൂട്ട പുതുക്കൽ നടത്തുക → ഫലവും പുതുക്കിയ വിവരങ്ങളും പരിശോധിക്കുക. COA mappingൽ pending transactions posting ആവശ്യപ്പെടാം.
-
-### നിലകളും നിയമങ്ങളും
-
-മൂന്നു വിഭാഗങ്ങളും വ്യത്യസ്ത പ്രവർത്തനങ്ങളാണ്. ചില മാറ്റങ്ങൾ ഓരോ രേഖയായി നടക്കുന്നതിനാൽ ഭാഗിക വിജയം ഉണ്ടാകാം. 1000 collections/vouchers വരെ വായിക്കുന്നു; മുഴുവൻ ഡാറ്റയും ലഭിക്കുമെന്ന് ഉറപ്പില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/bulk-update-client.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Apply shared changes to selected finance categories, ledger accounts, or transactions.
+
+### Steps
+
+1. Open **Bulk update** and choose **Public Categories**, **Chart of Accounts**, or **Transactions**.
+2. Search and filter the loaded records, then select the rows you want to change.
+3. For categories, choose the target fund, scope, ledger mapping, or status. When mapping a ledger, use the option to post pending transactions if needed.
+4. For accounts, choose the target type, parent, fund, or status. For transactions, choose collections or expenses and the target fund or category.
+5. Run the update and inspect the results and refreshed records.
+
+### Fields and choices
+
+Complete the required fields and any additional details requested for your selections.
+
+<Accordion title="Selection and target changes">
+
+| Field or control | Guidance |
+| --- | --- |
+| **Search** | Search category name... |
+| **Category kind** | All Categories, Collections (Inflow), Expenses (Outflow); Default: All |
+| **Filter fund** | All Funds; Default: All |
+| **Target category fund** | Move to Fund... |
+| **Target category type** | Set Scope / Type..., All Families, Specific Divisions, Category Based, General Public, Monthly Subscription, Recurring Period, One-time Collection |
+| **Target chart account** | Map Chart of Accounts... |
+| **Target status** | Set Status..., Active, Inactive |
+| **Post pending transactions** | Select or clear this option. |
+| **Select all rows** | Select or clear this option. |
+| **Select row** | Select or clear this option. |
+| **Account type filter** | All Account Types, Asset, Liability, Equity, Income, Expense; Default: All |
+| **Target account fund** | Move to Fund... |
+| **Target account type** | Set Type..., Asset, Liability, Equity, Income, Expense |
+| **Target parent account** | Set Parent Account..., No Parent (Top Level) |
+| **Target account status** | Set Status..., Active, Inactive |
+| **Transaction list** | Collections Recorded, Expenses / Vouchers; Default: Collections Recorded |
+| **Category filter** | All Categories; Default: All |
+| **Target fund** | Move to Fund... |
+| **Target category** | Change Category... |
+
+</Accordion>
+
+### Things to know
+
+Records may be updated one at a time, so a failed operation can leave some changes saved. Check results before repeating an update. Transaction lists include up to 1,000 loaded collections and vouchers; do not assume they cover every historical record.

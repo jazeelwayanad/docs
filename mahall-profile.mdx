@@ -1,131 +1,22 @@
 ---
-title: "General and Mahall profile"
-description: "Current screen specification: General and Mahall profile. English and Malayalam guidance for the development team."
+title: "General settings"
+description: "Review Mahallu and account information, then open the settings you need."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
-<Tabs>
-<Tab title="English">
+## General settings
 
-## General and Mahall profile
+Review Mahallu and account information, then open the settings you need.
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings`
+### Steps
 
-### Purpose and access
+1. Open **Settings** → **General**.
+2. Review the Mahallu name, Masjid, workspace information, country, organization, and signed-in account role.
+3. Review the modules grouped by category.
+4. Use **Change** for organization to open structure settings, or **View plan** to open billing.
+5. In **Configure**, choose structure, finance, notifications, users and roles, or activity.
 
-Inspect Mahallu identity, your account, and enabled modules, then open a configuration area.
+### Things to know
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-General contains Mahallu, Your account, Modules, and Configure sections. Identity shows name, Masjid, Workspace ID, country, and organization; account shows signed-in identity and role; modules are grouped by category.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Change | `/${slug}/settings/structure` |
-| View plan | `/${slug}/billing` |
-
-
-
-### Interaction sequence
-
-Review identity → use Change for organization → open structure settings. Use View plan for billing; Configure links to structure, finance, notifications, users/roles, and activity.
-
-### States and rules
-
-Identity and account values are read-only here; the page explicitly says they cannot be edited yet. Module availability is controlled by plans/platform administrators. Missing values display Not set.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/features.ts`
-
-### API behavior references
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## General and Mahall profile
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-മഹല്ലിന്റെ തിരിച്ചറിയൽ, നിങ്ങളുടെ അക്കൗണ്ട്, സജീവ വിഭാഗങ്ങൾ എന്നിവ പരിശോധിച്ച് ക്രമീകരണ വിഭാഗം തുറക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Generalൽ Mahallu, Your account, Modules, Configure വിഭാഗങ്ങളുണ്ട്. പേര്, Masjid, Workspace ID, രാജ്യം, organization; പ്രവേശിച്ച വ്യക്തിയും roleഉം; വിഭാഗം തിരിച്ചുള്ള modules എന്നിവ കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Change | `/${slug}/settings/structure` |
-| View plan | `/${slug}/billing` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-വിവരങ്ങൾ പരിശോധിക്കുക → organizationന്റെ Change വഴി structure settings തുറക്കുക. View plan billing തുറക്കും; Configure structure, finance, notifications, users/roles, activity എന്നിവയിലേക്ക് പോകും.
-
-### നിലകളും നിയമങ്ങളും
-
-തിരിച്ചറിയലും account വിവരങ്ങളും ഇവിടെ വായിക്കാൻ മാത്രമാണ്; ഇപ്പോൾ തിരുത്താനാവില്ലെന്ന് പേജ് പറയുന്നു. Modules plan/platform administrator നിയന്ത്രിക്കുന്നു. ഇല്ലാത്ത വിവരങ്ങൾക്ക് Not set കാണിക്കും.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/features.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Identity and account values are read-only on this page. **Not set** indicates an unavailable value. Module availability depends on your plan and platform configuration.

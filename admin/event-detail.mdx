@@ -1,163 +1,34 @@
 ---
 title: "Event detail"
-description: "Current screen specification: Event detail. English and Malayalam guidance for the development team."
+description: "Manage attendance and review income and expenditure associated with an event."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Event detail
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/events/[eventId]`
+Manage attendance and review income and expenditure associated with an event.
 
-### Purpose and access
+### Steps
 
-Inspect an event’s registrations and associated income/expenditure.
+1. Open an event from [Events](/admin/events).
+2. In **Registrations**, enter the participant’s name and optional phone number, then choose **Register**.
+3. After saving, review the refreshed list. Use the attendance action on a saved participant to change attendance.
+4. Confirm removal when deleting a registration.
+5. Review **Income & expenditure** for linked financial records.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The page shows the event heading, a Registrations table, and Income & expenditure. Registration actions operate on event-specific records.
+#### Event registrations table
 
-### Fields and displayed information
-
-
-Displayed table columns: **Participant**, **Phone**, **Attended**, **Actions**.
-
-#### Fields and filters: Event registrations table
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Name | `name` | text | Not marked | Participant name |
-| Phone | `phone` | text | Not marked | Phone (optional) |
-| Registration.attended | `registration.attended` | checkbox | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Register | Submits the associated API change; follow the sequence and failure rules below. | `event-registrations-table.tsx` |
-| Remove | Submits the associated API change; follow the sequence and failure rules below. | `event-registrations-table.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| ← All events | `/${slug}/events` |
+| **Name** | Participant name |
+| **Phone** | Phone (optional) |
+| **Attendance** | Select or clear this option. |
 
+### Things to know
 
-
-### Interaction sequence
-
-Open an event from Events → enter a participant name and optional phone → Register → the fields reset and the list refreshes. Toggle attendance for a saved participant or confirm removal → refresh. Review linked financial records in the income/expenditure panel.
-
-### States and rules
-
-The event is resolved within the tenant. Missing or unavailable events use notFound. Registration status changes and finance totals are separate concerns.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx`
-- `apps/web/src/features/tenants/event-registrations-table.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/event-detail.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `events.view`, `events.create`, `events.update`, `events.delete`, `finance.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Event detail
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/events/[eventId]`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-പരിപാടിയുടെ രജിസ്ട്രേഷനുകളും ബന്ധപ്പെട്ട വരവ്/ചെലവും പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-പരിപാടിയുടെ തലക്കെട്ട്, Registrations പട്ടിക, Income & expenditure എന്നിവയുണ്ട്. രജിസ്ട്രേഷൻ പ്രവർത്തനങ്ങൾ ഈ പരിപാടിയിലുള്ള രേഖകൾക്കാണ്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Participant**, **Phone**, **Attended**, **Actions**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Event registrations table
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Name | `name` | text | ചിഹ്നമില്ല | Participant name |
-| Phone | `phone` | text | ചിഹ്നമില്ല | Phone (optional) |
-| Registration.attended | `registration.attended` | checkbox | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Register | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `event-registrations-table.tsx` |
-| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `event-registrations-table.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| ← All events | `/${slug}/events` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Eventsൽ നിന്ന് പരിപാടി തുറക്കുക → participant name, ഐച്ഛിക phone നൽകുക → Register → fields reset ചെയ്ത് പട്ടിക പുതുക്കും. Attendance മാറ്റുകയോ സ്ഥിരീകരിച്ച് നീക്കുകയോ ചെയ്യുക → പുതുക്കും. ധനകാര്യ വിഭാഗത്തിൽ ബന്ധപ്പെട്ട രേഖകൾ കാണാം.
-
-### നിലകളും നിയമങ്ങളും
-
-മഹല്ലിനുള്ളിൽ നിന്നാണ് പരിപാടി വായിക്കുന്നത്. ലഭ്യമല്ലെങ്കിൽ notFound ഉപയോഗിക്കുന്നു. രജിസ്ട്രേഷൻ സ്ഥിതിമാറ്റവും ധനകാര്യ കണക്കുകളും വ്യത്യസ്ത കാര്യങ്ങളാണ്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx`
-- `apps/web/src/features/tenants/event-registrations-table.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/event-detail.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `events.view`, `events.create`, `events.update`, `events.delete`, `finance.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-</Tabs>
+Registration and financial records are separate. Changing attendance does not record income or an expense. A missing or unavailable event cannot be opened.

@@ -78,7 +78,9 @@
         "apps/api/src/tenants/admins.controller.ts",
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts"
-      ]
+      ],
+      "guideSection": "Home dashboard",
+      "anchor": "home-dashboard"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/overview/page.tsx",
@@ -113,7 +115,9 @@
         "apps/api/src/finance/finance.controller.ts",
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Mahallu dashboard",
+      "anchor": "mahallu-dashboard"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/members/page.tsx",
@@ -144,7 +148,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Members",
+      "anchor": "members"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/members/[memberId]/page.tsx",
@@ -188,7 +194,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Member profile",
+      "anchor": "member-profile"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/families/page.tsx",
@@ -222,7 +230,9 @@
       ],
       "apiControllers": [
         "apps/api/src/families/families.controller.ts"
-      ]
+      ],
+      "guideSection": "Families",
+      "anchor": "families"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/families/[familyId]/page.tsx",
@@ -270,7 +280,9 @@
       ],
       "apiControllers": [
         "apps/api/src/families/families.controller.ts"
-      ]
+      ],
+      "guideSection": "Family profile",
+      "anchor": "family-profile"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/houses/page.tsx",
@@ -297,7 +309,9 @@
       ],
       "apiControllers": [
         "apps/api/src/houses/houses.controller.ts"
-      ]
+      ],
+      "guideSection": "Houses directory",
+      "anchor": "houses-directory"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx",
@@ -327,7 +341,9 @@
       ],
       "apiControllers": [
         "apps/api/src/houses/houses.controller.ts"
-      ]
+      ],
+      "guideSection": "House profile",
+      "anchor": "house-profile"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/divisions/page.tsx",
@@ -358,7 +374,9 @@
       "apiControllers": [
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/families/families.controller.ts"
-      ]
+      ],
+      "guideSection": "Divisions and areas",
+      "anchor": "divisions-and-areas"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/divisions/[divisionId]/page.tsx",
@@ -391,7 +409,9 @@
       "apiControllers": [
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/families/families.controller.ts"
-      ]
+      ],
+      "guideSection": "Division profile",
+      "anchor": "division-profile"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/education-employment/page.tsx",
@@ -418,7 +438,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Education and employment",
+      "anchor": "education-and-employment"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx",
@@ -447,7 +469,9 @@
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts",
         "apps/api/src/families/families.controller.ts"
-      ]
+      ],
+      "guideSection": "Health and support",
+      "anchor": "health-and-support"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/finance/page.tsx",
@@ -468,7 +492,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Finance overview",
+      "anchor": "finance-overview"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/finance/collections/page.tsx",
@@ -499,7 +525,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Collections",
+      "anchor": "collections"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/finance/collections/new/page.tsx",
@@ -532,7 +560,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Record a collection",
+      "anchor": "record-a-collection"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/finance/payments/page.tsx",
@@ -560,7 +590,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Payments",
+      "anchor": "payments"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx",
@@ -581,7 +613,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Accountant workspace",
+      "anchor": "accountant-workspace"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx",
@@ -605,7 +639,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Chart of accounts",
+      "anchor": "chart-of-accounts"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx",
@@ -629,7 +665,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Manual journals",
+      "anchor": "manual-journals"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/bulk-update/page.tsx",
@@ -653,7 +691,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Bulk update",
+      "anchor": "bulk-update"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/financial-year/page.tsx",
@@ -677,7 +717,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Financial years",
+      "anchor": "financial-years"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx",
@@ -701,7 +743,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Taxes and legal tracker",
+      "anchor": "taxes-and-legal-tracker"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/balance-sheet/page.tsx",
@@ -724,7 +768,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Balance sheet",
+      "anchor": "balance-sheet"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/income-expenditure/page.tsx",
@@ -747,7 +793,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Profit and loss",
+      "anchor": "profit-and-loss"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/receipt-payment/page.tsx",
@@ -770,7 +818,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Receipt and payment",
+      "anchor": "receipt-and-payment"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/cash-book/page.tsx",
@@ -793,7 +843,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Cash book",
+      "anchor": "cash-book"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/bank-book/page.tsx",
@@ -816,7 +868,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Bank book",
+      "anchor": "bank-book"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/ledger/page.tsx",
@@ -839,7 +893,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "General ledger",
+      "anchor": "general-ledger"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/trial-balance/page.tsx",
@@ -862,7 +918,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Trial balance",
+      "anchor": "trial-balance"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/finance/reports/page.tsx",
@@ -890,7 +948,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Finance reports",
+      "anchor": "finance-reports"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/accountant/reports/page.tsx",
@@ -918,7 +978,9 @@
       ],
       "apiControllers": [
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Accounting reports catalog",
+      "anchor": "accounting-reports-catalog"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/committee/page.tsx",
@@ -946,7 +1008,9 @@
       ],
       "apiControllers": [
         "apps/api/src/committee/committee.controller.ts"
-      ]
+      ],
+      "guideSection": "Committee office bearers",
+      "anchor": "committee-office-bearers"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/committee/meetings/page.tsx",
@@ -974,7 +1038,9 @@
       ],
       "apiControllers": [
         "apps/api/src/committee/committee.controller.ts"
-      ]
+      ],
+      "guideSection": "Meetings and minutes",
+      "anchor": "meetings-and-minutes"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/events/page.tsx",
@@ -1001,7 +1067,9 @@
       "apiControllers": [
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Events",
+      "anchor": "events"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/announcements/page.tsx",
@@ -1028,7 +1096,9 @@
       ],
       "apiControllers": [
         "apps/api/src/announcements/announcements.controller.ts"
-      ]
+      ],
+      "guideSection": "Announcements",
+      "anchor": "announcements"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/programs/page.tsx",
@@ -1054,7 +1124,9 @@
       ],
       "apiControllers": [
         "apps/api/src/programs/programs.controller.ts"
-      ]
+      ],
+      "guideSection": "Programs",
+      "anchor": "programs"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/events/[eventId]/page.tsx",
@@ -1080,7 +1152,9 @@
       "apiControllers": [
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Event detail",
+      "anchor": "event-detail"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/services/page.tsx",
@@ -1108,7 +1182,9 @@
       ],
       "apiControllers": [
         "apps/api/src/services/services.controller.ts"
-      ]
+      ],
+      "guideSection": "Services and aid requests",
+      "anchor": "services-and-aid-requests"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/death/page.tsx",
@@ -1137,7 +1213,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/death/death.controller.ts"
-      ]
+      ],
+      "guideSection": "Death register",
+      "anchor": "death-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/divorce/page.tsx",
@@ -1166,7 +1244,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/divorce/divorce.controller.ts"
-      ]
+      ],
+      "guideSection": "Divorce register",
+      "anchor": "divorce-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/grave/page.tsx",
@@ -1195,7 +1275,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/grave/grave.controller.ts"
-      ]
+      ],
+      "guideSection": "Grave register",
+      "anchor": "grave-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/madrassa/page.tsx",
@@ -1224,7 +1306,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/madrassa/madrassa.controller.ts"
-      ]
+      ],
+      "guideSection": "Madrassa and Dars register",
+      "anchor": "madrassa-and-dars-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/marriage/page.tsx",
@@ -1253,7 +1337,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/marriage/marriage.controller.ts"
-      ]
+      ],
+      "guideSection": "Marriage register",
+      "anchor": "marriage-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/property/page.tsx",
@@ -1282,7 +1368,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/property/property.controller.ts"
-      ]
+      ],
+      "guideSection": "Waqf and property register",
+      "anchor": "waqf-and-property-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/registers/release/page.tsx",
@@ -1311,7 +1399,9 @@
       ],
       "apiControllers": [
         "apps/api/src/registers/release/release.controller.ts"
-      ]
+      ],
+      "guideSection": "Mahallu release register",
+      "anchor": "mahallu-release-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/reports/page.tsx",
@@ -1334,7 +1424,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Community reports",
+      "anchor": "community-reports"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/reports/blood-groups/page.tsx",
@@ -1362,7 +1454,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Blood group report",
+      "anchor": "blood-group-report"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/reports/expatriate/page.tsx",
@@ -1390,7 +1484,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Expatriate register",
+      "anchor": "expatriate-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/reports/yatheem/page.tsx",
@@ -1418,7 +1514,9 @@
         "apps/api/src/members/education-employment.controller.ts",
         "apps/api/src/members/health-support.controller.ts",
         "apps/api/src/members/members.controller.ts"
-      ]
+      ],
+      "guideSection": "Yatheem register",
+      "anchor": "yatheem-register"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/page.tsx",
@@ -1445,7 +1543,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "General settings",
+      "anchor": "general-settings"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/structure/page.tsx",
@@ -1478,7 +1578,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Structure settings",
+      "anchor": "structure-settings"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/finance/page.tsx",
@@ -1510,7 +1612,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Finance settings",
+      "anchor": "finance-settings"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/notifications/page.tsx",
@@ -1541,7 +1645,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Notification settings",
+      "anchor": "notification-settings"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/admins/page.tsx",
@@ -1571,7 +1677,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Mahallu users",
+      "anchor": "mahallu-users"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/admins/roles/page.tsx",
@@ -1602,7 +1710,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Mahallu roles",
+      "anchor": "mahallu-roles"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx",
@@ -1628,7 +1738,9 @@
         "apps/api/src/structure/structure.controller.ts",
         "apps/api/src/notifications/notifications.controller.ts",
         "apps/api/src/finance/finance.controller.ts"
-      ]
+      ],
+      "guideSection": "Activity log",
+      "anchor": "activity-log"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/page.tsx",
@@ -1648,7 +1760,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/page.tsx",
         "apps/web/src/features/website/website-overview.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website overview",
+      "anchor": "website-overview"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx",
@@ -1668,7 +1782,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx",
         "apps/web/src/features/website/website-pages.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website pages",
+      "anchor": "website-pages"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx",
@@ -1688,7 +1804,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/theme/page.tsx",
         "apps/web/src/features/website/website-theme.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website theme",
+      "anchor": "website-theme"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx",
@@ -1708,7 +1826,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/visibility/page.tsx",
         "apps/web/src/features/website/website-visibility.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website visibility",
+      "anchor": "website-visibility"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx",
@@ -1728,7 +1848,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/domains/page.tsx",
         "apps/web/src/features/website/website-domains.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website domains",
+      "anchor": "website-domains"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx",
@@ -1748,7 +1870,9 @@
         "apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx",
         "apps/web/src/features/website/website-analytics.tsx"
       ],
-      "apiControllers": []
+      "apiControllers": [],
+      "guideSection": "Website analytics",
+      "anchor": "website-analytics"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/billing/page.tsx",
@@ -1771,7 +1895,9 @@
       "apiControllers": [
         "apps/api/src/billing/plans.controller.ts",
         "apps/api/src/billing/tenant-billing.controller.ts"
-      ]
+      ],
+      "guideSection": "Subscription plan",
+      "anchor": "subscription-plan"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/billing/payments/page.tsx",
@@ -1796,7 +1922,9 @@
       "apiControllers": [
         "apps/api/src/billing/plans.controller.ts",
         "apps/api/src/billing/tenant-billing.controller.ts"
-      ]
+      ],
+      "guideSection": "Billing payment history",
+      "anchor": "billing-payment-history"
     },
     {
       "source": "apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx",
@@ -1819,7 +1947,9 @@
       "apiControllers": [
         "apps/api/src/billing/plans.controller.ts",
         "apps/api/src/billing/tenant-billing.controller.ts"
-      ]
+      ],
+      "guideSection": "Plan limits and usage",
+      "anchor": "plan-limits-and-usage"
     },
     {
       "source": "apps/web/src/app/sites/admin/login/page.tsx",
@@ -1846,7 +1976,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Sign in and create an account",
+      "anchor": "sign-in-and-create-an-account"
     },
     {
       "source": "apps/web/src/app/sites/admin/register/page.tsx",
@@ -1872,7 +2004,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Admin registration",
+      "anchor": "admin-registration"
     },
     {
       "source": "apps/web/src/app/sites/admin/page.tsx",
@@ -1930,7 +2064,9 @@
         "apps/api/src/tenants/admins.controller.ts",
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts"
-      ]
+      ],
+      "guideSection": "Where you go after signing in",
+      "anchor": "where-you-go-after-signing-in"
     },
     {
       "source": "apps/web/src/app/sites/admin/onboarding/page.tsx",
@@ -1971,7 +2107,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Set up your Mahallu",
+      "anchor": "set-up-your-mahallu"
     },
     {
       "source": "apps/web/src/app/sites/marketing/onboarding/page.tsx",
@@ -1992,7 +2130,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Start setup from the platform website",
+      "anchor": "start-setup-from-the-platform-website"
     },
     {
       "source": "apps/web/src/app/sites/control/login/page.tsx",
@@ -2023,7 +2163,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Control Panel sign-in",
+      "anchor": "control-panel-sign-in"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/page.tsx",
@@ -2052,7 +2194,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Control Panel overview",
+      "anchor": "control-panel-overview"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/tenants/page.tsx",
@@ -2086,7 +2230,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Manage Mahallu workspaces",
+      "anchor": "manage-mahallu-workspaces"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx",
@@ -2139,7 +2285,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Workspace command center",
+      "anchor": "workspace-command-center"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx",
@@ -2180,7 +2328,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Workspace billing",
+      "anchor": "workspace-billing"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx",
@@ -2212,7 +2362,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Workspace analytics",
+      "anchor": "workspace-analytics"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/users/page.tsx",
@@ -2242,7 +2394,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "User accounts and access",
+      "anchor": "user-accounts-and-access"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/users/[userId]/sessions/page.tsx",
@@ -2273,7 +2427,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "User sessions",
+      "anchor": "user-sessions"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/roles/page.tsx",
@@ -2303,7 +2459,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Platform roles",
+      "anchor": "platform-roles"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/plans/page.tsx",
@@ -2340,7 +2498,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Plans and included features",
+      "anchor": "plans-and-included-features"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/analytics/page.tsx",
@@ -2373,7 +2533,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Platform analytics",
+      "anchor": "platform-analytics"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/settings/page.tsx",
@@ -2403,7 +2565,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Platform settings",
+      "anchor": "platform-settings"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/audit-logs/page.tsx",
@@ -2433,7 +2597,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Platform audit log",
+      "anchor": "platform-audit-log"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/forms/page.tsx",
@@ -2467,7 +2633,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Form templates",
+      "anchor": "form-templates"
     },
     {
       "source": "apps/web/src/app/sites/control/(app)/forms/[templateId]/page.tsx",
@@ -2507,7 +2675,9 @@
         "apps/api/src/forms/forms.controller.ts",
         "apps/api/src/analytics/analytics.controller.ts",
         "apps/api/src/analytics/tenant-analytics.controller.ts"
-      ]
+      ],
+      "guideSection": "Form template detail",
+      "anchor": "form-template-detail"
     },
     {
       "source": "apps/web/src/app/sites/marketing/page.tsx",
@@ -2533,7 +2703,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Explore Mahallu",
+      "anchor": "explore-mahallu"
     },
     {
       "source": "apps/web/src/app/sites/marketing/new-mahalle/page.tsx",
@@ -2563,7 +2735,9 @@
         "apps/api/src/tenants/roles.controller.ts",
         "apps/api/src/tenants/tenants.controller.ts",
         "apps/api/src/onboarding/onboarding.controller.ts"
-      ]
+      ],
+      "guideSection": "Create a Mahallu with your account",
+      "anchor": "create-a-mahallu-with-your-account"
     },
     {
       "source": "apps/web/src/app/sites/tenant/[tenant]/page.tsx",
@@ -2591,7 +2765,9 @@
         "apps/api/src/announcements/announcements.controller.ts",
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Your Mahallu website",
+      "anchor": "your-mahallu-website"
     },
     {
       "source": "apps/web/src/app/sites/tenant/[tenant]/login/page.tsx",
@@ -2620,7 +2796,9 @@
         "apps/api/src/announcements/announcements.controller.ts",
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Member sign-in",
+      "anchor": "member-sign-in"
     },
     {
       "source": "apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx",
@@ -2647,7 +2825,9 @@
         "apps/api/src/announcements/announcements.controller.ts",
         "apps/api/src/events/event-registrations.controller.ts",
         "apps/api/src/events/events.controller.ts"
-      ]
+      ],
+      "guideSection": "Member dashboard",
+      "anchor": "member-dashboard"
     }
   ],
   "sourceHashes": {
@@ -2953,5 +3133,7 @@
     "apps/api/src/finance/dto/create-account.dto.ts": "285c28f8cffb3f3d2fc7b3bde797939ce00805bd11be3bee3671e85141754be9",
     "apps/api/src/finance/dto/update-account.dto.ts": "4a4a1166378d49906974c74ec4706977b49189fa23f1a0da65dd6fb2feae6100",
     "apps/api/src/main.ts": "53566469d91f9bbee003b97f5748c4d517f20645c40a6fe74c637c0a60bd1e55"
-  }
+  },
+  "documentationFormat": "English user guides",
+  "documentationUpdatedOn": "2026-10-15"
 }

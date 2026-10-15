@@ -1,159 +1,21 @@
 ---
 title: "Finance overview"
-description: "Current screen specification: Finance overview. English and Malayalam guidance for the development team."
+description: "Review balances, collections, expenses, and outstanding dues before recording finance activity."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Finance overview
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance`
+Review balances, collections, expenses, and outstanding dues before recording finance activity.
 
-### Purpose and access
+### Steps
 
-Review cash/bank balances, collection activity, expenses, and outstanding dues before opening finance workflows.
+1. Open **Finance**.
+2. Review the cash balance, bank balances, and six-month income and expense chart.
+3. Inspect **Recent Collections** and **Pending Dues & Arrears**.
+4. Open [Collections](/collection) or [Payments](/payments) to record or manage a transaction.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Things to know
 
-### Screen layout
-
-The dashboard presents cash balance, bank balances, a six-month income/expense chart, Recent Collections, and Pending Dues & Arrears.
-
-### Fields and displayed information
-
-
-Displayed table columns: **Date**, **Payer / Family**, **Category**, **Amount**, **Member / Family**, **Particulars**, **Due Date**.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Finance Reports | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Record Payment | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Record Collection | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Finance Reports | `${base}/reports` |
-| Record Payment | `${base}/payments` |
-| Record Collection | `${base}/collections/new` |
-| View Cash Book &rarr; | `/${slug}/accountant/cash-book` |
-| View Bank Book &rarr; | `/${slug}/accountant/bank-book` |
-| Manage Funds | `/${slug}/settings/finance` |
-| Collections Friday, Family, Donation | `${base}/collections` |
-| Payments Electricity, repairs & expenses | `${base}/payments` |
-| Dues & Subscriptions Monthly member contributions | `${base}/collections` |
-| Financial Reports Inflows, outflows & summaries | `${base}/reports` |
-| View All | `${base}/collections` |
-
-
-
-### Interaction sequence
-
-Inspect the balances and trend → open collection or payment links to record transactions → return to review refreshed summaries.
-
-### States and rules
-
-Unavailable finance access produces a permission panel. Supporting panels use their own fallbacks. A balance card is a summary, not a bank-reconciliation or payment control.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/finance/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
-
-
-Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Finance overview
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/finance`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-ധനകാര്യ പ്രവർത്തനങ്ങൾ തുടങ്ങുന്നതിന് മുമ്പ് പണം/ബാങ്ക് ബാലൻസ്, വരവ്, ചെലവ്, കുടിശ്ശിക എന്നിവ പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-കാഷ് ബാലൻസ്, ബാങ്ക് ബാലൻസുകൾ, ആറുമാസ വരവ്/ചെലവ് ചാർട്ട്, Recent Collections, Pending Dues & Arrears എന്നിവ കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Date**, **Payer / Family**, **Category**, **Amount**, **Member / Family**, **Particulars**, **Due Date**.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Finance Reports | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Record Payment | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Record Collection | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Finance Reports | `${base}/reports` |
-| Record Payment | `${base}/payments` |
-| Record Collection | `${base}/collections/new` |
-| View Cash Book &rarr; | `/${slug}/accountant/cash-book` |
-| View Bank Book &rarr; | `/${slug}/accountant/bank-book` |
-| Manage Funds | `/${slug}/settings/finance` |
-| Collections Friday, Family, Donation | `${base}/collections` |
-| Payments Electricity, repairs & expenses | `${base}/payments` |
-| Dues & Subscriptions Monthly member contributions | `${base}/collections` |
-| Financial Reports Inflows, outflows & summaries | `${base}/reports` |
-| View All | `${base}/collections` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-ബാലൻസും പ്രവണതയും പരിശോധിക്കുക → വരവോ ചെലവോ രേഖപ്പെടുത്താൻ ബന്ധപ്പെട്ട ലിങ്ക് തുറക്കുക → പുതുക്കിയ സംഗ്രഹം കാണാൻ മടങ്ങുക.
-
-### നിലകളും നിയമങ്ങളും
-
-ധനകാര്യ പ്രവേശനം ലഭ്യമല്ലെങ്കിൽ അനുമതി സന്ദേശമുണ്ട്. അനുബന്ധ വിഭാഗങ്ങൾക്ക് പ്രത്യേകം fallback ഉണ്ട്. ബാലൻസ് കാർഡ് സംഗ്രഹമാണ്; ബാങ്ക് പൊരുത്തപ്പെടുത്തലോ പണം നൽകലോ നടത്തുന്ന നിയന്ത്രണമല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/finance/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+A balance card summarizes recorded activity; it does not reconcile a bank account. If a panel is unavailable, check the related finance list before interpreting its figures.

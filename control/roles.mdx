@@ -1,159 +1,33 @@
 ---
 title: "Platform roles"
-description: "Current screen specification: Platform roles. English and Malayalam guidance for the development team."
+description: "Grant and revoke platform-wide access for operator accounts."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
 ## Platform roles
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/roles`
+Grant and revoke platform-wide access for operator accounts.
 
-### Purpose and access
+### Steps
 
-Inspect platform-level permissions and assign or revoke platform access.
+1. Open **Platform Roles & Permissions**.
+2. Review the role summaries and current staff assignments.
+3. Choose **Assign Role**, select the account, and choose **SUPER_ADMIN**, **PLATFORM_STAFF**, or **PLATFORM_SUPPORT**.
+4. Choose **Grant Platform Access** and review the refreshed assignments.
+5. Use **Revoke** to remove an account’s platform role.
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-Platform Roles & Permissions shows role summaries and staff assignments. Assign Platform Role asks for a user and SUPER_ADMIN, PLATFORM_STAFF, or PLATFORM_SUPPORT.
+#### Roles permissions
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Select User** | Required. Choose a user... |
+| **Platform Role** | Required. SUPER_ADMIN (Full Root Privileges), PLATFORM_STAFF (Operations & Billing), PLATFORM_SUPPORT (Support Mode Only); Default: PLATFORM_STAFF |
 
+### Things to know
 
-Displayed table columns: **Permission**, **Identifier Key**, **SUPER_ADMIN**, **PLATFORM_STAFF**, **PLATFORM_SUPPORT**, **Operator**, **Contact Email**, **Phone**, **Account Status**, **Action**.
-
-#### Fields and filters: Roles permissions view
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Select User | `assign-user-select` | select | Yes | Choose a user... |
-| Platform Role | `assign-role-select` | select | Yes | SUPER_ADMIN (Full Root Privileges), PLATFORM_STAFF (Operations & Billing), PLATFORM_SUPPORT (Support Mode Only); Initial: PLATFORM_STAFF |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Assign Role | Opens the `is assign` view. | `roles-permissions-view.tsx` |
-| Revoke platform role | Submits the associated API change; follow the sequence and failure rules below. | `roles-permissions-view.tsx` |
-| Cancel | Closes or clears the `is assign` view/selection. | `roles-permissions-view.tsx` |
-| Grant Platform Access | Submits the associated API change; follow the sequence and failure rules below. | `roles-permissions-view.tsx` |
-
-
-
-### Interaction sequence
-
-Assign Role → choose account and role → Grant Platform Access → refresh. Revoke sends role=null for the selected account.
-
-### States and rules
-
-These roles apply across the control plane and do not replace tenant roles. The API restricts grant/revoke operations; the role summary is descriptive rather than an editable permission matrix.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/roles/page.tsx`
-- `apps/web/src/features/platform/roles-permissions-view.tsx`
-
-Data and access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Platform roles
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/roles`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Platform permissions പരിശോധിച്ച് platform access നൽകുകയോ പിൻവലിക്കുകയോ ചെയ്യുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-Platform Roles & Permissionsൽ role summaries, staff assignments ഉണ്ട്. Assign Platform Roleൽ user, SUPER_ADMIN/PLATFORM_STAFF/PLATFORM_SUPPORT തിരഞ്ഞെടുക്കാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Permission**, **Identifier Key**, **SUPER_ADMIN**, **PLATFORM_STAFF**, **PLATFORM_SUPPORT**, **Operator**, **Contact Email**, **Phone**, **Account Status**, **Action**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Roles permissions view
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Select User | `assign-user-select` | select | ഉണ്ട് | Choose a user... |
-| Platform Role | `assign-role-select` | select | ഉണ്ട് | SUPER_ADMIN (Full Root Privileges), PLATFORM_STAFF (Operations & Billing), PLATFORM_SUPPORT (Support Mode Only); ആരംഭം: PLATFORM_STAFF |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Assign Role | `is assign` കാഴ്ച തുറക്കും. | `roles-permissions-view.tsx` |
-| Revoke platform role | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `roles-permissions-view.tsx` |
-| Cancel | `is assign` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `roles-permissions-view.tsx` |
-| Grant Platform Access | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `roles-permissions-view.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Assign Role → account/role → Grant Platform Access → പുതുക്കും. Revoke തിരഞ്ഞെടുത്ത accountന് role=null അയക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-ഇവ control plane roles ആണ്; tenant rolesന് പകരമല്ല. Grant/revoke API നിയന്ത്രിക്കുന്നു; role summary വിവരണമാണ്, editable permission matrix അല്ല.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/roles/page.tsx`
-- `apps/web/src/features/platform/roles-permissions-view.tsx`
-
-Data/access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+Platform roles control cross-workspace operations. They do not replace Mahallu roles. Your own platform privileges determine whether you can grant or revoke access; role summaries are not an editable permission matrix.

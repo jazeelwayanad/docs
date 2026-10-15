@@ -1,373 +1,91 @@
 ---
-title: "Tenant command center"
-description: "Current screen specification: Tenant command center. English and Malayalam guidance for the development team."
+title: "Workspace command center"
+description: "Review a Mahallu workspace and manage its profile, features, status, billing, and operational views."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Workspace command center
 
-## Tenant command center
+Review a Mahallu workspace and manage its profile, features, status, billing, and operational views.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]`
+### Steps
 
-### Purpose and access
+1. Open a workspace from [Fleet & Mahalles](/control/tenants).
+2. Choose **Overview & Profile** to review Mahallu identity, Masjid leadership, location, and office-bearer information. Use **Edit profile** to make permitted changes, then save.
+3. Use **Mahall Admin Operations** to inspect the available operational lists. Open the public or administrator site where needed.
+4. In **Feature Flags**, choose **Inherit**, **Force on**, or **Force off** for a module and save.
+5. In **Plans & Billing**, manage subscriptions, invoices, and payments as described in [Workspace billing](/control/tenant-billing). Review **Audit Stream** for changes.
+6. Use suspend or reactivate to change status. Permanent deletion requires entering the workspace’s confirmation slug.
 
-Inspect and administer one tenant’s identity, features, operations, subscription, invoices, payments, and audit history.
+### Fields and choices
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Tenant status actions
 
-TenantCommandCenter provides tabbed sections for Mahalle Profile, Masjid/religious leadership, jurisdiction, office bearers, module overrides, subscription, invoices, payments, and audit. It also opens public/admin sites and tenant operations views.
-
-### Fields and displayed information
-
-
-Displayed table columns: **Overview & Profile**, **Mahall Admin Operations**, **Feature Flags**, **Plans & Billing**, **Audit Stream**.
-
-#### Fields and filters: Tenant status actions
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Delete confirm slug | `delete-confirm-slug` | text | Not marked | — |
-
-
-#### Fields and filters: Edit tenant dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Mahalle Name | `edit-name` | text | Yes | — |
-| Slug (Immutable) | `edit-slug` | text | Not marked | — |
-| Description | `edit-desc` | textarea | Not marked | — |
-| Contact Email | `edit-email` | email | Not marked | — |
-| Contact Phone | `edit-phone` | text | Not marked | — |
-| Website | `edit-website` | text | Not marked | — |
-| Masjid Name | `edit-masjid` | text | Not marked | — |
-| Masjid Phone | `edit-masjid-phone` | text | Not marked | — |
-| Imam Name | `edit-imam` | text | Not marked | — |
-| Khatheeb Name | `edit-khatheeb` | text | Not marked | — |
-| Masjid Address | `edit-masjid-addr` | text | Not marked | — |
-| State | `edit-state` | searchable select | Not marked | Select State |
-| District | `edit-district` | searchable select | Not marked | Select District |
-| Place / Town | `edit-place` | text | Not marked | — |
-| Address Line | `edit-addr1` | text | Not marked | — |
-| PIN / Postal Code | `edit-pin` | text | Not marked | — |
-| President Name | `edit-pres-name` | text | Not marked | — |
-| President Phone | `edit-pres-phone` | text | Not marked | — |
-| Secretary Name | `edit-sec-name` | text | Not marked | — |
-| Secretary Phone | `edit-sec-phone` | text | Not marked | — |
-| Treasurer Name | `edit-tres-name` | text | Not marked | — |
-| Treasurer Phone | `edit-tres-phone` | text | Not marked | — |
-
-
-Displayed table columns: **Feature**, **Effective**, **Override**.
-
-#### Fields and filters: Tenant features editor
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Choice for(feature.override) | `choiceFor(feature.override)` | select | Not marked | Inherit (  ), Force on, Force off |
-
-
-#### Fields and filters: Tenant subscription editor
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Plan id | `planId` | select | Not marked | — |
-| Subscription.status | `subscription.status` | select | Not marked | — |
-
-
-Displayed table columns: **Amount**, **Description**, **Status**, **Issued**, **Due**.
-
-#### Fields and filters: Create invoice dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Amount | `invoice-amount` | number | Yes | 999.00; min 0.01 |
-| Description (optional) | `invoice-description` | text | Not marked | Growth plan — September |
-| Due date (optional) | `invoice-due` | date | Not marked | — |
-
-
-Displayed table columns: **Amount**, **Method**, **Reference**, **Recorded**.
-
-#### Fields and filters: Record payment dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Amount | `payment-amount` | number | Yes | 999.00; min 0.01 |
-| Method | `payment-method` | text | Yes | Bank transfer |
-| Reference (optional) | `payment-reference` | text | Not marked | UTR / cheque no. |
-
-
-Displayed table columns: **Full Name**, **Phone Number**, **Associated Family**, **Family Name**, **Address**, **Primary Phone**, **Event Title**, **Location**, **Starts At**, **Title**, **Status / Published**, **Program Name**, **Description**, **Admin Full Name**, **Email Address**, **Assigned Role**.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Edit Profile | Opens the `edit dialog` view. | `tenant-command-center.tsx` |
-| Public Portal | Opens the configured destination. | `tenant-command-center.tsx` |
-| Launch Admin Console | Opens the configured destination. | `tenant-command-center.tsx` |
-| Edit | Opens the `edit dialog` view. | `tenant-command-center.tsx` |
-| Stop this Mahalle / Reactivate this Mahalle | Submits the associated API change; follow the sequence and failure rules below. | `tenant-status-actions.tsx` |
-| Delete permanently | Opens the `delete dialog` view. | `tenant-status-actions.tsx` |
-| Delete permanently | Submits the associated API change; follow the sequence and failure rules below. | `tenant-status-actions.tsx` |
-| Cancel | Invokes the associated handler; see the sequence below. | `edit-tenant-dialog.tsx` |
-| Save Profile Changes | Submits the associated API change; follow the sequence and failure rules below. | `edit-tenant-dialog.tsx` |
-| Change plan / Assign plan | Submits the associated API change; follow the sequence and failure rules below. | `tenant-subscription-editor.tsx` |
-| Issue invoice | Opens the `create` view. | `invoices-panel.tsx` |
-| Mark paid | Submits the associated API change; follow the sequence and failure rules below. | `invoices-panel.tsx` |
-| Void | Submits the associated API change; follow the sequence and failure rules below. | `invoices-panel.tsx` |
-| Issue invoice | Submits the associated API change; follow the sequence and failure rules below. | `create-invoice-dialog.tsx` |
-| Record payment | Opens the `record` view. | `payments-panel.tsx` |
-| Record payment | Submits the associated API change; follow the sequence and failure rules below. | `record-payment-dialog.tsx` |
-| Members | Opens the configured destination. | `tenant-operations-viewer.tsx` |
-| Finance | Opens the configured destination. | `tenant-operations-viewer.tsx` |
-| Registers | Opens the configured destination. | `tenant-operations-viewer.tsx` |
-| Events | Opens the configured destination. | `tenant-operations-viewer.tsx` |
-| Launch Admin Console | Opens the configured destination. | `tenant-operations-viewer.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| &larr; Back to Fleet Directory | `/tenants` |
-| Open Full Audit Log &rarr; | `/audit-logs?tenantId=${tenant.id}` |
+| **Confirmation slug** | Enter confirmation slug. |
 
+<Accordion title="Edit tenant">
 
-
-### Interaction sequence
-
-Select a tenant → choose a tab → Edit profile or change a feature override → save and refresh. Use billing tools to assign plans, issue invoices, or record payments. Suspend/reactivate toggles tenant status; permanent delete requires the confirmation slug.
-
-### States and rules
-
-Feature overrides offer Inherit, Force on, Force off. Missing tenants use notFound. Opening the admin site does not itself create a support session or impersonate a tenant administrator; backend permission rules still apply.
-
-Explicit validation messages in the rendered forms:
-
-- Mahalle name cannot be empty
-
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx`
-- `apps/web/src/features/platform/tenant-command-center.tsx`
-- `apps/web/src/features/platform/tenant-status-actions.tsx`
-- `apps/web/src/features/platform/edit-tenant-dialog.tsx`
-- `apps/web/src/features/platform/tenant-features-editor.tsx`
-- `apps/web/src/features/platform/tenant-subscription-editor.tsx`
-- `apps/web/src/features/platform/invoices-panel.tsx`
-- `apps/web/src/features/platform/create-invoice-dialog.tsx`
-- `apps/web/src/features/platform/payments-panel.tsx`
-- `apps/web/src/features/platform/record-payment-dialog.tsx`
-- `apps/web/src/features/platform/tenant-operations-viewer.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/features.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Tenant command center
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-ഒരു tenantന്റെ identity, features, പ്രവർത്തനങ്ങൾ, subscription, invoices, payments, audit എന്നിവ പരിപാലിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-TenantCommandCenterൽ profile, Masjid/religious leadership, jurisdiction, office bearers, module overrides, subscription, invoices, payments, audit ടാബുകളുണ്ട്. Public/admin sites, tenant operations കാഴ്ചകളും തുറക്കാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Overview & Profile**, **Mahall Admin Operations**, **Feature Flags**, **Plans & Billing**, **Audit Stream**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tenant status actions
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Delete confirm slug | `delete-confirm-slug` | text | ചിഹ്നമില്ല | — |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Edit tenant dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Mahalle Name | `edit-name` | text | ഉണ്ട് | — |
-| Slug (Immutable) | `edit-slug` | text | ചിഹ്നമില്ല | — |
-| Description | `edit-desc` | textarea | ചിഹ്നമില്ല | — |
-| Contact Email | `edit-email` | email | ചിഹ്നമില്ല | — |
-| Contact Phone | `edit-phone` | text | ചിഹ്നമില്ല | — |
-| Website | `edit-website` | text | ചിഹ്നമില്ല | — |
-| Masjid Name | `edit-masjid` | text | ചിഹ്നമില്ല | — |
-| Masjid Phone | `edit-masjid-phone` | text | ചിഹ്നമില്ല | — |
-| Imam Name | `edit-imam` | text | ചിഹ്നമില്ല | — |
-| Khatheeb Name | `edit-khatheeb` | text | ചിഹ്നമില്ല | — |
-| Masjid Address | `edit-masjid-addr` | text | ചിഹ്നമില്ല | — |
-| State | `edit-state` | searchable select | ചിഹ്നമില്ല | Select State |
-| District | `edit-district` | searchable select | ചിഹ്നമില്ല | Select District |
-| Place / Town | `edit-place` | text | ചിഹ്നമില്ല | — |
-| Address Line | `edit-addr1` | text | ചിഹ്നമില്ല | — |
-| PIN / Postal Code | `edit-pin` | text | ചിഹ്നമില്ല | — |
-| President Name | `edit-pres-name` | text | ചിഹ്നമില്ല | — |
-| President Phone | `edit-pres-phone` | text | ചിഹ്നമില്ല | — |
-| Secretary Name | `edit-sec-name` | text | ചിഹ്നമില്ല | — |
-| Secretary Phone | `edit-sec-phone` | text | ചിഹ്നമില്ല | — |
-| Treasurer Name | `edit-tres-name` | text | ചിഹ്നമില്ല | — |
-| Treasurer Phone | `edit-tres-phone` | text | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Feature**, **Effective**, **Override**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tenant features editor
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Choice for(feature.override) | `choiceFor(feature.override)` | select | ചിഹ്നമില്ല | Inherit (  ), Force on, Force off |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tenant subscription editor
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Plan id | `planId` | select | ചിഹ്നമില്ല | — |
-| Subscription.status | `subscription.status` | select | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Amount**, **Description**, **Status**, **Issued**, **Due**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Create invoice dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Amount | `invoice-amount` | number | ഉണ്ട് | 999.00; min 0.01 |
-| Description (optional) | `invoice-description` | text | ചിഹ്നമില്ല | Growth plan — September |
-| Due date (optional) | `invoice-due` | date | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Amount**, **Method**, **Reference**, **Recorded**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Record payment dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Amount | `payment-amount` | number | ഉണ്ട് | 999.00; min 0.01 |
-| Method | `payment-method` | text | ഉണ്ട് | Bank transfer |
-| Reference (optional) | `payment-reference` | text | ചിഹ്നമില്ല | UTR / cheque no. |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Full Name**, **Phone Number**, **Associated Family**, **Family Name**, **Address**, **Primary Phone**, **Event Title**, **Location**, **Starts At**, **Title**, **Status / Published**, **Program Name**, **Description**, **Admin Full Name**, **Email Address**, **Assigned Role**.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Edit Profile | `edit dialog` കാഴ്ച തുറക്കും. | `tenant-command-center.tsx` |
-| Public Portal | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-command-center.tsx` |
-| Launch Admin Console | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-command-center.tsx` |
-| Edit | `edit dialog` കാഴ്ച തുറക്കും. | `tenant-command-center.tsx` |
-| Stop this Mahalle / Reactivate this Mahalle | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenant-status-actions.tsx` |
-| Delete permanently | `delete dialog` കാഴ്ച തുറക്കും. | `tenant-status-actions.tsx` |
-| Delete permanently | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenant-status-actions.tsx` |
-| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `edit-tenant-dialog.tsx` |
-| Save Profile Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `edit-tenant-dialog.tsx` |
-| Change plan / Assign plan | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenant-subscription-editor.tsx` |
-| Issue invoice | `create` കാഴ്ച തുറക്കും. | `invoices-panel.tsx` |
-| Mark paid | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `invoices-panel.tsx` |
-| Void | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `invoices-panel.tsx` |
-| Issue invoice | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `create-invoice-dialog.tsx` |
-| Record payment | `record` കാഴ്ച തുറക്കും. | `payments-panel.tsx` |
-| Record payment | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `record-payment-dialog.tsx` |
-| Members | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-operations-viewer.tsx` |
-| Finance | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-operations-viewer.tsx` |
-| Registers | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-operations-viewer.tsx` |
-| Events | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-operations-viewer.tsx` |
-| Launch Admin Console | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `tenant-operations-viewer.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
+| Field or control | Guidance |
 | --- | --- |
-| &larr; Back to Fleet Directory | `/tenants` |
-| Open Full Audit Log &rarr; | `/audit-logs?tenantId=${tenant.id}` |
+| **Mahalle Name** | Required. Enter mahalle name. |
+| **Slug (Immutable)** | Enter slug (immutable). |
+| **Description** | Enter additional details. |
+| **Contact Email** | Enter an email address. |
+| **Contact Phone** | Enter contact phone. |
+| **Website** | Enter website. |
+| **Masjid Name** | Enter masjid name. |
+| **Masjid Phone** | Enter masjid phone. |
+| **Imam Name** | Enter imam name. |
+| **Khatheeb Name** | Enter khatheeb name. |
+| **Masjid Address** | Enter masjid address. |
+| **State** | Select State |
+| **District** | Select District |
+| **Place / Town** | Enter place / town. |
+| **Address Line** | Enter address line. |
+| **PIN / Postal Code** | Enter pin / postal code. |
+| **President Name** | Enter president name. |
+| **President Phone** | Enter president phone. |
+| **Secretary Name** | Enter secretary name. |
+| **Secretary Phone** | Enter secretary phone. |
+| **Treasurer Name** | Enter treasurer name. |
+| **Treasurer Phone** | Enter treasurer phone. |
 
+</Accordion>
 
+#### Tenant features editor
 
-### പ്രവർത്തനക്രമം
+| Field or control | Guidance |
+| --- | --- |
+| **Feature override** | Inherit , Force on, Force off |
 
-Tenant തിരഞ്ഞെടുക്കുക → tab തുറക്കുക → Edit profile അല്ലെങ്കിൽ feature override മാറ്റുക → സംരക്ഷിച്ച് പുതുക്കുക. Billing toolsൽ plan നൽകുക, invoice സൃഷ്ടിക്കുക, payment രേഖപ്പെടുത്തുക. Suspend/reactivate tenant സ്ഥിതി മാറ്റും; permanent deleteന് confirmation slug വേണം.
+#### Tenant subscription editor
 
-### നിലകളും നിയമങ്ങളും
+| Field or control | Guidance |
+| --- | --- |
+| **Plan** | Choose an available option. |
+| **Subscription status** | Choose an available option. |
 
-Overrideൽ Inherit, Force on, Force off ഉണ്ട്. Tenant ഇല്ലെങ്കിൽ notFound. Admin site തുറക്കുന്നത് support session സൃഷ്ടിക്കുകയോ impersonate ചെയ്യുകയോ ചെയ്യുന്നില്ല; backend അനുമതികൾ ബാധകമാണ്.
+#### Create invoice
 
-Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
+| Field or control | Guidance |
+| --- | --- |
+| **Amount** | Required. 999.00; Minimum 0.01 |
+| **Description (optional)** | Growth plan — September |
+| **Due date (optional)** | Choose a date. |
 
-- Mahalle name cannot be empty
+#### Record payment
 
+| Field or control | Guidance |
+| --- | --- |
+| **Amount** | Required. 999.00; Minimum 0.01 |
+| **Method** | Required. Bank transfer |
+| **Reference (optional)** | UTR / cheque no. |
 
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
+### Things to know
 
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/page.tsx`
-- `apps/web/src/features/platform/tenant-command-center.tsx`
-- `apps/web/src/features/platform/tenant-status-actions.tsx`
-- `apps/web/src/features/platform/edit-tenant-dialog.tsx`
-- `apps/web/src/features/platform/tenant-features-editor.tsx`
-- `apps/web/src/features/platform/tenant-subscription-editor.tsx`
-- `apps/web/src/features/platform/invoices-panel.tsx`
-- `apps/web/src/features/platform/create-invoice-dialog.tsx`
-- `apps/web/src/features/platform/payments-panel.tsx`
-- `apps/web/src/features/platform/record-payment-dialog.tsx`
-- `apps/web/src/features/platform/tenant-operations-viewer.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/features.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+**Mahalle Name** cannot be blank. The profile’s slug is read-only. **Inherit** uses the plan entitlement; the force options explicitly override it. Opening the administrator site does not sign you in as another person. Available operations still depend on your access. A missing workspace cannot be opened.

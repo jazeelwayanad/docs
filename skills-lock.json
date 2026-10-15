@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "skills": {
+    "mintlify": {
+      "source": "mintlify.com",
+      "sourceUrl": "https://mintlify.com/docs",
+      "sourceType": "well-known",
+      "computedHash": "de9ca2fce0e71912d02a8702096c875e1f52e726dad5e2d72245c188a473d481",
+      "wellKnownDigest": "sha256:18b947ad9ab1ce972d0cc2d7394221ab0cc3699eddffb08decb876f40eb59435"
+    },
+    "mintlify-api": {
+      "source": "mintlify.com",
+      "sourceUrl": "https://mintlify.com/docs",
+      "sourceType": "well-known",
+      "computedHash": "4b73380bdf72f728299bbd1d40b2119d44651bde75b4a23317da290936bc3301",
+      "wellKnownDigest": "sha256:dacffa9de4971a0156927fa472e6ed552e3eb013a0b728fb0340c491815168e2"
+    }
+  }
+}

@@ -2,49 +2,52 @@
 
 ## Purpose and source of truth
 
-- This Mintlify site is an internal product guide and page-by-page screen specification for the development team.
+- This Mintlify site is a complete English user guide for Mahallu administrators, accountants, platform operators, members, and prospective customers.
+- Explain how to use the product. Do not turn pages into developer screen specifications or expose implementation references, API details, source paths, internal input identifiers, or application route templates.
 - The application source is `/Volumes/New Volume/mahall-app`. Inspect it without modifying it during documentation tasks.
-- Describe current implemented behavior. Distinguish proposed requirements from current behavior and obtain product input before defining new behavior.
-- Cover the Overview, Mahallu Admin, Control Panel, Mahallu Member, and Marketing areas. Preserve existing documentation slugs when practical.
+- Describe current implemented behavior. Explain unfinished features in plain language without promising that they save changes or complete a workflow. Obtain product input before defining new behavior.
+- Cover Overview, Mahallu Admin, Control Panel, Mahallu Member, and Marketing. Preserve existing documentation slugs when practical.
 - Pages use MDX with YAML frontmatter. Site configuration and navigation live in `docs.json`.
-- `reference/route-inventory.json` maps application page routes to specifications and records the reviewed source hashes. Update it when routes or relevant behavior change.
+- `reference/route-inventory.json` is maintenance data, not a reader-facing API or route guide. It maps application routes to user-guide sections and records reviewed source hashes. Update mappings when guides move; update source hashes and source-review dates only after reviewing the relevant behavior.
+- Keep documentation-format updates separate from application-review metadata. Do not claim a new application review merely because prose was rewritten.
 
 ## Terminology
 
-- Use **Mahallu** in prose. Preserve Mahalle, Mahall, tenant, and Ente Mahallu where they are exact UI labels or code identifiers.
-- A **member** is a citizen record; a **user/account** is an authenticated operator identity. Do not confuse these entities.
+- Use **Mahallu** in prose. Preserve Mahalle, Mahall, tenant, and Ente Mahallu where they are exact UI labels.
+- A **member** is a citizen record; a **user/account** is an authenticated operator identity.
 - A **family** is a household unit; a **house** is a dwelling.
-- Use the configured division term where relevant. Ward, zone, and division are not always fixed labels.
-- Keep platform roles separate from tenant roles, and operational funds separate from ledger accounts.
+- Use the configured division term where relevant. Ward, zone, and division are not fixed labels.
+- Keep platform roles separate from Mahallu roles, and operational funds separate from ledger accounts.
 
 ## Page format and style
 
-- Every page needs a title and a useful description in frontmatter.
-- Combine user explanation and developer screen specification on the same page.
-- Use `Tabs` with `Tab title="English"` and `Tab title="മലയാളം"`. Both tabs must cover the same screens, fields, rules, and gaps.
-- Preserve exact UI labels, route parameters, input identifiers, and enum values in both languages.
-- Each screen needs: purpose/access, layout in display order, fields/displayed information, actions, interaction sequence, states/rules, and implementation references.
-- Group related screens on one documentation page only when each route remains explicitly documented. Describe redirect routes as navigation behavior.
+- Every page needs a useful title and description in frontmatter.
+- Write in English only. Do not add language-selection tabs or Malayalam content.
+- Lead with what the reader can do. State prerequisites and access needs, give numbered task steps, explain relevant fields and choices, and cover errors and current limitations.
+- Document forms, dialogs, filters, detail views, and related records. Group related screens when helpful, but give every mapped screen its own meaningful section.
+- Explain redirects as what happens after navigation or sign-in, without exposing route templates.
 - Use active voice and second person. Keep sentences concise and headings in sentence case.
-- Bold UI labels in instructions. Use code formatting for file paths, routes, commands, and identifiers.
-- Field tables must distinguish required UI markers from client validation and backend validation. Include conditional visibility and defaults when established by source.
-- Keep implementation references in their dedicated section. Paths there are application-relative; documentation links are root-relative without `.mdx`.
+- Bold exact UI labels in instructions. Link to other guides using root-relative paths without `.mdx`.
+- Keep field tables useful to users: labels, required information, choices, defaults, and conditional details. Distinguish visible required markers from additional saving requirements when they differ, using plain language.
+- Use accordions for long optional field references. Avoid repeating the same form on multiple pages when a link to its complete guide is sufficient.
+- The guide directory at `reference/coverage.mdx` lists user guides, not application routes or implementation gaps.
 
 ## Verification rules
 
-- Trace the route, rendered components, dialogs, data helpers, validators, API controllers, and relevant guards/services before describing a workflow.
-- Imports alone do not prove that a component is rendered. Read the actual JSX and event bindings, including buttons attached to external forms.
-- Never infer persistence from a success message. Identify local-state changes, fixed display data, missing handlers/destinations, and unfinished integrations explicitly.
-- Identify partial multi-request behavior and suppressed errors. Do not describe such workflows as atomic or guaranteed to succeed.
-- Document authorization as implemented. Sidebar visibility is not an API access check; role elevation and guard exceptions must be accounted for.
-- Do not claim a browser journey was tested when it was only source-reviewed. Record the review date and source snapshot.
-- Ask the product owner about unresolved intended behavior; do not invent it. Record a source-backed implementation gap without blocking unrelated documentation.
-- Use current Mintlify guidance for components/configuration. Install its documentation skill with `npx skills add https://mintlify.com/docs` when needed. Use configured Mintlify MCP tools when available; local MDX edits are appropriate for local-only repository work.
-- Run `node scripts/check-docs.mjs`, then `mint validate` and `mint broken-links`. Preview representative long/bilingual pages and check both language tabs.
+- Trace the route, rendered components, dialogs, data helpers, validators, API controllers, and relevant guards/services before describing uncertain workflows.
+- Imports alone do not prove a component is rendered. Read actual JSX and event bindings, including buttons attached to external forms.
+- Never infer persistence from a success message. Explain preview-only controls, fixed example data, unavailable actions, and unfinished integrations in user-facing terms.
+- Identify partial saves and suppressed failures. Tell readers to check existing records before retrying a partly completed operation.
+- Describe access as implemented. Navigation visibility does not establish authorization; platform access and permission exceptions must be considered during source review.
+- Do not claim a browser journey was tested when only source was reviewed. Keep source snapshots and review dates in maintenance records.
+- Record source-backed limitations without blocking unrelated documentation. Ask the product owner about intended behavior only when it is necessary to define new requirements.
+- Use current Mintlify guidance for components and configuration. Install its documentation skill with `npx skills add https://mintlify.com/docs` when needed. Prefer configured Mintlify MCP tools when available; local MDX edits are appropriate for this repository.
+- Run `node scripts/check-docs.mjs`, then its `--source` mode against the application checkout, then `mint validate` and `mint broken-links`.
+- Preview representative long guides, field accordions, forms, accounting reports, member guides, and Control Panel guides at desktop and mobile sizes.
 
 ## Content boundaries
 
-- Include all existing screens, their forms/dialogs, related detail views, shared navigation, and observed failure/empty/loading states.
-- Exclude a separate technical architecture handbook, installation guide for the application, and exhaustive API reference unless requested.
-- Never include real credentials, tokens, personal records, or production infrastructure secrets. Use route/host templates and fictitious examples where necessary.
+- Include all existing screens and their forms, dialogs, related detail views, navigation, and observed failure, empty, and loading states relevant to a reader.
+- Exclude a technical architecture handbook, application installation guide, exhaustive API reference, and source-code references from the user documentation.
+- Never include real credentials, tokens, personal records, or production infrastructure secrets. Use fictitious examples.
 - Do not change application behavior, publish the site, or alter hosting/access configuration as part of a local documentation task.

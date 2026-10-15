@@ -1,173 +1,38 @@
 ---
 title: "Chart of accounts"
-description: "Current screen specification: Chart of accounts. English and Malayalam guidance for the development team."
+description: "Create and maintain ledger accounts used for accounting and financial reports."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Chart of accounts
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/chart-of-accounts`
+Create and maintain ledger accounts used for accounting and financial reports.
 
-### Purpose and access
+### Steps
 
-Maintain the tenant’s ledger accounts and their hierarchy.
+1. Open **Accountant** → **Chart of accounts**.
+2. Choose **New Account**, enter the account name, and select its type. Add a code and description if needed.
+3. Choose **Save Account**. A successful save closes the dialog and refreshes the list.
+4. Search by name, code, description, or parent name. Filter by account type or **System Accounts**.
+5. Open an account name or choose **Edit account details**. Update its name, code, description, or available details, then choose **Update Account**.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The screen has account-type and System Accounts filters, name/code search, an account table, and create/edit dialogs. Fields include name, code, type, parent account, and description.
+#### Accounts
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Account filter** | All Accounts , Assets , Liabilities , Equity , Income , Expenses , System Accounts ; Default: All |
+| **Search** | Search by name or code... |
+| **Account Name** | Required. e.g., Cash in Hand, Hundi Collection... |
+| **Account Code** | e.g., 1010, 2010... |
+| **Account Type** | Required. ASSET, LIABILITY, EQUITY, INCOME, EXPENSE; Default: ASSET |
+| **Parent Account (Optional)** | None (Top Level Account) |
+| **Description** | Account purpose or notes... |
 
+### Things to know
 
-Displayed table columns: **#**, **Account Name**, **Account Code**, **Account Type**, **Parent Account Name**, **Description**, **Action**.
-
-#### Fields and filters: Accounts client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Selected filter | `selectedFilter` | select | Not marked | All Accounts (  ), Assets (  ), Liabilities (  ), Equity (  ), Income (  ), Expenses (  ), System Accounts (  ); Initial: ALL |
-| Search query | `searchQuery` | text | Not marked | Search by name or code... |
-| Account Name | `name` | text | Yes | e.g., Cash in Hand, Hundi Collection... |
-| Account Code | `code` | text | Not marked | e.g., 1010, 2010... |
-| Account Type | `type` | select | Yes | ASSET, LIABILITY, EQUITY, INCOME, EXPENSE; Initial: ASSET |
-| Parent Account (Optional) | `parentId` | select | Not marked | None (Top Level Account) |
-| Description | `description` | textarea | Not marked | Account purpose or notes... |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| ALL / All | Changes the selected view, filter, or page in local state. | `accounts-client.tsx` |
-| New Account | Invokes the associated handler; see the sequence below. | `accounts-client.tsx` |
-| Reset filters | Changes the selected view, filter, or page in local state. | `accounts-client.tsx` |
-| Create first account | Invokes the associated handler; see the sequence below. | `accounts-client.tsx` |
-| Account name (row) | Opens the edit form populated from the selected record. | `accounts-client.tsx` |
-| Edit account details | Opens the edit form populated from the selected record. | `accounts-client.tsx` |
-| Cancel | Closes or clears the `modal` view/selection. | `accounts-client.tsx` |
-| Saving... / Update Account / Save Account | Submits the associated API change; follow the sequence and failure rules below. | `accounts-client.tsx` |
-
-
-
-### Interaction sequence
-
-Choose **New Account** → enter the name and type → optionally add code and description → choose **Save Account**. Success closes the dialog and refreshes the list. Click an account name or **Edit account details** to populate the edit dialog; **Update Account** sends name, code, description, and parent, but no type change. Selecting a parent encounters the request mismatch described below.
-
-### States and rules
-
-Blank names are rejected. Search also matches description and parent name. This screen does not expose a delete action; do not infer removal from account filtering.
-
-**Implementation gap:** The form sends `parentId` when you select a parent, while the create/update DTOs accept `parentAccountId`. The API enables `forbidNonWhitelisted`, so a nonempty parent selection is rejected as an unknown property. Saving with no parent omits `parentId`. Treat parent assignment as unfinished until the request contract is corrected.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/accounts-client.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-- `apps/api/src/finance/dto/create-account.dto.ts`
-- `apps/api/src/finance/dto/update-account.dto.ts`
-- `apps/api/src/main.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Chart of accounts
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/chart-of-accounts`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-മഹല്ലിന്റെ ledger അക്കൗണ്ടുകളും അവയുടെ ക്രമവും പരിപാലിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-അക്കൗണ്ട് തരം, System Accounts ഫിൽട്ടറുകൾ, പേര്/കോഡ് തിരച്ചിൽ, പട്ടിക, ചേർക്കൽ/തിരുത്തൽ ഡയലോഗുകൾ ഉണ്ട്. പേര്, കോഡ്, തരം, parent account, വിവരണം എന്നിവ നൽകാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **#**, **Account Name**, **Account Code**, **Account Type**, **Parent Account Name**, **Description**, **Action**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Accounts client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Selected filter | `selectedFilter` | select | ചിഹ്നമില്ല | All Accounts (  ), Assets (  ), Liabilities (  ), Equity (  ), Income (  ), Expenses (  ), System Accounts (  ); ആരംഭം: ALL |
-| Search query | `searchQuery` | text | ചിഹ്നമില്ല | Search by name or code... |
-| Account Name | `name` | text | ഉണ്ട് | e.g., Cash in Hand, Hundi Collection... |
-| Account Code | `code` | text | ചിഹ്നമില്ല | e.g., 1010, 2010... |
-| Account Type | `type` | select | ഉണ്ട് | ASSET, LIABILITY, EQUITY, INCOME, EXPENSE; ആരംഭം: ASSET |
-| Parent Account (Optional) | `parentId` | select | ചിഹ്നമില്ല | None (Top Level Account) |
-| Description | `description` | textarea | ചിഹ്നമില്ല | Account purpose or notes... |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| ALL / All | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `accounts-client.tsx` |
-| New Account | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `accounts-client.tsx` |
-| Reset filters | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `accounts-client.tsx` |
-| Create first account | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `accounts-client.tsx` |
-| Account name (row) | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `accounts-client.tsx` |
-| Edit account details | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `accounts-client.tsx` |
-| Cancel | `modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `accounts-client.tsx` |
-| Saving... / Update Account / Save Account | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `accounts-client.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-അക്കൗണ്ട് സൃഷ്ടിക്കുക → പേരും തരവും parentഉം നൽകുക → സംരക്ഷിക്കുക → പുതുക്കും. നിലവിലെ അക്കൗണ്ടിൽ പേര്, കോഡ്, വിവരണം, parent എന്നിവ തിരുത്താം; edit request തരം മാറ്റുന്നില്ല.
-
-### നിലകളും നിയമങ്ങളും
-
-ശൂന്യപേര് നിരസിക്കുന്നു. വിവരണവും parent പേരും തിരച്ചിലിൽ ഉൾപ്പെടുന്നു. ഈ സ്ക്രീനിൽ delete action ഇല്ല; ഫിൽട്ടറിൽ കാണാത്തത് നീക്കിയതാണെന്ന് കരുതരുത്.
-
-**Implementation gap:** Parent തിരഞ്ഞെടുക്കുമ്പോൾ form `parentId` അയയ്ക്കുന്നു; create/update DTOകൾ `parentAccountId` ആണ് സ്വീകരിക്കുന്നത്. APIയിൽ `forbidNonWhitelisted` ഉള്ളതിനാൽ parent നൽകിയ request unknown property ആയി നിരസിക്കുന്നു. Parent ഇല്ലാതെ save ചെയ്യുമ്പോൾ `parentId` ഒഴിവാക്കും. Request contract തിരുത്തുന്നതുവരെ parent assignment പൂർത്തിയായതായി കണക്കാക്കരുത്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/chart-of-accounts/accounts-client.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-- `apps/api/src/finance/dto/create-account.dto.ts`
-- `apps/api/src/finance/dto/update-account.dto.ts`
-- `apps/api/src/main.ts`
-
-</Tab>
-</Tabs>
+An account name is required. Parent-account assignment currently fails when saving through this screen; save without a parent. Editing does not change the account type. This page has no account-deletion action.

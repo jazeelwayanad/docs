@@ -1,167 +1,31 @@
 ---
 title: "Health and support"
-description: "Current screen specification: Health and support. English and Malayalam guidance for the development team."
+description: "Review member care needs and household welfare information."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Health and support
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/health-support`
+Review member care needs and household welfare information.
 
-### Purpose and access
+### Steps
 
-Review confidential member health cases and household welfare needs. The page explicitly identifies health.view as its access requirement.
+1. Open **Health and support** with an account allowed to view health information.
+2. Choose **Active Welfare Aid**, **Chronic Illness & Medicine**, **Disability Register**, **Care & Bedridden**, or **Welfare Households**.
+3. Search for a person or household and apply the available condition filters.
+4. Open the linked member or family profile to update health or welfare information.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The register has summary statistics, condition filters, search, and Active Welfare Aid, Chronic Illness & Medicine, Disability Register, Care & Bedridden, and Welfare Households views.
+#### Health support
 
-### Fields and displayed information
-
-
-#### Fields and filters: Health support client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Search | `search` | text | Not marked | Search health or welfare cases... |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| All Conditions | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| ( ) | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| Active Welfare Aid | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| Chronic Illness & Medicine | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| Disability Register | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| Care & Bedridden | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-| Welfare Households ( ) | Changes the selected view, filter, or page in local state. | `health-support-client.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| Open Record | `/${slug}/families/${f.id}` |
-| View Details | `/${slug}/members/${m.id}` |
+| **Search** | Search health or welfare cases... |
 
+### Things to know
 
-
-### Interaction sequence
-
-Choose a case category → filter by condition or search → open the linked member or household → edit the underlying health or welfare profile there.
-
-### States and rules
-
-Without health.view the page shows Restricted Access. Member and household lists have separate empty messages. The initial requests load up to 100 records per list; the view does not implement a separate medical case creation form.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/health-support/health-support-client.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/health-support.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`
-
-
-Relevant controller permission keys: `health.view`, `health.manage`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-- `apps/api/src/families/families.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Health and support
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/health-support`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-രഹസ്യ അംഗ ആരോഗ്യവിവരങ്ങളും കുടുംബ ക്ഷേമാവശ്യങ്ങളും പരിശോധിക്കുക. health.view ആണ് ഈ പേജിലെ വ്യക്തമായ പ്രവേശനാനുമതി.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-സംഗ്രഹ കണക്കുകൾ, രോഗാവസ്ഥ ഫിൽട്ടറുകൾ, തിരച്ചിൽ, Active Welfare Aid, Chronic Illness & Medicine, Disability Register, Care & Bedridden, Welfare Households കാഴ്ചകൾ എന്നിവയുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Health support client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Search | `search` | text | ചിഹ്നമില്ല | Search health or welfare cases... |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| All Conditions | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| Active Welfare Aid | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| Chronic Illness & Medicine | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| Disability Register | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| Care & Bedridden | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-| Welfare Households ( ) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `health-support-client.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Open Record | `/${slug}/families/${f.id}` |
-| View Details | `/${slug}/members/${m.id}` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-വിഭാഗം തിരഞ്ഞെടുക്കുക → രോഗാവസ്ഥയോ തിരച്ചിലോ ഉപയോഗിക്കുക → ബന്ധപ്പെട്ട അംഗമോ കുടുംബമോ തുറക്കുക → അവിടെയുള്ള ആരോഗ്യ/ക്ഷേമ പ്രൊഫൈൽ തിരുത്തുക.
-
-### നിലകളും നിയമങ്ങളും
-
-health.view ഇല്ലെങ്കിൽ Restricted Access കാണിക്കും. അംഗങ്ങളുടെയും കുടുംബങ്ങളുടെയും ശൂന്യ സന്ദേശങ്ങൾ വ്യത്യസ്തമാണ്. ഓരോ ലിസ്റ്റിലും ആദ്യം 100 രേഖകൾ വരെ വായിക്കുന്നു; പ്രത്യേക മെഡിക്കൽ കേസ് സൃഷ്ടിക്കൽ form ഇല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/health-support/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/health-support/health-support-client.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/health-support.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `health.view`, `health.manage`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-- `apps/api/src/families/families.controller.ts`
-
-</Tab>
-</Tabs>
+**Restricted Access** means your account cannot view these records. Member and household lists show separate empty messages and initially include up to 100 records each. New information is entered through member or household profiles.

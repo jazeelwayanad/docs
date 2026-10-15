@@ -1,52 +1,52 @@
 ---
-title: "Mahallu setup"
+title: "Set up your Mahallu"
+description: "Create a Mahallu and its initial administrator through the guided setup."
 ---
 
-<Tabs>
-<Tab title="English">
-
-## Mahallu setup wizard
-
-### Purpose and access
+## Set up your Mahallu
 
 Create a Mahallu and its initial administrator through the guided setup.
 
-Entry, public access, and redirect rules are described for this screen below.
+### Steps
 
-### Screen layout
+1. Open the setup wizard from the platform’s signup action.
+2. In **Mahallu Details**, enter **Mahallu Name** and choose the location using search.
+3. Choose **Next: Administrator Account**. If you are new, complete **Administrator Account** with your name, email, password, and password confirmation. Existing signed-in users reuse their account.
+4. Choose **Complete Setup & Create Mahallu**.
+5. On completion, review the created Mahallu address and open the administrator dashboard.
 
-Mahallu Details collects name and location; Administrator Account collects identity/password for new users; completion shows the created Mahallu URL and dashboard action. Existing users reuse their account.
+### Setup details
 
-### Fields and displayed information
+| Field | Guidance |
+| --- | --- |
+| **Mahallu Name** | Required. Enter your community’s name. |
+| **Mahallu Location** | Marked as required. Search for a town, village, Masjid, or area, then select a result. You can adjust the map pin or use your current location when available. The current setup allows you to continue without selecting a location. |
+| **Administrator Name** | Required for a new account. Enter the administrator’s full name. |
+| **Email Address** | Required for a new account. Use the email you will sign in with. |
+| **Password** | Required for a new account. Use at least eight characters. |
+| **Confirm Password** | Required for a new account. Enter the same password again. |
 
-#### Mahallu details step
+Choose the back control to return to Mahallu details before submitting. Location search or current-location lookup can fail; try another search or select the map location where available.
 
-| Field / control | Input | Required marker |
-| --- | --- | --- |
-| Mahallu Name | text | Yes |
+### Things to know
 
-| Field / control | Input | Required marker |
-| --- | --- | --- |
-| Location search input | text | Not marked |
+A signed-in account that already manages a Mahallu is returned to its existing administrator area. If creation fails after your account has been registered, sign in with that account before retrying setup. New-account passwords must be at least eight characters and match their confirmation. If a generated address is already taken, setup tries an address with a numeric suffix.
 
-#### Admin account step
+## Start setup from the platform website
 
-| Field / control | Input | Required marker |
-| --- | --- | --- |
-| Administrator Name | text | Yes |
-| Email Address | email | Yes |
-| Onboarding password | password | Yes |
-| Confirm Password | password | Yes |
+The signup entry on the marketing website forwards you to the administrator setup wizard.
 
-#### Interaction sequence
+### Steps
 
-Enter Mahallu name/location → Next → complete account details → Complete Setup & Create Mahallu → register if needed, then create tenant → completion → open admin dashboard. URL conflicts retry once with a numeric suffix.
+1. Choose the onboarding action on the platform website.
+2. Continue in **Mahallu Details** in the [Setup wizard](/mahallu-setup#set-up-your-mahallu).
 
-### Purpose and access
+### Things to know
 
-Forward visitors from the marketing onboarding URL to the administrator setup wizard.
+The marketing entry does not create a separate Mahallu or account.
 
-Entry, public access, and redirect rules are described for this screen below.
+## Related guides
 
-</Tab>
-</Tabs>
+- [Sign in and create an account](/getting-started)
+- [Structure settings](/admin/structure-settings)
+- [Families](/family)

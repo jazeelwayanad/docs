@@ -1,185 +1,41 @@
 ---
-title: "Plans and entitlements"
-description: "Current screen specification: Plans and entitlements. English and Malayalam guidance for the development team."
+title: "Plans and included features"
+description: "Create subscription plans and choose the features included in each plan."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Plans and included features
 
-## Plans and entitlements
+Create subscription plans and choose the features included in each plan.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/plans`
+### Steps
 
-### Purpose and access
+1. Open **Plans** and choose **New plan**.
+2. Enter the plan name, key, price, and monthly or yearly billing period, then create it.
+3. Choose **Features** on a plan and select its included features.
+4. Choose **Save entitlements** and review the updated plan.
+5. Choose **Remove** and confirm when deleting a plan.
 
-Maintain platform subscription plans and their included features.
+### Fields and choices
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Create plan
 
-The plans table offers New plan, Features, and Remove. Creation fields are name, key, price, and monthly/yearly billing period. Features opens an entitlement selection dialog.
+| Field or control | Guidance |
+| --- | --- |
+| **Name** | Required. Growth |
+| **Key** | Required. growth |
+| **Price (leave blank for custom/contact-us pricing)** | 999.00; Minimum 0 |
+| **Billing period** | Monthly, Yearly; Default: Monthly |
 
-### Fields and displayed information
+#### Plan features
 
+| Field or control | Guidance |
+| --- | --- |
+| **Included feature** | Select or clear this option. |
 
-Displayed table columns: **Name**, **Key**, **Price**, **Limits**, **Features**, **Subscribers**.
+### Things to know
 
-#### Fields and filters: Create plan dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Name | `plan-name` | text | Yes | Growth |
-| Key | `plan-key` | text | Yes | growth |
-| Price (leave blank for custom/contact-us pricing) | `plan-price` | number | Not marked | 999.00; min 0 |
-| Billing period | `plan-period` | select | Not marked | Monthly, Yearly; Initial: MONTHLY |
-
-
-#### Fields and filters: Plan features dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Selected.has(feature.id) | `selected.has(feature.id)` | checkbox | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Remove | Opens the `open` view. | `plans-table.tsx` |
-| Remove | Submits the associated API change; follow the sequence and failure rules below. | `plans-table.tsx` |
-| New plan | Opens the `create` view. | `plans-table.tsx` |
-| Features | Updates local UI state; persistence is described separately below. | `plans-table.tsx` |
-| Create plan | Submits the associated API change; follow the sequence and failure rules below. | `create-plan-dialog.tsx` |
-| Save entitlements | Submits the associated API change; follow the sequence and failure rules below. | `plan-features-dialog.tsx` |
-
-
-
-### Interaction sequence
-
-New plan → enter details → create → refresh. Features → choose included feature IDs → Save entitlements → refresh. Remove requires confirmation.
-
-### States and rules
-
-Entered prices are converted to minor units. Feature entitlements govern effective tenant availability along with overrides; displayed plan entries are persisted records here.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/plans/page.tsx`
-- `apps/web/src/features/platform/plans-table.tsx`
-- `apps/web/src/features/platform/create-plan-dialog.tsx`
-- `apps/web/src/features/platform/plan-features-dialog.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/features.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Plans and entitlements
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/plans`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Platform subscription plans, ഉൾപ്പെടുന്ന features എന്നിവ പരിപാലിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-പട്ടികയിൽ New plan, Features, Remove ഉണ്ട്. Name, key, price, monthly/yearly period നൽകാം. Features entitlement selection തുറക്കും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Name**, **Key**, **Price**, **Limits**, **Features**, **Subscribers**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Create plan dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Name | `plan-name` | text | ഉണ്ട് | Growth |
-| Key | `plan-key` | text | ഉണ്ട് | growth |
-| Price (leave blank for custom/contact-us pricing) | `plan-price` | number | ചിഹ്നമില്ല | 999.00; min 0 |
-| Billing period | `plan-period` | select | ചിഹ്നമില്ല | Monthly, Yearly; ആരംഭം: MONTHLY |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Plan features dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Selected.has(feature.id) | `selected.has(feature.id)` | checkbox | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Remove | `open` കാഴ്ച തുറക്കും. | `plans-table.tsx` |
-| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `plans-table.tsx` |
-| New plan | `create` കാഴ്ച തുറക്കും. | `plans-table.tsx` |
-| Features | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `plans-table.tsx` |
-| Create plan | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `create-plan-dialog.tsx` |
-| Save entitlements | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `plan-features-dialog.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-New plan → വിവരങ്ങൾ → create → പുതുക്കും. Features → feature IDs തിരഞ്ഞെടുക്കുക → Save entitlements → പുതുക്കും. Removeന് സ്ഥിരീകരണം വേണം.
-
-### നിലകളും നിയമങ്ങളും
-
-വില minor units ആക്കുന്നു. Entitlementsഉം overridesഉം ചേർന്ന് tenant ലഭ്യത നിർണ്ണയിക്കുന്നു; ഇവിടെ planകൾ സംരക്ഷിച്ച രേഖകളാണ്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/plans/page.tsx`
-- `apps/web/src/features/platform/plans-table.tsx`
-- `apps/web/src/features/platform/create-plan-dialog.tsx`
-- `apps/web/src/features/platform/plan-features-dialog.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/features.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+Plan features combine with individual workspace overrides to determine availability. The plans managed here are saved records, separate from the fixed plan examples shown in administrator billing.

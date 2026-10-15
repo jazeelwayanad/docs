@@ -1,483 +1,146 @@
 ---
-title: "Families registry"
-description: "Current screen specification: Families registry. English and Malayalam guidance for the development team."
+title: "Families"
+description: "Register households and maintain their dwelling, contact, and welfare information."
 ---
 
-<Tabs>
-<Tab title="English">
-
-## Families registry
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/families`
-
-### Purpose and access
-
-Maintain households and connect their house, head, members, categories, and welfare details.
-
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-The registry has filter pills, search, house filter, sorting, selectable rows, page-size controls, and bulk actions. New-family intake uses location, applicant, and members steps. Editing uses details and welfare tabs.
-
-### Fields and displayed information
-
-
-#### Fields and filters: Families registry
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Query | `query` | text | Not marked | Search family, house, head... |
-| House filter | `houseFilter` | select | Not marked | All Houses |
-| Sort by | `sortBy` | radio | Not marked | — |
-| Sort direction | `sortDirection` | radio | Not marked | — |
-| Is all selected | `isAllSelected` | checkbox | Not marked | — |
-| Is selected | `isSelected` | checkbox | Not marked | — |
-| Rows per page | `rowsPerPage` | select | Not marked | 10 / page, 15 / page, 25 / page, 50 / page; Initial: 15 |
-| Bulk target house id | `bulkTargetHouseId` | select | Not marked | Select a house... |
-
-
-#### Fields and filters: Family form dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Edit ward select | `edit-ward-select` | select | Not marked | -- Choose  / Area -- |
-| Municipal House Number | `edit-municipal-house-number` | text | Not marked | e.g. 12/450-A |
-| Edit mahall house number | `edit-mahall-house-number` | text | Not marked | — |
-| House Name | `edit-house-name` | text | Yes | e.g. Baitul Noor, Al Baraka |
-| Head of Family (Applicant / Househead) | `family-head` | select | Not marked | Select head of family |
-| Edit family status | `edit-family-status` | select | Not marked | -- Select  -- |
-| Primary Contact Phone | `family-phone` | text | Not marked | e.g. +91 98765 43210 |
-| Registered Locality / Road | `family-address` | text | Not marked | Street / Place / Locality |
-| Administrative Notes | `family-notes` | textarea | Not marked | Internal administration annotations... |
-| Emergency Contact Person | `family-emer-name` | text | Not marked | Contact person name |
-| Emergency Phone | `family-emer-phone` | text | Not marked | e.g. +91 98765 43210 |
-| Requires community support | `requiresCommunitySupport` | checkbox | Not marked | — |
-| Welfare Category | `support-category` | select | Not marked | Select Category, Medical assistance, Regular medicine aid, Financial assistance, Home visit / Elderly care, Mobility assistance, Counselling / Guidance, Children education aid, Other welfare aid |
-| Support Status | `support-status` | select | Not marked | Active Support, Monitoring / Periodic, Resolved / Discontinued; Initial: ACTIVE |
-| Welfare Notes / Case Summary | `support-notes` | textarea | Not marked | Details regarding family situation, required aid, or monthly allocation... |
-
-
-#### Fields and filters: Add family dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Ward select | `ward-select` | select | Not marked | -- Choose  / Area -- |
-| Municipal House Number | `municipal-house-number` | text | Not marked | e.g. 12/450-A |
-| Mahall house number | `mahall-house-number` | text | Not marked | — |
-| House Name | `house-name` | text | Not marked | e.g. Baitul Noor, Al-Falah |
-| Place / Locality | `place` | text | Not marked | e.g. Kalpetta |
-| Post Office | `post` | text | Not marked | e.g. Kalpetta North |
-| State | `state` | searchable select | Not marked | Select State; Initial: Kerala |
-| District | `district` | searchable select | Not marked | Select District |
-| PIN Code | `pin` | text | Not marked | e.g. 673121 |
-| Local Body Type | `local-body-type` | select | Not marked | Panchayath, Municipality, Corporation; Initial: Grama Panchayath |
-| Local Body Name | `local-body-name` | text | Not marked | Name |
-| Househead / Applicant Name | `applicant-name` | text | Yes | Full legal name |
-| Father's Name | `father-name` | text | Not marked | Father's full name |
-| Date of Birth | `applicant-dob` | date | Not marked | — |
-| Gender | `applicant-gender` | select | Not marked | Male, Female, Other; Initial: MALE |
-| Blood Group | `applicant-blood` | select | Not marked | Select Blood Group |
-| Family category | `family-category` | select | Not marked | -- Select  -- |
-| Mobile Phone | `applicant-phone` | text | Yes | +91 98765 43210 |
-| Email Address | `applicant-email` | email | Not marked | name@example.com |
-| Govt ID Type | `applicant-id-type` | select | Not marked | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card; Initial: Aadhaar Card |
-| ID Number | `applicant-id-num` | text | Not marked | Enter ID / card number |
-| Current Course / Class / Standard | `applicant-student-course` | text | Not marked | e.g. Plus Two Science, Class 10, B.Com |
-| Current Institution / School / College | `applicant-student-inst` | text | Not marked | e.g. Farook College, Govt HSS |
-| Employment Status | `applicant-emp-status` | select | Not marked | Select employment status |
-| Job Title / Designation | `applicant-job-title` | text | Not marked | e.g. Accountant, Driver, Electrician, Sales Executive |
-| Employer / Company / Business | `applicant-employer` | text | Not marked | e.g. Lulu Hypermarket, Self - Freelance |
-| Applicant is job seeker | `applicantIsJobSeeker` | checkbox | Not marked | — |
-| New applicant skill | `newApplicantSkill` | text | Not marked | e.g. Driving, Accounting, Plumbing, Teaching, Coding, Electrical |
-| Highest Education Level | `applicant-edu-level` | select | Not marked | Select highest education |
-| Primary Qualification / Major | `applicant-edu-details` | text | Not marked | e.g. B.Com, Plus Two Science, Alimiyya |
-| Level | `app-new-edu-level` | select | Not marked | Initial: SECONDARY_SSLC |
-| Degree / Course | `app-new-edu-degree` | text | Not marked | e.g. SSLC, Plus Two, B.Com |
-| Institution / Board | `app-new-edu-inst` | text | Not marked | e.g. Govt HSS, Calicut Univ |
-| Year | `app-new-edu-year` | text | Not marked | e.g. 2021 |
-| Applicant has disability | `applicantHasDisability` | checkbox | Not marked | — |
-| Disability Category | `applicantDisabilityType` | select | Not marked | Select Category |
-| Disability Percentage (%) | `applicantDisabilityPercentage` | number | Not marked | Percentage %; min 1; max 100 |
-| Applicant disability certificate | `applicantDisabilityCertificate` | checkbox | Not marked | — |
-| Applicant disability certificate no | `applicantDisabilityCertificateNo` | text | Not marked | Certificate / UDID Number |
-| Applicant has chronic illness | `applicantHasChronicIllness` | checkbox | Not marked | — |
-| Specific Diagnosis / Details | `applicantChronicDetails` | text | Not marked | Condition notes or specific diagnosis |
-| Applicant treatment required | `applicantTreatmentRequired` | checkbox | Not marked | — |
-| Applicant regular medication required | `applicantRegularMedicationRequired` | checkbox | Not marked | — |
-| Applicant requires assistance | `applicantRequiresAssistance` | checkbox | Not marked | — |
-| Primary Caregiver Name | `applicantPrimaryCaregiverName` | text | Not marked | Name of person assisting |
-| Caregiver Relationship | `applicantCaregiverRelationship` | text | Not marked | e.g. Spouse, Son, Daughter, Caretaker |
-| Emergency Contact Person | `applicantEmergencyContactName` | text | Not marked | Emergency contact name |
-| Emergency Phone Number | `applicantEmergencyContactPhone` | text | Not marked | e.g. +91 98765 43210 |
-| Applicant requires mental health support | `applicantRequiresMentalHealthSupport` | checkbox | Not marked | — |
-| Support Type Required | `applicantMentalHealthSupportType` | select | Not marked | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
-| Applicant requires community support | `applicantRequiresCommunitySupport` | checkbox | Not marked | — |
-| Support Category | `applicantSupportCategory` | select | Not marked | Select Welfare Category |
-| Support Status | `applicantSupportStatus` | select | Not marked | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; Initial: ACTIVE |
-| Welfare Committee Notes | `applicantSupportNotes` | textarea | Not marked | Confidential notes for the Mahallu welfare committee / relief desk... |
-| Member Name | `m-name-${m.id}` | text | Yes | Full name |
-| Relation to Head | `m-rel-${m.id}` | select | Not marked | Spouse, Son, Daughter, Parent, Sibling, Other |
-| Gender | `m-gen-${m.id}` | select | Not marked | Male, Female, Other |
-| Date of Birth | `m-dob-${m.id}` | date | Not marked | — |
-| Phone Number | `m-phone-${m.id}` | text | Not marked | Mobile phone |
-| Govt ID Type | `m-id-type-${m.id}` | select | Not marked | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card |
-| ID Number | `m-id-num-${m.id}` | text | Not marked | Enter ID number |
-| Current Course / Class / Standard | `m-stu-course-${m.id}` | text | Not marked | e.g. Plus Two Science, Class 10, B.Com |
-| Current Institution / School / College | `m-stu-inst-${m.id}` | text | Not marked | e.g. Farook College, Govt HSS |
-| Employment Status | `m-emp-${m.id}` | select | Not marked | Select status |
-| Job Title / Role | `m-job-${m.id}` | text | Not marked | e.g. Accountant, Driver, Electrician |
-| Employer / Business | `m-biz-${m.id}` | text | Not marked | e.g. Lulu Hypermarket, Freelance |
-| M.new skill input | `m.newSkillInput` | text | Not marked | Type skill (e.g. Electrician, Driving, Plumbing) & click Add |
-| Highest Education Level | `m-edu-${m.id}` | select | Not marked | Select education level |
-| M.new edu level | `m.newEduLevel` | select | Not marked | — |
-| M.new edu degree | `m.newEduDegree` | text | Not marked | Degree / Course |
-| M.new edu institution | `m.newEduInstitution` | text | Not marked | Institution / Board |
-| M.new edu year | `m.newEduYear` | text | Not marked | Year |
-| M.has disability | `m.hasDisability` | checkbox | Not marked | — |
-| M.has chronic illness | `m.hasChronicIllness` | checkbox | Not marked | — |
-| M.regular medication required | `m.regularMedicationRequired` | checkbox | Not marked | — |
-| M.is job seeker | `m.isJobSeeker` | checkbox | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| More | Toggles the `more menu` view. | `families-registry.tsx` |
-| Import Families CSV | Shows a notification; does not establish a saved change. | `families-registry.tsx` |
-| Batch House Map | Shows a notification; does not establish a saved change. | `families-registry.tsx` |
-| Census Summary | Shows a notification; does not establish a saved change. | `families-registry.tsx` |
-| Export | Downloads the locally generated output. | `families-registry.tsx` |
-| Add Family | Opens a blank creation form. | `families-registry.tsx` |
-| Search Families | Opens the `search` view. | `families-registry.tsx` |
-| Filter by House | Toggles the `filter menu` view. | `families-registry.tsx` |
-| Reset | Changes the selected view, filter, or page in local state. | `families-registry.tsx` |
-| Sort Records | Toggles the `sort menu` view. | `families-registry.tsx` |
-| Actions | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `families-registry.tsx` |
-| View Family | Opens the configured destination. | `families-registry.tsx` |
-| Edit Family | Opens the edit form populated from the selected record. | `families-registry.tsx` |
-| Add Member | Opens the configured destination. | `families-registry.tsx` |
-| Assign House | Opens the `bulk house modal` view. | `families-registry.tsx` |
-| Export | Downloads the locally generated output. | `families-registry.tsx` |
-| Delete | Opens the `bulk delete modal` view. | `families-registry.tsx` |
-| Clear | Changes the selected view, filter, or page in local state. | `families-registry.tsx` |
-| Cancel | Closes or clears the `bulk house modal` view/selection. | `families-registry.tsx` |
-| Assigning... / Assign House | Shows a notification; does not establish a saved change. | `families-registry.tsx` |
-| Deleting... | Shows a notification; does not establish a saved change. | `families-registry.tsx` |
-| 1. House & Location | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
-| 2. Emergency & Welfare | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
-| Delete Family | Opens the `delete confirm` view. | `family-form-dialog.tsx` |
-| Cancel | Invokes the associated handler; see the sequence below. | `family-form-dialog.tsx` |
-| Emergency & Welfare → | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
-| Save Changes / Register | Submits the associated API change; follow the sequence and failure rules below. | `family-form-dialog.tsx` |
-| ← Back | Changes the selected view, filter, or page in local state. | `family-form-dialog.tsx` |
-| Delete Family | Submits the associated API change; follow the sequence and failure rules below. | `family-form-dialog.tsx` |
-| 1. Location & Housing | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| 2. Househead (Applicant) | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| 3. Family Members | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| Student | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Worker / Adult | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| + | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| No Known Condition Healthy / No chronic illness | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Has Condition Chronic illness, disability, or care | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Not Disclosed Prefer not to disclose | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Add Member | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| Remove | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| Student | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Worker / Adult | Updates local UI state; persistence is described separately below. | `add-family-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| + | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| Add | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| × | Invokes the associated handler; see the sequence below. | `add-family-dialog.tsx` |
-| ← Back: Location | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| ← Back: Applicant | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| Next: Applicant Details → | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| Next: Family Members → | Changes the selected view, filter, or page in local state. | `add-family-dialog.tsx` |
-| Save & Register Family | Submits the associated API change; follow the sequence and failure rules below. | `add-family-dialog.tsx` |
-
-
-
-### Interaction sequence
-
-Choose Add family → enter location/house information → supply the applicant or househead and primary phone → add household members → submit. The client creates the house when needed, then the family, head, and additional members; success opens the new family profile. Use Edit to change the saved household.
-
-### States and rules
-
-Applicant/househead name and primary phone are required by the intake handler. Multi-request creation is not atomic; a late failure can leave earlier records saved. The registry initially loads 100 families. Bulk removal and bulk house assignment only show success and refresh; neither persists the requested change. Import and summary-report menu actions are notification-only.
-
-Explicit validation messages in the rendered forms:
-
-- House Name / Family Name is required.
-- Please provide the Applicant / Househead Name.
-- Please provide the primary contact phone number.
-
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/families/page.tsx`
-- `apps/web/src/features/tenants/families-registry.tsx`
-- `apps/web/src/features/tenants/family-form-dialog.tsx`
-- `apps/web/src/features/tenants/add-family-dialog.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `families.view`, `families.create`, `families.update`, `families.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/families/families.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Families registry
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/families`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-കുടുംബരേഖകളും വീട്, കുടുംബനാഥൻ, അംഗങ്ങൾ, വിഭാഗങ്ങൾ, ക്ഷേമവിവരങ്ങൾ എന്നിവയുടെ ബന്ധവും പരിപാലിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-ഫിൽട്ടറുകൾ, തിരച്ചിൽ, വീട് ഫിൽട്ടർ, ക്രമീകരണം, തിരഞ്ഞെടുക്കാവുന്ന വരികൾ, പേജ് വലുപ്പം, കൂട്ട പ്രവർത്തനങ്ങൾ എന്നിവയുണ്ട്. പുതിയ കുടുംബം ചേർക്കുമ്പോൾ location, applicant, members ഘട്ടങ്ങളുണ്ട്. തിരുത്തലിൽ details, welfare ടാബുകളുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Families registry
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Query | `query` | text | ചിഹ്നമില്ല | Search family, house, head... |
-| House filter | `houseFilter` | select | ചിഹ്നമില്ല | All Houses |
-| Sort by | `sortBy` | radio | ചിഹ്നമില്ല | — |
-| Sort direction | `sortDirection` | radio | ചിഹ്നമില്ല | — |
-| Is all selected | `isAllSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Is selected | `isSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Rows per page | `rowsPerPage` | select | ചിഹ്നമില്ല | 10 / page, 15 / page, 25 / page, 50 / page; ആരംഭം: 15 |
-| Bulk target house id | `bulkTargetHouseId` | select | ചിഹ്നമില്ല | Select a house... |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Family form dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Edit ward select | `edit-ward-select` | select | ചിഹ്നമില്ല | -- Choose  / Area -- |
-| Municipal House Number | `edit-municipal-house-number` | text | ചിഹ്നമില്ല | e.g. 12/450-A |
-| Edit mahall house number | `edit-mahall-house-number` | text | ചിഹ്നമില്ല | — |
-| House Name | `edit-house-name` | text | ഉണ്ട് | e.g. Baitul Noor, Al Baraka |
-| Head of Family (Applicant / Househead) | `family-head` | select | ചിഹ്നമില്ല | Select head of family |
-| Edit family status | `edit-family-status` | select | ചിഹ്നമില്ല | -- Select  -- |
-| Primary Contact Phone | `family-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
-| Registered Locality / Road | `family-address` | text | ചിഹ്നമില്ല | Street / Place / Locality |
-| Administrative Notes | `family-notes` | textarea | ചിഹ്നമില്ല | Internal administration annotations... |
-| Emergency Contact Person | `family-emer-name` | text | ചിഹ്നമില്ല | Contact person name |
-| Emergency Phone | `family-emer-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
-| Requires community support | `requiresCommunitySupport` | checkbox | ചിഹ്നമില്ല | — |
-| Welfare Category | `support-category` | select | ചിഹ്നമില്ല | Select Category, Medical assistance, Regular medicine aid, Financial assistance, Home visit / Elderly care, Mobility assistance, Counselling / Guidance, Children education aid, Other welfare aid |
-| Support Status | `support-status` | select | ചിഹ്നമില്ല | Active Support, Monitoring / Periodic, Resolved / Discontinued; ആരംഭം: ACTIVE |
-| Welfare Notes / Case Summary | `support-notes` | textarea | ചിഹ്നമില്ല | Details regarding family situation, required aid, or monthly allocation... |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Add family dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Ward select | `ward-select` | select | ചിഹ്നമില്ല | -- Choose  / Area -- |
-| Municipal House Number | `municipal-house-number` | text | ചിഹ്നമില്ല | e.g. 12/450-A |
-| Mahall house number | `mahall-house-number` | text | ചിഹ്നമില്ല | — |
-| House Name | `house-name` | text | ചിഹ്നമില്ല | e.g. Baitul Noor, Al-Falah |
-| Place / Locality | `place` | text | ചിഹ്നമില്ല | e.g. Kalpetta |
-| Post Office | `post` | text | ചിഹ്നമില്ല | e.g. Kalpetta North |
-| State | `state` | searchable select | ചിഹ്നമില്ല | Select State; ആരംഭം: Kerala |
-| District | `district` | searchable select | ചിഹ്നമില്ല | Select District |
-| PIN Code | `pin` | text | ചിഹ്നമില്ല | e.g. 673121 |
-| Local Body Type | `local-body-type` | select | ചിഹ്നമില്ല | Panchayath, Municipality, Corporation; ആരംഭം: Grama Panchayath |
-| Local Body Name | `local-body-name` | text | ചിഹ്നമില്ല | Name |
-| Househead / Applicant Name | `applicant-name` | text | ഉണ്ട് | Full legal name |
-| Father's Name | `father-name` | text | ചിഹ്നമില്ല | Father's full name |
-| Date of Birth | `applicant-dob` | date | ചിഹ്നമില്ല | — |
-| Gender | `applicant-gender` | select | ചിഹ്നമില്ല | Male, Female, Other; ആരംഭം: MALE |
-| Blood Group | `applicant-blood` | select | ചിഹ്നമില്ല | Select Blood Group |
-| Family category | `family-category` | select | ചിഹ്നമില്ല | -- Select  -- |
-| Mobile Phone | `applicant-phone` | text | ഉണ്ട് | +91 98765 43210 |
-| Email Address | `applicant-email` | email | ചിഹ്നമില്ല | name@example.com |
-| Govt ID Type | `applicant-id-type` | select | ചിഹ്നമില്ല | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card; ആരംഭം: Aadhaar Card |
-| ID Number | `applicant-id-num` | text | ചിഹ്നമില്ല | Enter ID / card number |
-| Current Course / Class / Standard | `applicant-student-course` | text | ചിഹ്നമില്ല | e.g. Plus Two Science, Class 10, B.Com |
-| Current Institution / School / College | `applicant-student-inst` | text | ചിഹ്നമില്ല | e.g. Farook College, Govt HSS |
-| Employment Status | `applicant-emp-status` | select | ചിഹ്നമില്ല | Select employment status |
-| Job Title / Designation | `applicant-job-title` | text | ചിഹ്നമില്ല | e.g. Accountant, Driver, Electrician, Sales Executive |
-| Employer / Company / Business | `applicant-employer` | text | ചിഹ്നമില്ല | e.g. Lulu Hypermarket, Self - Freelance |
-| Applicant is job seeker | `applicantIsJobSeeker` | checkbox | ചിഹ്നമില്ല | — |
-| New applicant skill | `newApplicantSkill` | text | ചിഹ്നമില്ല | e.g. Driving, Accounting, Plumbing, Teaching, Coding, Electrical |
-| Highest Education Level | `applicant-edu-level` | select | ചിഹ്നമില്ല | Select highest education |
-| Primary Qualification / Major | `applicant-edu-details` | text | ചിഹ്നമില്ല | e.g. B.Com, Plus Two Science, Alimiyya |
-| Level | `app-new-edu-level` | select | ചിഹ്നമില്ല | ആരംഭം: SECONDARY_SSLC |
-| Degree / Course | `app-new-edu-degree` | text | ചിഹ്നമില്ല | e.g. SSLC, Plus Two, B.Com |
-| Institution / Board | `app-new-edu-inst` | text | ചിഹ്നമില്ല | e.g. Govt HSS, Calicut Univ |
-| Year | `app-new-edu-year` | text | ചിഹ്നമില്ല | e.g. 2021 |
-| Applicant has disability | `applicantHasDisability` | checkbox | ചിഹ്നമില്ല | — |
-| Disability Category | `applicantDisabilityType` | select | ചിഹ്നമില്ല | Select Category |
-| Disability Percentage (%) | `applicantDisabilityPercentage` | number | ചിഹ്നമില്ല | Percentage %; min 1; max 100 |
-| Applicant disability certificate | `applicantDisabilityCertificate` | checkbox | ചിഹ്നമില്ല | — |
-| Applicant disability certificate no | `applicantDisabilityCertificateNo` | text | ചിഹ്നമില്ല | Certificate / UDID Number |
-| Applicant has chronic illness | `applicantHasChronicIllness` | checkbox | ചിഹ്നമില്ല | — |
-| Specific Diagnosis / Details | `applicantChronicDetails` | text | ചിഹ്നമില്ല | Condition notes or specific diagnosis |
-| Applicant treatment required | `applicantTreatmentRequired` | checkbox | ചിഹ്നമില്ല | — |
-| Applicant regular medication required | `applicantRegularMedicationRequired` | checkbox | ചിഹ്നമില്ല | — |
-| Applicant requires assistance | `applicantRequiresAssistance` | checkbox | ചിഹ്നമില്ല | — |
-| Primary Caregiver Name | `applicantPrimaryCaregiverName` | text | ചിഹ്നമില്ല | Name of person assisting |
-| Caregiver Relationship | `applicantCaregiverRelationship` | text | ചിഹ്നമില്ല | e.g. Spouse, Son, Daughter, Caretaker |
-| Emergency Contact Person | `applicantEmergencyContactName` | text | ചിഹ്നമില്ല | Emergency contact name |
-| Emergency Phone Number | `applicantEmergencyContactPhone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
-| Applicant requires mental health support | `applicantRequiresMentalHealthSupport` | checkbox | ചിഹ്നമില്ല | — |
-| Support Type Required | `applicantMentalHealthSupportType` | select | ചിഹ്നമില്ല | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
-| Applicant requires community support | `applicantRequiresCommunitySupport` | checkbox | ചിഹ്നമില്ല | — |
-| Support Category | `applicantSupportCategory` | select | ചിഹ്നമില്ല | Select Welfare Category |
-| Support Status | `applicantSupportStatus` | select | ചിഹ്നമില്ല | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; ആരംഭം: ACTIVE |
-| Welfare Committee Notes | `applicantSupportNotes` | textarea | ചിഹ്നമില്ല | Confidential notes for the Mahallu welfare committee / relief desk... |
-| Member Name | `m-name-${m.id}` | text | ഉണ്ട് | Full name |
-| Relation to Head | `m-rel-${m.id}` | select | ചിഹ്നമില്ല | Spouse, Son, Daughter, Parent, Sibling, Other |
-| Gender | `m-gen-${m.id}` | select | ചിഹ്നമില്ല | Male, Female, Other |
-| Date of Birth | `m-dob-${m.id}` | date | ചിഹ്നമില്ല | — |
-| Phone Number | `m-phone-${m.id}` | text | ചിഹ്നമില്ല | Mobile phone |
-| Govt ID Type | `m-id-type-${m.id}` | select | ചിഹ്നമില്ല | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card |
-| ID Number | `m-id-num-${m.id}` | text | ചിഹ്നമില്ല | Enter ID number |
-| Current Course / Class / Standard | `m-stu-course-${m.id}` | text | ചിഹ്നമില്ല | e.g. Plus Two Science, Class 10, B.Com |
-| Current Institution / School / College | `m-stu-inst-${m.id}` | text | ചിഹ്നമില്ല | e.g. Farook College, Govt HSS |
-| Employment Status | `m-emp-${m.id}` | select | ചിഹ്നമില്ല | Select status |
-| Job Title / Role | `m-job-${m.id}` | text | ചിഹ്നമില്ല | e.g. Accountant, Driver, Electrician |
-| Employer / Business | `m-biz-${m.id}` | text | ചിഹ്നമില്ല | e.g. Lulu Hypermarket, Freelance |
-| M.new skill input | `m.newSkillInput` | text | ചിഹ്നമില്ല | Type skill (e.g. Electrician, Driving, Plumbing) & click Add |
-| Highest Education Level | `m-edu-${m.id}` | select | ചിഹ്നമില്ല | Select education level |
-| M.new edu level | `m.newEduLevel` | select | ചിഹ്നമില്ല | — |
-| M.new edu degree | `m.newEduDegree` | text | ചിഹ്നമില്ല | Degree / Course |
-| M.new edu institution | `m.newEduInstitution` | text | ചിഹ്നമില്ല | Institution / Board |
-| M.new edu year | `m.newEduYear` | text | ചിഹ്നമില്ല | Year |
-| M.has disability | `m.hasDisability` | checkbox | ചിഹ്നമില്ല | — |
-| M.has chronic illness | `m.hasChronicIllness` | checkbox | ചിഹ്നമില്ല | — |
-| M.regular medication required | `m.regularMedicationRequired` | checkbox | ചിഹ്നമില്ല | — |
-| M.is job seeker | `m.isJobSeeker` | checkbox | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| More | `more menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `families-registry.tsx` |
-| Import Families CSV | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `families-registry.tsx` |
-| Batch House Map | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `families-registry.tsx` |
-| Census Summary | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `families-registry.tsx` |
-| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `families-registry.tsx` |
-| Add Family | പുതിയ രേഖയ്ക്കുള്ള ശൂന്യ form തുറക്കും. | `families-registry.tsx` |
-| Search Families | `search` കാഴ്ച തുറക്കും. | `families-registry.tsx` |
-| Filter by House | `filter menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `families-registry.tsx` |
-| Reset | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `families-registry.tsx` |
-| Sort Records | `sort menu` കാഴ്ച തുറക്കുകയോ അടയ്ക്കുകയോ ചെയ്യും. | `families-registry.tsx` |
-| Actions | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `families-registry.tsx` |
-| View Family | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `families-registry.tsx` |
-| Edit Family | തിരഞ്ഞെടുത്ത രേഖയുടെ വിവരങ്ങളുള്ള edit form തുറക്കും. | `families-registry.tsx` |
-| Add Member | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. | `families-registry.tsx` |
-| Assign House | `bulk house modal` കാഴ്ച തുറക്കും. | `families-registry.tsx` |
-| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. | `families-registry.tsx` |
-| Delete | `bulk delete modal` കാഴ്ച തുറക്കും. | `families-registry.tsx` |
-| Clear | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `families-registry.tsx` |
-| Cancel | `bulk house modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `families-registry.tsx` |
-| Assigning... / Assign House | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `families-registry.tsx` |
-| Deleting... | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. | `families-registry.tsx` |
-| 1. House & Location | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
-| 2. Emergency & Welfare | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
-| Delete Family | `delete confirm` കാഴ്ച തുറക്കും. | `family-form-dialog.tsx` |
-| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `family-form-dialog.tsx` |
-| Emergency & Welfare → | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
-| Save Changes / Register | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `family-form-dialog.tsx` |
-| ← Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `family-form-dialog.tsx` |
-| Delete Family | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `family-form-dialog.tsx` |
-| 1. Location & Housing | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| 2. Househead (Applicant) | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| 3. Family Members | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| + | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| No Known Condition Healthy / No chronic illness | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Has Condition Chronic illness, disability, or care | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Not Disclosed Prefer not to disclose | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Add Member | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| Remove | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `add-family-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| + | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `add-family-dialog.tsx` |
-| ← Back: Location | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| ← Back: Applicant | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| Next: Applicant Details → | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| Next: Family Members → | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `add-family-dialog.tsx` |
-| Save & Register Family | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `add-family-dialog.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Add family തിരഞ്ഞെടുക്കുക → സ്ഥലവും വീടും നൽകുക → അപേക്ഷകന്റെ/കുടുംബനാഥന്റെ പേരും പ്രധാന ഫോണും നൽകുക → മറ്റു അംഗങ്ങളെ ചേർക്കുക → സമർപ്പിക്കുക. ആവശ്യമായാൽ വീട് സൃഷ്ടിച്ച ശേഷം കുടുംബം, കുടുംബനാഥൻ, മറ്റു അംഗങ്ങൾ എന്നിവ സൃഷ്ടിക്കുന്നു. വിജയിക്കുമ്പോൾ പുതിയ കുടുംബ പ്രൊഫൈൽ തുറക്കും. Edit വഴി തിരുത്താം.
-
-### നിലകളും നിയമങ്ങളും
-
-അപേക്ഷകന്റെ/കുടുംബനാഥന്റെ പേരും പ്രധാന ഫോണും നിർബന്ധമാണ്. പല അഭ്യർത്ഥനകളിലൂടെയുള്ള സൃഷ്ടിക്കൽ ഒരൊറ്റ ഇടപാടല്ല; അവസാന ഘട്ടം പരാജയപ്പെട്ടാലും മുൻ രേഖകൾ നിലനിൽക്കാം. ആദ്യം 100 കുടുംബങ്ങൾ വായിക്കുന്നു. കൂട്ട നീക്കലും കൂട്ട house assignmentഉം വിജയസന്ദേശവും പുതുക്കലും മാത്രം നടത്തുന്നു; ആവശ്യപ്പെട്ട മാറ്റം സംരക്ഷിക്കുന്നില്ല. Import, summary-report നിയന്ത്രണങ്ങൾ അറിയിപ്പുകൾ മാത്രമാണ്.
-
-Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
-
-- House Name / Family Name is required.
-- Please provide the Applicant / Househead Name.
-- Please provide the primary contact phone number.
-
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/families/page.tsx`
-- `apps/web/src/features/tenants/families-registry.tsx`
-- `apps/web/src/features/tenants/family-form-dialog.tsx`
-- `apps/web/src/features/tenants/add-family-dialog.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `families.view`, `families.create`, `families.update`, `families.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/families/families.controller.ts`
-
-</Tab>
-</Tabs>
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
+
+## Families
+
+Register households and maintain their dwelling, contact, and welfare information.
+
+### Steps
+
+1. Open **Families** and choose **Add Family**.
+2. In **1. Location & Housing**, select the configured division if used, and enter the house and address information.
+3. In **2. Househead (Applicant)**, enter the househead’s name and primary mobile number. Add identity, education, employment, and health information where applicable.
+4. In **3. Family Members**, choose **Add Member** for each additional person. Enter a name and relationship, then complete the available details.
+5. Choose **Save & Register Family**. After a successful registration, the family profile opens.
+6. To find an existing household, search by family, house, or head; use the house filter, sorting, and page-size controls. Open **View Family** or **Edit Family** from its actions.
+
+### Fields and choices
+
+Complete the required fields and any additional details requested for your selections.
+
+#### Search and selection
+
+| Field or control | Guidance |
+| --- | --- |
+| **Search** | Search family, house, head... |
+| **House filter** | All Houses |
+| **Sort by** | Choose the field used to order the list. |
+| **Sort direction** | Choose ascending or descending order. |
+| **Select all rows** | Select or clear this option. |
+| **Select row** | Select or clear this option. |
+| **Rows per page** | 10 / page, 15 / page, 25 / page, 50 / page; Default: 15 |
+| **Target house** | Select a house... |
+
+#### Edit household details
+
+| Field or control | Guidance |
+| --- | --- |
+| **Division** | Choose the configured division or area. |
+| **Municipal House Number** | e.g. 12/450-A |
+| **Mahall house number** | Enter mahall house number. |
+| **House Name** | Required. e.g. Baitul Noor, Al Baraka |
+| **Head of Family (Applicant / Househead)** | Select head of family |
+| **Family category** | Choose an available category. |
+| **Primary Contact Phone** | e.g. +91 98765 43210 |
+| **Registered Locality / Road** | Street / Place / Locality |
+| **Administrative Notes** | Internal administration annotations... |
+| **Emergency Contact Person** | Contact person name |
+| **Emergency Phone** | e.g. +91 98765 43210 |
+| **Requires community support** | Select or clear this option. |
+| **Welfare Category** | Select Category, Medical assistance, Regular medicine aid, Financial assistance, Home visit / Elderly care, Mobility assistance, Counselling / Guidance, Children education aid, Other welfare aid |
+| **Support Status** | Active Support, Monitoring / Periodic, Resolved / Discontinued; Default: Active |
+| **Welfare Notes / Case Summary** | Details regarding family situation, required aid, or monthly allocation... |
+
+<Accordion title="Register a household">
+
+| Field or control | Guidance |
+| --- | --- |
+| **Division** | Choose the configured division or area. |
+| **Municipal House Number** | e.g. 12/450-A |
+| **Mahall house number** | Enter mahall house number. |
+| **House Name** | e.g. Baitul Noor, Al-Falah |
+| **Place / Locality** | e.g. Kalpetta |
+| **Post Office** | e.g. Kalpetta North |
+| **State** | Select State; Default: Kerala |
+| **District** | Select District |
+| **PIN Code** | e.g. 673121 |
+| **Local Body Type** | Panchayath, Municipality, Corporation; Default: Grama Panchayath |
+| **Local Body Name** | Name |
+| **Househead / Applicant Name** | Required. Full legal name |
+| **Father's Name** | Father's full name |
+| **Date of Birth** | Choose a date. |
+| **Gender** | Male, Female, Other; Default: Male |
+| **Blood Group** | Select Blood Group |
+| **Family category** | Choose an available category. |
+| **Mobile Phone** | Required. +91 98765 43210 |
+| **Email Address** | name@example.com |
+| **Govt ID Type** | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card; Default: Aadhaar Card |
+| **ID Number** | Enter ID / card number |
+| **Current Course / Class / Standard** | e.g. Plus Two Science, Class 10, B.Com |
+| **Current Institution / School / College** | e.g. Farook College, Govt HSS |
+| **Employment Status** | Select employment status |
+| **Job Title / Designation** | e.g. Accountant, Driver, Electrician, Sales Executive |
+| **Employer / Company / Business** | e.g. Lulu Hypermarket, Self - Freelance |
+| **Job seeker** | Select or clear this option. |
+| **Add skill** | e.g. Driving, Accounting, Plumbing, Teaching, Coding, Electrical |
+| **Highest Education Level** | Select highest education |
+| **Primary Qualification / Major** | e.g. B.Com, Plus Two Science, Alimiyya |
+| **Level** | Default: Secondary / SSLC (10th) |
+| **Degree / Course** | e.g. SSLC, Plus Two, B.Com |
+| **Institution / Board** | e.g. Govt HSS, Calicut Univ |
+| **Year** | e.g. 2021 |
+| **Has disability** | Select or clear this option. |
+| **Disability Category** | Select Category |
+| **Disability Percentage (%)** | Percentage %; Minimum 1; Maximum 100 |
+| **Disability certificate** | Select or clear this option. |
+| **Disability certificate number** | Certificate / UDID Number |
+| **Has chronic illness** | Select or clear this option. |
+| **Specific Diagnosis / Details** | Condition notes or specific diagnosis |
+| **Treatment required** | Select or clear this option. |
+| **Regular medication required** | Select or clear this option. |
+| **Requires assistance** | Select or clear this option. |
+| **Primary Caregiver Name** | Name of person assisting |
+| **Caregiver Relationship** | e.g. Spouse, Son, Daughter, Caretaker |
+| **Emergency Contact Person** | Emergency contact name |
+| **Emergency Phone Number** | e.g. +91 98765 43210 |
+| **Requires mental health support** | Select or clear this option. |
+| **Support Type Required** | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
+| **Requires community support** | Select or clear this option. |
+| **Support Category** | Select Welfare Category |
+| **Support Status** | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; Default: Active |
+| **Welfare Committee Notes** | Confidential notes for the Mahallu welfare committee / relief desk... |
+| **Member Name** | Required. Full name |
+| **Relation to Head** | Spouse, Son, Daughter, Parent, Sibling, Other |
+| **Gender** | Male, Female, Other |
+| **Phone Number** | Mobile phone |
+| **Govt ID Type** | Aadhaar Card, Voter ID, Passport, Driving License, Ration Card |
+| **ID Number** | Enter ID number |
+| **Employment Status** | Select status |
+| **Job Title / Role** | e.g. Accountant, Driver, Electrician |
+| **Employer / Business** | e.g. Lulu Hypermarket, Freelance |
+| **Add skill** | Type skill (e.g. Electrician, Driving, Plumbing) & click Add |
+| **Highest Education Level** | Select education level |
+| **Education level** | Choose an available option. |
+| **Degree / Course** | Degree / Course |
+| **Institution / Board** | Institution / Board |
+| **Year** | Year |
+
+</Accordion>
+
+### Additional details
+
+Use **Student** or **Worker / Adult** for the applicant and additional members to display the relevant education or employment fields. Health and welfare choices reveal their associated details. Add or remove skill, qualification, and member rows before submitting. When editing a household, **1. House & Location** and **2. Emergency & Welfare** separate dwelling details from emergency contacts and support information.
+
+### Things to know
+
+The househead name and primary phone are required. Each additional member needs a name. Registration saves the house, family, and people in stages. If it fails partway through, check for records already created before retrying. The directory initially loads up to 100 families. Bulk **Assign House**, bulk deletion, **Import Families CSV**, **Batch House Map**, and **Census Summary** do not currently complete their advertised changes. Use individual record editing where available. **Export** downloads the records included by the selected export action.
+
+## Related guides
+
+- [Family profile](/admin/family-profile)
+- [Members](/members)
+- [Houses directory](/admin/houses)

@@ -1,179 +1,44 @@
 ---
 title: "Services and aid requests"
-description: "Current screen specification: Services and aid requests. English and Malayalam guidance for the development team."
+description: "Log service and aid requests, review them, and record their outcomes."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Services and aid requests
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/services`
+Log service and aid requests, review them, and record their outcomes.
 
-### Purpose and access
+### Steps
 
-Log and review service requests associated with members.
+1. Open **Services** and complete **Log a request**. Enter **Request type**, **Requester name**, and **Subject**, plus phone, linked member, and description if applicable.
+2. Submit the request and select it in the list.
+3. Choose **Start review** when available. Review its details and enter **Resolution notes** where appropriate.
+4. Choose **Approve** or **Reject** according to the outcome.
+5. Use **Mark completed** where offered after the work is complete. Filter by status to follow up on outstanding requests.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The screen has a Log a request form and a selectable request list with status filtering. Selected request details include Resolution notes and status actions.
+#### Record details
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Request type** | Required. Enter request type. |
+| **Requester name** | Required. Enter requester name. |
+| **Requester phone** | Enter requester phone. |
+| **Member** | Choose an available option. |
+| **Subject** | Required. Enter subject. |
+| **Description** | Enter additional details. |
 
+#### Service requests table
 
-#### Fields and filters: Page
+| Field or control | Guidance |
+| --- | --- |
+| **Status filter** | All statuses |
+| **Resolution notes** | Enter additional details. |
 
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Request type | `requestType` | text | Yes | — |
-| Requester name | `requesterName` | text | Yes | — |
-| Requester phone | `requesterPhone` | text | Not marked | — |
-| Member | `memberId` | select | Not marked | — |
-| Subject | `subject` | text | Yes | — |
-| Description | `description` | textarea | Not marked | — |
+### Things to know
 
-
-Displayed table columns: **Type**, **Requester**, **Subject**, **Status**, **Submitted**.
-
-#### Fields and filters: Service requests table
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Status filter | `statusFilter` | select | Not marked | All statuses |
-| Resolution notes | `request-notes` | textarea | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Add Record | Submits the associated API change; follow the sequence and failure rules below. | `simple-create-form.tsx` |
-| Reject | Submits the associated API change; follow the sequence and failure rules below. | `service-requests-table.tsx` |
-| Start review | Submits the associated API change; follow the sequence and failure rules below. | `service-requests-table.tsx` |
-| Approve | Submits the associated API change; follow the sequence and failure rules below. | `service-requests-table.tsx` |
-| Mark completed | Submits the associated API change; follow the sequence and failure rules below. | `service-requests-table.tsx` |
-| Remove | Submits the associated API change; follow the sequence and failure rules below. | `service-requests-table.tsx` |
-
-
-
-### Interaction sequence
-
-Create a request → select it → Start review → Approve or Reject → Mark completed where offered. Rejection/completion can include resolution notes; each action patches the request and refreshes.
-
-### States and rules
-
-The screen checks services access and exposes empty requests separately. Status controls are conditional on the selected request’s status; the presence of a button is not authority to bypass backend permissions.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/services/page.tsx`
-- `apps/web/src/features/tenants/simple-create-form.tsx`
-- `apps/web/src/features/tenants/service-requests-table.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `services.view`, `services.create`, `services.update`, `services.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/services/services.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Services and aid requests
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/services`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-അംഗങ്ങളുമായി ബന്ധപ്പെട്ട സേവന അഭ്യർത്ഥനകൾ രേഖപ്പെടുത്തി പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Log a request form, തിരഞ്ഞെടുക്കാവുന്ന അഭ്യർത്ഥനപട്ടിക, സ്ഥിതി ഫിൽട്ടർ എന്നിവയുണ്ട്. തിരഞ്ഞെടുത്ത അഭ്യർത്ഥനയിൽ Resolution notes, സ്ഥിതി മാറ്റാനുള്ള നിയന്ത്രണങ്ങൾ കാണിക്കും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Page
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Request type | `requestType` | text | ഉണ്ട് | — |
-| Requester name | `requesterName` | text | ഉണ്ട് | — |
-| Requester phone | `requesterPhone` | text | ചിഹ്നമില്ല | — |
-| Member | `memberId` | select | ചിഹ്നമില്ല | — |
-| Subject | `subject` | text | ഉണ്ട് | — |
-| Description | `description` | textarea | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Type**, **Requester**, **Subject**, **Status**, **Submitted**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Service requests table
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Status filter | `statusFilter` | select | ചിഹ്നമില്ല | All statuses |
-| Resolution notes | `request-notes` | textarea | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Add Record | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `simple-create-form.tsx` |
-| Reject | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `service-requests-table.tsx` |
-| Start review | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `service-requests-table.tsx` |
-| Approve | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `service-requests-table.tsx` |
-| Mark completed | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `service-requests-table.tsx` |
-| Remove | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `service-requests-table.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-അഭ്യർത്ഥന സൃഷ്ടിക്കുക → തിരഞ്ഞെടുക്കുക → Start review → Approve അല്ലെങ്കിൽ Reject → ലഭ്യമെങ്കിൽ Mark completed. നിരസിക്കലിലും പൂർത്തിയാക്കലിലും കുറിപ്പ് നൽകാം; ഓരോ പ്രവർത്തനവും രേഖ പുതുക്കുന്നു.
-
-### നിലകളും നിയമങ്ങളും
-
-services പ്രവേശനം പരിശോധിക്കുന്നു; അഭ്യർത്ഥനകളില്ലെങ്കിൽ പ്രത്യേക സന്ദേശമുണ്ട്. നിലവിലെ സ്ഥിതി അനുസരിച്ചാണ് ബട്ടണുകൾ വരുന്നത്; ബട്ടൺ കാണുന്നത് backend അനുമതി മറികടക്കാനുള്ള അധികാരമല്ല.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/services/page.tsx`
-- `apps/web/src/features/tenants/simple-create-form.tsx`
-- `apps/web/src/features/tenants/service-requests-table.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `services.view`, `services.create`, `services.update`, `services.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/services/services.controller.ts`
-
-</Tab>
-</Tabs>
+Available actions depend on the request’s current status and your access. Rejection and completion can include resolution notes. Logging requests here is separate from the currently unavailable request buttons on the member dashboard.

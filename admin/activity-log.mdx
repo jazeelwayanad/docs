@@ -1,125 +1,20 @@
 ---
 title: "Activity log"
-description: "Current screen specification: Activity log. English and Malayalam guidance for the development team."
+description: "Review who changed Mahallu records and when."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Activity log
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/activity`
+Review who changed Mahallu records and when.
 
-### Purpose and access
+### Steps
 
-Review tenant changes and their actors without editing the audit entries.
+1. Open **Settings** → **Activity log**.
+2. Review the newest entries, grouped by day. Each entry includes the actor, action, affected record, and time.
+3. Use the page links to read older activity.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Things to know
 
-### Screen layout
-
-The page groups entries by day, showing actor, action description, target context, and time. Pagination loads 30 entries per page.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-Navigation and row interactions are described in the sequence below.
-
-
-### Interaction sequence
-
-Open Activity log → inspect newest changes → navigate the page links to older entries.
-
-### States and rules
-
-Denied audit.view and No activity yet have separate states. This is read-only; it does not provide an undo or audit-entry deletion workflow.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/activity.ts`
-
-
-Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `settings.view`, `settings.update`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Activity log
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/settings/activity`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-മഹല്ലിലെ മാറ്റങ്ങളും അവ നടത്തിയവരെയും audit രേഖ തിരുത്താതെ പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-ദിവസം തിരിച്ചുള്ള രേഖകളിൽ actor, പ്രവർത്തന വിവരണം, ബന്ധപ്പെട്ട വിവരം, സമയം എന്നിവ കാണിക്കുന്നു. ഓരോ പേജിലും 30 രേഖകൾ വായിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
-
-
-### പ്രവർത്തനക്രമം
-
-Activity log തുറക്കുക → പുതിയ മാറ്റങ്ങൾ പരിശോധിക്കുക → page ലിങ്കുകളിലൂടെ പഴയവ കാണുക.
-
-### നിലകളും നിയമങ്ങളും
-
-'audit.view' ഇല്ലാത്തതും No activity yetഉം വേറെയാണ്. ഇത് വായിക്കാൻ മാത്രം; undo അല്ലെങ്കിൽ audit-entry deletion workflow ഇല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/settings/activity/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/activity.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`, `structure.view`, `structure.update`, `settings.view`, `settings.update`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/structure/structure.controller.ts`
-- `apps/api/src/notifications/notifications.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+The list shows 30 entries per page. **No activity yet** is different from a denied-access message. This page is read-only and cannot undo changes or delete activity entries.

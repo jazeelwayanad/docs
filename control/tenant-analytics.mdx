@@ -1,137 +1,20 @@
 ---
-title: "Tenant analytics"
-description: "Current screen specification: Tenant analytics. English and Malayalam guidance for the development team."
+title: "Workspace analytics"
+description: "Review growth, subscription information, and metrics for a single Mahallu workspace."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Workspace analytics
 
-## Tenant analytics
+Review growth, subscription information, and metrics for a single Mahallu workspace.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]/analytics`
+### Steps
 
-### Purpose and access
+1. Open analytics for a selected workspace from its platform-management views.
+2. Review the workspace heading, **Member growth** chart, subscription information, and supporting measures.
+3. Use the back or workspace links to return to its command center.
 
-Inspect tenant-level member growth and subscription summaries.
+### Things to know
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
-
-### Screen layout
-
-The page presents the selected tenant heading, Member growth chart, subscription information, and supporting tenant metrics.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| &larr; Back to Mahalle settings | `/tenants/${tenantId}` |
-
-
-
-### Interaction sequence
-
-Open tenant analytics → inspect growth and subscription → follow the tenant/back links to its command center.
-
-### States and rules
-
-Missing tenant records use notFound. This screen is analytical and does not expose member, plan, or payment editing forms.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx`
-- `apps/web/src/features/platform/growth-chart.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Tenant analytics
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]/analytics`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Tenant അംഗവളർച്ചയും subscription സംഗ്രഹവും പരിശോധിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-തിരഞ്ഞെടുത്ത tenant തലക്കെട്ട്, Member growth chart, subscription വിവരങ്ങൾ, അനുബന്ധ കണക്കുകൾ എന്നിവയുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| &larr; Back to Mahalle settings | `/tenants/${tenantId}` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Tenant analytics തുറക്കുക → growth/subscription പരിശോധിക്കുക → tenant/back ലിങ്കിലൂടെ command centerലേക്ക് മടങ്ങുക.
-
-### നിലകളും നിയമങ്ങളും
-
-Tenant ഇല്ലെങ്കിൽ notFound. ഇത് analytics സ്ക്രീനാണ്; അംഗം, plan, payment തിരുത്തൽ formകൾ ഇല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/analytics/page.tsx`
-- `apps/web/src/features/platform/growth-chart.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+This is a read-only view. Use the workspace command center or billing tools to change records. A missing or unavailable workspace cannot be opened.

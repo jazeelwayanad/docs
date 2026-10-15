@@ -1,153 +1,37 @@
 ---
 title: "Manual journals"
-description: "Current screen specification: Manual journals. English and Malayalam guidance for the development team."
+description: "Record balanced accounting adjustments using debit and credit lines."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Manual journals
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/manual-journals`
+Record balanced accounting adjustments using debit and credit lines.
 
-### Purpose and access
+### Steps
 
-Review journal postings and create manual double-entry vouchers.
+1. Open **Manual journals** and choose **New Journal Entry**.
+2. Enter the journal date, reference, and description.
+3. Select ledger accounts and enter debit or credit amounts on at least two lines. Use **Add Line** for additional lines.
+4. Check that total debits equal total credits, then submit.
+5. Review the refreshed journal list.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The page lists journal entries and opens a dialog with date, reference, description, and account/debit/credit lines. Add Line expands the journal; at least two UI lines remain.
+#### Journal
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Date** | Required. Choose a date. |
+| **Reference / Cheque #** | e.g. JV-001 |
+| **Narration / Description** | Required. Description of journal entry... |
+| **Account** | Required. Choose an available option. |
+| **Debit** | Debit (₹) |
+| **Credit** | Credit (₹) |
 
+### Things to know
 
-Displayed table columns: **Entry #**, **Date**, **Particulars**, **Source**, **Debit**, **Credit**, **Status**.
-
-#### Fields and filters: Journal client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Date | `date` | date | Yes | — |
-| Reference / Cheque # | `reference` | text | Not marked | e.g. JV-001 |
-| Narration / Description | `description` | text | Yes | Description of journal entry... |
-| Line.account id | `line.accountId` | select | Yes | — |
-| Line.debit | `line.debit` | number | Not marked | Debit (₹) |
-| Line.credit | `line.credit` | number | Not marked | Credit (₹) |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| New Journal Entry | Opens the `modal` view. | `journal-client.tsx` |
-| + Add Line | Updates local UI state; persistence is described separately below. | `journal-client.tsx` |
-| Cancel | Closes or clears the `modal` view/selection. | `journal-client.tsx` |
-| Posting... / Post Entry | Submits the associated API change; follow the sequence and failure rules below. | `journal-client.tsx` |
-
-
-
-### Interaction sequence
-
-New Journal Entry → select accounts and enter debit/credit values → add lines if needed → balance total debits and credits → submit → refresh the journal list.
-
-### States and rules
-
-Unbalanced entries are rejected before posting. Zero-amount lines are omitted from the submitted payload. Account choices come from the tenant’s chart of accounts.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/journal-client.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Manual journals
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/manual-journals`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Journal postings പരിശോധിച്ച് manual double-entry വൗച്ചറുകൾ സൃഷ്ടിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Journal പട്ടികയും തീയതി, reference, വിവരണം, account/debit/credit വരികളുള്ള ഡയലോഗും ഉണ്ട്. Add Line പുതിയ വരി ചേർക്കും; UIയിൽ കുറഞ്ഞത് രണ്ടു വരികൾ നിലനിൽക്കും.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Entry #**, **Date**, **Particulars**, **Source**, **Debit**, **Credit**, **Status**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Journal client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Date | `date` | date | ഉണ്ട് | — |
-| Reference / Cheque # | `reference` | text | ചിഹ്നമില്ല | e.g. JV-001 |
-| Narration / Description | `description` | text | ഉണ്ട് | Description of journal entry... |
-| Line.account id | `line.accountId` | select | ഉണ്ട് | — |
-| Line.debit | `line.debit` | number | ചിഹ്നമില്ല | Debit (₹) |
-| Line.credit | `line.credit` | number | ചിഹ്നമില്ല | Credit (₹) |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| New Journal Entry | `modal` കാഴ്ച തുറക്കും. | `journal-client.tsx` |
-| + Add Line | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `journal-client.tsx` |
-| Cancel | `modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `journal-client.tsx` |
-| Posting... / Post Entry | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `journal-client.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-New Journal Entry → അക്കൗണ്ടുകളും debit/credit തുകയും നൽകുക → ആവശ്യമെങ്കിൽ വരികൾ ചേർക്കുക → ആകെ debit, credit തുല്യമാക്കുക → സമർപ്പിക്കുക → പട്ടിക പുതുക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-തുല്യമല്ലാത്ത entry സമർപ്പിക്കുന്നതിന് മുമ്പ് നിരസിക്കുന്നു. പൂജ്യം തുകയുള്ള വരികൾ payloadൽ ഉൾപ്പെടില്ല. മഹല്ലിന്റെ chart of accountsൽ നിന്നാണ് അക്കൗണ്ടുകൾ തിരഞ്ഞെടുക്കുന്നത്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/manual-journals/journal-client.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+An unbalanced journal is rejected. Lines with zero amounts are ignored when submitting. Account choices come from your [Chart of accounts](/charts-of-accounts).

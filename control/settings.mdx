@@ -1,169 +1,43 @@
 ---
-title: "System settings"
-description: "Current screen specification: System settings. English and Malayalam guidance for the development team."
+title: "Platform settings"
+description: "Maintain platform identity, policy settings, and onboarding defaults."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Platform settings
 
-## System settings
+Maintain platform identity, policy settings, and onboarding defaults.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/settings`
+### Steps
 
-### Purpose and access
+1. Open **System settings**.
+2. Review **General Platform Identity** and update the name, root domain, support email, currency, or timezone as needed.
+3. Review **Security & Session Policies** for timeout and session-count settings.
+4. Review **Fleet & Onboarding Defaults** for trial and audit defaults.
+5. Choose **Save Changes**, then review the refreshed values. Inspect telemetry and fleet/compliance summaries separately.
 
-Edit platform configuration and inspect system telemetry.
+### Fields and choices
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Platform settings
 
-General Platform Identity covers name, root domain, support email, currency, and timezone. Security & Session Policies covers timeout/session count. Fleet & Onboarding Defaults covers trial/audit defaults; telemetry and fleet/compliance panels are read-only.
+| Field or control | Guidance |
+| --- | --- |
+| **Platform Name** | Required. Enter platform name. |
+| **Root Domain** | Required. Enter root domain. |
+| **Platform Support Email** | Required. Enter an email address. |
+| **Default Currency** | INR (₹) - Indian Rupee, USD ($) - US Dollar, AED (د.إ) - UAE Dirham, SAR (﷼) - Saudi Riyal |
+| **Platform Timezone** | Asia/Kolkata (IST), Asia/Dubai (GST), Asia/Riyadh (AST), UTC |
+| **Session Idle Timeout (Minutes)** | 15 minutes (High Security), 30 minutes (Standard), 60 minutes (1 hour), 4 hours, 24 hours (1 day) |
+| **Max Concurrent Device Sessions** | 3 active sessions, 5 active sessions (Recommended), 10 active sessions, Unlimited |
+| **Require two-factor authentication for superadmins** | Enter require two-factor authentication for superadmins. |
+| **Default Trial Duration (Days)** | Minimum 0; Maximum 90 |
+| **Audit Stream Retention (Days)** | 90 Days, 180 Days (6 Months), 365 Days (1 Year), 730 Days (2 Years) |
+| **Auto approve tenants** | Enter auto approve tenants. |
+| **Allow public registration** | Enter allow public registration. |
 
-### Fields and displayed information
+### Things to know
 
-
-#### Fields and filters: Platform settings view
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Platform Name | `set-platformName` | text | Yes | — |
-| Root Domain | `set-rootDomain` | text | Yes | — |
-| Platform Support Email | `set-supportEmail` | email | Yes | — |
-| Default Currency | `set-currency` | select | Not marked | INR (₹) - Indian Rupee, USD ($) - US Dollar, AED (د.إ) - UAE Dirham, SAR (﷼) - Saudi Riyal |
-| Platform Timezone | `set-timezone` | select | Not marked | Asia/Kolkata (IST), Asia/Dubai (GST), Asia/Riyadh (AST), UTC |
-| Session Idle Timeout (Minutes) | `set-timeout` | select | Not marked | 15 minutes (High Security), 30 minutes (Standard), 60 minutes (1 hour), 4 hours, 24 hours (1 day) |
-| Max Concurrent Device Sessions | `set-maxSessions` | select | Not marked | 3 active sessions, 5 active sessions (Recommended), 10 active sessions, Unlimited |
-| Require2fafor superadmins | `require2FAForSuperadmins` | switch | Not marked | — |
-| Default Trial Duration (Days) | `set-trialDays` | number | Not marked | min 0; max 90 |
-| Audit Stream Retention (Days) | `set-auditDays` | select | Not marked | 90 Days, 180 Days (6 Months), 365 Days (1 Year), 730 Days (2 Years) |
-| Auto approve tenants | `autoApproveTenants` | switch | Not marked | — |
-| Allow public registration | `allowPublicRegistration` | switch | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Save Changes | Submits the associated API change; follow the sequence and failure rules below. | `platform-settings-view.tsx` |
-
-
-
-### Interaction sequence
-
-Change configuration → Save Changes → patch /platform/settings → refresh. Inspect telemetry separately from the editable fields.
-
-### States and rules
-
-Persisted setting values do not prove every runtime service consumes them. Document the saving operation without claiming that editing rootDomain automatically rewrites DNS or that all policy controls are fully enforced.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/settings/page.tsx`
-- `apps/web/src/features/platform/platform-settings-view.tsx`
-
-Data and access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## System settings
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/settings`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Platform ക്രമീകരണം തിരുത്തി system telemetry പരിശോധിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-General Platform Identityൽ name, root domain, support email, currency, timezone; Security & Session Policiesൽ timeout/session count; Fleet & Onboarding Defaultsൽ trial/audit defaults. Telemetry/fleet/compliance വായിക്കാൻ മാത്രമാണ്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Platform settings view
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Platform Name | `set-platformName` | text | ഉണ്ട് | — |
-| Root Domain | `set-rootDomain` | text | ഉണ്ട് | — |
-| Platform Support Email | `set-supportEmail` | email | ഉണ്ട് | — |
-| Default Currency | `set-currency` | select | ചിഹ്നമില്ല | INR (₹) - Indian Rupee, USD ($) - US Dollar, AED (د.إ) - UAE Dirham, SAR (﷼) - Saudi Riyal |
-| Platform Timezone | `set-timezone` | select | ചിഹ്നമില്ല | Asia/Kolkata (IST), Asia/Dubai (GST), Asia/Riyadh (AST), UTC |
-| Session Idle Timeout (Minutes) | `set-timeout` | select | ചിഹ്നമില്ല | 15 minutes (High Security), 30 minutes (Standard), 60 minutes (1 hour), 4 hours, 24 hours (1 day) |
-| Max Concurrent Device Sessions | `set-maxSessions` | select | ചിഹ്നമില്ല | 3 active sessions, 5 active sessions (Recommended), 10 active sessions, Unlimited |
-| Require2fafor superadmins | `require2FAForSuperadmins` | switch | ചിഹ്നമില്ല | — |
-| Default Trial Duration (Days) | `set-trialDays` | number | ചിഹ്നമില്ല | min 0; max 90 |
-| Audit Stream Retention (Days) | `set-auditDays` | select | ചിഹ്നമില്ല | 90 Days, 180 Days (6 Months), 365 Days (1 Year), 730 Days (2 Years) |
-| Auto approve tenants | `autoApproveTenants` | switch | ചിഹ്നമില്ല | — |
-| Allow public registration | `allowPublicRegistration` | switch | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Save Changes | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `platform-settings-view.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-ക്രമീകരണം മാറ്റുക → Save Changes → /platform/settings patch → പുതുക്കും. Telemetry editable fieldsൽ നിന്ന് വേർതിരിച്ച് പരിശോധിക്കുക.
-
-### നിലകളും നിയമങ്ങളും
-
-Setting സംരക്ഷിച്ചുവെന്നത് എല്ലാ runtime serviceഉം ഉപയോഗിക്കുന്നു എന്ന തെളിവല്ല. RootDomain തിരുത്തിയാൽ DNS മാറുമെന്നോ എല്ലാ policiesഉം നടപ്പിലാകുമെന്നോ അവകാശപ്പെടരുത്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/settings/page.tsx`
-- `apps/web/src/features/platform/platform-settings-view.tsx`
-
-Data/access helpers: `apps/web/src/lib/platform.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+The telemetry and fleet/compliance panels are read-only. Saving settings stores their values, but some runtime policy integrations remain incomplete. Changing the root-domain field does not connect or reconfigure a domain.

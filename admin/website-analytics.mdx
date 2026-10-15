@@ -1,107 +1,22 @@
 ---
 title: "Website analytics"
-description: "Current screen specification: Website analytics. English and Malayalam guidance for the development team."
+description: "Review the website analytics panels and their current availability."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+<Note>Live website analytics are not connected. The empty panels do not measure traffic.</Note>
 
-<Tabs>
-<Tab title="English">
-
-## Website analytics
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/analytics`
-
-### Purpose and access
-
-Inspect the website analytics presentation.
-
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-The screen contains Traffic trend, Top Pages, Referrers, Countries, Devices, and Browsers panels plus Refresh.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Refresh | Updates local UI state; persistence is described separately below. | `website-analytics.tsx` |
-
-
-
-### Interaction sequence
-
-Open the screen → inspect its empty analytics panels → Refresh briefly animates the control.
-
-### States and rules
-
-The component begins with hasData=false and does not fetch analytics. Refresh is timer-based; these panels are not live traffic measurements.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx`
-- `apps/web/src/features/website/website-analytics.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-<Tab title="മലയാളം">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Website analytics
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/analytics`
+Review the website analytics panels and their current availability.
 
-### ഉദ്ദേശ്യവും പ്രവേശനവും
+### Steps
 
-വെബ്സൈറ്റ് analytics കാഴ്ച പരിശോധിക്കുക.
+1. Open **Website** → **Analytics**.
+2. Review **Traffic trend**, **Top Pages**, **Referrers**, **Countries**, **Devices**, and **Browsers**.
+3. Choose **Refresh** to see the refresh indicator.
 
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+### Things to know
 
-### സ്ക്രീൻ ക്രമം
-
-Traffic trend, Top Pages, Referrers, Countries, Devices, Browsers വിഭാഗങ്ങളും Refreshഉം ഉണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Refresh | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `website-analytics.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-സ്ക്രീൻ തുറക്കുക → ശൂന്യ analytics വിഭാഗങ്ങൾ പരിശോധിക്കുക → Refresh നിയന്ത്രണം താൽക്കാലികമായി animate ചെയ്യും.
-
-### നിലകളും നിയമങ്ങളും
-
-Component hasData=false ആയി തുടങ്ങുന്നു; analytics വായിക്കുന്നില്ല. Refresh timer അധിഷ്ഠിതമാണ്; ഇവ live traffic കണക്കുകളല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/analytics/page.tsx`
-- `apps/web/src/features/website/website-analytics.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-</Tabs>
+Live website analytics are not connected. The panels remain empty, and **Refresh** does not load traffic measurements.

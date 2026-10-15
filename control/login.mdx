@@ -1,149 +1,31 @@
 ---
-title: "Control-panel login"
-description: "Current screen specification: Control-panel login. English and Malayalam guidance for the development team."
+title: "Control Panel sign-in"
+description: "Sign in with an operator account that has platform access."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Control Panel sign-in
 
-## Control-panel login
+Sign in with an operator account that has platform access.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/login`
+### Steps
 
-### Purpose and access
+1. Open the Control Panel sign-in page supplied by your platform team.
+2. Enter **Email** and **Password**, then choose **Log in**.
+3. After signing in, open the Control Panel starting page or your requested destination.
 
-Authenticate your account before entering the platform control plane.
+### Fields and choices
 
-Entry, public access, and redirect rules are described for this screen below.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Login form
 
-Control Panel Log in displays the shared email/password LoginForm.
+| Field or control | Guidance |
+| --- | --- |
+| **Email** | Required. you@example.com |
+| **Password** | Required. •••••••• |
 
-### Fields and displayed information
+### Things to know
 
-
-#### Fields and filters: Login form
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Email | `login-email` | email | Yes | you@example.com |
-| Password | `login-password` | password | Yes | •••••••• |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Log in | Submits the associated API change; follow the sequence and failure rules below. | `login-form.tsx` |
-
-
-
-### Interaction sequence
-
-Enter credentials → Log in → authenticate → navigate to the control root or a safe return path. Platform membership is checked when platform screens load.
-
-### States and rules
-
-A successful account login does not itself grant platform privileges. Tenant administrator roles are separate from platform membership.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/login/page.tsx`
-- `apps/web/src/features/auth/login-form.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Control-panel login
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/login`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Platform control panel പ്രവേശനത്തിന് account authenticate ചെയ്യുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Control Panel Log in പൊതുവായ email/password LoginForm കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Login form
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Email | `login-email` | email | ഉണ്ട് | you@example.com |
-| Password | `login-password` | password | ഉണ്ട് | •••••••• |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Log in | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `login-form.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-വിവരങ്ങൾ നൽകുക → Log in → authenticate → control root അല്ലെങ്കിൽ സുരക്ഷിത return path തുറക്കും. Platform സ്ക്രീനുകൾ membership പരിശോധിക്കുന്നു.
-
-### നിലകളും നിയമങ്ങളും
-
-Account login വിജയിച്ചതുകൊണ്ട് platform അധികാരം ലഭിക്കില്ല. Tenant admin roleഉം platform membershipഉം വ്യത്യസ്തമാണ്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/login/page.tsx`
-- `apps/web/src/features/auth/login-form.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+Signing in successfully does not grant platform privileges. Mahallu administrator roles and platform roles are separate.

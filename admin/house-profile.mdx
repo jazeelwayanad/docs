@@ -1,167 +1,35 @@
 ---
 title: "House profile"
-description: "Current screen specification: House profile. English and Malayalam guidance for the development team."
+description: "View a dwelling\u2019s details and the family and members linked to it."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## House profile
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/houses/[houseId]`
+View a dwelling’s details and the family and members linked to it.
 
-### Purpose and access
+### Steps
 
-Inspect a dwelling and the family and members associated with it.
+1. Open a house from [Houses](/admin/houses).
+2. Review **House Information**, including its division and address.
+3. Open the linked family or member to review that record.
+4. Use the edit-house control to change the dwelling details, then save.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The page presents House Information, Family, Members, and History panels with an edit-house control.
+#### House details
 
-### Fields and displayed information
-
-
-#### Fields and filters: House form dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| House number | `house-number` | text | Yes | e.g. 14/A |
-| House name | `house-name` | text | Not marked | — |
-| Division | `house-division` | select | Not marked | No division |
-| Address | `house-address` | text | Not marked | — |
-| Notes | `house-notes` | textarea | Not marked | — |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Edit house | Opens the `open` view. | `edit-house-button.tsx` |
-| Cancel | Invokes the associated handler; see the sequence below. | `house-form-dialog.tsx` |
-| Save Changes / Add House | Submits the associated API change; follow the sequence and failure rules below. | `house-form-dialog.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| ← All houses | `/${slug}/houses` |
-| Add one from the Members Directory → | `/${slug}/members` |
+| **House number** | Required. e.g. 14/A |
+| **House name** | Enter house name. |
+| **Division** | No division |
+| **Address** | Enter address. |
+| **Notes** | Enter additional details. |
 
+### Things to know
 
-
-### Interaction sequence
-
-Open a house from the directory → inspect its division and address → follow the family/member links → or edit house details and save → refresh.
-
-### States and rules
-
-Missing houses use notFound. Unlinked households and missing members have explicit empty messages. History currently states No history to show yet; do not describe an implemented house timeline.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx`
-- `apps/web/src/features/tenants/edit-house-button.tsx`
-- `apps/web/src/features/tenants/house-form-dialog.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `houses.view`, `houses.create`, `houses.update`, `houses.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/houses/houses.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## House profile
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/houses/[houseId]`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-ഒരു വീടും അതുമായി ബന്ധിപ്പിച്ച കുടുംബവും അംഗങ്ങളും പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-House Information, Family, Members, History വിഭാഗങ്ങളും വീട് തിരുത്താനുള്ള നിയന്ത്രണവും കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: House form dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| House number | `house-number` | text | ഉണ്ട് | e.g. 14/A |
-| House name | `house-name` | text | ചിഹ്നമില്ല | — |
-| Division | `house-division` | select | ചിഹ്നമില്ല | No division |
-| Address | `house-address` | text | ചിഹ്നമില്ല | — |
-| Notes | `house-notes` | textarea | ചിഹ്നമില്ല | — |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Edit house | `open` കാഴ്ച തുറക്കും. | `edit-house-button.tsx` |
-| Cancel | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `house-form-dialog.tsx` |
-| Save Changes / Add House | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `house-form-dialog.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| ← All houses | `/${slug}/houses` |
-| Add one from the Members Directory → | `/${slug}/members` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-വീട് പട്ടികയിൽ നിന്ന് തുറക്കുക → പ്രദേശവും വിലാസവും പരിശോധിക്കുക → കുടുംബ/അംഗ ലിങ്കുകൾ തുറക്കുക → അല്ലെങ്കിൽ വീട് തിരുത്തി സംരക്ഷിക്കുക → പുതുക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-വീട് ലഭിക്കാത്തപ്പോൾ notFound ഉപയോഗിക്കുന്നു. കുടുംബമോ അംഗങ്ങളോ ഇല്ലെങ്കിൽ ശൂന്യ സന്ദേശങ്ങളുണ്ട്. History ഇപ്പോൾ No history to show yet ആണ് കാണിക്കുന്നത്; പ്രവർത്തിക്കുന്ന ചരിത്രപട്ടികയായി വിവരിക്കരുത്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/houses/[houseId]/page.tsx`
-- `apps/web/src/features/tenants/edit-house-button.tsx`
-- `apps/web/src/features/tenants/house-form-dialog.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/houses.ts`, `apps/web/src/lib/structure.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `houses.view`, `houses.create`, `houses.update`, `houses.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/houses/houses.controller.ts`
-
-</Tab>
-</Tabs>
+The page shows separate messages for missing family and member links. **History** currently shows **No history to show yet**; a house timeline is unavailable. A missing or unavailable house cannot be opened.

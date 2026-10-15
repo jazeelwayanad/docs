@@ -1,151 +1,21 @@
 ---
-title: "Control overview"
-description: "Current screen specification: Control overview. English and Malayalam guidance for the development team."
+title: "Control Panel overview"
+description: "Review platform totals, commissioned Mahallu workspaces, and recent audit activity."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Control Panel overview
 
-## Control overview
+Review platform totals, commissioned Mahallu workspaces, and recent audit activity.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/`
+### Steps
 
-### Purpose and access
+1. Open **Control Panel** with a platform account.
+2. Review **Fleet Command Center**, platform statistics, and commissioned Mahallu workspaces.
+3. Choose a Mahallu to open its command center, or select a platform-management tool.
+4. Review **Audit Stream** for recent activity.
 
-Review the platform fleet, headline metrics, recent tenants, and audit activity.
+### Things to know
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
-
-### Screen layout
-
-Fleet Command Center presents platform identity, statistics, commissioned Mahalles, operational links, and Audit Stream.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Manage All Fleet | `/tenants` |
-| Audit Stream | `/audit-logs` |
-| Fleet Directory Provision &amp; configure Mahalles | `/tenants` |
-| Platform Analytics Demographics &amp; growth trends | `/analytics` |
-| Plans &amp; Billing Pricing tiers &amp; subscriptions | `/plans` |
-| Forensic Audit Stream Security &amp; compliance trails | `/audit-logs` |
-| All Mahalles ( ) | `/tenants` |
-| Inspect | `/tenants/${tenant.id}` |
-| Full Stream | `/audit-logs` |
-
-
-
-### Interaction sequence
-
-Open Control Panel → inspect fleet totals → open a tenant command center or platform tool → return to review recent audit entries.
-
-### States and rules
-
-Without PlatformMembership the root displays Platform Root Access Denied. Some health labels are presentation text; do not infer live health from the static Cluster Healthy badge.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Control overview
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Platform fleet, പ്രധാന കണക്കുകൾ, പുതിയ tenants, audit പ്രവർത്തനം എന്നിവ പരിശോധിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-Fleet Command Centerൽ platform identity, കണക്കുകൾ, commissioned Mahalles, tool ലിങ്കുകൾ, Audit Stream എന്നിവയുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Manage All Fleet | `/tenants` |
-| Audit Stream | `/audit-logs` |
-| Fleet Directory Provision &amp; configure Mahalles | `/tenants` |
-| Platform Analytics Demographics &amp; growth trends | `/analytics` |
-| Plans &amp; Billing Pricing tiers &amp; subscriptions | `/plans` |
-| Forensic Audit Stream Security &amp; compliance trails | `/audit-logs` |
-| All Mahalles ( ) | `/tenants` |
-| Inspect | `/tenants/${tenant.id}` |
-| Full Stream | `/audit-logs` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Control Panel തുറക്കുക → fleet കണക്കുകൾ പരിശോധിക്കുക → tenant command center അല്ലെങ്കിൽ platform tool തുറക്കുക → പുതിയ audit രേഖകൾ കാണാൻ മടങ്ങുക.
-
-### നിലകളും നിയമങ്ങളും
-
-PlatformMembership ഇല്ലെങ്കിൽ rootൽ Platform Root Access Denied കാണിക്കും. ചില health labels display text ആണ്; സ്ഥിരമായ Cluster Healthy badge live health തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/analytics.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+**Platform Root Access Denied** means your account lacks the required platform access. The **Cluster Healthy** badge is a fixed label and does not confirm live system health.

@@ -1,351 +1,118 @@
 ---
-title: "Members directory"
-description: "Current screen specification: Members directory. English and Malayalam guidance for the development team."
+title: "Members"
+description: "Maintain individual citizen records, including family links, education, work, health, and residency information."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
-<Tabs>
-<Tab title="English">
+## Members
 
-## Members directory
+Maintain individual citizen records, including family links, education, work, health, and residency information.
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/members`
+### Steps
 
-### Purpose and access
+1. Open **Members**, then choose **Add member**.
+2. Enter a full name in the identity section and complete contact and family information.
+3. Complete the education and work, health, and address tabs as applicable.
+4. Save the form. The dialog closes and the directory refreshes after a successful save.
+5. Search, use the summary filters, or filter by family and blood group to find a person. Adjust sorting and rows per page as needed.
+6. Open a row to view its profile, or edit the saved record. Confirm individual deletion when removing a person.
 
-Maintain individual member records and their family, education, work, health, and residency information.
+### Fields and choices
 
-You need an account session and membership in the selected Mahallu. The API independently checks the requested operation’s permissions and feature availability.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Search and selection
 
-The directory contains summary/filter pills, search, family and blood-group filters, sorting, a selectable table, page-size controls, and a bulk-action bar. Add/edit opens a four-tab dialog: identity, education, health, and address.
-
-### Fields and displayed information
-
-
-#### Fields and filters: Members registry
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Query | `query` | text | Not marked | Search name, phone, family... |
-| Family filter | `familyFilter` | select | Not marked | All Families |
-| Blood filter | `bloodFilter` | select | Not marked | All Blood Groups; Initial: ALL |
-| Sort by | `sortBy` | radio | Not marked | — |
-| Sort direction | `sortDirection` | radio | Not marked | — |
-| Is all selected | `isAllSelected` | checkbox | Not marked | — |
-| Is selected | `isSelected` | checkbox | Not marked | — |
-| Rows per page | `rowsPerPage` | select | Not marked | 10 / page, 15 / page, 25 / page, 50 / page; Initial: 15 |
-| Bulk target family id | `bulkTargetFamilyId` | select | Not marked | Select a family... |
-
-
-#### Fields and filters: Member form dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Full Legal Name | `member-name` | text | Yes | Enter full name |
-| Linked Family / Household | `member-family` | select | Not marked | No family assigned |
-| Relation to Head of Family | `member-relation` | select | Not marked | Select relation |
-| Date of Birth | `member-dob` | date | Not marked | — |
-| Gender | `member-gender` | select | Not marked | Select gender, Male, Female, Other |
-| Blood Group | `member-blood-group` | select | Not marked | Select blood group |
-| Marital Status | `member-marital-status` | select | Not marked | Select status, Single, Married, Widowed, Divorced |
-| Primary Phone Number | `member-phone` | text | Not marked | e.g. +91 98765 43210 |
-| Email Address | `member-email` | email | Not marked | e.g. name@example.com |
-| National ID / Aadhaar | `member-id-number` | text | Not marked | e.g. 12-digit Aadhaar number |
-| Current Course / Class / Standard | `member-student-course` | text | Not marked | e.g. Plus Two Science, Class 10, B.Tech CS |
-| Current Institution / School / College | `member-student-inst` | text | Not marked | e.g. Farook College, Govt HSS |
-| Employment Status | `member-emp-status` | select | Not marked | Select Employment Status |
-| Job Title / Designation | `member-job-title` | text | Not marked | e.g. Accountant, Electrician, Driver, Merchant |
-| Employer / Company / Business Name | `member-employer` | text | Not marked | e.g. Lulu Hypermarket, Self - Own Shop, Freelance |
-| Is job seeker | `isJobSeeker` | checkbox | Not marked | — |
-| Highest Education Level | `member-edu-level` | select | Not marked | Select Highest Education Level |
-| Primary Qualification / Major | `member-edu-details-primary` | text | Not marked | e.g. B.Com, Plus Two Science, Alimiyya |
-| Level | `new-edu-level` | select | Not marked | Initial: SECONDARY_SSLC |
-| Degree / Course | `new-edu-degree` | text | Not marked | e.g. SSLC, Plus Two, B.Com |
-| Institution / Board | `new-edu-inst` | text | Not marked | e.g. Govt HSS, Calicut Univ |
-| Year | `new-edu-year` | text | Not marked | e.g. 2021 |
-| New skill input | `newSkillInput` | text | Not marked | e.g. Electrician, Driving, Plumbing, Coding, Graphic Design, Tuition/Teaching, Accounting |
-| Has disability | `hasDisability` | checkbox | Not marked | — |
-| Disability Category | `disabilityType` | select | Not marked | Select Category |
-| Disability Percentage (%) | `disabilityPercentage` | number | Not marked | Percentage %; min 1; max 100 |
-| Disability certificate | `disabilityCertificate` | checkbox | Not marked | — |
-| Disability certificate no | `disabilityCertificateNo` | text | Not marked | Certificate / UDID Number |
-| Has chronic illness | `hasChronicIllness` | checkbox | Not marked | — |
-| Specific Diagnosis / Details | `chronicDetails` | text | Not marked | Condition notes or specific diagnosis |
-| Treatment required | `treatmentRequired` | checkbox | Not marked | — |
-| Regular medication required | `regularMedicationRequired` | checkbox | Not marked | — |
-| Requires assistance | `requiresAssistance` | checkbox | Not marked | — |
-| Primary Caregiver Name | `primaryCaregiverName` | text | Not marked | Name of person assisting |
-| Caregiver Relationship | `caregiverRelationship` | text | Not marked | e.g. Spouse, Son, Daughter, Caretaker |
-| Emergency Contact Person | `emergencyContactName` | text | Not marked | Emergency contact name |
-| Emergency Phone Number | `emergencyContactPhone` | text | Not marked | e.g. +91 98765 43210 |
-| Requires mental health support | `requiresMentalHealthSupport` | checkbox | Not marked | — |
-| Support Type Required | `mentalHealthSupportType` | select | Not marked | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
-| Requires community support | `requiresCommunitySupport` | checkbox | Not marked | — |
-| Support Category | `supportCategory` | select | Not marked | Select Welfare Category |
-| Support Status | `supportStatus` | select | Not marked | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; Initial: ACTIVE |
-| Welfare Committee Notes | `supportNotes` | textarea | Not marked | Confidential notes for the Mahallu welfare committee / relief desk... |
-| Use family address | `useFamilyAddress` | checkbox | Not marked | — |
-| House / Building Name | `m-house-name` | text | Not marked | House Name / Flat |
-| Place / Locality | `m-place` | text | Not marked | Place / Locality |
-| Post Office | `m-post` | text | Not marked | Post Office |
-| State | `m-state` | searchable select | Not marked | Select State; Initial: Kerala |
-| District | `m-district` | searchable select | Not marked | Select District |
-| PIN Code | `m-pin` | text | Not marked | 6-digit PIN |
-| Local Body Type | `m-local-body-type` | select | Not marked | Grama Panchayath, Municipality, Corporation; Initial: Grama Panchayath |
-| Local Body Name | `m-local-body-name` | text | Not marked | Name of Panchayath / Municipality |
-| Residency Status | `member-movement-status` | select | Not marked | — |
-| Status Effective Date | `member-movement-date` | date | Not marked | — |
-| Is expatriate | `isExpatriate` | checkbox | Not marked | — |
-| Expatriate country | `expatriateCountry` | text | Not marked | Country of residence (e.g. UAE, Saudi Arabia) |
-| Expatriate occupation | `expatriateOccupation` | text | Not marked | Occupation abroad |
-| Is yatheem | `isYatheem` | checkbox | Not marked | — |
-| Guardian name | `guardianName` | text | Not marked | Guardian Name |
-| Guardian phone | `guardianPhone` | text | Not marked | Guardian Phone |
-
-
-
-### Actions
-
-
-| Control | Result |
+| Field or control | Guidance |
 | --- | --- |
-| More | Opens, closes, or selects the associated dialog/record. |
-| Import CSV / Excel | Shows a notification; does not establish a saved change. |
-| Bulk Photos | Shows a notification; does not establish a saved change. |
-| ID Cards | Shows a notification; does not establish a saved change. |
-| Export | Downloads the locally generated output. |
-| Add Member | Opens, closes, or selects the associated dialog/record. |
-| Search Members | Opens, closes, or selects the associated dialog/record. |
-| Advanced Filters | Opens, closes, or selects the associated dialog/record. |
-| Reset | Changes the selected view, filter, or page in local state. |
-| Sort Records | Opens, closes, or selects the associated dialog/record. |
-| Actions | No direct click handler; may be a menu trigger or linked control. See the sequence below. |
-| View Profile | Opens the configured destination. |
-| Edit Member | Opens, closes, or selects the associated dialog/record. |
-| Delete Member | Opens, closes, or selects the associated dialog/record. |
-| Assign to Family | Opens, closes, or selects the associated dialog/record. |
-| Delete | Opens, closes, or selects the associated dialog/record. |
-| Clear | Changes the selected view, filter, or page in local state. |
-| Cancel | Opens, closes, or selects the associated dialog/record. |
-| Assigning... / Assign Family | Shows a notification; does not establish a saved change. |
-| isBulkProcessing ? "Deleting..." : `Delete $&#123;selectedMemberIds.size&#125; Members` | Submits the associated API change; follow the sequence and failure rules below. |
-| isRemoving ? "Deleting..." : "Delete Member" | Submits the associated API change; follow the sequence and failure rules below. |
-| 1. Identity & Demographics | Changes the selected view, filter, or page in local state. |
-| 2. Education & Work | Changes the selected view, filter, or page in local state. |
-| 3. Health & Support | Changes the selected view, filter, or page in local state. |
-| 4. Address & Registers | Changes the selected view, filter, or page in local state. |
-| Student | Updates local UI state; persistence is described separately below. |
-| Worker / Adult | Updates local UI state; persistence is described separately below. |
-| Add | Invokes the associated handler; see the sequence below. |
-| × | Invokes the associated handler; see the sequence below. |
-| + | Updates local UI state; persistence is described separately below. |
-| No Known Condition Healthy / No chronic illness | Updates local UI state; persistence is described separately below. |
-| Has Condition Chronic illness, disability, or care | Updates local UI state; persistence is described separately below. |
-| Not Disclosed Prefer not to disclose | Updates local UI state; persistence is described separately below. |
-| Back | Changes the selected view, filter, or page in local state. |
-| Next | Changes the selected view, filter, or page in local state. |
-| Save Changes / Add Member | Updates local UI state; persistence is described separately below. |
+| **Search** | Search name, phone, family... |
+| **Family filter** | All Families |
+| **Blood filter** | All Blood Groups; Default: All |
+| **Sort by** | Choose the field used to order the list. |
+| **Sort direction** | Choose ascending or descending order. |
+| **Select all rows** | Select or clear this option. |
+| **Select row** | Select or clear this option. |
+| **Rows per page** | 10 / page, 15 / page, 25 / page, 50 / page; Default: 15 |
+| **Target family** | Select a family... |
 
+<Accordion title="Member details">
 
-
-### Interaction sequence
-
-Choose Add member → enter a full name in identity → complete education/work, health, and address tabs → submit → the dialog closes and the directory refreshes. Open a row to inspect its profile. Edit pre-fills existing values; individual deletion requires confirmation.
-
-### States and rules
-
-Full name is required. The server page initially fetches at most 100 members; client filtering and pagination operate on the loaded list. Import Data, Bulk Photos, and ID Cards only show notifications. Bulk deletion suppresses individual failures and can overstate success.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/members/page.tsx`
-- `apps/web/src/features/tenants/members-registry.tsx`
-- `apps/web/src/features/tenants/member-form-dialog.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Members directory
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/members`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-വ്യക്തിഗത അംഗരേഖകളും കുടുംബം, വിദ്യാഭ്യാസം, ജോലി, ആരോഗ്യം, താമസസ്ഥിതി എന്നിവയും പരിപാലിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ membershipഉം വേണം. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-സംഗ്രഹ ഫിൽട്ടറുകൾ, തിരച്ചിൽ, കുടുംബം/രക്തഗ്രൂപ്പ് ഫിൽട്ടറുകൾ, ക്രമീകരണം, തിരഞ്ഞെടുക്കാവുന്ന പട്ടിക, പേജ് വലുപ്പം, കൂട്ട പ്രവർത്തനങ്ങൾ എന്നിവ ഡയറക്ടറിയിലുണ്ട്. ചേർക്കൽ/തിരുത്തൽ ഡയലോഗിൽ identity, education, health, address എന്നീ നാല് ടാബുകൾ ഉണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Members registry
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Query | `query` | text | ചിഹ്നമില്ല | Search name, phone, family... |
-| Family filter | `familyFilter` | select | ചിഹ്നമില്ല | All Families |
-| Blood filter | `bloodFilter` | select | ചിഹ്നമില്ല | All Blood Groups; ആരംഭം: ALL |
-| Sort by | `sortBy` | radio | ചിഹ്നമില്ല | — |
-| Sort direction | `sortDirection` | radio | ചിഹ്നമില്ല | — |
-| Is all selected | `isAllSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Is selected | `isSelected` | checkbox | ചിഹ്നമില്ല | — |
-| Rows per page | `rowsPerPage` | select | ചിഹ്നമില്ല | 10 / page, 15 / page, 25 / page, 50 / page; ആരംഭം: 15 |
-| Bulk target family id | `bulkTargetFamilyId` | select | ചിഹ്നമില്ല | Select a family... |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Member form dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Full Legal Name | `member-name` | text | ഉണ്ട് | Enter full name |
-| Linked Family / Household | `member-family` | select | ചിഹ്നമില്ല | No family assigned |
-| Relation to Head of Family | `member-relation` | select | ചിഹ്നമില്ല | Select relation |
-| Date of Birth | `member-dob` | date | ചിഹ്നമില്ല | — |
-| Gender | `member-gender` | select | ചിഹ്നമില്ല | Select gender, Male, Female, Other |
-| Blood Group | `member-blood-group` | select | ചിഹ്നമില്ല | Select blood group |
-| Marital Status | `member-marital-status` | select | ചിഹ്നമില്ല | Select status, Single, Married, Widowed, Divorced |
-| Primary Phone Number | `member-phone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
-| Email Address | `member-email` | email | ചിഹ്നമില്ല | e.g. name@example.com |
-| National ID / Aadhaar | `member-id-number` | text | ചിഹ്നമില്ല | e.g. 12-digit Aadhaar number |
-| Current Course / Class / Standard | `member-student-course` | text | ചിഹ്നമില്ല | e.g. Plus Two Science, Class 10, B.Tech CS |
-| Current Institution / School / College | `member-student-inst` | text | ചിഹ്നമില്ല | e.g. Farook College, Govt HSS |
-| Employment Status | `member-emp-status` | select | ചിഹ്നമില്ല | Select Employment Status |
-| Job Title / Designation | `member-job-title` | text | ചിഹ്നമില്ല | e.g. Accountant, Electrician, Driver, Merchant |
-| Employer / Company / Business Name | `member-employer` | text | ചിഹ്നമില്ല | e.g. Lulu Hypermarket, Self - Own Shop, Freelance |
-| Is job seeker | `isJobSeeker` | checkbox | ചിഹ്നമില്ല | — |
-| Highest Education Level | `member-edu-level` | select | ചിഹ്നമില്ല | Select Highest Education Level |
-| Primary Qualification / Major | `member-edu-details-primary` | text | ചിഹ്നമില്ല | e.g. B.Com, Plus Two Science, Alimiyya |
-| Level | `new-edu-level` | select | ചിഹ്നമില്ല | ആരംഭം: SECONDARY_SSLC |
-| Degree / Course | `new-edu-degree` | text | ചിഹ്നമില്ല | e.g. SSLC, Plus Two, B.Com |
-| Institution / Board | `new-edu-inst` | text | ചിഹ്നമില്ല | e.g. Govt HSS, Calicut Univ |
-| Year | `new-edu-year` | text | ചിഹ്നമില്ല | e.g. 2021 |
-| New skill input | `newSkillInput` | text | ചിഹ്നമില്ല | e.g. Electrician, Driving, Plumbing, Coding, Graphic Design, Tuition/Teaching, Accounting |
-| Has disability | `hasDisability` | checkbox | ചിഹ്നമില്ല | — |
-| Disability Category | `disabilityType` | select | ചിഹ്നമില്ല | Select Category |
-| Disability Percentage (%) | `disabilityPercentage` | number | ചിഹ്നമില്ല | Percentage %; min 1; max 100 |
-| Disability certificate | `disabilityCertificate` | checkbox | ചിഹ്നമില്ല | — |
-| Disability certificate no | `disabilityCertificateNo` | text | ചിഹ്നമില്ല | Certificate / UDID Number |
-| Has chronic illness | `hasChronicIllness` | checkbox | ചിഹ്നമില്ല | — |
-| Specific Diagnosis / Details | `chronicDetails` | text | ചിഹ്നമില്ല | Condition notes or specific diagnosis |
-| Treatment required | `treatmentRequired` | checkbox | ചിഹ്നമില്ല | — |
-| Regular medication required | `regularMedicationRequired` | checkbox | ചിഹ്നമില്ല | — |
-| Requires assistance | `requiresAssistance` | checkbox | ചിഹ്നമില്ല | — |
-| Primary Caregiver Name | `primaryCaregiverName` | text | ചിഹ്നമില്ല | Name of person assisting |
-| Caregiver Relationship | `caregiverRelationship` | text | ചിഹ്നമില്ല | e.g. Spouse, Son, Daughter, Caretaker |
-| Emergency Contact Person | `emergencyContactName` | text | ചിഹ്നമില്ല | Emergency contact name |
-| Emergency Phone Number | `emergencyContactPhone` | text | ചിഹ്നമില്ല | e.g. +91 98765 43210 |
-| Requires mental health support | `requiresMentalHealthSupport` | checkbox | ചിഹ്നമില്ല | — |
-| Support Type Required | `mentalHealthSupportType` | select | ചിഹ്നമില്ല | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
-| Requires community support | `requiresCommunitySupport` | checkbox | ചിഹ്നമില്ല | — |
-| Support Category | `supportCategory` | select | ചിഹ്നമില്ല | Select Welfare Category |
-| Support Status | `supportStatus` | select | ചിഹ്നമില്ല | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; ആരംഭം: ACTIVE |
-| Welfare Committee Notes | `supportNotes` | textarea | ചിഹ്നമില്ല | Confidential notes for the Mahallu welfare committee / relief desk... |
-| Use family address | `useFamilyAddress` | checkbox | ചിഹ്നമില്ല | — |
-| House / Building Name | `m-house-name` | text | ചിഹ്നമില്ല | House Name / Flat |
-| Place / Locality | `m-place` | text | ചിഹ്നമില്ല | Place / Locality |
-| Post Office | `m-post` | text | ചിഹ്നമില്ല | Post Office |
-| State | `m-state` | searchable select | ചിഹ്നമില്ല | Select State; ആരംഭം: Kerala |
-| District | `m-district` | searchable select | ചിഹ്നമില്ല | Select District |
-| PIN Code | `m-pin` | text | ചിഹ്നമില്ല | 6-digit PIN |
-| Local Body Type | `m-local-body-type` | select | ചിഹ്നമില്ല | Grama Panchayath, Municipality, Corporation; ആരംഭം: Grama Panchayath |
-| Local Body Name | `m-local-body-name` | text | ചിഹ്നമില്ല | Name of Panchayath / Municipality |
-| Residency Status | `member-movement-status` | select | ചിഹ്നമില്ല | — |
-| Status Effective Date | `member-movement-date` | date | ചിഹ്നമില്ല | — |
-| Is expatriate | `isExpatriate` | checkbox | ചിഹ്നമില്ല | — |
-| Expatriate country | `expatriateCountry` | text | ചിഹ്നമില്ല | Country of residence (e.g. UAE, Saudi Arabia) |
-| Expatriate occupation | `expatriateOccupation` | text | ചിഹ്നമില്ല | Occupation abroad |
-| Is yatheem | `isYatheem` | checkbox | ചിഹ്നമില്ല | — |
-| Guardian name | `guardianName` | text | ചിഹ്നമില്ല | Guardian Name |
-| Guardian phone | `guardianPhone` | text | ചിഹ്നമില്ല | Guardian Phone |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം |
+| Field or control | Guidance |
 | --- | --- |
-| More | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Import CSV / Excel | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
-| Bulk Photos | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
-| ID Cards | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
-| Export | പ്രാദേശികമായി സൃഷ്ടിച്ച output download ചെയ്യും. |
-| Add Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Search Members | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Advanced Filters | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Reset | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| Sort Records | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Actions | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. |
-| View Profile | നിർവചിച്ച ലക്ഷ്യസ്ഥാനം തുറക്കും. |
-| Edit Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Delete Member | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Assign to Family | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Delete | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Clear | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| Cancel | ബന്ധപ്പെട്ട dialog/record തുറക്കുകയോ അടയ്ക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്യും. |
-| Assigning... / Assign Family | അറിയിപ്പ് കാണിക്കും; സംരക്ഷിച്ച മാറ്റം ഉറപ്പാക്കുന്നില്ല. |
-| isBulkProcessing ? "Deleting..." : `Delete $&#123;selectedMemberIds.size&#125; Members` | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. |
-| isRemoving ? "Deleting..." : "Delete Member" | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. |
-| 1. Identity & Demographics | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| 2. Education & Work | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| 3. Health & Support | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| 4. Address & Registers | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| Student | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| Worker / Adult | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| Add | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. |
-| × | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. |
-| + | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| No Known Condition Healthy / No chronic illness | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| Has Condition Chronic illness, disability, or care | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| Not Disclosed Prefer not to disclose | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
-| Back | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| Next | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. |
-| Save Changes / Add Member | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. |
+| **Full Legal Name** | Required. Enter full name |
+| **Linked Family / Household** | No family assigned |
+| **Relation to Head of Family** | Select relation |
+| **Date of Birth** | Choose a date. |
+| **Gender** | Select gender, Male, Female, Other |
+| **Blood Group** | Select blood group |
+| **Marital Status** | Select status, Single, Married, Widowed, Divorced |
+| **Primary Phone Number** | e.g. +91 98765 43210 |
+| **Email Address** | e.g. name@example.com |
+| **National ID / Aadhaar** | e.g. 12-digit Aadhaar number |
+| **Current Course / Class / Standard** | e.g. Plus Two Science, Class 10, B.Tech CS |
+| **Current Institution / School / College** | e.g. Farook College, Govt HSS |
+| **Employment Status** | Select Employment Status |
+| **Job Title / Designation** | e.g. Accountant, Electrician, Driver, Merchant |
+| **Employer / Company / Business Name** | e.g. Lulu Hypermarket, Self - Own Shop, Freelance |
+| **Is job seeker** | Select or clear this option. |
+| **Highest Education Level** | Select Highest Education Level |
+| **Primary Qualification / Major** | e.g. B.Com, Plus Two Science, Alimiyya |
+| **Level** | Default: Secondary / SSLC (10th) |
+| **Degree / Course** | e.g. SSLC, Plus Two, B.Com |
+| **Institution / Board** | e.g. Govt HSS, Calicut Univ |
+| **Year** | e.g. 2021 |
+| **Add Skill** | e.g. Electrician, Driving, Plumbing, Coding, Graphic Design, Tuition/Teaching, Accounting |
+| **Has disability** | Select or clear this option. |
+| **Disability Category** | Select Category |
+| **Disability Percentage (%)** | Percentage %; Minimum 1; Maximum 100 |
+| **Disability certificate** | Select or clear this option. |
+| **Disability certificate number** | Certificate / UDID Number |
+| **Has chronic illness** | Select or clear this option. |
+| **Specific Diagnosis / Details** | Condition notes or specific diagnosis |
+| **Treatment required** | Select or clear this option. |
+| **Regular medication required** | Select or clear this option. |
+| **Requires assistance** | Select or clear this option. |
+| **Primary Caregiver Name** | Name of person assisting |
+| **Caregiver Relationship** | e.g. Spouse, Son, Daughter, Caretaker |
+| **Emergency Contact Person** | Emergency contact name |
+| **Emergency Phone Number** | e.g. +91 98765 43210 |
+| **Requires mental health support** | Select or clear this option. |
+| **Support Type Required** | Select Support Type, Medical / Psychiatric Treatment, Professional Counselling, Family Mediation & Support, Mahallu Community Care, Other |
+| **Requires community support** | Select or clear this option. |
+| **Support Category** | Select Welfare Category |
+| **Support Status** | Active (Needs Continuous Care), Monitoring (Periodic Follow-up), Resolved / Completed; Default: Active |
+| **Welfare Committee Notes** | Confidential notes for the Mahallu welfare committee / relief desk... |
+| **Use family address** | Select or clear this option. |
+| **House / Building Name** | House Name / Flat |
+| **Place / Locality** | Place / Locality |
+| **Post Office** | Post Office |
+| **State** | Select State; Default: Kerala |
+| **District** | Select District |
+| **PIN Code** | 6-digit PIN |
+| **Local Body Type** | Grama Panchayath, Municipality, Corporation; Default: Grama Panchayath |
+| **Local Body Name** | Name of Panchayath / Municipality |
+| **Residency Status** | Choose an available option. |
+| **Status Effective Date** | Choose a date. |
+| **Is expatriate** | Select or clear this option. |
+| **Expatriate country** | Country of residence (e.g. UAE, Saudi Arabia) |
+| **Expatriate occupation** | Occupation abroad |
+| **Is yatheem** | Select or clear this option. |
+| **Guardian name** | Guardian Name |
+| **Guardian phone** | Guardian Phone |
 
+</Accordion>
 
+### Additional details
 
-### പ്രവർത്തനക്രമം
+Choose **Student** to enter course and institution details, or **Worker / Adult** for employment information. Disability, chronic-illness, caregiver, mental-health, welfare, expatriate, and guardian details appear when you select the corresponding condition. Use **Add Skill** and the education-history controls to add entries; remove an entry before saving if it is no longer needed. **Use family address** copies the household address when a linked family is available.
 
-Add member തിരഞ്ഞെടുക്കുക → identityയിൽ മുഴുവൻ പേര് നൽകുക → വിദ്യാഭ്യാസം/ജോലി, ആരോഗ്യം, വിലാസം പൂർത്തിയാക്കുക → സമർപ്പിക്കുക → ഡയലോഗ് അടയുകയും പട്ടിക പുതുക്കുകയും ചെയ്യും. വരി തുറന്ന് പ്രൊഫൈൽ കാണാം. തിരുത്തലിൽ നിലവിലെ വിവരങ്ങൾ വരും; വ്യക്തിഗത നീക്കലിന് സ്ഥിരീകരണം വേണം.
+### Things to know
 
-### നിലകളും നിയമങ്ങളും
+A full name is required. Searches and pagination work on the initially loaded list of up to 100 members. **Import Data**, **Bulk Photos**, and **ID Cards** currently show messages without completing those operations. Some bulk deletions can fail without a separate error for each person; check the list afterward. Bulk **Assign Family** currently displays a confirmation without saving the new family association. Use individual editing or a family profile to link people. **Export** downloads a CSV of the available records; the selected-row export includes the selected people.
 
-മുഴുവൻ പേര് നിർബന്ധമാണ്. ആദ്യം പരമാവധി 100 അംഗങ്ങളെയാണ് വായിക്കുന്നത്; ഫിൽട്ടറും പേജിംഗും ഈ ലിസ്റ്റിലാണ് പ്രവർത്തിക്കുന്നത്. Import Data, Bulk Photos, ID Cards അറിയിപ്പുകൾ മാത്രം കാണിക്കുന്നു. കൂട്ട നീക്കലിൽ ഓരോ പരാജയവും മറയ്ക്കുന്നതിനാൽ വിജയസംഖ്യ തെറ്റാകാം.
+## Related guides
 
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/members/page.tsx`
-- `apps/web/src/features/tenants/members-registry.tsx`
-- `apps/web/src/features/tenants/member-form-dialog.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-
-</Tab>
-</Tabs>
+- [Member profile](/admin/member-profile)
+- [Families](/family)
+- [Health and support](/admin/health-support)

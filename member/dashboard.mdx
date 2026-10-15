@@ -1,129 +1,26 @@
 ---
 title: "Member dashboard"
-description: "Current screen specification: Member dashboard. English and Malayalam guidance for the development team."
+description: "Review your member profile and the community panels shown after sign-in."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+<Note>The service application buttons are not available yet. Contact the Mahallu office to request certificates or aid.</Note>
 
 ## Member dashboard
 
-Host: `[tenant].<ROOT_DOMAIN>` · Route: `/dashboard`
+Review your member profile and the community panels shown after sign-in.
 
-### Purpose and access
+### Steps
 
-Show the signed-in citizen’s profile and community notices.
+1. Sign in through [Member sign-in](/member/login).
+2. Review **Member Profile**, including your name and any recorded phone or email.
+3. Review **Friday Notices & Announcements** and **Community Events & Milad**.
+4. Check **Citizen Services & Certificates** for the services displayed.
 
-Entry, public access, and redirect rules are described for this screen below.
+### Things to know
 
-### Screen layout
+**Apply Online** and **Request Aid** do not currently submit applications. This includes **Marriage (Nikah) NOC**, **Mahallu Release (NOC)**, and **Welfare & Aid Request**. Contact the Mahallu office to request these services. The **Active** badge is a fixed display label, not a verified membership-status check. Community feeds may be empty because member access is not fully connected. If your session ends, sign in again.
 
-The dashboard contains a greeting, Member Profile, Citizen Services & Certificates, Friday Notices & Announcements, and Community Events & Milad. Profile fields include name and optional phone/email; a static Active badge is displayed.
+## Related guides
 
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Apply Online | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Request Aid | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-
-
-
-### Interaction sequence
-
-Log in through OTP → open dashboard → inspect your profile and notices. Marriage (Nikah) NOC, Mahallu Release (NOC), and Welfare & Aid Request cards display action buttons.
-
-### States and rules
-
-Those service buttons have no handlers or destinations and submit no applications. The Active badge is presentation text. Without a member session the route redirects to /login; failed announcements/events requests render empty panels. These feeds currently call operator-JWT-protected endpoints rather than member-auth endpoints.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`
-
-### API behavior references
-
-
-- `apps/api/src/member-auth/member-auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/announcements/announcements.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Member dashboard
-
-Host: `[tenant].<ROOT_DOMAIN>` · Route: `/dashboard`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-പ്രവേശിച്ച പൗര അംഗത്തിന്റെ പ്രൊഫൈലും സാമൂഹിക അറിയിപ്പുകളും കാണിക്കുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Greeting, Member Profile, Citizen Services & Certificates, Friday Notices & Announcements, Community Events & Milad എന്നിവയുണ്ട്. പേര്, ലഭ്യമായ phone/email, സ്ഥിരമായ Active badge കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Apply Online | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Request Aid | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-OTP വഴി പ്രവേശിക്കുക → dashboard തുറക്കുക → പ്രൊഫൈലും അറിയിപ്പുകളും പരിശോധിക്കുക. Marriage (Nikah) NOC, Mahallu Release (NOC), Welfare & Aid Request കാർഡുകളിൽ ബട്ടണുകളുണ്ട്.
-
-### നിലകളും നിയമങ്ങളും
-
-ഈ service buttonsന് handler/destination ഇല്ല; അപേക്ഷ അയക്കുന്നില്ല. Active badge display text ആണ്. Member session ഇല്ലെങ്കിൽ /loginലേക്ക് redirect ചെയ്യും; അറിയിപ്പ്/events വായന പരാജയപ്പെട്ടാൽ ശൂന്യ വിഭാഗങ്ങൾ കാണിക്കും. ഇവ member-auth endpointന് പകരം operator-JWT-protected endpoints ആണ് വിളിക്കുന്നത്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/tenant/[tenant]/dashboard/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/member-session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/business-resources.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/member-auth/member-auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/announcements/announcements.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-</Tabs>
+- [Member sign-in](/member/login)
+- [Your Mahallu website](/member/public-home)

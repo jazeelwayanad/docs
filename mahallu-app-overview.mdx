@@ -1,81 +1,69 @@
 ---
-title: "Mahallu screen specifications"
-description: "Page-by-page guide and current behavior specifications for the Mahallu development team."
+title: "Welcome to Mahallu"
+description: "Learn how to manage your Mahallu, maintain community records, and use the tools available to your role."
 ---
 
-<Tabs>
-<Tab title="English">
+Mahallu helps you organize community records, households, finance, registers, events, and administration. Use these guides to learn each task, understand the information you need, and resolve common problems.
 
-## What this documentation describes
+## Start with your role
 
-Use these specifications to understand what appears on each screen, what its controls do, and what developers need to preserve or complete. Each page combines a usage explanation with its current screen behavior. This is an internal product specification, based on source review on **13 October 2026**.
+<Columns cols={2}>
+  <Card title="Mahallu administrators" href="/getting-started">
+    Sign in, set up your Mahallu, and manage day-to-day community work.
+  </Card>
+  <Card title="Accountants" href="/admin/accountant-workspace">
+    Maintain ledger accounts, record journals, and review financial reports.
+  </Card>
+  <Card title="Members" href="/member/public-home">
+    Visit your Mahallu website and learn about member sign-in and services.
+  </Card>
+  <Card title="Platform operators" href="/control/overview">
+    Manage Mahallu workspaces, operator accounts, plans, and platform access.
+  </Card>
+</Columns>
 
-The inventory accounts for **90 page routes** across four application surfaces. Documentation keeps five tabs so you can distinguish the overview from the four surfaces:
+If you are considering Mahallu for your community, start with [Explore Mahallu](/marketing/home) or [Set up your Mahallu](/mahallu-setup).
 
-| Tab | What it covers |
+## Set up a new Mahallu
+
+1. [Create an account and sign in](/getting-started).
+2. Complete [Mahallu setup](/mahallu-setup).
+3. Configure [divisions and family categories](/admin/structure-settings).
+4. [Register families](/family) and [maintain member records](/members).
+5. Configure [finance settings](/admin/finance-settings) before recording collections or expenses.
+6. Give other operators the appropriate [users and roles](/admin/users-roles).
+
+## Everyday tasks
+
+- [Find or update a household](/family) and its [family profile](/admin/family-profile).
+- [Find a member](/members) or review [education and employment](/admin/education-employment).
+- [Review health and welfare needs](/admin/health-support).
+- [Record a collection and issue a receipt](/admin/record-collection) or [record a paid expense](/payments).
+- [Create an event](/admin/events), [manage registrations](/admin/event-detail), or [post an announcement](/admin/announcements).
+- [Maintain committee appointments](/admin/committee) and [record meeting decisions](/admin/committee-meetings).
+- [Log a service or aid request](/admin/services).
+
+For the complete list, open the [Guide directory](/reference/coverage).
+
+## Understand the main records
+
+| Term | Meaning |
 | --- | --- |
-| Mahallu Admin | Accounts, onboarding, dashboards, people, finance, accounting, registers, community work, website, billing, and settings |
-| Control Panel | Fleet administration, accounts/access, plans, forms, analytics, settings, and audit |
-| Mahallu Member | Public Mahallu home, member OTP login, and member dashboard |
-| Marketing | Platform landing and tenant creation; onboarding forwards to the admin wizard |
+| Mahallu | The community workspace you manage. Some screens use the labels Mahalle or Mahall. |
+| Member | A citizen record in your community. |
+| User or account | A person’s sign-in identity for operating the application. |
+| Family | A household unit whose members are linked together. |
+| House | The physical dwelling linked to a household. |
+| Division | A configured area such as a ward or zone. Your Mahallu chooses the term. |
+| Mahallu role | The permissions an operator has inside a Mahallu. |
+| Platform role | Access to platform-wide tools in Control Panel. |
+| Operational fund | A grouping for community income and expenses. |
+| Ledger account | An accounting record used for posting and reporting. |
 
-## How to read a specification
+## Access and feature availability
 
-Every screen uses seven sections: purpose/access, layout, fields/displayed information, actions, interaction sequence, states/rules, and implementation references. Related screens can share one documentation page, with a separate specification for each route.
+What you can open or change depends on your role and the features enabled for your Mahallu. If you see an access message, ask your administrator to review your permissions. Platform tools require separate platform access.
 
-English and Malayalam tabs describe the same behavior. UI labels and identifiers retain their source spelling. Descriptive names identify controls without visible labels. **Required marker** describes the rendered field marker; it is not a promise that every form validates the same way. Tables include conditional fields and modal controls; not every field appears at once.
+Some screens currently offer previews or unfinished controls. Their guides explain what you can use today and when an action does not save a change. In particular, confirm subscription details with the platform team, prayer times with your Masjid, and the actual reporting period before relying on report totals.
 
-## Terminology
-
-- **Mahallu** means the community workspace; source files may use Mahalle, Mahall, or tenant.
-- **Member** means a citizen/member record. **User/account** means an authenticated operator identity.
-- **Family** means a household unit. **House** means the dwelling linked to a household.
-- **Division** means the configured area/ward/zone; the displayed name can be customized.
-- **Platform role** controls cross-tenant operations. **Tenant role** controls a user’s access inside one Mahallu.
-- **Operational fund** and **ledger account** are distinct finance records.
-
-## Current behavior and gaps
-
-A button label does not prove the operation saves data. Specifications explicitly identify local-state controls, fixed display values, missing destinations, incomplete filtering, and partial multi-request workflows. They do not turn those gaps into intended product requirements.
-
-Start with [shared navigation](/reference/shared-navigation), consult [route coverage and review notes](/reference/coverage), or follow the role tabs. The application repository stays unchanged; publication and team access configuration are separate.
-
-</Tab>
-<Tab title="മലയാളം">
-
-## ഈ രേഖകളിൽ എന്തുണ്ട്
-
-ഓരോ സ്ക്രീനിലെയും ഉള്ളടക്കം, നിയന്ത്രണങ്ങളുടെ പ്രവർത്തനം, developer നിലനിർത്തേണ്ടതോ പൂർത്തിയാക്കേണ്ടതോ ആയ behavior എന്നിവ മനസ്സിലാക്കാൻ ഈ രേഖകൾ ഉപയോഗിക്കുക. ഓരോ പേജിലും ഉപയോഗ വിശദീകരണവും നിലവിലെ screen specificationഉം ഉണ്ട്. **2026 ഒക്ടോബർ 13**ന് source പരിശോധിച്ച internal product specification ആണ്.
-
-നാല് application ഭാഗങ്ങളിലെ **90 page routes** inventoryയിൽ ഉൾപ്പെടുന്നു. Overviewനും മറ്റു നാലു ഭാഗങ്ങൾക്കും അഞ്ച് documentation tabs നിലനിർത്തുന്നു:
-
-| Tab | ഉൾപ്പെടുന്ന കാര്യങ്ങൾ |
-| --- | --- |
-| Mahallu Admin | Accounts, onboarding, dashboards, people, finance, accounting, registers, community പ്രവർത്തനം, website, billing, settings |
-| Control Panel | Fleet administration, accounts/access, plans, forms, analytics, settings, audit |
-| Mahallu Member | Public Mahallu home, member OTP login, member dashboard |
-| Marketing | Platform landing, tenant creation; onboarding admin wizardലേക്ക് അയക്കും |
-
-## Specification വായിക്കുന്ന വിധം
-
-ഓരോ സ്ക്രീനിനും ഏഴ് വിഭാഗങ്ങളുണ്ട്: ഉദ്ദേശ്യം/പ്രവേശനം, layout, fields/displayed information, actions, interaction sequence, states/rules, implementation references. ബന്ധപ്പെട്ട സ്ക്രീനുകൾ ഒരേ documentation പേജിലാകാം; ഓരോ routeനും പ്രത്യേകം specification ഉണ്ടായിരിക്കും.
-
-English, Malayalam tabs ഒരേ behavior വിവരിക്കുന്നു. UI labels, identifiers എന്നിവ sourceലെ പേരിൽ നിലനിർത്തുന്നു. Visible label ഇല്ലാത്ത controlsന് വിവരണപേരുകൾ ഉപയോഗിക്കുന്നു. **Required marker** rendered field ചിഹ്നമാണ്; എല്ലാ formകളും ഒരേ രീതിയിൽ validate ചെയ്യുമെന്ന് ഉറപ്പല്ല. Conditional fields, modal controls എന്നിവയും പട്ടികകളിലുണ്ട്; എല്ലാം ഒരുമിച്ച് പ്രത്യക്ഷപ്പെടില്ല.
-
-## പദപ്രയോഗം
-
-- **Mahallu** സാമൂഹിക workspace ആണ്; sourceൽ Mahalle, Mahall, tenant എന്നീ പേരുകളും കാണാം.
-- **Member** പൗര അംഗരേഖയാണ്. **User/account** authenticate ചെയ്യുന്ന operator identity ആണ്.
-- **Family** കുടുംബയൂണിറ്റാണ്. **House** കുടുംബവുമായി ബന്ധിപ്പിക്കുന്ന വീടാണ്.
-- **Division** ക്രമീകരിച്ച area/ward/zone ആണ്; പ്രദർശനപേര് മാറ്റാം.
-- **Platform role** പല tenantsലുള്ള പ്രവർത്തനങ്ങൾ നിയന്ത്രിക്കുന്നു. **Tenant role** ഒരു മഹല്ലിലെ user access നിയന്ത്രിക്കുന്നു.
-- **Operational fund**, **ledger account** വ്യത്യസ്ത ധനകാര്യരേഖകളാണ്.
-
-## നിലവിലെ behaviorയും കുറവുകളും
-
-ബട്ടണിന്റെ പേര് മാത്രം സംരക്ഷിക്കൽ പ്രവർത്തിക്കുന്നു എന്ന് തെളിയിക്കുന്നില്ല. Local-state controls, സ്ഥിരവിലകൾ, destination ഇല്ലാത്തത്, പൂർത്തിയാകാത്ത filters, ഭാഗികമായി വിജയിക്കാവുന്ന പല അഭ്യർത്ഥനകൾ എന്നിവ വ്യക്തമാക്കുന്നു. ഇവയെ ഉദ്ദേശിച്ച product requirements ആയി മാറ്റുന്നില്ല.
-
-[പൊതുവായ നാവിഗേഷൻ](/reference/shared-navigation), [route coverage, review notes](/reference/coverage) എന്നിവയിൽ നിന്ന് തുടങ്ങാം; role tabs ഉപയോഗിക്കാം. Application repository മാറ്റിയിട്ടില്ല. Publishing, team access configuration വേറെയുള്ള ജോലികളാണ്.
-
-</Tab>
-</Tabs>
+Read [Find your way around](/reference/shared-navigation) for navigation, search, notifications, and sign-out help.

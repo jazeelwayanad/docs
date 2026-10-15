@@ -1,153 +1,36 @@
 ---
 title: "Taxes and legal tracker"
-description: "Current screen specification: Taxes and legal tracker. English and Malayalam guidance for the development team."
+description: "Track filing deadlines and record when a compliance item has been filed."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Taxes and legal tracker
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/taxes-legal`
+Track filing deadlines and record when a compliance item has been filed.
 
-### Purpose and access
+### Steps
 
-Track statutory filing obligations and mark filings completed. This is a tracker, not an external tax-submission integration.
+1. Open **Taxes and legal tracker** and choose **Add Statutory Compliance**.
+2. Enter the title and due date. Add filing type, period, amount, and notes if applicable.
+3. Save the item and review it in the list.
+4. After completing the filing outside the application, choose **Mark Filed** to update its status.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Fields and choices
 
-### Screen layout
+Complete the required fields and any additional details requested for your selections.
 
-The page lists filing records. Add Statutory Compliance opens title, filing type, due date, period, amount, and notes.
+#### Taxes legal
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Filing Title** | Required. Enter filing title |
+| **Type** | Required. Enter type. |
+| **Due Date** | Required. Choose a date. |
+| **Period** | Enter period |
+| **Filing Fees / Tax (₹)** | 0.00 |
+| **Notes / Reference** | Registration number, acknowledgment details... |
 
+### Things to know
 
-Displayed table columns: **Filing / Obligation**, **Type**, **Period**, **Due Date**, **Statutory Fees**, **Status**, **Actions**.
-
-#### Fields and filters: Taxes legal client
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Filing Title | `title` | text | Yes | Enter filing title |
-| Type | `filingType` | text | Yes | — |
-| Due Date | `dueDate` | date | Yes | — |
-| Period | `period` | text | Not marked | Enter period |
-| Filing Fees / Tax (₹) | `amount` | number | Not marked | 0.00 |
-| Notes / Reference | `notes` | textarea | Not marked | Registration number, acknowledgment details... |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Add Statutory Compliance | Opens the `modal` view. | `taxes-legal-client.tsx` |
-| Mark Filed | Submits the associated API change; follow the sequence and failure rules below. | `taxes-legal-client.tsx` |
-| Cancel | Closes or clears the `modal` view/selection. | `taxes-legal-client.tsx` |
-| Saving... / Save Record | Submits the associated API change; follow the sequence and failure rules below. | `taxes-legal-client.tsx` |
-
-
-
-### Interaction sequence
-
-Add a filing → enter title and due date plus optional tracking details → save → use Mark Filed on a record to change its status to FILED and record the current payment date.
-
-### States and rules
-
-Title and due date are required by the handler. Mark Filed updates the local application record; it does not submit documents to a government portal.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/taxes-legal-client.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Taxes and legal tracker
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant/taxes-legal`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-നിയമപരമായ filing ബാധ്യതകൾ രേഖപ്പെടുത്തി പൂർത്തിയായതായി അടയാളപ്പെടുത്തുക. ഇത് tracking ആണ്; പുറത്തുള്ള tax portalലേക്കുള്ള integration അല്ല.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Filing രേഖകൾ കാണിക്കുന്നു. Add Statutory Compliance തുറക്കുമ്പോൾ title, filing type, due date, period, amount, notes എന്നിവ നൽകാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Filing / Obligation**, **Type**, **Period**, **Due Date**, **Statutory Fees**, **Status**, **Actions**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Taxes legal client
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Filing Title | `title` | text | ഉണ്ട് | Enter filing title |
-| Type | `filingType` | text | ഉണ്ട് | — |
-| Due Date | `dueDate` | date | ഉണ്ട് | — |
-| Period | `period` | text | ചിഹ്നമില്ല | Enter period |
-| Filing Fees / Tax (₹) | `amount` | number | ചിഹ്നമില്ല | 0.00 |
-| Notes / Reference | `notes` | textarea | ചിഹ്നമില്ല | Registration number, acknowledgment details... |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Add Statutory Compliance | `modal` കാഴ്ച തുറക്കും. | `taxes-legal-client.tsx` |
-| Mark Filed | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `taxes-legal-client.tsx` |
-| Cancel | `modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `taxes-legal-client.tsx` |
-| Saving... / Save Record | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `taxes-legal-client.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Filing ചേർക്കുക → title, due date, അനുബന്ധ വിവരങ്ങൾ നൽകുക → സംരക്ഷിക്കുക → Mark Filed ഉപയോഗിച്ച് FILED ആക്കുകയും നിലവിലെ payment date രേഖപ്പെടുത്തുകയും ചെയ്യുക.
-
-### നിലകളും നിയമങ്ങളും
-
-Title, due date handlerൽ നിർബന്ധമാണ്. Mark Filed ആപ്പിലെ രേഖ മാത്രം പുതുക്കുന്നു; സർക്കാർ പോർട്ടലിലേക്ക് രേഖ സമർപ്പിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/page.tsx`
-- `apps/web/src/app/sites/admin/[tenant]/accountant/taxes-legal/taxes-legal-client.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/api-client.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Title and due date are required. **Mark Filed** records the current date with the filed status. It does not submit documents or payments to a government portal.

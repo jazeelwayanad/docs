@@ -1,227 +1,50 @@
 ---
-title: "Tenant billing operations"
-description: "Current screen specification: Tenant billing operations. English and Malayalam guidance for the development team."
+title: "Workspace billing"
+description: "Manage a Mahallu workspace\u2019s subscription, invoices, and payment records."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in with a platform account that has access to this tool. Your role determines which changes you can make.
 
-<Tabs>
-<Tab title="English">
+## Workspace billing
 
-## Tenant billing operations
+Manage a Mahallu workspace’s subscription, invoices, and payment records.
 
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]/billing`
+### Steps
 
-### Purpose and access
+1. Open the workspace’s billing view or **Plans & Billing** in its command center.
+2. In **Subscription**, choose the plan and status, then save the change.
+3. To issue an invoice, enter an amount, optional description, and due date, then save.
+4. Use **Mark paid** or **Void** on the appropriate invoice when needed.
+5. To record a payment, enter its amount and method, add an optional reference, and save.
+6. Review the subscription, invoice, and payment lists after each action.
 
-Manage the persisted subscription, invoices, and payment records for one tenant.
+### Fields and choices
 
-You need an account session and platform access. Platform privileges are separate from tenant roles; privileged writes remain subject to endpoint role checks.
+Complete the required fields and any additional details requested for your selections.
 
-### Screen layout
+#### Tenant subscription editor
 
-The screen groups Subscription, Invoices, and Payments. Subscription selects a plan and status. Invoice creation asks amount, description, and due date; payment recording asks amount, method, and reference.
-
-### Fields and displayed information
-
-
-#### Fields and filters: Tenant subscription editor
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Plan id | `planId` | select | Not marked | — |
-| Subscription.status | `subscription.status` | select | Not marked | — |
-
-
-Displayed table columns: **Amount**, **Description**, **Status**, **Issued**, **Due**.
-
-#### Fields and filters: Create invoice dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Amount | `invoice-amount` | number | Yes | 999.00; min 0.01 |
-| Description (optional) | `invoice-description` | text | Not marked | Growth plan — September |
-| Due date (optional) | `invoice-due` | date | Not marked | — |
-
-
-Displayed table columns: **Amount**, **Method**, **Reference**, **Recorded**.
-
-#### Fields and filters: Record payment dialog
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Amount | `payment-amount` | number | Yes | 999.00; min 0.01 |
-| Method | `payment-method` | text | Yes | Bank transfer |
-| Reference (optional) | `payment-reference` | text | Not marked | UTR / cheque no. |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Change plan / Assign plan | Submits the associated API change; follow the sequence and failure rules below. | `tenant-subscription-editor.tsx` |
-| Issue invoice | Opens the `create` view. | `invoices-panel.tsx` |
-| Mark paid | Submits the associated API change; follow the sequence and failure rules below. | `invoices-panel.tsx` |
-| Void | Submits the associated API change; follow the sequence and failure rules below. | `invoices-panel.tsx` |
-| Issue invoice | Submits the associated API change; follow the sequence and failure rules below. | `create-invoice-dialog.tsx` |
-| Record payment | Opens the `record` view. | `payments-panel.tsx` |
-| Record payment | Submits the associated API change; follow the sequence and failure rules below. | `record-payment-dialog.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
+| Field or control | Guidance |
 | --- | --- |
-| &larr; Back to Mahalle settings | `/tenants/${tenantId}` |
+| **Plan** | Choose an available option. |
+| **Subscription status** | Choose an available option. |
 
+#### Create invoice
 
-
-### Interaction sequence
-
-Assign plan or change status → refresh. Issue invoice → enter amount/details → save. Mark paid or Void operates on an invoice. Record payment creates a separate payment record.
-
-### States and rules
-
-Display amounts are converted to minor units before posting. Invoice status changes and payment recording are distinct API calls; do not assume recording a payment automatically settles an invoice. This is separate from the tenant’s static billing UI.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx`
-- `apps/web/src/features/platform/tenant-subscription-editor.tsx`
-- `apps/web/src/features/platform/invoices-panel.tsx`
-- `apps/web/src/features/platform/create-invoice-dialog.tsx`
-- `apps/web/src/features/platform/payments-panel.tsx`
-- `apps/web/src/features/platform/record-payment-dialog.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Tenant billing operations
-
-Host: `control.<ROOT_DOMAIN>` · Route: `/tenants/[tenantId]/billing`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-ഒരു tenantന്റെ സംരക്ഷിച്ച subscription, invoice, payment രേഖകൾ പരിപാലിക്കുക.
-
-Account sessionഉം platform accessഉം വേണം. Platform privileges tenant rolesൽ നിന്ന് വേറെയാണ്; privileged writes endpoint role checksന് വിധേയമാണ്.
-
-### സ്ക്രീൻ ക്രമം
-
-Subscription, Invoices, Payments വിഭാഗങ്ങളുണ്ട്. Subscriptionൽ plan/status; invoiceൽ amount, description, due date; paymentൽ amount, method, reference നൽകാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Tenant subscription editor
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Plan id | `planId` | select | ചിഹ്നമില്ല | — |
-| Subscription.status | `subscription.status` | select | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Amount**, **Description**, **Status**, **Issued**, **Due**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Create invoice dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Amount | `invoice-amount` | number | ഉണ്ട് | 999.00; min 0.01 |
-| Description (optional) | `invoice-description` | text | ചിഹ്നമില്ല | Growth plan — September |
-| Due date (optional) | `invoice-due` | date | ചിഹ്നമില്ല | — |
-
-
-പ്രദർശിപ്പിക്കുന്ന table columns: **Amount**, **Method**, **Reference**, **Recorded**.
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Record payment dialog
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Amount | `payment-amount` | number | ഉണ്ട് | 999.00; min 0.01 |
-| Method | `payment-method` | text | ഉണ്ട് | Bank transfer |
-| Reference (optional) | `payment-reference` | text | ചിഹ്നമില്ല | UTR / cheque no. |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Change plan / Assign plan | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `tenant-subscription-editor.tsx` |
-| Issue invoice | `create` കാഴ്ച തുറക്കും. | `invoices-panel.tsx` |
-| Mark paid | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `invoices-panel.tsx` |
-| Void | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `invoices-panel.tsx` |
-| Issue invoice | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `create-invoice-dialog.tsx` |
-| Record payment | `record` കാഴ്ച തുറക്കും. | `payments-panel.tsx` |
-| Record payment | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `record-payment-dialog.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
+| Field or control | Guidance |
 | --- | --- |
-| &larr; Back to Mahalle settings | `/tenants/${tenantId}` |
+| **Amount** | Required. 999.00; Minimum 0.01 |
+| **Description (optional)** | Growth plan — September |
+| **Due date (optional)** | Choose a date. |
 
+#### Record payment
 
+| Field or control | Guidance |
+| --- | --- |
+| **Amount** | Required. 999.00; Minimum 0.01 |
+| **Method** | Required. Bank transfer |
+| **Reference (optional)** | UTR / cheque no. |
 
-### പ്രവർത്തനക്രമം
+### Things to know
 
-Plan നൽകുകയോ status മാറ്റുകയോ ചെയ്യുക → പുതുക്കും. Issue invoice → തുക/വിവരങ്ങൾ → സംരക്ഷിക്കുക. Mark paid/Void invoice മാറ്റും. Record payment പ്രത്യേകം payment record സൃഷ്ടിക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-തുക minor units ആക്കി അയക്കുന്നു. Invoice status മാറ്റവും payment recordഉം വ്യത്യസ്ത API calls ആണ്; payment ചേർത്താൽ invoice സ്വയം settle ആകുമെന്ന് കരുതരുത്. Tenantന്റെ static billing UIയിൽ നിന്ന് ഇത് വേറെയാണ്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/control/(app)/tenants/[tenantId]/billing/page.tsx`
-- `apps/web/src/features/platform/tenant-subscription-editor.tsx`
-- `apps/web/src/features/platform/invoices-panel.tsx`
-- `apps/web/src/features/platform/create-invoice-dialog.tsx`
-- `apps/web/src/features/platform/payments-panel.tsx`
-- `apps/web/src/features/platform/record-payment-dialog.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/platform.ts`, `apps/web/src/lib/billing.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/platform/platform-tenant-access.controller.ts`
-- `apps/api/src/platform/platform.controller.ts`
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-- `apps/api/src/features/features.controller.ts`
-- `apps/api/src/features/tenant-features.controller.ts`
-- `apps/api/src/forms/forms.controller.ts`
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-
-</Tab>
-</Tabs>
+Invoice status changes and payment recording are separate. Recording a payment does not automatically settle an invoice. These tools manage saved billing records; the administrator Billing area currently shows previews.

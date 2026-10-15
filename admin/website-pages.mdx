@@ -1,101 +1,20 @@
 ---
 title: "Website pages"
-description: "Current screen specification: Website pages. English and Malayalam guidance for the development team."
+description: "Review the public-page shortcuts offered in website management."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Website pages
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/pages`
+Review the public-page shortcuts offered in website management.
 
-### Purpose and access
+### Steps
 
-Browse the public-page shortcuts advertised by website administration.
+1. Open **Website** → **Pages**.
+2. Review the rows for **Home**, **Display Wall / Prayer Screen**, **Announcements & Circulars**, **Schedules & Prayer Times**, **Office Bearers & Committee**, and **Donations & Community Aid**.
+3. Choose a row to open its supplied public address in a new tab.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Things to know
 
-### Screen layout
-
-Rows describe Home, Display Wall / Prayer Screen, Announcements & Circulars, Schedules & Prayer Times, Office Bearers & Committee, and Donations & Community Aid.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-Navigation and row interactions are described in the sequence below.
-
-
-### Interaction sequence
-
-Choose a row → open its public URL in a new tab. There is no page-content editor or save workflow on this screen.
-
-### States and rules
-
-Only public home, login, and dashboard routes exist in the tenant route inventory. Wall, announcements, schedules, committee, and donate shortcuts have no matching tenant page routes in this snapshot.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx`
-- `apps/web/src/features/website/website-pages.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Website pages
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website/pages`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-വെബ്സൈറ്റ് അഡ്മിനിലുള്ള പൊതു പേജ് shortcuts പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Home, Display Wall / Prayer Screen, Announcements & Circulars, Schedules & Prayer Times, Office Bearers & Committee, Donations & Community Aid വരികളുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
-
-
-### പ്രവർത്തനക്രമം
-
-വരി തിരഞ്ഞെടുക്കുക → പുതിയ tabൽ പൊതു URL തുറക്കും. പേജ് ഉള്ളടക്കം തിരുത്താനോ സംരക്ഷിക്കാനോ ഇവിടെ workflow ഇല്ല.
-
-### നിലകളും നിയമങ്ങളും
-
-Tenant inventoryയിൽ public home, login, dashboard routeകൾ മാത്രമാണ്. Wall, announcements, schedules, committee, donate shortcutsന് ഈ snapshotൽ അനുയോജ്യ route ഇല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/pages/page.tsx`
-- `apps/web/src/features/website/website-pages.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-</Tabs>
+This screen does not edit page content. The public home page is available; the display wall, announcements, schedules, committee, and donation shortcuts currently lead to unavailable pages. Member sign-in and the member dashboard are documented separately.

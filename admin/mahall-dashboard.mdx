@@ -1,185 +1,21 @@
 ---
-title: "Mahall dashboard"
-description: "Current screen specification: Mahall dashboard. English and Malayalam guidance for the development team."
+title: "Mahallu dashboard"
+description: "Check setup progress, recent members, treasury information, upcoming events, and demographic summaries."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
-<Tabs>
-<Tab title="English">
+## Mahallu dashboard
 
-## Mahall dashboard
+Check setup progress, recent members, treasury information, upcoming events, and demographic summaries.
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/overview`
+### Steps
 
-### Purpose and access
+1. Open the **Mahall** dashboard.
+2. Follow a setup-checklist item to complete the corresponding settings.
+3. Review recent members and upcoming events, then open a linked record for more detail.
+4. Return to the dashboard to review the updated information.
 
-Review the operational dashboard inside the Mahall navigation area. This is a separate screen from Home.
+### Things to know
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-The page starts with a greeting and setup checklist. It then presents recent members, the treasury snapshot, upcoming agenda, and demographic summaries.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Collect Dues | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Add Member | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Collect Dues | `/${slug}/finance/dues` |
-| Add Member | `/${slug}/members` |
-| New Member | `/${slug}/members` |
-| Register Family | `/${slug}/families` |
-| Record Payment | `/${slug}/finance/payments` |
-| Issue Certificate | `/${slug}/registers/marriage` |
-| Friday Notice | `/${slug}/announcements` |
-| Review Requests | `/${slug}/services` |
-| View all directory | `/${slug}/members` |
-| Full Accounts | `/${slug}/finance` |
-| + New Payment | `/${slug}/finance/payments` |
-| Calendar | `/${slug}/events` |
-| Wards & Divisions | `/${slug}/settings/structure` |
-| Expatriates (Pravasi) | `/${slug}/reports/expatriate` |
-| Yatheem (Orphans) | `/${slug}/reports/yatheem` |
-| Blood Donor Registry | `/${slug}/reports/blood-groups` |
-| Committee & Admins Manage roles, permissions & access | `/${slug}/settings/admins` |
-
-
-
-### Interaction sequence
-
-Check setup progress → follow a checklist link to the relevant settings page → return to inspect recent records → open a member or event from its link.
-
-### States and rules
-
-Recent-member and event panels distinguish unavailable data from an empty list. Supporting requests may return null; do not infer record creation or deletion from dashboard fallback values.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/overview/page.tsx`
-- `apps/web/src/features/onboarding/setup-checklist.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/structure.ts`
-
-
-Relevant controller permission keys: `education.view`, `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `events.view`, `events.create`, `events.update`, `events.delete`, `health.view`, `health.manage`, `members.view`, `members.create`, `members.update`, `members.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Mahall dashboard
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/overview`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Mahall നാവിഗേഷനിലുള്ള പ്രവർത്തന ഡാഷ്ബോർഡ് പരിശോധിക്കുക. ഇത് Home സ്ക്രീനിൽ നിന്ന് വ്യത്യസ്തമാണ്.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-സ്വാഗത സന്ദേശവും സജ്ജീകരണ പട്ടികയും ആദ്യം വരുന്നു. തുടർന്ന് പുതിയ അംഗങ്ങൾ, ധനകാര്യ സംഗ്രഹം, വരാനിരിക്കുന്ന പരിപാടികൾ, ജനസംഖ്യാ സംഗ്രഹങ്ങൾ എന്നിവ കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Collect Dues | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Add Member | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Collect Dues | `/${slug}/finance/dues` |
-| Add Member | `/${slug}/members` |
-| New Member | `/${slug}/members` |
-| Register Family | `/${slug}/families` |
-| Record Payment | `/${slug}/finance/payments` |
-| Issue Certificate | `/${slug}/registers/marriage` |
-| Friday Notice | `/${slug}/announcements` |
-| Review Requests | `/${slug}/services` |
-| View all directory | `/${slug}/members` |
-| Full Accounts | `/${slug}/finance` |
-| + New Payment | `/${slug}/finance/payments` |
-| Calendar | `/${slug}/events` |
-| Wards & Divisions | `/${slug}/settings/structure` |
-| Expatriates (Pravasi) | `/${slug}/reports/expatriate` |
-| Yatheem (Orphans) | `/${slug}/reports/yatheem` |
-| Blood Donor Registry | `/${slug}/reports/blood-groups` |
-| Committee & Admins Manage roles, permissions & access | `/${slug}/settings/admins` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-സജ്ജീകരണ പുരോഗതി പരിശോധിക്കുക → അനുയോജ്യമായ ക്രമീകരണ ലിങ്ക് തുറക്കുക → തിരിച്ചെത്തി പുതിയ രേഖകൾ പരിശോധിക്കുക → അംഗത്തിന്റെയോ പരിപാടിയുടെയോ ലിങ്ക് തുറക്കുക.
-
-### നിലകളും നിയമങ്ങളും
-
-അംഗങ്ങളുടെയും പരിപാടികളുടെയും വിഭാഗങ്ങൾ വിവരങ്ങൾ ലഭ്യമല്ലാത്തതും രേഖകൾ ഇല്ലാത്തതും വേർതിരിക്കുന്നു. null ലഭിക്കുന്ന കണക്കുകളിൽ നിന്ന് രേഖകൾ ചേർത്തതോ നീക്കിയതോ അനുമാനിക്കരുത്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/overview/page.tsx`
-- `apps/web/src/features/onboarding/setup-checklist.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/members.ts`, `apps/web/src/lib/business-resources.ts`, `apps/web/src/lib/finance.ts`, `apps/web/src/lib/services.ts`, `apps/web/src/lib/structure.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `education.view`, `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`, `events.view`, `events.create`, `events.update`, `events.delete`, `health.view`, `health.manage`, `members.view`, `members.create`, `members.update`, `members.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/analytics/analytics.controller.ts`
-- `apps/api/src/analytics/tenant-analytics.controller.ts`
-- `apps/api/src/members/education-employment.controller.ts`
-- `apps/api/src/members/health-support.controller.ts`
-- `apps/api/src/members/members.controller.ts`
-- `apps/api/src/finance/finance.controller.ts`
-- `apps/api/src/events/event-registrations.controller.ts`
-- `apps/api/src/events/events.controller.ts`
-
-</Tab>
-</Tabs>
+A panel may be unavailable when its information cannot be loaded. Check the relevant directory before treating an empty summary as confirmation that no records exist.

@@ -1,143 +1,40 @@
 ---
 title: "Website overview"
-description: "Current screen specification: Website overview. English and Malayalam guidance for the development team."
+description: "Review the website-management screen and open your Mahallu\u2019s public website."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+<Note>Website-management controls are currently previews. They do not enforce password protection or launch changes on the public site.</Note>
 
-<Tabs>
-<Tab title="English">
-
-## Website overview
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website`
-
-### Purpose and access
-
-Review website status and the public-site link.
-
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
-
-### Screen layout
-
-The screen shows the public URL, website status, password protection, View website, and Launch controls.
-
-### Fields and displayed information
-
-
-#### Fields and filters: Website overview
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Site password | `sitePassword` | password | Not marked | Enter new site passcode |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Edit password | Opens the `password modal` view. | `website-overview.tsx` |
-| View website | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `website-overview.tsx` |
-| Launch | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `website-overview.tsx` |
-| Cancel | Closes or clears the `password modal` view/selection. | `website-overview.tsx` |
-| Save Password | Updates local UI state; persistence is described separately below. | `website-overview.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| .eucodes.tech | `publicUrl` |
-| View website | `publicUrl` |
-| Launch | `/${slug}/website/theme` |
-
-
-
-### Interaction sequence
-
-Toggle password protection → Edit password → enter a passcode → Save Password. The local success state changes after a timer; View website opens the public URL.
-
-### States and rules
-
-Password protection and launch controls are not connected to persistence or public-site enforcement. The URL is hard-coded to the eucodes.tech domain pattern.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/page.tsx`
-- `apps/web/src/features/website/website-overview.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-<Tab title="മലയാളം">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Website overview
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/website`
+Review the website-management screen and open your Mahallu’s public website.
 
-### ഉദ്ദേശ്യവും പ്രവേശനവും
+### Steps
 
-വെബ്സൈറ്റ് നിലയും പൊതു സൈറ്റിന്റെ ലിങ്കും പരിശോധിക്കുക.
+1. Open **Website**.
+2. Review the displayed website address and status, then choose **View website** to open the supplied address.
+3. Explore the password and launch controls only as a preview of the settings screen.
 
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
+### Fields and choices
 
-### സ്ക്രീൻ ക്രമം
+Complete the required fields and any additional details requested for your selections.
 
-പൊതു URL, വെബ്സൈറ്റ് സ്ഥിതി, password protection, View website, Launch എന്നിവ കാണിക്കുന്നു.
+#### Website overview
 
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Website overview
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Site password | `sitePassword` | password | ചിഹ്നമില്ല | Enter new site passcode |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Edit password | `password modal` കാഴ്ച തുറക്കും. | `website-overview.tsx` |
-| View website | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `website-overview.tsx` |
-| Launch | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `website-overview.tsx` |
-| Cancel | `password modal` കാഴ്ച/തിരഞ്ഞെടുപ്പ് അടയ്ക്കുകയോ ഒഴിവാക്കുകയോ ചെയ്യും. | `website-overview.tsx` |
-| Save Password | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `website-overview.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
+| Field or control | Guidance |
 | --- | --- |
-| .eucodes.tech | `publicUrl` |
-| View website | `publicUrl` |
-| Launch | `/${slug}/website/theme` |
+| **Site password** | Enter new site passcode |
 
+### Things to know
 
+Password protection, **Save Password**, and launch controls do not currently save or enforce changes on the public website. The displayed address uses a preset domain pattern, so confirm the correct public address with your administrator.
 
-### പ്രവർത്തനക്രമം
+## Related guides
 
-Password protection മാറ്റുക → Edit password → passcode നൽകുക → Save Password. Timerനു ശേഷം local success മാറും; View website പൊതു URL തുറക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-Password protection, launch എന്നിവ persistence അല്ലെങ്കിൽ പൊതു സൈറ്റ് enforcementലേക്ക് ബന്ധിപ്പിച്ചിട്ടില്ല. URL eucodes.tech patternൽ സ്ഥിരമായി നൽകിയതാണ്.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/website/page.tsx`
-- `apps/web/src/features/website/website-overview.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-</Tab>
-</Tabs>
+- [Website pages](/admin/website-pages)
+- [Website theme](/admin/website-theme)
+- [Website visibility](/admin/website-visibility)
+- [Website domains](/admin/website-domains)
+- [Website analytics](/admin/website-analytics)

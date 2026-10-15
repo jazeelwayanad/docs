@@ -1,123 +1,22 @@
 ---
-title: "Billing usage"
-description: "Current screen specification: Billing usage. English and Malayalam guidance for the development team."
+title: "Plan limits and usage"
+description: "Review the resource-usage preview displayed for your Mahallu."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+<Note>Usage cards show example figures rather than measured resource use.</Note>
 
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
-## Billing usage
+## Plan limits and usage
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing/usage`
+Review the resource-usage preview displayed for your Mahallu.
 
-### Purpose and access
+### Steps
 
-Inspect the tenant resource-usage presentation.
+1. Open **Billing** → **Plan limits and usage**.
+2. Review the storage and resource cards for divisions, members, programs and registers, users, messaging, and website views.
+3. Choose **Refresh** or **Recalculate** to see the loading indicator.
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Things to know
 
-### Screen layout
-
-Plan limits and usage contains storage and resource cards for subdivisions, members, programmes/registers, users, messaging, and website views.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Refresh | Updates local UI state; persistence is described separately below. | `billing-usage.tsx` |
-| Resources | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `billing-usage.tsx` |
-| Recalculate | Updates local UI state; persistence is described separately below. | `billing-usage.tsx` |
-
-
-
-### Interaction sequence
-
-Refresh or Recalculate → a timed loading indicator runs → the existing displayed figures remain. Resources has no connected click handler.
-
-### States and rules
-
-Used and limit figures are fixed component values. This screen does not measure storage, enforce quotas, or recalculate live usage.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx`
-- `apps/web/src/features/billing/billing-usage.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-### API behavior references
-
-
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Billing usage
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/billing/usage`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Tenant resource usage കാഴ്ച പരിശോധിക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Plan limits and usageൽ storage, പ്രദേശങ്ങൾ, അംഗങ്ങൾ, programmes/registers, users, messaging, website views കാർഡുകളുണ്ട്.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Refresh | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `billing-usage.tsx` |
-| Resources | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `billing-usage.tsx` |
-| Recalculate | Local UI state പുതുക്കും; സംരക്ഷിക്കൽ താഴെ പ്രത്യേകം വിവരിക്കുന്നു. | `billing-usage.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Refresh/Recalculate → timer loading കാണും → നിലവിലെ കണക്കുകൾ തുടരുന്നു. Resourcesന് click handler ഇല്ല.
-
-### നിലകളും നിയമങ്ങളും
-
-Used/limit കണക്കുകൾ സ്ഥിരമായ component values ആണ്. Storage അളക്കലോ quota enforcementഓ live usage കണക്കാക്കലോ ഈ സ്ക്രീൻ നടത്തുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/billing/usage/page.tsx`
-- `apps/web/src/features/billing/billing-usage.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/billing/plans.controller.ts`
-- `apps/api/src/billing/tenant-billing.controller.ts`
-
-</Tab>
-</Tabs>
+The figures and limits are fixed examples. Refreshing does not measure usage or enforce quotas. **Resources** has no connected action.

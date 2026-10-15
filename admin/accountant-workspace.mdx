@@ -1,169 +1,20 @@
 ---
 title: "Accountant workspace"
-description: "Current screen specification: Accountant workspace. English and Malayalam guidance for the development team."
+description: "Open ledger tools and accounting reports from one workspace."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
-
-<Tabs>
-<Tab title="English">
+Sign in to the selected Mahallu with access to this area. If access is denied, ask your administrator to review your role and enabled features.
 
 ## Accountant workspace
 
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant`
+Open ledger tools and accounting reports from one workspace.
 
-### Purpose and access
+### Steps
 
-Open the dedicated accounting workspace for ledger and financial reporting work.
+1. Open **Accountant**.
+2. Review the available account, journal, and finance summaries.
+3. Choose [Chart of accounts](/charts-of-accounts), [Manual journals](/admin/manual-journals), or an [Accounting report](/reports-2).
 
-You need an account session and a resolved membership context in the selected Mahallu (including the API’s current platform elevation path). The API independently checks the requested operation’s permissions and feature availability.
+### Things to know
 
-### Screen layout
-
-The workspace presents links to accounting tools and reports, using account, journal, and finance summaries loaded by the route.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Reports Center | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Bulk Update | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| Chart of Accounts | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-| + Manual Journal | No direct click handler; may be a menu trigger or linked control. See the sequence below. | `page.tsx` |
-
-
-#### Linked navigation
-
-| Link | Target in source |
-| --- | --- |
-| Reports Center | `${base}/reports` |
-| Bulk Update | `${base}/bulk-update` |
-| Chart of Accounts | `${base}/chart-of-accounts` |
-| + Manual Journal | `${base}/manual-journals` |
-| Journal Entries Post multi-line debit & credit journal vouchers with balanced entries. | `${base}/manual-journals` |
-| General Ledger Account-wise running debit/credit transactions, opening & closing balances. | `${base}/ledger` |
-| Chart of Accounts Manage structured 5-category chart of accounts, codes, and parent-child trees. | `${base}/chart-of-accounts` |
-| Cash Book Daily record of physical cash receipts, payments, and running balance. | `${base}/cash-book` |
-| Bank Book Bank-wise transaction register and reconciled bank account records. | `${base}/bank-book` |
-| Trial Balance Debit vs Credit balance check | `${base}/trial-balance` |
-| Receipt & Payment Actual cash basis statement | `${base}/receipt-payment` |
-| Income & Expenditure Operational surplus or deficit | `${base}/income-expenditure` |
-| Balance Sheet Assets, Liabilities & Equity | `${base}/balance-sheet` |
-| Financial Year Management Create financial years, lock periods, and year-end rollover. | `${base}/financial-year` |
-| Taxes & Legal Filings 80G, 12A, Waqf board compliance, and statutory audit records. | `${base}/taxes-legal` |
-
-
-
-### Interaction sequence
-
-Review the summary → choose Manual Journals, Chart of Accounts, or a report → continue in the selected accounting screen.
-
-### States and rules
-
-Membership is checked before data loads. Several supporting reads fall back to null or empty lists; unavailable summaries are not evidence that the ledger is empty.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
-
-
-Relevant controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Accountant workspace
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/[tenant]/accountant`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-ലെഡ്ജറും ധനകാര്യ റിപ്പോർട്ടുകളും കൈകാര്യം ചെയ്യാനുള്ള അക്കൗണ്ടന്റ് വിഭാഗം തുറക്കുക.
-
-Account sessionഉം തിരഞ്ഞെടുത്ത മഹല്ലിൽ resolved membership contextഉം വേണം; APIയിലെ നിലവിലെ platform elevation pathഉം ഇതിൽപ്പെടും. ഓരോ പ്രവർത്തനത്തിന്റെയും permissions/features API പ്രത്യേകം പരിശോധിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-അക്കൗണ്ട്, journal, ധനകാര്യ സംഗ്രഹങ്ങൾ ഉപയോഗിച്ച് അക്കൗണ്ടിംഗ് ടൂളുകളിലേക്കും റിപ്പോർട്ടുകളിലേക്കും ലിങ്കുകൾ കാണിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Reports Center | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Bulk Update | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| Chart of Accounts | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-| + Manual Journal | നേരിട്ടുള്ള click handler ഇല്ല; menu trigger/linked control ആയിരിക്കാം. താഴെ പ്രവർത്തനക്രമം കാണുക. | `page.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Reports Center | `${base}/reports` |
-| Bulk Update | `${base}/bulk-update` |
-| Chart of Accounts | `${base}/chart-of-accounts` |
-| + Manual Journal | `${base}/manual-journals` |
-| Journal Entries Post multi-line debit & credit journal vouchers with balanced entries. | `${base}/manual-journals` |
-| General Ledger Account-wise running debit/credit transactions, opening & closing balances. | `${base}/ledger` |
-| Chart of Accounts Manage structured 5-category chart of accounts, codes, and parent-child trees. | `${base}/chart-of-accounts` |
-| Cash Book Daily record of physical cash receipts, payments, and running balance. | `${base}/cash-book` |
-| Bank Book Bank-wise transaction register and reconciled bank account records. | `${base}/bank-book` |
-| Trial Balance Debit vs Credit balance check | `${base}/trial-balance` |
-| Receipt & Payment Actual cash basis statement | `${base}/receipt-payment` |
-| Income & Expenditure Operational surplus or deficit | `${base}/income-expenditure` |
-| Balance Sheet Assets, Liabilities & Equity | `${base}/balance-sheet` |
-| Financial Year Management Create financial years, lock periods, and year-end rollover. | `${base}/financial-year` |
-| Taxes & Legal Filings 80G, 12A, Waqf board compliance, and statutory audit records. | `${base}/taxes-legal` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-സംഗ്രഹം പരിശോധിക്കുക → Manual Journals, Chart of Accounts അല്ലെങ്കിൽ റിപ്പോർട്ട് തിരഞ്ഞെടുക്കുക → ബന്ധപ്പെട്ട സ്ക്രീനിൽ തുടരുക.
-
-### നിലകളും നിയമങ്ങളും
-
-വിവരങ്ങൾ വായിക്കുന്നതിന് മുമ്പ് അംഗത്വം പരിശോധിക്കുന്നു. ചില അഭ്യർത്ഥനകൾ null/ശൂന്യ ലിസ്റ്റിലേക്ക് മടങ്ങുന്നതിനാൽ കണക്കുകൾ ലഭ്യമല്ലാത്തത് ledger ശൂന്യമാണെന്ന തെളിവല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/[tenant]/accountant/page.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/finance.ts`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `finance.view`, `finance.settings.view`, `finance.settings.update`, `accounting.accounts.manage`, `accounting.journal.create`, `accounting.view`, `accounting.journal.cancel`, `accounting.ledger.view`, `accounting.reports.view`, `collections.view`, `collections.create`, `collections.update`, `collections.delete`, `collections.cancel`, `receipts.view`, `expenses.view`, `expenses.create`, `expenses.update`, `expenses.approve`, `payments.create`, `expenses.cancel`, `expenses.delete`, `dues.view`, `dues.manage`, `salary.view`, `salary.create`, `salary.approve`, `salary.pay`, `salary.update`, `banking.view`, `banking.manage`, `taxes.view`, `taxes.manage`, `reports.view`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/finance/finance.controller.ts`
-
-</Tab>
-</Tabs>
+Some summaries can be unavailable when information cannot be loaded. Check the underlying records before treating an empty summary as an empty ledger.

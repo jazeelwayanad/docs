@@ -1,157 +1,35 @@
 ---
-title: "Create Mahalle"
-description: "Current screen specification: Create Mahalle. English and Malayalam guidance for the development team."
+title: "Create a Mahallu with your account"
+description: "Create a Mahallu workspace using an existing signed-in operator account."
 ---
 
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
+## Create a Mahallu with your account
 
-<Tabs>
-<Tab title="English">
+Create a Mahallu workspace using an existing signed-in operator account.
 
-## Create Mahalle
+### Steps
 
-Host: `<ROOT_DOMAIN>` · Route: `/new-mahalle`
+1. Open the **Create your Mahalle** form. Sign in if prompted.
+2. Enter **Mahalle name**. Review the address name generated from it, or edit the address name manually.
+3. Wait for the availability check and choose an available address.
+4. Submit the form to create the workspace and continue to its administrator area.
 
-### Purpose and access
+### Fields and choices
 
-Create a tenant from the marketing-host form using an authenticated account.
+Complete the required fields and any additional details requested for your selections.
 
-Entry, public access, and redirect rules are described for this screen below.
+#### Mahallu name
 
-### Screen layout
+| Field or control | Guidance |
+| --- | --- |
+| **Mahalle name** | Required. Al Noor Mahalle |
 
-Create your Mahalle contains the CreateTenantForm with tenant name and slug/URL. The slug field supports automatic name-based generation, manual editing, and availability checking.
+#### Mahallu address
 
-### Fields and displayed information
+| Field or control | Guidance |
+| --- | --- |
+| **Mahallu address name** | Required. your-mahalle |
 
+### Things to know
 
-#### Fields and filters: Create tenant form
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Mahalle name | `tenant-name` | text | Yes | Al Noor Mahalle |
-
-
-#### Fields and filters: Slug field
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Id | `id` | text | Yes | your-mahalle |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
-| --- | --- | --- |
-| Create Mahalle | Submits the associated API change; follow the sequence and failure rules below. | `create-tenant-form.tsx` |
-
-
-
-### Interaction sequence
-
-Enter tenant identity → submit → create through /tenants → continue to the resulting administrator workspace.
-
-### States and rules
-
-The route requires an account session; unauthenticated visitors are redirected. This simpler creation form is separate from the location/account onboarding wizard.
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/marketing/new-mahalle/page.tsx`
-- `apps/web/src/features/tenants/create-tenant-form.tsx`
-- `apps/web/src/features/tenants/slug-field.tsx`
-- `apps/web/src/components/auth-shell.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior references
-
-
-- `apps/api/src/auth/auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/onboarding/onboarding.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Create Mahalle
-
-Host: `<ROOT_DOMAIN>` · Route: `/new-mahalle`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Authenticate ചെയ്ത account ഉപയോഗിച്ച് marketing host formൽ tenant സൃഷ്ടിക്കുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Create your Mahalleൽ tenant name, slug/URL ഉള്ള CreateTenantForm ഉണ്ട്. Slug പേരിൽ നിന്ന് സ്വയം ഉണ്ടാക്കാം, തിരുത്താം, ലഭ്യത പരിശോധിക്കാം.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Create tenant form
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Mahalle name | `tenant-name` | text | ഉണ്ട് | Al Noor Mahalle |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Slug field
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Id | `id` | text | ഉണ്ട് | your-mahalle |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Create Mahalle | ബന്ധപ്പെട്ട API മാറ്റം സമർപ്പിക്കും; താഴെയുള്ള പ്രവർത്തനക്രമവും പിശക് നിയമങ്ങളും കാണുക. | `create-tenant-form.tsx` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-Tenant identity നൽകുക → സമർപ്പിക്കുക → /tenants വഴി സൃഷ്ടിക്കും → അഡ്മിൻ workspaceൽ തുടരുക.
-
-### നിലകളും നിയമങ്ങളും
-
-Routeന് account session വേണം; പ്രവേശിക്കാത്തവർ redirect ചെയ്യും. ഇത് location/account onboarding wizardൽ നിന്ന് വ്യത്യസ്തമായ ലളിത form ആണ്.
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/marketing/new-mahalle/page.tsx`
-- `apps/web/src/features/tenants/create-tenant-form.tsx`
-- `apps/web/src/features/tenants/slug-field.tsx`
-- `apps/web/src/components/auth-shell.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/api-client.ts`
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/auth/auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/onboarding/onboarding.controller.ts`
-
-</Tab>
-</Tabs>
+This shorter form is separate from [Mahallu setup](/mahallu-setup), which collects location and new-account details.
