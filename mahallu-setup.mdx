@@ -1,16 +1,11 @@
 ---
 title: "Mahallu setup"
-description: "Current screen specification: Mahallu setup. English and Malayalam guidance for the development team."
 ---
-
-<Note>Source snapshot: 13 October 2026. These pages describe the current implementation, including unfinished controls. See [coverage and review notes](/reference/coverage).</Note>
 
 <Tabs>
 <Tab title="English">
 
 ## Mahallu setup wizard
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/onboarding`
 
 ### Purpose and access
 
@@ -24,290 +19,34 @@ Mahallu Details collects name and location; Administrator Account collects ident
 
 ### Fields and displayed information
 
+#### Mahallu details step
 
-#### Fields and filters: Mahallu details step
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Mahallu Name | `onboarding-mahalle-name` | text | Yes | Your Mahall Name |
-
-
-#### Fields and filters: Location picker
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Location search input | `location-search-input` | text | Not marked | Search town, village, masjid, or area |
-
-
-#### Fields and filters: Admin account step
-
-| Field / control | Reference | Input | Required marker | Choices / hints / initial values |
-| --- | --- | --- | --- | --- |
-| Administrator Name | `onboarding-fullname` | text | Yes | Enter your full name |
-| Email Address | `onboarding-email` | email | Yes | Enter your email address (e.g. admin@example.com) |
-| Onboarding password | `onboarding-password` | password | Yes | Create a secure password |
-| Confirm Password | `onboarding-confirm-password` | password | Yes | Re-enter your password to confirm |
-
-
-
-### Actions
-
-
-| Control | Result | Component |
+| Field / control | Input | Required marker |
 | --- | --- | --- |
-| Next: Administrator Account | Invokes the associated handler; see the sequence below. | `mahallu-details-step.tsx` |
-| Locate Me | Changes the selected view, filter, or page in local state. | `location-picker.tsx` |
-| Clear | Invokes the associated handler; see the sequence below. | `location-picker.tsx` |
-| Back | Invokes the associated handler; see the sequence below. | `admin-account-step.tsx` |
-| Complete Setup & Create Mahallu | Invokes the associated handler; see the sequence below. | `admin-account-step.tsx` |
-| Copied! / Copy URL | Copies the displayed value to the clipboard. | `complete-step.tsx` |
-| Open Mahallu Admin Dashboard → | Invokes the associated handler; see the sequence below. | `complete-step.tsx` |
+| Mahallu Name | text | Yes |
 
+| Field / control | Input | Required marker |
+| --- | --- | --- |
+| Location search input | text | Not marked |
 
-#### Linked navigation
+#### Admin account step
 
-| Link | Target in source |
-| --- | --- |
-| Exit to portal | `rootUrl()` |
-| Log in instead | `/login` |
+| Field / control | Input | Required marker |
+| --- | --- | --- |
+| Administrator Name | text | Yes |
+| Email Address | email | Yes |
+| Onboarding password | password | Yes |
+| Confirm Password | password | Yes |
 
-
-
-### Interaction sequence
+#### Interaction sequence
 
 Enter Mahallu name/location → Next → complete account details → Complete Setup & Create Mahallu → register if needed, then create tenant → completion → open admin dashboard. URL conflicts retry once with a numeric suffix.
-
-### States and rules
-
-Name is required to advance. New users need name/email, an eight-character password, and matching confirmation. Existing users with a tenant redirect to the admin root. Stored draft data is read on entry; the current wizard does not continuously save edits to the draft.
-
-Explicit validation messages in the rendered forms:
-
-- Please enter your Mahallu Name.
-- Please provide your name and email address.
-- Password must be at least 8 characters long.
-- Passwords do not match.
-
-
-The rendered action controls bind loading indicators to pending state. Failed API saves keep their documented error/notification path; a loading indicator alone does not establish persistence.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/admin/onboarding/page.tsx`
-- `apps/web/src/features/onboarding/onboarding-wizard.tsx`
-- `apps/web/src/features/onboarding/onboarding-steps.tsx`
-- `apps/web/src/features/onboarding/steps/mahallu-details-step.tsx`
-- `apps/web/src/features/onboarding/components/location-picker.tsx`
-- `apps/web/src/features/onboarding/steps/admin-account-step.tsx`
-- `apps/web/src/features/onboarding/steps/complete-step.tsx`
-
-Data and access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/onboarding.ts`, `apps/web/src/lib/api-client.ts`
-
-## Marketing onboarding redirect
-
-Host: `<ROOT_DOMAIN>` · Route: `/onboarding`
 
 ### Purpose and access
 
 Forward visitors from the marketing onboarding URL to the administrator setup wizard.
 
 Entry, public access, and redirect rules are described for this screen below.
-
-### Screen layout
-
-No setup form is rendered on the marketing host at this route.
-
-### Fields and displayed information
-
-
-This screen has no editable fields or filters in its rendered components.
-
-
-### Actions
-
-
-Navigation and row interactions are described in the sequence below.
-
-
-### Interaction sequence
-
-Open /onboarding on the marketing host → redirect to adminUrl(/onboarding) → use the shared setup wizard.
-
-### States and rules
-
-This is a redirect entry, not a second implementation of onboarding.
-
-### Implementation references
-
-Paths below are relative to the application repository. This is source-reviewed behavior, not a recorded browser test.
-
-- `apps/web/src/app/sites/marketing/onboarding/page.tsx`
-
-
-Relevant controller permission keys: `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`. Keys are operation-specific; the current guard grants OWNER/ADMIN and its platform-elevation context an operational bypass. A visible control still does not establish authorization.
-
-### API behavior references
-
-
-- `apps/api/src/auth/auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/onboarding/onboarding.controller.ts`
-
-</Tab>
-<Tab title="മലയാളം">
-
-## Mahallu setup wizard
-
-Host: `admin.<ROOT_DOMAIN>` · Route: `/onboarding`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Guided setup വഴി മഹല്ലും ആദ്യ അഡ്മിനും സൃഷ്ടിക്കുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-Mahallu Detailsൽ പേരും സ്ഥലവും; Administrator Accountൽ പുതിയ userന്റെ identity/password; completionൽ പുതിയ URL, dashboard action എന്നിവയുണ്ട്. നിലവിലുള്ള user account പുനരുപയോഗിക്കുന്നു.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Mahallu details step
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Mahallu Name | `onboarding-mahalle-name` | text | ഉണ്ട് | Your Mahall Name |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Location picker
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Location search input | `location-search-input` | text | ചിഹ്നമില്ല | Search town, village, masjid, or area |
-
-
-#### ഫീൽഡുകളും ഫിൽട്ടറുകളും: Admin account step
-
-| ഫീൽഡ് / നിയന്ത്രണം | റഫറൻസ് | ഇൻപുട്ട് | നിർബന്ധ ചിഹ്നം | തിരഞ്ഞെടുപ്പുകൾ / സൂചനകൾ / ആരംഭ മൂല്യങ്ങൾ |
-| --- | --- | --- | --- | --- |
-| Administrator Name | `onboarding-fullname` | text | ഉണ്ട് | Enter your full name |
-| Email Address | `onboarding-email` | email | ഉണ്ട് | Enter your email address (e.g. admin@example.com) |
-| Onboarding password | `onboarding-password` | password | ഉണ്ട് | Create a secure password |
-| Confirm Password | `onboarding-confirm-password` | password | ഉണ്ട് | Re-enter your password to confirm |
-
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-| നിയന്ത്രണം | ഫലം | Component |
-| --- | --- | --- |
-| Next: Administrator Account | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `mahallu-details-step.tsx` |
-| Locate Me | പ്രാദേശിക stateൽ കാഴ്ച, filter അല്ലെങ്കിൽ page മാറ്റും. | `location-picker.tsx` |
-| Clear | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `location-picker.tsx` |
-| Back | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `admin-account-step.tsx` |
-| Complete Setup & Create Mahallu | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `admin-account-step.tsx` |
-| Copied! / Copy URL | പ്രദർശിപ്പിച്ച മൂല്യം clipboardലേക്ക് copy ചെയ്യും. | `complete-step.tsx` |
-| Open Mahallu Admin Dashboard → | ബന്ധപ്പെട്ട handler പ്രവർത്തിപ്പിക്കും; താഴെ പ്രവർത്തനക്രമം കാണുക. | `complete-step.tsx` |
-
-
-#### ലിങ്ക് നാവിഗേഷൻ
-
-| ലിങ്ക് | Source ലക്ഷ്യം |
-| --- | --- |
-| Exit to portal | `rootUrl()` |
-| Log in instead | `/login` |
-
-
-
-### പ്രവർത്തനക്രമം
-
-മഹല്ലിന്റെ പേര്/സ്ഥലം → Next → account വിവരങ്ങൾ → Complete Setup & Create Mahallu → ആവശ്യമെങ്കിൽ register ചെയ്ത് tenant സൃഷ്ടിക്കും → completion → admin dashboard തുറക്കുക. URL conflict ഉണ്ടെങ്കിൽ numeric suffix ഉപയോഗിച്ച് ഒരിക്കൽ വീണ്ടും ശ്രമിക്കും.
-
-### നിലകളും നിയമങ്ങളും
-
-മുന്നോട്ട് പോകാൻ പേര് വേണം. പുതിയ userന് പേര്/email, എട്ട് അക്ഷര password, പൊരുത്തപ്പെടുന്ന confirmation വേണം. Tenant ഉള്ള user admin rootലേക്ക് redirect ചെയ്യും. Entryയിൽ draft വായിക്കുന്നു; നിലവിലെ wizard ഓരോ മാറ്റവും draftൽ തുടർച്ചയായി സംരക്ഷിക്കുന്നില്ല.
-
-Rendered formsലെ വ്യക്തമായ validation സന്ദേശങ്ങൾ:
-
-- Please enter your Mahallu Name.
-- Please provide your name and email address.
-- Password must be at least 8 characters long.
-- Passwords do not match.
-
-
-Rendered action controls pending state അനുസരിച്ച് loading indicator കാണിക്കുന്നു. API save പരാജയപ്പെട്ടാൽ ബന്ധപ്പെട്ട error/notification കാണിക്കും; loading indicator മാത്രം persistence തെളിയിക്കുന്നില്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/admin/onboarding/page.tsx`
-- `apps/web/src/features/onboarding/onboarding-wizard.tsx`
-- `apps/web/src/features/onboarding/onboarding-steps.tsx`
-- `apps/web/src/features/onboarding/steps/mahallu-details-step.tsx`
-- `apps/web/src/features/onboarding/components/location-picker.tsx`
-- `apps/web/src/features/onboarding/steps/admin-account-step.tsx`
-- `apps/web/src/features/onboarding/steps/complete-step.tsx`
-
-Data/access helpers: `apps/web/src/lib/session.ts`, `apps/web/src/lib/server-api.ts`, `apps/web/src/lib/tenants.ts`, `apps/web/src/lib/onboarding.ts`, `apps/web/src/lib/api-client.ts`
-
-## Marketing onboarding redirect
-
-Host: `<ROOT_DOMAIN>` · Route: `/onboarding`
-
-### ഉദ്ദേശ്യവും പ്രവേശനവും
-
-Marketing onboarding URLയിൽ നിന്ന് അഡ്മിൻ setup wizardലേക്ക് സന്ദർശകരെ അയക്കുക.
-
-ഈ സ്ക്രീനിന്റെ entry, public access, redirect നിയമങ്ങൾ താഴെ വിവരിക്കുന്നു.
-
-### സ്ക്രീൻ ക്രമം
-
-ഈ routeൽ marketing host setup form കാണിക്കുന്നില്ല.
-
-### ഫീൽഡുകളും പ്രദർശിപ്പിക്കുന്ന വിവരങ്ങളും
-
-
-ഈ സ്ക്രീനിന്റെ componentsൽ തിരുത്താവുന്ന ഫീൽഡുകളോ ഫിൽട്ടറുകളോ ഇല്ല.
-
-
-### പ്രവർത്തനങ്ങൾ
-
-
-നാവിഗേഷനും വരിയിലെ പ്രവർത്തനങ്ങളും താഴെയുള്ള ക്രമത്തിൽ വിവരിക്കുന്നു.
-
-
-### പ്രവർത്തനക്രമം
-
-Marketing hostൽ /onboarding തുറക്കുക → adminUrl(/onboarding)ലേക്ക് redirect → പൊതുവായ setup wizard ഉപയോഗിക്കുക.
-
-### നിലകളും നിയമങ്ങളും
-
-ഇത് redirect പ്രവേശനമാണ്; മറ്റൊരു onboarding implementation അല്ല.
-
-### Implementation റഫറൻസുകൾ
-
-താഴെയുള്ള paths application repositoryയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്. Source പരിശോധിച്ച behavior ആണ്; browser test രേഖയല്ല.
-
-- `apps/web/src/app/sites/marketing/onboarding/page.tsx`
-
-
-ബന്ധപ്പെട്ട controller permission keys: `admins.view`, `admins.create`, `admins.update`, `admins.delete`, `roles.view`, `roles.create`, `roles.update`, `roles.delete`. ഓരോ പ്രവർത്തനത്തിനും key വ്യത്യസ്തമാണ്; നിലവിലെ guard OWNER/ADMINനും platform-elevation contextനും operational bypass നൽകുന്നു. Control കാണുന്നതുകൊണ്ട് authorization ഉറപ്പില്ല.
-
-### API behavior റഫറൻസുകൾ
-
-
-- `apps/api/src/auth/auth.controller.ts`
-- `apps/api/src/tenants/admins.controller.ts`
-- `apps/api/src/tenants/roles.controller.ts`
-- `apps/api/src/tenants/tenants.controller.ts`
-- `apps/api/src/onboarding/onboarding.controller.ts`
 
 </Tab>
 </Tabs>
